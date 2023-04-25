@@ -1,0 +1,446 @@
+% Version 1.2 of SN LaTeX, November 2022
+%
+% See section 11 of the User Manual for version history 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double line spacing
+
+%%=======================================================%%
+%% to print line numbers in the margin use lineno option %%
+%%=======================================================%%
+
+%%\documentclass[lineno,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%======================================================%%
+%% to compile with pdflatex/xelatex use pdflatex option %%
+%%======================================================%%
+
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+
+%%Note: the following reference styles support Namedate and Numbered referencing. By default the style follows the most common style. To switch between the options you can add or remove Numbered in the optional parenthesis. 
+%%The option is available for: sn-basic.bst, sn-vancouver.bst, sn-chicago.bst, sn-mathphys.bst. %  
+ 
+%%\documentclass[sn-nature]{sn-jnl}% Style for submissions to Nature Portfolio journals
+%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+\documentclass[sn-mathphys,Numbered]{sn-jnl}% Math and Physical Sciences Reference Style
+%%\documentclass[sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
+%%\documentclass[sn-vancouver,Numbered]{sn-jnl}% Vancouver Reference Style
+%%\documentclass[sn-apa]{sn-jnl}% APA Reference Style 
+%%\documentclass[sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
+%%\documentclass[default]{sn-jnl}% Default
+%%\documentclass[default,iicol]{sn-jnl}% Default with double column layout
+
+%%%% Standard Packages
+%%<additional latex packages if required can be included here>
+
+\usepackage{graphicx}%
+\usepackage{multirow}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{amsthm}%
+\usepackage{mathrsfs}%
+\usepackage[title]{appendix}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{manyfoot}%
+\usepackage{booktabs}%
+\usepackage{algorithm}%
+\usepackage{algorithmicx}%
+\usepackage{algpseudocode}%
+\usepackage{listings}%
+%%%%
+
+%%%%%=============================================================================%%%%
+%%%%  Remarks: This template is provided to aid authors with the preparation
+%%%%  of original research articles intended for submission to journals published 
+%%%%  by Springer Nature. The guidance has been prepared in partnership with 
+%%%%  production teams to conform to Springer Nature technical requirements. 
+%%%%  Editorial and presentation requirements differ among journal portfolios and 
+%%%%  research disciplines. You may find sections in this template are irrelevant 
+%%%%  to your work and are empowered to omit any such section if allowed by the 
+%%%%  journal you intend to submit to. The submission guidelines and policies 
+%%%%  of the journal take precedence. A detailed User Manual is available in the 
+%%%%  template package for technical guidance.
+%%%%%=============================================================================%%%%
+
+%\jyear{2021}%
+
+%% as per the requirement new theorem styles can be included as shown below
+\theoremstyle{thmstyleone}%
+\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
+%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
+\newtheorem{proposition}[theorem]{Proposition}% 
+%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem and proposition etc.
+
+\theoremstyle{thmstyletwo}%
+\newtheorem{example}{Example}%
+\newtheorem{remark}{Remark}%
+
+\theoremstyle{thmstylethree}%
+\newtheorem{definition}{Definition}%
+
+\raggedbottom
+%%\unnumbered% uncomment this for unnumbered level heads
+
+\begin{document}
+
+\title[Article Title]{Developing Comprehensive Annotation Guidelines and a Corpus of Risk of Bias Assessment for Rehabilitation: A Methodological Approach}
+
+%%=============================================================%%
+%% Prefix	-> \pfx{Dr}
+%% GivenName	-> \fnm{Joergen W.}
+%% Particle	-> \spfx{van der} -> surname prefix
+%% FamilyName	-> \sur{Ploeg}
+%% Suffix	-> \sfx{IV}
+%% NatureName	-> \tanm{Poet Laureate} -> Title after name
+%% Degrees	-> \dgr{MSc, PhD}
+%% \author*[1,2]{\pfx{Dr} \fnm{Joergen W.} \spfx{van der} \sur{Ploeg} \sfx{IV} \tanm{Poet Laureate} 
+%%                 \dgr{MSc, PhD}}\email{iauthor@gmail.com}
+%%=============================================================%%
+
+\author*[1,2]{\fnm{First} \sur{Author}}\email{iauthor@gmail.com}
+
+\author[2,3]{\fnm{Second} \sur{Author}}\email{iiauthor@gmail.com}
+\equalcont{These authors contributed equally to this work.}
+
+\author[1,2]{\fnm{Third} \sur{Author}}\email{iiiauthor@gmail.com}
+\equalcont{These authors contributed equally to this work.}
+
+\affil*[1]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{100190}, \state{State}, \country{Country}}}
+
+\affil[2]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{10587}, \state{State}, \country{Country}}}
+
+\affil[3]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{610101}, \state{State}, \country{Country}}}
+
+%%==================================%%
+%% sample for unstructured abstract %%
+%%==================================%%
+
+\abstract{The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. Authors are advised to check the author instructions for the journal they are submitting to for word limits and if structural elements like subheadings, citations, or equations are permitted.}
+
+%%================================%%
+%% Sample for structured abstract %%
+%%================================%%
+
+% \abstract{\textbf{Purpose:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Methods:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Results:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Conclusion:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.}
+
+\keywords{keyword1, Keyword2, Keyword3, Keyword4}
+
+%%\pacs[JEL Classification]{D8, H51}
+
+%%\pacs[MSC Classification]{35A01, 65L10, 65L12, 65L20, 65L70}
+
+\maketitle
+
+
+%%%%%%%%%%%%%%%%
+%% Background %%
+\section{Background and Significance}
+\label{sec:background}
+%
+Systematic reviews (SRs) synthesized using randomized controlled trials (RCTs) are the highest quality of evidence in the evidence pyramid.
+SRs aid medical professionals make educated decisions about an individual's health and help governments enact informed health policies.
+An RCT is a scientific experiment aiming to evaluate the efficacy of an intervention on particular patient outcomes.
+In these trials, patients are randomly divided and allocated to either an active intervention group or a comparator group, and the impact of intervention compared to the comparator is measured in a controlled setting~\cite{sibbald1998understanding}.
+Theoretically, RCTs are less susceptible to biases given the randomized study design but are still prone to unavoidable flaws in the trial's design, conduction, or reporting.
+Biased clinical trials make medical practitioners systematically overestimate or underestimate the intervention effect on patient outcomes, leading to harmful health practices and policies~\cite{kjaergard1999randomized,naci2019design}.
+Thus, Reviewers conducting SRs must thoroughly screen RCTs for biases before inclusion in writing SRs.
+
+
+The biases in RCTs cannot be measured, but an RCT can be assessed for biases to minimize the overall risk and judge its quality.
+Various terms are used for bias assessment, like validity or quality assessment, but in this study, we refer to bias assessment as risk-of-bias (RoB) assessment.
+There are several tools to assess RoB, including the Cochrane Collaborations RoB Tool, Physiotherapy Evidence Database (PEDro) RoB scale, revised Cochrane RoB 2.0 tool, AMSTAR/AMSTAR 2, EPOC RoB Tool and several other independent checklists~\cite{higgins2011cochrane,elkins2013growth,sterne2019rob,shea2017amstar,farrah2019risk}.
+These tools are structured as a series of questions aiming to elicit factual information from the RCTs, which could then be used for RoB assessment.
+These tools are a series of questions aiming to elicit factual information from the RCTs, which can then be used to assess their quality.
+Manual quality assessment requires the reviewers to go through full-text RCTs and manually inspect every question from the chosen bias assessment tool.
+The process takes about 3-10 months per person per SR and requires a high degree of methodological expertise on the reviewer's part.
+Moreover, RoB assessment is a part of writing systematic reviews, which is highly resource-heavy, taking about six months to several years to complete~\cite{tsertsvadze2015conduct, khangura2012evidence}.
+review~\cite{higgins2019cochrane}.
+The pace at which RCTs are published makes RoB assessment a lengthy process.
+%~\footnote{\url{https://pubmed.ncbi.nlm.nih.gov/?term=randomized\%20controlled\%20trial&filter=pubt.randomizedcontrolledtrial}
+
+Machine learning (ML) can help accelerate the assessment process by directly pointing the reviewers to the parts of the RCT text relevant to identifying bias, leading to quickly judging the trial quality.
+Marshall \textit{et al.}~\cite{marshall2015automating} attempted automation of RoB assessment using distant supervision approach supported by proprietary data from the Cochrane Database of Systematic Reviews (CDSR). 
+They formulated the trial quality assessment as binary classification into \textit{low-risk} and \textit{unclear-risk/high-risk} quality attributes for each risk domain.
+The study was supported by the manually-entered data from CDSR, which is behind a paywall and automates based on Cochrane's RoB 1.0 guidelines and not RoB 2.0~\cite{higgins2011cochrane}.
+Millard \textit{et al.}~\cite{millard2016machine} attempted automating RoB assessment using supervised machine learning trained on proprietary data as well.
+The question, however, remains of the unavailability of a publicly-available RoB annotated corpus that hinders community efforts for automation. 
+Manual RoB assessment is a complex, expert-led task laden with the expert's subjective judgements.
+Systematically translating this manual process for developing an RoB annotated corpus requires a carefully designed annotation scheme and detailed annotation guidelines.
+Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether the currently available RoB 2.0 guidelines could be applied to manually annotate an RoB corpus using a multi-level annotation scheme adapted from the same guidelines.
+They neither provide any annotation guidelines or a hand-labelled dataset.
+Our objective was to develop clear annotation guidelines to annotate RCTs with risk-of-bias categories corresponding to the revised Cochrane risk-of-bias tool for randomized trials (RoB 2)~\cite{sterne2019rob}.
+%
+%
+%
+\section{Methodology}
+\label{sec:methods}
+%
+The birds-eye view of our approach is shown in the Figure.
+%
+%
+%
+\subsection{Cochrane RoB 2.0 tool}
+\label{cochrane}
+%
+The Cochrane's RoB tool is the most frequently used to assess RCT quality, but a recently revised Cochrane RoB 2.0 offers significant differences in comparison to the original tool~\cite{ma2020methodological}.
+
+The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
+%
+%
+%
+\subsection{Data collection}
+\label{data}
+%
+\begin{itemize}
+    \item 60 RCTs
+    \item Between 2001:2021
+    \item CC0, CC BY, CC BY non-commercial
+    \item Eutils search - Include search query for PubMed
+    \item Search for each year, retmax=not defined, randomly selected 20 studies from the retrieved
+    \item Take the first three studies with free-full text available.
+    \item Upload to tagtog
+\end{itemize}
+%
+%
+%
+\subsection{Guideline development}
+\label{guidelines}
+%
+Subjectivity in the revised Cochrane RoB 2.0 tool. %Anjani: Comments from Roger and Martin about the inherent subjectivity
+%
+%
+%
+\subsection{Annotation schema}
+\label{schema}
+%
+OxO
+%
+%
+%
+\subsection{Annotation Instructions}
+\label{instructions}
+%
+Describe the placards here...
+%
+%
+%
+\subsection{Annotation}
+\label{annotation}
+%
+Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, that allows for annotating PDF (Portable Document Format) documents, was used for pilot annotation.
+We had to stop using tagtog for certain reasons and switched to the PAWLS annotation tool, which allows users to annotate PDFs for free.
+We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format (maintains the structure of sections and subsections, tables, and figures) that makes the annotation task quicker for the annotators and increases annotation quality.
+Tagtog allows customized annotation schemes at entity and document levels and has functionality for parsing PDF documents to plain HTML for annotation extraction, allowing for easy quality control for the annotations.
+Tagtog has an internal IAA (inter-annotator agreement) scoring scheme and a visual display to report the agreement.
+This setup streamlines the iterative annotation projects.
+%
+%
+%
+\subsection{Conflict resolution}
+\label{conflicts}
+%
+Conflict resolution and placard improvement.
+Followed by annotating 49 more RCTs.
+%
+%
+%
+\subsection{Machine Learning}
+\label{ml}
+%
+OxO
+%
+%
+%
+\section{Results}
+\label{sec:results}
+%
+This section describes the results of the annotation project.
+\begin{table}[h!]
+\caption{Sample table title. This is where the description of the table should go}
+  \begin{tabular}{cccc}
+    \hline
+    & B1  &B2   & B3\\ \hline
+    A1 & 0.1 & 0.2 & 0.3\\
+    A2 & ... & ..  & .\\
+    A3 & ..  & .   & .\\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+    \caption{IAA before after guidelines improvement}
+    \label{table:IAA_sq}
+    \centering
+    \begin{tabular}{llll}
+    \hline
+        Signalling question & before guideline improvement & after guidelines improvement & change \\
+    \hline
+        RoB 1\_1 & 24.44 & 55.02 & +30.58 \\ 
+        RoB 1\_2 & 50.28 & 44 & -6.28 \\ 
+        RoB 1\_3 & 20.44 & 90.9 & +70.46 \\ 
+        RoB 2\_1 & 1.34 & 67.26 & +65.92 \\ 
+        RoB 2\_2 & 7.23 & 38.66 & +31.43 \\ 
+        RoB 2\_3 & 5.42 & 0 & -5.42 \\ 
+        RoB 2\_4 & - & 0 & 0 \\ 
+        RoB 2\_5 & 0 & 0 & 0 \\ 
+        RoB 2\_6 & 68.85 & 83.25 & +14.4 \\ 
+        RoB 2\_7 & 6.52 & 0 & -6.52 \\ 
+        RoB 3\_1 & 23.57 & 39.68 & +16.11 \\ 
+        RoB 3\_2 & 0 & ~ & 0 \\ 
+        RoB 3\_3 & 0 & 0 & 0 \\ 
+        RoB 3\_4 & 0 & 0 & 0 \\ 
+        RoB 4\_1 & 6.51 & 61.71 & +55.2 \\ 
+        RoB 4\_2 & 0 & 0 & 0 \\ 
+        RoB 4\_3 & 13.85 & 30.21 & +16.36 \\ 
+        RoB 4\_4 & 0 & 56.25 & +56.25 \\ 
+        RoB 4\_5 & 0 & 0 & 0 \\ 
+        RoB 5\_1 & 0 & 0 & 0 \\ 
+        RoB 5\_2 & 0 & 49.49 & +49.49 \\ 
+        RoB 5\_3 & 0 & 0 & 0 \\ \hline
+    \end{tabular}
+\end{table}
+%
+%
+%
+\section{Discussion}
+\label{sec:discussion}
+%
+XoX
+%
+%
+%
+\section{Conclusion}
+\label{sec:conclusion}
+%
+XoX
+%
+%
+%
+\section{Abbreviations}%% if any
+%
+\begin{enumerate}
+    \item RCT - Randomized Controlled Trial
+    \item RoB - Risk of Bias
+\end{enumerate}
+%
+%
+%
+\backmatter
+
+\bmhead{Supplementary information}
+
+If your article has accompanying supplementary file/s please state so here. 
+
+Authors reporting data from electrophoretic gels and blots should supply the full unprocessed scans for key as part of their Supplementary information. This may be requested by the editorial team/s if it is missing.
+
+Please refer to Journal-level guidance for any specific requirements.
+
+\bmhead{Acknowledgments}
+
+Acknowledgments are not compulsory. Where included they should be brief. Grant or contribution numbers may be acknowledged.
+
+Please refer to Journal-level guidance for any specific requirements.
+
+\section*{Declarations}
+%
+\subsection*{Funding}
+%
+Will be added after successful review
+%
+%
+%
+\subsection*{Conflict of interest}
+%
+The authors declare that they have no competing interests.
+%
+%
+%
+\subsection*{Competing interest}
+%
+The authors declare that they have no competing interests.
+%
+%
+%
+\subsection*{Ethics approval}
+%
+Not applicable
+%
+%
+%
+\subsection*{Consent to participate}
+%
+OXO
+%
+%
+%
+\subsection*{Consent for publication}
+%
+OXO
+%
+%
+%
+\subsection*{Data availability}
+%
+Availability of data and materials
+%
+%
+%
+\subsection*{Code availability}
+%
+Code availability 
+%
+%
+%
+\subsection*{Authors' contributions}
+%
+Authors' contributions
+BMC journals: \url{https://www.biomedcentral.com/getpublished/editorial-policies}
+%
+%
+%
+%%===================================================%%
+%% For presentation purpose, we have included        %%
+%% \bigskip command. please ignore this.             %%
+%%===================================================%%
+%
+\begin{appendices}
+%
+%
+%
+\section{Annotation guidelines}\label{annot_guidelines}
+%
+An appendix contains supplementary information that is not an essential part of the text itself but which may be helpful in providing a more comprehensive understanding of the research problem or it is information that is too cumbersome to be included in the body of the paper.
+%
+%
+%
+\end{appendices}
+
+%%===========================================================================================%%
+%% If you are submitting to one of the Nature Portfolio journals, using the eJP submission   %%
+%% system, please include the references within the manuscript file itself. You may do this  %%
+%% by copying the reference list from your .bbl file, paste it into the main manuscript .tex %%
+%% file, and delete the associated \verb+\bibliography+ commands.                            %%
+%%===========================================================================================%%
+
+\bibliography{sn-bibliography.bib}% common bib file
+%% if required, the content of .bbl file can be included here once bbl is generated
+%%\input sn-article.bbl
+
+
+\end{document}
