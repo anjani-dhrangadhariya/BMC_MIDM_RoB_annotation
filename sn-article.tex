@@ -196,10 +196,15 @@ Systematically translating this manual process for developing an RoB annotated c
 Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether the currently available RoB 2.0 guidelines could be utilized as guidelines to manually annotate a corpus of randomized controlled trials with RoB using a multi-level annotation scheme adapted from the same guidelines.
 They neither provide any annotation guidelines and their dataset is rather small with only 10 annotated RCTs.
 Our objective was to develop clear cut annotation guidelines to annotate RCTs with risk-of-bias categories corresponding to the revised Cochrane risk-of-bias tool for randomized trials (RoB 2)~\cite{sterne2019rob}.
+
+
+
+Recently, large language models (LLMs) have demonstrated exceptional performance on unseen tasks when only the task instructions are provided.
+However, till date, no one has evaluated their performance on the cognitively complex task of identifying risk of bias text descriptions from RCTs and providing their risk judgments based on text.
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We fine-grained annotate a corpus of 60 full-text randomized controlled trials with more than 20 risk of bias signalling questions.
+3) We fine-grained annotate a corpus of 60 full-text randomized controlled trials with more than 20 risk of bias signalling questions which could be used to train machine learning models or even LLMs and could be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions using prompt generation.
 5) We make the annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
 %
@@ -277,8 +282,8 @@ Followed by annotating 49 more RCTs.
 %
 %
 %
-\subsection{Machine Learning}
-\label{ml}
+\subsection{LLM evaluation}
+\label{llms}
 %
 OxO
 %
