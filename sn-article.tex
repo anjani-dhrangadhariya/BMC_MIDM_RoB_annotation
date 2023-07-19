@@ -155,7 +155,7 @@
 % 
 % \textbf{Conclusion:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.}
 
-\keywords{keyword1, Keyword2, Keyword3, Keyword4}
+\keywords{risk of bias, data annotation, natural language processing, large language models}
 
 %%\pacs[JEL Classification]{D8, H51}
 
@@ -327,6 +327,7 @@ PDFs of the full-text RCTs were extracted and each article was collated with its
 %TODO Anjani: Justify why only these journals were considered?
 All these RCT PDFs have CC-BY-0 licences.
 We list these studies and their licenses are listed in the supplementary material.
+%TODO Anjani: Add if some studies were randomly added. Ask Roger for more information.
 
 
 %\begin{itemize}
@@ -341,22 +342,14 @@ We list these studies and their licenses are listed in the supplementary materia
 %
 %
 %
-\subsection{Annotation Instructions}
-\label{instructions}
-%
-Describe the placards here...
-%
-%
-%
 \subsection{Annotation}
 \label{annotation}
 %
-Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, that allows for annotating PDF (Portable Document Format) documents, was used for pilot annotation.
-We had to stop using tagtog for certain reasons and switched to the PAWLS annotation tool, which allows users to annotate PDFs for free.
+Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
+Out of the 60 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
+After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
 We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format (maintains the structure of sections and subsections, tables, and figures) that makes the annotation task quicker for the annotators and increases annotation quality.
-Tagtog allows customized annotation schemes at entity and document levels and has functionality for parsing PDF documents to plain HTML for annotation extraction, allowing for easy quality control for the annotations.
-Tagtog has an internal IAA (inter-annotator agreement) scoring scheme and a visual display to report the agreement.
-This setup streamlines the iterative annotation projects.
+Post annotation, the feedback was taken from both the annotators details of which could be found in the supplementary material. %TODO Anjani: Prepare the supplementary material 
 %
 %
 %
@@ -373,6 +366,35 @@ Followed by annotating 49 more RCTs.
 %
 Cohen's kappa is the standard annotation reliability measure for many classification annotation tasks, but it is not a relevant measure for token-level annotation tasks like the RoB annotation we carried out.
 Therefore, we stick to reporting the pairwise F1 measure that disregards out-of-the-span tokens (unannotated tokens), which is the ideal measure of annotation reliability for the token-level annotation tasks~\cite{brandsen2020creating,deleger2012building}.
+We interpret F1 measure as shown in the Table~\ref{tab:iaa_interpret}~\cite{landis1977measurement}.
+
+
+%
+%
+%
+\begin{center}
+ \begin{table}[ht]
+   \caption{The table details interpretation of pairwise F1-measure and Cohen's Kappa.}\label{tab:iaa_interpret}
+ \centering
+    \begin{tabular}{|l|r|}
+    \hline
+    Agreement interpretation & IAA range \\ 
+    \hline
+    \hline
+        Poor & 0-0.99 \\ 
+        Slight & 1 - 20.99 \\ 
+        Fair & 21 - 40.99 \\ 
+        Good & 41 - 60.99 \\ 
+        Substantial & 61 - 80.99 \\ 
+        Almost perfect & 81 - 99.99 \\ 
+        Perfect & 100 \\ 
+    \hline
+    \end{tabular}
+ \end{table}   
+\end{center}
+%
+%
+%
 %
 %
 %
@@ -390,17 +412,10 @@ We use the publicly available ChatPDF tool for the purpose~\footnote{\url{https:
 \label{sec:results}
 %
 This section describes the results of the annotation project.
-\begin{table}[h!]
-\caption{Sample table title. This is where the description of the table should go}
-  \begin{tabular}{cccc}
-    \hline
-    & B1  &B2   & B3\\ \hline
-    A1 & 0.1 & 0.2 & 0.3\\
-    A2 & ... & ..  & .\\
-    A3 & ..  & .   & .\\ \hline
-  \end{tabular}
-\end{table}
 
+%
+%
+%
 \begin{table}[!ht]
     \caption{IAA before after guidelines improvement}
     \label{table:IAA_sq}
@@ -473,6 +488,10 @@ XoX
 \begin{enumerate}
     \item RCT - Randomized Controlled Trial
     \item RoB - Risk of Bias
+    \item SR - Systematic review
+    \item LLM - Large Language Model
+    \item GPT - Generative Pre-trained Transformer
+    \item NLP - Natural Language Processing
 \end{enumerate}
 %
 %
