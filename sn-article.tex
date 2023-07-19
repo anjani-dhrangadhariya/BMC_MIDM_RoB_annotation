@@ -110,26 +110,32 @@
 
 \author*[1,2]{\fnm{Anjani} \sur{Dhrangadhariya}}\email{anjani.dhrangadhariya@hevs.ch}
 
-\author[2,3]{\fnm{Roger} \sur{Hilfiker}}\email{roger.hilfiker@proton.me}
+\author[3]{\fnm{Roger} \sur{Hilfiker}}\email{roger.hilfiker@proton.me}
 
-\author[1,2]{\fnm{Martin} \sur{Sattelmayer}}\email{martin.sattelmayer@hevs.ch}
+\author[4]{\fnm{Martin} \sur{Sattelmayer}}\email{martin.sattelmayer@hevs.ch}
 
-\author[1,2]{\fnm{Nona} \sur{Naderi}}\email{nona.naderi@hesge.ch}
+\author[5,6]{\fnm{Nona} \sur{Naderi}}\email{nona.naderi@hesge.ch}
 
-\author[1,2]{\fnm{Katia} \sur{Giacomino}}\email{katia.giacomino@hevs.ch}
+\author[4]{\fnm{Katia} \sur{Giacomino}}\email{katia.giacomino@hevs.ch}
 \equalcont{These authors contributed equally to this work.}
 
-\author[1,2]{\fnm{Rahel} \sur{Caliesch}}\email{rahel.caliesch@hevs.ch}
+\author[4]{\fnm{Rahel} \sur{Caliesch}}\email{rahel.caliesch@hevs.ch}
 \equalcont{These authors contributed equally to this work.}
 
 \author[1,2]{\fnm{Henning} \sur{Müller}}\email{henning.mueller@hevs.ch}
 
 
-\affil*[1]{\orgdiv{Department of Computer Science}, \orgname{University of Geneva}, \orgaddress{\city{Geneva}, \state{Geneva}, \country{Switzerland}}}
+\affil*[1]{\orgdiv{Department of Computer Science}, \orgname{University of Geneva}, \orgaddress{\city{Geneva}, \country{Switzerland}}}
 
-\affil[2]{\orgdiv{Informatics Institute}, \orgname{HES-SO Valais-WAllis}, \orgaddress{\street{Rue de Technopôle 3}, \city{Sierre}, \postcode{3960}, \state{State}, \country{Country}}}
+\affil[2]{\orgdiv{Informatics Institute}, \orgname{HES-SO Valais-Wallis}, \orgaddress{\city{Sierre}, \country{Switzerland}}}
 
-\affil[3]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{610101}, \state{State}, \country{Country}}}
+\affil[3]{\orgdiv{IUFRS}, \orgname{University of Lausanne}, \orgaddress{\city{Lausanne}, \country{Switzerland}}}
+
+\affil[4]{\orgdiv{School of Health Sciences}, \orgname{HES-SO Valais-Wallis}, \orgaddress{\city{Leukerbad}, \country{Switzerland}}}
+
+\affil[5]{\orgdiv{Geneva School of Business Administration}, \orgname{HES-SO Geneva}, \orgaddress{\city{Geneva}, \country{Switzerland}}}
+
+\affil[6]{\orgname{Swiss Institute of Bioinformatics (SIB)}, \orgaddress{\city{Geneva}, \country{Switzerland}}}
 
 %%==================================%%
 %% sample for unstructured abstract %%
@@ -228,10 +234,12 @@ RoB 2.0 divides biases into five risk domains, each corresponding to different p
 Each risk domain decomposes into several signalling questions, each aiming to prompt a relevant response to bias assessment (refer to Table~\ref{tab1}).
 The response options are restricted to ``Yes'', ``Probably yes'', ``No'', ``Probably no'', or ``No information''~\cite{sterne2019rob}.
 %TODO - Give examples of good methods of randomization and bad methods of randomization.
-For instance, let's consider signaling question 1.1 from risk domain 1 (randomization bias), which assesses whether the allocation sequence was randomly generated. 
-To answer this question, reviewers must carefully examine the entire RCT to find the procedure describing the randomization process.
+For instance, to respond to the signalling question ``Was the allocation sequence random?'', the reviewers read through the RCT study to identify the methodology used to randomize the allocation of participants into the intervention groups.
 If a well-executed method of randomization is identified, the risk of bias for this signaling question is judged as ``low risk'' with the response option ``good''.
 Conversely, if a poorly executed method of randomization is found, the risk of bias is deemed  ``high risk'' with response option ``No''.
+Similarly, each signalling question prompts the reviewer to look for a piece(s) of factual evidence in the clinical study to respond with one of the five response options.
+
+
 %
 %
 %
@@ -251,6 +259,22 @@ Conversely, if a poorly executed method of randomization is found, the risk of b
     \end{tabular}
   \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2.0) and the number of signalling questions in each domain.}\label{tab1}
 \end{table*}
+%
+%
+%
+\subsection{Annotation schema}
+\label{schema}
+%
+
+We mimic the RoB assessment process detailed in the RoB 2.0 to develop our RoB document annotation scheme.
+We formulate an annotation scheme where each signalling question is an entity.
+The factual evidence in the RCT helps decide the response to that question.
+Each entity could have one of the five response options incorporating the reviewer's judgment of the answer.
+The reviewer needs to mark the identified text evidence (a phrase, sentence (s), or paragraph) with the RoB entity along with one of the five response options.
+In this regard, we have a hierarchical annotation scheme comprising 22 entities corresponding to the 22 signalling questions, each with usually two response options but depending upon the question, it could be three or four response options as well.
+
+
+
 %
 %
 %
@@ -276,13 +300,6 @@ Annotation guidelines along with the visual placards are
     \item Take the first three studies with free-full text available.
     \item Upload to tagtog
 \end{itemize}
-%
-%
-%
-\subsection{Annotation schema}
-\label{schema}
-%
-OxO
 %
 %
 %
