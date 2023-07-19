@@ -204,7 +204,7 @@ However, till date, no one has evaluated their performance on the cognitively co
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We fine-grained annotate a corpus of 60 full-text randomized controlled trials with more than 20 risk of bias signalling questions which could be used to train machine learning models or even LLMs and could be used as a validation benchmark.
+3) We annotate a corpus of 60 full-text RCTs with more than 20 risk of bias signalling questions which could be used to train machine learning models or LLMs and could also be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions using prompt generation.
 5) We make the annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
 %
@@ -221,8 +221,46 @@ The birds-eye view of our approach is shown in the Figure.
 \label{cochrane}
 %
 The Cochrane's RoB tool is the most frequently used to assess RCT quality, but a recently revised Cochrane RoB 2.0 offers significant differences in comparison to the original tool~\cite{ma2020methodological}.
+Compared to the original RoB version released in 2008, the 2.0 version provides a more reliable and concrete structure to the RoB evaluation by developing comprehensive guidelines that enforce consistency~\cite{higgins2011cochrane,sterne2019rob}.
+A study analyzing Cochrane systematic reviews and protocols found that the use of RoB 2.0 increased from 0\% in 2019 to 24.1\% in 2022~\cite{martimbianco2023most}.
+Understanding the tool structure is essential to understanding the further sections of the paper.
+RoB 2.0 divides biases into five risk domains, each corresponding to different parts of the trial design.
+Each risk domain decomposes into several signalling questions, each aiming to prompt a relevant response to bias assessment (refer to Table~\ref{tab1}).
+The response options are restricted to ``Yes'', ``Probably yes'', ``No'', ``Probably no'', or ``No information''~\cite{sterne2019rob}.
+%TODO - Give examples of good methods of randomization and bad methods of randomization.
+For instance, let's consider signaling question 1.1 from risk domain 1 (randomization bias), which assesses whether the allocation sequence was randomly generated. 
+To answer this question, reviewers must carefully examine the entire RCT to find the procedure describing the randomization process.
+If a well-executed method of randomization is identified, the risk of bias for this signaling question is judged as ``low risk'' with the response option ``good''.
+Conversely, if a poorly executed method of randomization is found, the risk of bias is deemed  ``high risk'' with response option ``No''.
+%
+%
+%
+\begin{table*}
+ \centering
+    \begin{tabular}{|l|l|r|}
+    \hline
+    Bias class & Bias domain &  Signalling questions\\
+    \hline
+    \hline
+    RoB 1 & biases arising from the randomization process &  3\\
+    RoB 2 & biases due to deviations from intended interventions & 7\\
+    RoB 3 & bias due to missing outcome data & 4\\
+    RoB 4 & bias in the measurement of the outcome & 5\\
+    RoB 5 & bias in the selection of the reported result & 3\\
+    \hline
+    \end{tabular}
+  \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2.0) and the number of signalling questions in each domain.}\label{tab1}
+\end{table*}
+%
+%
+%
+\subsection{Guideline development}
+\label{guidelines}
+%
+Subjectivity in the revised Cochrane RoB 2.0 tool. %Anjani: Comments from Roger and Martin about the inherent subjectivity
+%The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
 
-The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
+Annotation guidelines along with the visual placards are 
 %
 %
 %
@@ -238,13 +276,6 @@ The signalling questions are broadly factual but leave room for subjective judge
     \item Take the first three studies with free-full text available.
     \item Upload to tagtog
 \end{itemize}
-%
-%
-%
-\subsection{Guideline development}
-\label{guidelines}
-%
-Subjectivity in the revised Cochrane RoB 2.0 tool. %Anjani: Comments from Roger and Martin about the inherent subjectivity
 %
 %
 %
@@ -285,7 +316,10 @@ Followed by annotating 49 more RCTs.
 \subsection{LLM evaluation}
 \label{llms}
 %
-OxO
+We carry out the human evaluation of LLMs using detailed prompts in which LLMs are prompted to extract sentences from RCT PDFs that act as text evidence to answer a signalling question.
+Basically the LLMs need to the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
+If the text selected by LLMs is a part of the human selected text, then we attribute it as a correct answer.
+We use the publicly available ChatPDF tool for the purpose~\footnote{\url{https://www.chatpdf.com/}}.
 %
 %
 %
@@ -352,6 +386,18 @@ Reason 2: Subjective judgments within the signalling questions.
 %
 %
 %
+\subsection{LLM evaluation}
+\label{disc:llm}
+%
+We had a few examples where ChatPDF generated an answer to the signalling question, but these sentences comprising the answer were not to be found in the input PDF document.
+After instructing ChatPDF to look into the uploaded PDF and not generate sentences by itself, it gives the following output.
+``I apologize, but as an AI language model, I do not have access to any uploaded PDFs or any external sources. Please provide me with the PDF you are referring to, and I will be happy to extract the sentences related to answering the signalling question RoB 1.1.''
+When no information was found to answer a RoB question, ChatPDF generates a response by itself giving example sentences that could be used to answer that question.
+Can retrieve multiple related answers for a RoB question prompt and one of that has to be the correct answer and should be the same as what the annotators annotated.
+
+%
+%
+%
 \section{Conclusion}
 \label{sec:conclusion}
 %
@@ -380,9 +426,11 @@ Please refer to Journal-level guidance for any specific requirements.
 
 \bmhead{Acknowledgments}
 
-Acknowledgements are not compulsory. Where included, they should be brief. Grant or contribution numbers may be acknowledged.
+%Acknowledgements are not compulsory. Where included, they should be brief. Grant or contribution numbers may be acknowledged.
 
-Please refer to Journal-level guidance for any specific requirements.
+%Please refer to Journal-level guidance for any specific requirements.
+This research was supported by HES-SO, Valais-Wallis. 
+
 %
 %
 %
@@ -390,7 +438,7 @@ Please refer to Journal-level guidance for any specific requirements.
 %
 \subsection*{Funding}
 %
-Will be added after a successful review
+This research was supported by HES-SO, Valais-Wallis. 
 %
 %
 %
