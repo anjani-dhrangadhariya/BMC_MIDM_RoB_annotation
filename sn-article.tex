@@ -296,25 +296,48 @@ In this regard, we have a hierarchical annotation scheme comprising 22 entities 
 \subsection{Guideline development}
 \label{guidelines}
 %
+
 Subjectivity in the revised Cochrane RoB 2.0 tool. %Anjani: Comments from Roger and Martin about the inherent subjectivity
 %The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
 
-Annotation guidelines along with the visual placards are 
+The visual annotation placards were created based on the revised RoB 2.0 tool and were developed collaboratively by our team of experts.
+Our team consisted of four researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher, an assistant professor, a post-doc, and a PhD student.
+Additionally, two researchers with expertise in natural language processing (NLP) were involved, one being a professor and the other a PhD student in computer science.
+The inclusion of NLP researchers was particularly important because the guidelines and placards they helped create will be utilized to annotate a text corpus, which will serve as a benchmark for the NLP task of RoB span extraction.
+Annotation guidelines along with the visual placards are detailed in the Supplementary material. %TODO: Prepare supplementary material
 %
 %
 %
-\subsection{Data collection}
+\subsection{Dataset creation}
 \label{data}
 %
-\begin{itemize}
-    \item 60 RCTs
-    \item Between 2001:2021
-    \item CC0, CC BY, CC BY non-commercial
-    \item Eutils search - Include search query for PubMed
-    \item Search for each year, retmax=not defined, randomly selected 20 studies from the retrieved
-    \item Take the first three studies with free-full text available.
-    \item Upload to tagtog
-\end{itemize}
+The epidemiology researcher from our team created an annotation dataset of 60 RCTs from the domain of physiotherapy and rehabilitation.
+Our corpus is focused on these domains because our annotators have RoB assessment expertise in this domain.
+To ensure different outcome types are represented in the corpus, we restricted including XX, XX and X RCTs addressing subjective, objective and mortality primary outcomes.
+In context of RCTs, subjective outcomes are measurements that rely on individuals' perceptions, opinions, or feelings about their own health or well-being.
+These outcomes are typically self-reported by the participants in the trial.
+Since they are based on individual experiences, they can be influenced by factors such as bias, expectations, or interpretation.
+For example, pain intensity and quality of life.
+Objective outcomes are measurements that are independent of individual opinions or perceptions and are based on observable and measurable data.
+These outcomes are typically collected by trained assessors or through laboratory tests, imaging studies, or other objective methods.
+For example, blood pressure, heart rate and other laboratory results.
+Mortality outcomes refer to the occurrence of death during the course of the randomized controlled trial. 
+These 60 studies were selected from four journals: journal 1, journal 2, journal 3 and journal 4. 
+PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol wherever available.
+%TODO Anjani: Justify why only these journals were considered?
+All these RCT PDFs have CC-BY-0 licences.
+We list these studies and their licenses are listed in the supplementary material.
+
+
+%\begin{itemize}
+%    \item 60 RCTs
+%    \item Between 2001:2021
+%    \item CC0, CC BY, CC BY non-commercial
+%    \item Eutils search - Include search query for PubMed
+%    \item Search for each year, retmax=not defined, randomly selected 20 studies from the retrieved
+%    \item Take the first three studies with free-full text available.
+%    \item Upload to tagtog
+%\end{itemize}
 %
 %
 %
@@ -342,6 +365,14 @@ This setup streamlines the iterative annotation projects.
 %
 Conflict resolution and placard improvement.
 Followed by annotating 49 more RCTs.
+%
+%
+%
+\subsection{Inter-Annotator Agreement}
+\label{subsec:corpus}
+%
+Cohen's kappa is the standard annotation reliability measure for many classification annotation tasks, but it is not a relevant measure for token-level annotation tasks like the RoB annotation we carried out.
+Therefore, we stick to reporting the pairwise F1 measure that disregards out-of-the-span tokens (unannotated tokens), which is the ideal measure of annotation reliability for the token-level annotation tasks~\cite{brandsen2020creating,deleger2012building}.
 %
 %
 %
