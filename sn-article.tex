@@ -194,13 +194,18 @@ Machine learning (ML) can help accelerate the assessment process by directly poi
 Marshall \textit{et al.}~\cite{marshall2015automating} attempted automation of RoB assessment using distant supervision approach supported by proprietary data from the Cochrane Database of Systematic Reviews (CDSR). 
 They formulated the trial quality assessment as binary classification into \textit{low-risk} and \textit{unclear-risk/high-risk} quality attributes for each risk domain.
 The study was supported by the manually-entered data from CDSR, which is behind a paywall and automates based on Cochrane's RoB 1.0 guidelines and not RoB 2.0~\cite{higgins2011cochrane}.
+Even though Cochrane's RoB tool is the most frequently used to assess RCT quality, a recently revised Cochrane RoB 2.0 offers significant differences in comparison~\cite{ma2020methodological}.
+Compared to the original RoB version released in 2008, the 2.0 version provides a more reliable and concrete structure to the RoB evaluation by developing comprehensive guidelines that enforce consistency~\cite{higgins2011cochrane,sterne2019rob}.
+A study analyzing Cochrane systematic reviews and protocols found that the use of RoB 2.0 increased from 0\% in 2019 to 24.1\% in 2022~\cite{martimbianco2023most}.
+This indicates a growing recognition of the importance of using an updated and standardized tool to assess bias in RCTs.
+
 Millard \textit{et al.}~\cite{millard2016machine} attempted automating RoB assessment using supervised machine learning trained on proprietary data as well.
 The question, however, remains of the unavailability of a publicly-available RoB annotated corpus that hinders community efforts for automation. 
 Wang \textit{et al.} recently released three RoB annotated datasets, but for preclinical animal studies with RoB assessments pertaining to animals~\cite{wang2022risk}.
 Manual RoB assessment is a complex, expert-led task laden with the expert's subjective judgements.
 Systematically translating this manual process for developing an RoB annotated corpus requires a carefully designed annotation scheme and detailed annotation guidelines.
 Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether the currently available RoB 2.0 guidelines could be utilized as guidelines to manually annotate a corpus of randomized controlled trials with RoB using a multi-level annotation scheme adapted from the same guidelines.
-They neither provide any annotation guidelines and their dataset is rather small with only 10 annotated RCTs.
+They neither provide any annotation guidelines and their dataset is rather small with only 10 annotated RCTs~\cite{dhrangadhariya2023first}.
 Our objective was to develop clear cut annotation guidelines to annotate RCTs with risk-of-bias categories corresponding to the revised Cochrane risk-of-bias tool for randomized trials (RoB 2)~\cite{sterne2019rob}.
 
 
@@ -223,22 +228,18 @@ The birds-eye view of our approach is shown in the Figure.
 %
 %
 %
-\subsection{Cochrane RoB 2.0 tool}
-\label{cochrane}
+\subsection{Annotation scheme}
+\label{annot_scheme}
 %
-The Cochrane's RoB tool is the most frequently used to assess RCT quality, but a recently revised Cochrane RoB 2.0 offers significant differences in comparison to the original tool~\cite{ma2020methodological}.
-Compared to the original RoB version released in 2008, the 2.0 version provides a more reliable and concrete structure to the RoB evaluation by developing comprehensive guidelines that enforce consistency~\cite{higgins2011cochrane,sterne2019rob}.
-A study analyzing Cochrane systematic reviews and protocols found that the use of RoB 2.0 increased from 0\% in 2019 to 24.1\% in 2022~\cite{martimbianco2023most}.
-Understanding the tool structure is essential to understanding the further sections of the paper.
+
+Our annotation schema and guidelines will be adapted using RoB 2.0 and therefore understanding the tool structure is essential to understanding the further sections of the paper.
 RoB 2.0 divides biases into five risk domains, each corresponding to different parts of the trial design.
 Each risk domain decomposes into several signalling questions, each aiming to prompt a relevant response to bias assessment (refer to Table~\ref{tab1}).
 The response options are restricted to ``Yes'', ``Probably yes'', ``No'', ``Probably no'', or ``No information''~\cite{sterne2019rob}.
-%TODO - Give examples of good methods of randomization and bad methods of randomization.
 For instance, to respond to the signalling question ``Was the allocation sequence random?'', the reviewers read through the RCT study to identify the methodology used to randomize the allocation of participants into the intervention groups.
 If a well-executed method of randomization is identified, the risk of bias for this signaling question is judged as ``low risk'' with the response option ``good''.
 Conversely, if a poorly executed method of randomization is found, the risk of bias is deemed  ``high risk'' with response option ``No''.
 Similarly, each signalling question prompts the reviewer to look for a piece(s) of factual evidence in the clinical study to respond with one of the five response options.
-
 
 %
 %
@@ -247,7 +248,7 @@ Similarly, each signalling question prompts the reviewer to look for a piece(s) 
  \centering
     \begin{tabular}{|l|l|r|}
     \hline
-    Bias class & Bias domain &  Signalling questions\\
+     Class & Domain & SQ\\
     \hline
     \hline
     RoB 1 & biases arising from the randomization process &  3\\
@@ -257,22 +258,36 @@ Similarly, each signalling question prompts the reviewer to look for a piece(s) 
     RoB 5 & bias in the selection of the reported result & 3\\
     \hline
     \end{tabular}
-  \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2.0) and the number of signalling questions in each domain.}\label{tab1}
+  \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2.0) and the number of signalling questions (SQ) in each domain.}\label{tab1}
 \end{table*}
 %
 %
 %
-\subsection{Annotation schema}
-\label{schema}
-%
 
-We mimic the RoB assessment process detailed in the RoB 2.0 to develop our RoB document annotation scheme.
-We formulate an annotation scheme where each signalling question is an entity.
+We mimic the RoB assessment process detailed in the RoB 2.0 to develop our RoB annotation scheme where each signalling question is an entity.
 The factual evidence in the RCT helps decide the response to that question.
-Each entity could have one of the five response options incorporating the reviewer's judgment of the answer.
-The reviewer needs to mark the identified text evidence (a phrase, sentence (s), or paragraph) with the RoB entity along with one of the five response options.
+Once the factual evidence is found, it is annotated with whatever RoB signalling question it answer.
+This factual evidence can be either phrase, a sentence or a group of sentence.
+The annotation guidelines for individual signalling questions will instruct on whether to annotate a phrase, a sentence or a group of sentences.
+Again, each annotated text could have one of the above-mentioned response options incorporating the reviewer's judgment of the answer.
+Dhrangadhariya \textit{et al.} suggests collapsing the response options ``yes'' and ``probably yes'' into a single ``yes'' and ``no'' and ``probably no'' together into a single ``no'' to increase the inter-annotator agreement (IAA)~\cite{dhrangadhariya2023first}.
+Except for some special case signalling questions, we too collapse these response option as suggested.
+As shown in Figure~\ref{fig:flowchart} responding to any signalling question for the risk domain 2 as either ``Probably yes'' or ``Yes'' does not alter the final risk judgment for this domain (low, high, or some concerns).
+In summary, the reviewer needs to mark the identified text evidence with the RoB entity along with one of the response options.
 In this regard, we have a hierarchical annotation scheme comprising 22 entities corresponding to the 22 signalling questions, each with usually two response options but depending upon the question, it could be three or four response options as well.
 
+%
+%
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{EMNLP2022/figures/rob_flowchart.pdf}
+    \caption{Algorithm for suggested judgement of risk of bias arising from the randomization process. Taken from the revised Cochrane's risk of bias tool (RoB 2.0).}
+    \label{fig:flowchart}
+\end{figure}
+%
+%
+%
 
 
 %
