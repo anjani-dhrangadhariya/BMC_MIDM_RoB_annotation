@@ -58,6 +58,7 @@
 \usepackage{algpseudocode}%
 \usepackage{listings}%
 %%%%
+%\usepackage{caption}
 
 %%%%%=============================================================================%%%%
 %%%%  Remarks: This template is provided to aid authors with the preparation
@@ -94,7 +95,8 @@
 
 \begin{document}
 
-\title[Article Title]{Developing Comprehensive Annotation Guidelines and a Corpus of Risk of Bias Assessment for Rehabilitation: A Methodological Approach}
+%\title[Article Title]{Developing Comprehensive Annotation Guidelines and a Corpus of Risk of Bias Assessment for Rehabilitation: A Methodological Approach}
+\title[Article Title]{RoBuster: A Validation Corpus with Risk of Bias span annotations in Randomized Controlled Trials}
 
 %%=============================================================%%
 %% Prefix	-> \pfx{Dr}
@@ -215,7 +217,7 @@ However, till date, no one has evaluated their performance on the cognitively co
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We annotate a corpus of 60 full-text RCTs with more than 20 risk of bias signalling questions which could be used to train machine learning models or LLMs and could also be used as a validation benchmark.
+3) We annotate a corpus of 60 full-text RCTs with more than 20 risk of bias span types which could be used to train machine learning models or LLMs and could also be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions using prompt generation.
 5) We make the annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
 %
@@ -224,28 +226,38 @@ Our contributions with this paper are five-fold.
 \section{Methodology}
 \label{sec:methods}
 %
-The birds-eye view of our approach is shown in the Figure.
+This section describes the annotation scheme, annotation softwares and guidelines.
+Since there are no annotation guidelines available for RoB span annotation task, we take pleasure in formulating them from scratch. 
+We first developed a draft version of our visual annotation guidelines, doubly annotated a fraction of documents using it and used this exercise to refine the guidelines.
+
 %
 %
 %
 \subsection{Annotation scheme}
 \label{annot_scheme}
 %
-
-Our annotation schema and guidelines will be adapted using RoB 2.0 and therefore understanding the tool structure is essential to understanding the further sections of the paper.
+Developing a new annotated corpus entails either defining a new annotation scheme or using the already existing one.
+To our knowledge the only available annotation scheme for RoB span annotation was presented by ~\cite{dhrangadhariya2023first}.
+Therefore, rather than inventing a new scheme, we adapt and improve their scheme incorporating the learning from the drawback of their scheme.
+Their annotation scheme was directly adapted from the RoB 2.0 assessment procedure and hence it is imperative to understand the RoB 2.0 structure to understand the annotation scheme.
 RoB 2.0 divides biases into five risk domains, each corresponding to different parts of the trial design.
 Each risk domain decomposes into several signalling questions, each aiming to prompt a relevant response to bias assessment (refer to Table~\ref{tab1}).
-The response options are restricted to ``Yes'', ``Probably yes'', ``No'', ``Probably no'', or ``No information''~\cite{sterne2019rob}.
-For instance, to respond to the signalling question ``Was the allocation sequence random?'', the reviewers read through the RCT study to identify the methodology used to randomize the allocation of participants into the intervention groups.
-If a well-executed method of randomization is identified, the risk of bias for this signaling question is judged as ``low risk'' with the response option ``good''.
-Conversely, if a poorly executed method of randomization is found, the risk of bias is deemed  ``high risk'' with response option ``No''.
+The response judgement options are restricted to ``Yes'', ``Probably yes'', ``No'', ``Probably no'', or ``No information''~\cite{sterne2019rob}.
+It is the factual evidence found in the RCT that helps decide the response judgement to that question.
+As an example, consider a reviewer assessing the signalling question ``Was the allocation sequence random?''.
+To answer this question, the reviewer reads through the RCT study to identify the methodology used to randomize the allocation of participants into the intervention groups.
+If a well-executed method of randomization is identified, the reviewer answers with ``yes'' (the allocation sequence is random) judging the risk of bias for this signaling question as low risk.
+Conversely, if a poorly executed method of randomization is found, the risk of bias is deemed  high risk with response option ``no''.
 Similarly, each signalling question prompts the reviewer to look for a piece(s) of factual evidence in the clinical study to respond with one of the five response options.
+
 
 %
 %
 %
 \begin{table*}
  \centering
+ %\captionsetup{justification=justified}
+   \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2.0) and the number of signalling questions (SQ) in each domain.}\label{tab1}
     \begin{tabular}{|l|l|r|}
     \hline
      Class & Domain & SQ\\
@@ -258,23 +270,29 @@ Similarly, each signalling question prompts the reviewer to look for a piece(s) 
     RoB 5 & bias in the selection of the reported result & 3\\
     \hline
     \end{tabular}
-  \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2.0) and the number of signalling questions (SQ) in each domain.}\label{tab1}
 \end{table*}
 %
 %
 %
 
-We mimic the RoB assessment process detailed in the RoB 2.0 to develop our RoB annotation scheme where each signalling question is an entity.
-The factual evidence in the RCT helps decide the response to that question.
-Once the factual evidence is found, it is annotated with whatever RoB signalling question it answer.
-This factual evidence can be either phrase, a sentence or a group of sentence.
-The annotation guidelines for individual signalling questions will instruct on whether to annotate a phrase, a sentence or a group of sentences.
-Again, each annotated text could have one of the above-mentioned response options incorporating the reviewer's judgment of the answer.
+
+The RoB span annotation and the annotation scheme directly mimics this assessment process.
+The evidence text spans found in the RCT to answer a signalling question were considered as the main units of annotation.
+Once found, a span should be annotated with the most informative label.
+As each span corresponds to answering a signalling question, the label incorporates the information about the signalling question number and the domain it assess.
+For above example it should be ``1.1'' with first ``1'' representing the domain assessing biases arising due to randomization and the second ``1'' representing the signalling question serial number.
+Additionally, it is based on this span, the response judgment option is decided, and therefore even the response judgement information is incorporated in the label.
+Consider the following span is found to answer the above-mentioned signalling question, ``randomized participants using random number generation...'', which is a good randomization procedure and therefore the reviewer responds with ``yes''.
+The label extends the example label to ``1.1 Yes''.
+In addition, a direction is also added to the label, for example, whether it is ``good'' or ``bad.
+In this example, a good randomization ensure low risk for this signalling question and vice versa.
+Adding direction extends the example label to ``1.1 Yes Good''.
 Dhrangadhariya \textit{et al.} suggests collapsing the response options ``yes'' and ``probably yes'' into a single ``yes'' and ``no'' and ``probably no'' together into a single ``no'' to increase the inter-annotator agreement (IAA)~\cite{dhrangadhariya2023first}.
 Except for some special case signalling questions, we too collapse these response option as suggested.
 As shown in Figure~\ref{fig:flowchart} responding to any signalling question for the risk domain 2 as either ``Probably yes'' or ``Yes'' does not alter the final risk judgment for this domain (low, high, or some concerns).
-In summary, the reviewer needs to mark the identified text evidence with the RoB entity along with one of the response options.
-In this regard, we have a hierarchical annotation scheme comprising 22 entities corresponding to the 22 signalling questions, each with usually two response options but depending upon the question, it could be three or four response options as well.
+In summary, the reviewer needs to label the identified text span with the RoB entity along with one of the response options.
+In this regard, we have a hierarchical span annotation scheme comprising 22 entities corresponding to the 22 signalling questions, each with typically two response options and two directions (mutually exclusive).
+However depending upon the question, we keep the possibility to label with ``probably yes'' and ``probably no''.
 
 %
 %
@@ -308,7 +326,7 @@ Annotation guidelines along with the visual placards are detailed in the Supplem
 %
 %
 %
-\subsection{Dataset creation}
+\subsection{Data collection}
 \label{data}
 %
 The epidemiology researcher from our team created an annotation dataset of 60 RCTs from the domain of physiotherapy and rehabilitation.
