@@ -242,7 +242,7 @@ We first developed a draft version of our visual annotation guidelines, doubly a
 %
 \begin{figure}
     \centering
-    \includegraphics[width=0.90\columnwidth]{figures/annotation_schema.pdf}
+    \includegraphics[width=0.99\columnwidth]{figures/annotation_schema.pdf}
     \caption{Our annotation scheme}
     \label{fig:annotationscheme}
 \end{figure}
@@ -328,22 +328,6 @@ In such situations, ``No Information'' label is acceptable.
 %
 %
 
-
-%
-%
-%
-\subsection{Guideline development}
-\label{guidelines}
-%
-
-Subjectivity in the revised Cochrane RoB 2.0 tool. %Anjani: Comments from Roger and Martin about the inherent subjectivity
-%The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
-
-The visual annotation placards were created based on the revised RoB 2.0 tool and were developed collaboratively by our team of experts.
-Our team consisted of four researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher, an assistant professor, a post-doc, and a PhD student.
-Additionally, two researchers with expertise in natural language processing (NLP) were involved, one being a professor and the other a PhD student in computer science.
-The inclusion of NLP researchers was particularly important because the guidelines and placards they helped create will be utilized to annotate a text corpus, which will serve as a benchmark for the NLP task of RoB span extraction.
-Annotation guidelines along with the visual placards are detailed in the Supplementary material.
 %
 %
 %
@@ -366,8 +350,8 @@ These 60 studies were selected from four journals: journal 1, journal 2, journal
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol wherever available.
 %TODO Anjani: Justify why only these journals were considered?
 %TODO Anjani: Add if some studies were randomly added. Ask Roger for more information.
-All these RCT PDFs have CC-BY-0 licences.
-We list these studies and their licenses are listed in the supplementary material.
+All these RCT PDFs have CC-BY-0 licences~\footnote{\url{https://creativecommons.org/share-your-work/public-domain/cc0/}}.
+We list these studies and their licenses in the supplementary material.
 
 %
 %
@@ -381,6 +365,31 @@ We list these studies and their licenses are listed in the supplementary materia
 %    \item Take the first three studies with free-full text available.
 %    \item Upload to tagtog
 %\end{itemize}
+%
+%
+%
+\subsection{Guideline development}
+\label{guidelines}
+%
+As previously mentioned, RoB annotation is a complex task requiring expert knowledge.
+The task is also cognitively demanding given one needs to do back and forth over entire RCT full-text carefully annotate 22 bias classes.
+This task could definitely not be managed by non-expert annotators.
+Moreover, several papers explored subjectivity in the Cochrane RoB 1.0 and 2.0 tools~\cite{minozzi2022reliability,da2017effect}.
+Subjectivity could lead to different assessors reaching different conclusions when evaluating the same trial.
+Ensuring consistency and reliability among assessors is important.
+%Anjani: Comments from Roger and Martin about the inherent subjectivity
+%The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
+%
+%
+%
+\subsection{Expert Annotators}
+\label{experts}
+%
+The visual annotation placards were created based on the revised RoB 2.0 tool and were developed collaboratively by our team of experts.
+Our team consisted of four researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher, an assistant professor, a post-doc, and a PhD student.
+Additionally, two researchers with expertise in natural language processing (NLP) were involved, one being a professor and the other a PhD student in computer science.
+The inclusion of NLP researchers was particularly important because the guidelines and placards they helped create will be utilized to annotate a text corpus, which will serve as a benchmark for the NLP task of RoB span extraction.
+Annotation guidelines along with the visual placards are detailed in the Supplementary material.
 %
 %
 %
@@ -406,8 +415,9 @@ Followed by annotating 49 more RCTs.
 \subsection{Inter-Annotator Agreement}
 \label{subsec:corpus}
 %
-Cohen's kappa is the standard annotation reliability measure for many classification annotation tasks, but it is not a relevant measure for token-level annotation tasks like the RoB annotation we carried out.
-Therefore, we stick to reporting the pairwise F1 measure that disregards out-of-the-span tokens (unannotated tokens), which is the ideal measure of annotation reliability for the token-level annotation tasks~\cite{brandsen2020creating,deleger2012building}.
+Cohen's kappa $\kappa$ is the standard annotation reliability measure for many classification annotation tasks, but it is not a relevant measure for token-level annotation tasks like span annotation and entity annotation.
+Therefore, instead of $\kappa$, we reporting the pairwise F1 measure that disregards out-of-the-span tokens (unannotated tokens), which is the ideal measure of annotation reliability for the token-level annotation tasks~\cite{deleger2012building}.
+Pairwise F1 calculates the F1 score for each pair of annotators, treating one annotator's labels as the "true" labels and the other annotator's labels as the "predicted" labels.~\cite{brandsen2020creating}.
 We interpret F1 measure as shown in the Table~\ref{tab:iaa_interpret}~\cite{landis1977measurement}.
 
 
@@ -459,11 +469,21 @@ With the advent of LLMs and tools like ChatPDF which allows directly interaction
 \section{Results}
 \label{sec:results}
 %
-This section describes the results of the annotation project.
+This section describes the annotated corpus, reports inter-annotator agreement and LLM evaluation.
 
 %
 %
 %
+\subsection{The corpus}
+\label{subsec:corpus}
+%
+xOx
+%
+%
+%
+\subsection{Inter-annotator agreement}
+%
+
 \begin{table}[!ht]
     \caption{IAA before after guidelines improvement}
     \label{table:IAA_sq}
@@ -499,6 +519,12 @@ This section describes the results of the annotation project.
 %
 %
 %
+\subsection{LLM evaluation}
+%
+XoX
+%
+%
+%
 \section{Discussion}
 \label{sec:discussion}
 %
@@ -509,6 +535,7 @@ However, when the annotators went through the conflicts, they were able to resol
 Therefore, we recommend semi-automation for RoB information extraction given two succinct reasons.
 Reason 1: Cognitive load of annotating (and assessment). Machine learning models can help function like ``hint finding'' for many questions.
 Reason 2: Subjective judgments within the signalling questions.
+~\cite{loef2022interrater}
 %
 %
 %
