@@ -343,7 +343,7 @@ The visual annotation placards were created based on the revised RoB 2.0 tool an
 Our team consisted of four researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher, an assistant professor, a post-doc, and a PhD student.
 Additionally, two researchers with expertise in natural language processing (NLP) were involved, one being a professor and the other a PhD student in computer science.
 The inclusion of NLP researchers was particularly important because the guidelines and placards they helped create will be utilized to annotate a text corpus, which will serve as a benchmark for the NLP task of RoB span extraction.
-Annotation guidelines along with the visual placards are detailed in the Supplementary material. %TODO: Prepare supplementary material
+Annotation guidelines along with the visual placards are detailed in the Supplementary material.
 %
 %
 %
@@ -352,23 +352,26 @@ Annotation guidelines along with the visual placards are detailed in the Supplem
 %
 The epidemiology researcher from our team created an annotation dataset of 60 RCTs from the domain of physiotherapy and rehabilitation.
 Our corpus is focused on these domains because our annotators have RoB assessment expertise in this domain.
-To ensure different outcome types are represented in the corpus, we restricted including XX, XX and X RCTs addressing subjective, objective and mortality primary outcomes.
+Savović~\textit{et al.} categorized outcome measures as mortality, other objective outcome, or subjective outcome and estimated the associations of bias judgments with intervention effect estimates~\cite{savovic2018association}.
+Trials assessing subjective outcomes are more prone to bias, therefore, had we used only one outcome type, we would have limited label types for different risk classes~\cite{page2016empirical}.
 In context of RCTs, subjective outcomes are measurements that rely on individuals' perceptions, opinions, or feelings about their own health or well-being.
-These outcomes are typically self-reported by the participants in the trial.
-Since they are based on individual experiences, they can be influenced by factors such as bias, expectations, or interpretation.
-For example, pain intensity and quality of life.
+These outcomes are typically self-reported by the participants in the trial and can be influenced by factors such as  placebo effects, patient expectations, interpretation, and psychological factors.
+For example, in a study on rheumatoid arthritis, subjective outcome measures included patient-reported pain ratings~\cite{vollert2020assessment}.
 Objective outcomes are measurements that are independent of individual opinions or perceptions and are based on observable and measurable data.
 These outcomes are typically collected by trained assessors or through laboratory tests, imaging studies, or other objective methods.
-For example, blood pressure, heart rate and other laboratory results.
-Mortality outcomes refer to the occurrence of death during the course of the randomized controlled trial. 
+For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
+Mortality outcomes refer to the occurrence of death during the course of the randomized controlled trial.
+To ensure these different outcome types are represented in the corpus, we restricted including XX, XX and X RCTs addressing subjective, objective and mortality primary outcomes.
 These 60 studies were selected from four journals: journal 1, journal 2, journal 3 and journal 4. 
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol wherever available.
 %TODO Anjani: Justify why only these journals were considered?
+%TODO Anjani: Add if some studies were randomly added. Ask Roger for more information.
 All these RCT PDFs have CC-BY-0 licences.
 We list these studies and their licenses are listed in the supplementary material.
-%TODO Anjani: Add if some studies were randomly added. Ask Roger for more information.
 
-
+%
+%
+%
 %\begin{itemize}
 %    \item 60 RCTs
 %    \item Between 2001:2021
