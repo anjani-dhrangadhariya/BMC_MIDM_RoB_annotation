@@ -172,7 +172,7 @@
 \label{sec:background}
 %
 Systematic reviews (SRs) synthesized using randomized controlled trials (RCTs) are the highest quality of evidence in the evidence pyramid.
-SRs aid medical professionals make educated decisions about an individual's health and help governments enact informed health policies.
+SRs aid medical professionals make educated decisions about an individual's health and help governments enact informed health policies~\cite{mogo2022systematic,mctigue2006obesity}.
 An RCT is a scientific experiment aiming to evaluate the efficacy of an intervention on particular patient outcomes.
 In these trials, patients are randomly divided and allocated to either an active intervention group or a comparator group, and the impact of intervention compared to the comparator is measured in a controlled setting~\cite{sibbald1998understanding}.
 Theoretically, RCTs are less susceptible to biases given the randomized study design but are still prone to unavoidable flaws in the trial's design, conduction, or reporting.
@@ -180,40 +180,41 @@ Biased clinical trials make medical practitioners systematically overestimate or
 Thus, Reviewers conducting SRs must thoroughly screen RCTs for biases before inclusion in writing SRs.
 
 
-The biases in RCTs cannot be measured, but an RCT can be assessed for biases to minimize the overall risk and judge its quality.
+The biases in RCTs cannot be quantified, but an RCT can be assessed for biases to minimize the overall risk and judge its quality.
 Various terms are used for bias assessment, like validity or quality assessment, but in this study, we refer to bias assessment as risk-of-bias (RoB) assessment.
 There are several tools to assess RoB, including the Cochrane Collaborations RoB Tool, Physiotherapy Evidence Database (PEDro) RoB scale, revised Cochrane RoB 2.0 tool, AMSTAR/AMSTAR 2, EPOC RoB Tool and several other independent checklists~\cite{higgins2011cochrane,elkins2013growth,sterne2019rob,shea2017amstar,farrah2019risk}.
 These tools are structured as a series of questions aiming to elicit factual information from the RCTs, which could then be used for RoB assessment.
-These tools are a series of questions aiming to elicit factual information from the RCTs, which can then be used to assess their quality.
+%These tools are a series of questions aiming to elicit factual information from the RCTs, which can then be used to assess their quality.
 Manual quality assessment requires the reviewers to go through full-text RCTs and manually inspect every question from the chosen bias assessment tool.
 The process takes about 3-10 months per person per SR and requires a high degree of methodological expertise on the reviewer's part.
 Moreover, RoB assessment is a part of writing systematic reviews, which is highly resource-heavy, taking about six months to several years to complete~\cite{tsertsvadze2015conduct, khangura2012evidence}.
 review~\cite{higgins2019cochrane}.
-The pace at which RCTs are published makes RoB assessment a lengthy process.
+The pace at which RCTs are published makes RoB assessment a lengthy process and underscores the need for automation..
 %~\footnote{\url{https://pubmed.ncbi.nlm.nih.gov/?term=randomized\%20controlled\%20trial&filter=pubt.randomizedcontrolledtrial}
 
 Machine learning (ML) can help accelerate the assessment process by directly pointing the reviewers to the parts of the RCT text relevant to identifying bias, leading to quickly judging the trial quality.
 Marshall \textit{et al.}~\cite{marshall2015automating} attempted automation of RoB assessment using distant supervision approach supported by proprietary data from the Cochrane Database of Systematic Reviews (CDSR). 
 They formulated the trial quality assessment as binary classification into \textit{low-risk} and \textit{unclear-risk/high-risk} quality attributes for each risk domain.
-The study was supported by the manually-entered data from CDSR, which is behind a paywall and automates based on Cochrane's RoB 1.0 guidelines and not RoB 2.0~\cite{higgins2011cochrane}.
-Even though Cochrane's RoB tool is the most frequently used to assess RCT quality, a recently revised Cochrane RoB 2.0 offers significant differences in comparison~\cite{ma2020methodological}.
+The study was supported by the manually-entered data from CDSR, which is behind a paywall and automates based on Cochrane's RoB 1.0 guidelines and not the latest RoB 2.0~\cite{higgins2011cochrane}.
+Even though Cochrane's RoB tool (version 1) is the most frequently used to assess RCT quality, a recently revised Cochrane RoB 2.0 offers significant differences in comparison~\cite{ma2020methodological}.
 Compared to the original RoB version released in 2008, the 2.0 version provides a more reliable and concrete structure to the RoB evaluation by developing comprehensive guidelines that enforce consistency~\cite{higgins2011cochrane,sterne2019rob}.
 A study analyzing Cochrane systematic reviews and protocols found that the use of RoB 2.0 increased from 0\% in 2019 to 24.1\% in 2022~\cite{martimbianco2023most}.
 This indicates a growing recognition of the importance of using an updated and standardized tool to assess bias in RCTs.
 
-Millard \textit{et al.}~\cite{millard2016machine} attempted automating RoB assessment using supervised machine learning trained on proprietary data as well.
+Millard \textit{et al.} attempted automating RoB assessment using supervised machine learning trained on proprietary data as well~\cite{millard2016machine}.
+In fact, the research utilising this pay-walled data was used to develop RobotReviewer that has been evaluated by several studies for its human-competent performance~\cite{marshall2016robotreviewer,soboczenski2019machine,vinkers2021methodological,jardim2022automating,hirt2021agreement}.
 The question, however, remains of the unavailability of a publicly-available RoB annotated corpus that hinders community efforts for automation. 
 Wang \textit{et al.} recently released three RoB annotated datasets, but for preclinical animal studies with RoB assessments pertaining to animals~\cite{wang2022risk}.
-Manual RoB assessment is a complex, expert-led task laden with the expert's subjective judgements.
+Manual RoB assessment is a complex, expert-led task laden with subjective judgements.
 Systematically translating this manual process for developing an RoB annotated corpus requires a carefully designed annotation scheme and detailed annotation guidelines.
-Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether the currently available RoB 2.0 guidelines could be utilized as guidelines to manually annotate a corpus of randomized controlled trials with RoB using a multi-level annotation scheme adapted from the same guidelines.
-They neither provide any annotation guidelines and their dataset is rather small with only 10 annotated RCTs~\cite{dhrangadhariya2023first}.
-Our objective was to develop clear cut annotation guidelines to annotate RCTs with risk-of-bias categories corresponding to the revised Cochrane risk-of-bias tool for randomized trials (RoB 2)~\cite{sterne2019rob}.
+Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether RoB 2.0 guidelines could be utilized as guidelines to manually annotate a corpus of randomized controlled trials with RoB using a multi-level annotation scheme adapted from the same guidelines.
+They neither provide any annotation guidelines and their dataset is comparatively small with 10 annotated RCTs~\cite{dhrangadhariya2023first}.
+Our objective is to develop clear cut annotation guidelines to annotate RCTs with RoB categories corresponding to RoB 2.0 tool for randomized trials~\cite{sterne2019rob}.
 
 
 
-Recently, large language models (LLMs) have demonstrated exceptional performance on unseen tasks when only the task instructions are provided.
-However, till date, no one has evaluated their performance on the cognitively complex task of identifying risk of bias text descriptions from RCTs and providing their risk judgments based on text.
+Recently, large language models (LLMs) have demonstrated exceptional performance on unseen tasks when only the task instructions are provided~\cite{chang2023survey}.
+However, till date, no one has evaluated their performance on the cognitively complex task of identifying RoB text descriptions from RCTs and providing their risk judgments based on text.
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
@@ -229,17 +230,32 @@ Our contributions with this paper are five-fold.
 This section describes the annotation scheme, annotation softwares and guidelines.
 Since there are no annotation guidelines available for RoB span annotation task, we take pleasure in formulating them from scratch. 
 We first developed a draft version of our visual annotation guidelines, doubly annotated a fraction of documents using it and used this exercise to refine the guidelines.
-
 %
 %
 %
 \subsection{Annotation scheme}
 \label{annot_scheme}
 %
+
+%
+%
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=0.90\columnwidth]{figures/annotation_schema.pdf}
+    \caption{Our annotation scheme}
+    \label{fig:annotationscheme}
+\end{figure}
+%
+%
+%
+
+
+
 Creating a new annotated corpus involves defining an annotation scheme or adopting an existing one.
 To our knowledge the only available annotation scheme for RoB span annotation was presented by ~\cite{dhrangadhariya2023first}.
 Rather than creating a new scheme, we adapt and enhance their approach by learning from its drawbacks.
- Their annotation scheme was directly adapted from the RoB 2.0 assessment procedure and hence it is imperative to understand the RoB 2.0 structure to understand the annotation scheme.
+Their annotation scheme was directly adapted from the RoB 2.0 assessment procedure and hence it is imperative to understand the RoB 2.0 structure to understand the annotation scheme.
 RoB 2.0 divides biases into five risk domains, each corresponding to different parts of the trial design.
 Each risk domain decomposes into several signalling questions, each aiming to prompt a relevant response to bias assessment (refer to Table~\ref{tab1}).
 
@@ -281,13 +297,16 @@ Conversely, if a poorly executed method of randomization is found, the risk of b
 In RoB span annotation, we mimic this assessment process by considering evidence text spans in the RCT as the main units of annotation. 
 Each span corresponds to answering a signalling question and is annotated with the most informative label. 
 The label incorporates information about the signalling question number and the domain it assesses (for the above example, ``1.1'' for the first domain and first signalling question of the domain)
-Additionally, the response judgement is incorporated in the label, such as ``1.1 Yes Good'' for a well-executed randomization.
-Dhrangadhariya \textit{et al.} suggests collapsing the response options ``yes'' and ``probably yes'' into a single ``yes'' and ``no'' and ``probably no'' together into a single ``no'' to increase the inter-annotator agreement (IAA)~\cite{dhrangadhariya2023first}.
+Additionally, the response judgement is incorporated in the label, such as ``1.1 Yes Good'' for a well-executed randomization (see Figure~\ref{fig:annotationscheme}).
+Dhrangadhariya \textit{et al.} suggests collapsing the response options ``yes'' and ``probably yes'' into a single ``yes'', and ``no'' and ``probably no'' together into a single ``no'' to increase the inter-annotator agreement (IAA)~\cite{dhrangadhariya2023first}.
 Except for some special case signalling questions, we too collapse these response option as suggested.
 As shown in Figure~\ref{fig:flowchart} responding to any signalling question for the risk domain 2 as either ``Probably yes'' or ``Yes'' does not alter the final risk judgment for this domain (low, high, or some concerns).
 In summary, the reviewer needs to label the identified text span with the RoB entity along with one of the response options.
 In this regard, we have a hierarchical span annotation scheme comprising 22 entities corresponding to the 22 signalling questions, each with typically two response options and two directions (mutually exclusive).
-However, in some cases, "probably yes" and "probably no" may still be used.
+We also remove the ``No Information'' labels since it is meant for the situations where actually no text evidence is found to answer a SQ leaving on text to be labelled with it.
+However, for selected signalling questions, ``probably yes'', ``probably no'' and ``No Information'' may still be used.
+For example, consider that an RCT uses ``...random number generator and sealed envelopes for patient randomization...'', but the trial provided no information on whether the envelop was ``opaque'' or not.
+In such situations, ``No Information'' label is acceptable.
 %Additionally, it is based on this span, the response judgment option is decided, and therefore even the response judgement information is incorporated in the label.
 %Consider the following span is found to answer the above-mentioned signalling question, ``randomized participants using random number generation...'', which is a good randomization procedure and therefore the reviewer responds with ``yes''.
 %The label extends the example label to ``1.1 Yes''.
@@ -301,7 +320,7 @@ However, in some cases, "probably yes" and "probably no" may still be used.
 %
 \begin{figure}
     \centering
-    \includegraphics[width=0.90\columnwidth]{figures/rob1_flowchart.png}
+    \includegraphics[width=0.60\columnwidth]{figures/rob1_flowchart.png}
     \caption{Algorithm for suggested judgement of risk of bias arising from the randomization process. Taken from the revised Cochrane's risk of bias tool (RoB 2.0).}
     \label{fig:flowchart}
 \end{figure}
@@ -425,6 +444,12 @@ We carry out the human evaluation of LLMs using detailed prompts in which LLMs a
 Basically the LLMs need to the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
 If the text selected by LLMs is a part of the human selected text, then we attribute it as a correct answer.
 We use the publicly available ChatPDF tool for the purpose~\footnote{\url{https://www.chatpdf.com/}}.
+
+
+% Why are we conducting an LLM evaluation and not classical machine learning?
+Initially the annotation guidelines and annotations were adapted for classical machine learning and not large language models.
+So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical machine learning model could not use without some modifications.
+With the advent of LLMs and tools like ChatPDF which allows directly interactions of ChatGPT with PDFs, it was essential to evaluate these instead of forcefully adapting the task to a classical machine learning problem.
 %
 %
 %
