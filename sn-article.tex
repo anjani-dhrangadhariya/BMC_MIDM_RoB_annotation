@@ -234,7 +234,7 @@ We first developed a draft version of our visual annotation guidelines, doubly a
 %
 %
 \subsection{Annotation scheme}
-\label{annot_scheme}
+\label{met:annot_scheme}
 %
 
 %
@@ -372,24 +372,35 @@ We list these studies and their licenses in the supplementary material.
 \label{guidelines}
 %
 As previously mentioned, RoB annotation is a complex task requiring expert knowledge.
-The task is also cognitively demanding given one needs to do back and forth over entire RCT full-text carefully annotate 22 bias classes.
+It is also cognitively demanding given one needs to do back and forth over entire RCT full-text carefully and annotate 22 bias classes.
 This task could definitely not be managed by non-expert annotators.
-Moreover, several papers explored subjectivity in the Cochrane RoB 1.0 and 2.0 tools~\cite{minozzi2022reliability,da2017effect}.
-Subjectivity could lead to different assessors reaching different conclusions when evaluating the same trial.
-Ensuring consistency and reliability among assessors is important.
+To support the bias assessment, RoB 2.0 tool provides extensive bias assessment guidelines.
+These guidelines are the step-by-step instructions using the signalling questions as explained in the subsection~\ref{met:annot_scheme}.
+Through their pilot annotation study, Dhrangadhariya \textit{et al.} demonstrated that RoB 2.0 guidelines cannot be used RoB annotation guidelines directly given the subjectivity of these guidelines.
+Several papers explored subjectivity of the Cochrane RoB 1.0 and 2.0 tools~\cite{minozzi2022reliability,da2017effect,loef2022interrater}.
 %Anjani: Comments from Roger and Martin about the inherent subjectivity
 %The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
+Subjectivity could lead to different assessors reaching different conclusions when evaluating the same trial.
+
+
+For us, ensuring consistency and reliability among annotators is important.
+Therefore, we developed clear and crisp annotation guidelines along with our team of expert annotators which are formatted in form of visual placards.
+The visual annotation placards were created based on the revised RoB 2.0 tool and were developed collaboratively by our team of four experts.
+Each placard is a flowchart and instructs the annotators to annotate for a single signalling question.
+Annotation guidelines along with the visual placards are detailed in the Supplementary material.
 %
 %
 %
-\subsection{Expert Annotators}
+\subsection{Expert team}
 \label{experts}
 %
-The visual annotation placards were created based on the revised RoB 2.0 tool and were developed collaboratively by our team of experts.
-Our team consisted of four researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher, an assistant professor, a post-doc, and a PhD student.
-Additionally, two researchers with expertise in natural language processing (NLP) were involved, one being a professor and the other a PhD student in computer science.
+Our annotation team consisted of two researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher and an assistant professor in physiotherapy.
+With a substantial background in both physiotherapy, advanced statistical methods and experience writing systematic reviews, both experts possesses a deep understanding of the complexities involved in assessing risk of bias in research studies.
+Two additional physiotherapy experts, a post-doc and a senior PhD student, were a part of developing the visual annotation guidelines.
+
+
+Additionally, two researchers with expertise in natural language processing (NLP) were involved, one being a linguistics professor and the other a PhD student in computer science.
 The inclusion of NLP researchers was particularly important because the guidelines and placards they helped create will be utilized to annotate a text corpus, which will serve as a benchmark for the NLP task of RoB span extraction.
-Annotation guidelines along with the visual placards are detailed in the Supplementary material.
 %
 %
 %
@@ -398,17 +409,13 @@ Annotation guidelines along with the visual placards are detailed in the Supplem
 %
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
 Out of the 60 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
+Conflict resolution and placard improvement.
+Followed by annotating 51 more RCTs. %TODO - Elaborate
+
+
 After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
 We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format (maintains the structure of sections and subsections, tables, and figures) that makes the annotation task quicker for the annotators and increases annotation quality.
 Post annotation, the feedback was taken from both the annotators details of which could be found in the supplementary material. %TODO Anjani: Prepare the supplementary material 
-%
-%
-%
-\subsection{Conflict resolution}
-\label{conflicts}
-%
-Conflict resolution and placard improvement.
-Followed by annotating 49 more RCTs.
 %
 %
 %
