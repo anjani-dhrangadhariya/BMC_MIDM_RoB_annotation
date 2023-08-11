@@ -345,7 +345,7 @@ Objective outcomes are measurements that are independent of individual opinions 
 These outcomes are typically collected by trained assessors or through laboratory tests, imaging studies, or other objective methods.
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
 Mortality outcomes refer to the occurrence of death during the course of the randomized controlled trial.
-To ensure these different outcome types are represented in the corpus, we restricted including XX, XX and X RCTs addressing subjective, objective and mortality primary outcomes.
+To ensure these different outcome types are represented in the corpus, we restricted including 26, 23 and 11 RCTs addressing objective, subjective and mortality primary outcomes.
 These 60 studies were selected from four journals: journal 1, journal 2, journal 3 and journal 4. 
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol wherever available.
 %TODO Anjani: Justify why only these journals were considered?
@@ -368,35 +368,12 @@ We list these studies and their licenses in the supplementary material.
 %
 %
 %
-\subsection{Guideline development}
-\label{guidelines}
-%
-As mentioned earlier, RoB (Risk of Bias) annotation is a complex task that requires specialized expertise.
-It's mentally demanding due to the need to carefully go through the entire full-text of Randomized Controlled Trials (RCTs) and identify 22 different bias categories for annotation.
-This level of task complexity would not be manageable for annotators without expertise in the field.
-
-
-To assist in evaluating bias, the RoB 2.0 tool offers comprehensive guidelines for bias assessment.
-These guidelines are a step-by-step set of instructions that employ signaling questions, as outlined in subsection~\ref{met:annot_scheme}.
-However, in a pilot annotation study conducted by Dhrangadhariya \textit{et al.}, it was demonstrated that using RoB 2.0 guidelines directly for annotation is challenging due to the subjectivity inherent in these guidelines.
-Several papers explored subjectivity and reliability of the Cochrane RoB 1.0 and 2.0 tools~\cite{minozzi2022reliability,da2017effect,loef2022interrater}.
-Subjectivity could lead to different assessors reaching different conclusions when evaluating the same trial.
-%Anjani: Comments from Roger and Martin about the inherent subjectivity
-%The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
-
-
-Given the significance of maintaining consistency and reliability among annotators, we undertook the development of precise and clear annotation guidelines.
-Working closely with our team of expert annotators, we formatted these guidelines into visual placards.
-These placards, based on the revised RoB 2.0 tool, were collaboratively created by our group of four experts.
-Each placard takes the form of a flowchart and provides instructions for annotating a single signaling question.
-The annotation guidelines, along with these visual placards, are extensively explained in the Supplementary material.
-You can find an example of one such placard illustrated in the Figure.
-%
-%
-%
 \subsection{Expert team}
 \label{experts}
 %
+As mentioned earlier, risk of bias annotation is a complex task that requires specialized expertise.
+It's mentally demanding due to the need to carefully go through the entire full-text of RCTs and identify 22 different bias categories for annotation.
+This level of task complexity would not be manageable for annotators without expertise in the field.
 Our annotation team consisted of two researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher and an assistant professor in physiotherapy.
 With a substantial background in both physiotherapy, advanced statistical methods and experience writing systematic reviews, both experts possesses a deep understanding of the complexities involved in assessing bias risk in research studies.
 Two additional physiotherapy experts, a post-doc and a senior PhD student, were a part of developing the visual annotation guidelines.
@@ -404,6 +381,50 @@ Two additional physiotherapy experts, a post-doc and a senior PhD student, were 
 
 Additionally, two researchers with expertise in natural language processing (NLP) were involved, one being a computational linguistics professor and the other a PhD student in computer science.
 The inclusion of NLP researchers was particularly important because the guidelines and placards they helped create will be utilized to annotate a text corpus, which will serve as a benchmark for the NLP task of RoB span extraction.
+%
+%
+%
+\subsection{Guideline development}
+\label{guidelines}
+%
+RoB 2.0 guidelines consist of extensive and step-by-step set of instructions that utilize signaling questions, which are detailed in subsection~\ref{met:annot_scheme}.
+Even though RoB 2.0 guidelines are widely used for bias assessment, there have been some research on the reliability of these guidelines.
+This reliability concern of RoB 2.0 has been extensively investigated by Minozzi \textit{et al.}. 
+They formulated specific instructions on how to approach and answer the signaling questions of RoB 2.0.
+These instructions, referred to as the Instruction Document (ID), address the subjectivity present in the RoB 2.0 guidelines and provide clear guidance for the assessment process.
+Subjectivity in assessment could potentially result in different evaluators coming to disparate conclusions when analyzing the same trial.
+Before implementing the ID, the agreement among four expert RoB assessors was zero, but it improved after adopting the ID.
+Several other papers explored subjectivity and reliability of the Cochrane RoB 1.0 and 2.0 tools~\cite{minozzi2022reliability,da2017effect,loef2022interrater,minozzi2020revised}.
+%Anjani: Comments from Roger and Martin about the inherent subjectivity
+%The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
+
+
+Given the significance of maintaining consistency and reliability among annotators, we undertook the development of precise and clear annotation guidelines.
+Working closely with our team of experts, we formatted these guidelines into visual placards.
+Each placard takes the form of a flowchart and provides instructions for annotating a single signaling question.
+These placards address various facets of RoB 2.0 subjectivity and the actual process of annotation.
+For instance, a common reason for low inter-annotator agreement is when annotators correctly address a bias question but annotate evidence from different parts of the full text. 
+To tackle this, our placards restrict annotations for a question to a specific part of the text, such as the Methods section, Results section, Flowchart in the Methods section, etc.
+Detailed guidelines and these visual placards are available in the Supplementary material, with an example placard shown in the Figure.
+These placards also tackle another factor contributing to the low inter-annotator agreement.
+For example, while some annotators might annotate an entire paragraph as text evidence to answer a question, others might focus on the most informative portion of the text.
+To address this, the placards provide clear guidance on whether annotators should annotate a phrase, a sentence, or a combination of sentences.
+
+
+
+%
+%
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=0.80\columnwidth]{figures/placard_3_1.pdf}
+    \caption{Example annotation instruction placard for the signalling question 3.1 from RoB 2.0 tool.}
+    \label{fig:flowchart}
+\end{figure}
+%
+%
+%
+
 %
 %
 %
