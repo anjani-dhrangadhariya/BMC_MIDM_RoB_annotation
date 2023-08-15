@@ -433,7 +433,7 @@ To address this, the placards provide clear guidance on whether annotators shoul
 %
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
 Out of the 60 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
-After double annotation, we performed conflict resolution to address conflicting factors and further calibrate the placards.
+After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the placards.
 The conflict resolution was followed by annotating 51 more RCTs.
 
 
@@ -484,16 +484,15 @@ We interpret F1 measure as shown in the Table~\ref{tab:iaa_interpret}~\cite{land
 \subsection{LLM evaluation}
 \label{llms}
 %
-We carry out the human evaluation of LLMs using detailed prompts in which LLMs are prompted to extract sentences from RCT PDFs that act as text evidence to answer a signalling question.
-Basically the LLMs need to the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
-If the text selected by LLMs is a part of the human selected text, then we attribute it as a correct answer.
-We use the publicly available ChatPDF tool for the purpose~\footnote{\url{https://www.chatpdf.com/}}.
-
-
 % Why are we conducting an LLM evaluation and not classical machine learning?
 Initially the annotation guidelines and annotations were adapted for classical machine learning and not large language models.
 So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical machine learning model could not use without some modifications.
 With the advent of LLMs and tools like ChatPDF which allows directly interactions of ChatGPT with PDFs, it was essential to evaluate these instead of forcefully adapting the task to a classical machine learning problem.
+With this in mind, we carry out the human evaluation of LLMs using detailed prompts in which LLMs are prompted to extract sentences from RCT PDFs that act as text evidence to answer a signalling question.
+Basically the LLMs are required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
+If the text selected by LLMs is a part of the human selected text, then we attribute it as a correct answer.
+We use the publicly available ChatPDF tool~\footnote{\url{https://www.chatpdf.com/}}.
+
 %
 %
 %
@@ -501,7 +500,6 @@ With the advent of LLMs and tools like ChatPDF which allows directly interaction
 \label{sec:results}
 %
 This section describes the annotated corpus, reports inter-annotator agreement and the results of LLM evaluation.
-
 %
 %
 %
@@ -515,7 +513,20 @@ The provided instructions directed the annotators to read specific sections of f
 Their task involved identifying and highlighting relevant text passages related to answering the signaling question.
 A total of 60 full-text RCTs were annotated using this approach, covering 22 signaling questions across five risk domains defined by RoB 2.0.
 Out of the 60, nine were doubly-annotated to capture IAA and the rest were singly annotated.
+%Anjani - TODO: Ask Roger for the annotation files from PAWLS and start documenting with whatever annotations are already made.
 
+%
+%
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=0.60\columnwidth]{figures/rob_annot_freq.png}
+    \caption{Total number of annotations made for each signalling question.}
+    \label{fig:flowchart}
+\end{figure}
+%
+%
+%
 
 
 \begin{table}[!ht]
@@ -610,6 +621,20 @@ Therefore, we recommend semi-automation for RoB information extraction given two
 Reason 1: Cognitive load of annotating (and assessment). Machine learning models can help function like ``hint finding'' for many questions.
 Reason 2: Subjective judgments within the signalling questions.
 ~\cite{loef2022interrater}
+
+
+%
+%
+%
+\subsection{Conflict resolution}
+%
+During conflict resolution, we found that certain instances where both annotators marked the same text evidence to answer the same SQ but gave different .
+We resorted to face-to-face conflict resolution in this case for every conflict case and updated the visual placards.
+We went for conflict resolution in the scenarios when
+1) the annotators marked different parts of text to answer the same question with same judgment. (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=1107412538})
+2) the annotators marked same part of text to answer the same question, but gave different judgment option for it. (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=0})
+Both annotators use different parts of text to answer the same signalling question, but give different judgment options. \url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=1107412538}
+In case, one annotator selected a part of text and another the same text but an additional text too, then we will select the annotations from the longer annotation.
 %
 %
 %
@@ -651,6 +676,7 @@ Our corpus has detailed and fine-grained information in form of individual risk 
 As it has been developed by bias assessors and natural language processing experts, RoBuster can support automated approaches to bias assessment and can also be a part SLR (living systematic review) systems.
 Throughout our journey, we've encountered several challenges during RoB annotation. These experiences have led us to outline refinements in the discussion section, offering insights to guide future studies in this domain.
 In the future, we plan to extend this corpus by adding more annotated full-texts.
+%In addition, LLMs could be fine-tuned with the available annotations to further refine the corpus with new annotations which could have been missed.
 Another direction to test whether the developed visual placards could be used to train fresh risk of bias assessors.
 %
 %
