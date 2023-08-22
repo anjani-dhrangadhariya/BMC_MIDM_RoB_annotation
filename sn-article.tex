@@ -488,11 +488,13 @@ We interpret F1 measure as shown in the Table~\ref{tab:iaa_interpret}~\cite{land
 Initially the annotation guidelines and annotations were adapted for classical machine learning and not large language models.
 So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical machine learning model could not use without some modifications.
 With the advent of LLMs and tools like ChatPDF which allows directly interactions of ChatGPT with PDFs, it was essential to evaluate these instead of forcefully adapting the task to a classical machine learning problem.
-With this in mind, we carry out the human evaluation of LLMs using detailed prompts in which LLMs are prompted to extract sentences from RCT PDFs that act as text evidence to answer a signalling question.
+With this in mind, we carry out the human evaluation of LLMs using simple prompts in which LLMs are prompted to extract sentences from RCT PDFs that act as text evidence to answer a signalling question.
+We begin with simple prompt consisting of the signalling question itself along with an instruction on 
 Basically the LLMs are required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
 If the text selected by LLMs is a part of the human selected text, then we attribute it as a correct answer.
-We use the publicly available ChatPDF tool~\footnote{\url{https://www.chatpdf.com/}}.
-
+We use the publicly available ChatPDF tool~\footnote{\url{https://www.chatpdf.com/}}. 
+The tool allows for three free PDF uploads and chats per day.
+A pdf of the paper was uploaded to ChatPDF and 
 %
 %
 %
@@ -529,7 +531,7 @@ Out of the 60, nine were doubly-annotated to capture IAA and the rest were singl
 %
 
 
-\begin{table}[!ht]
+\begin{table}[htb]
     \centering
     \caption{General statistics for the annotated corpus}
     \label{table:stats}
@@ -569,7 +571,7 @@ Table \ref{table:IAA_sq} illustrates the levels of inter-annotator agreement bet
 %
 %
 %
-\begin{table}[!ht]
+\begin{table}[htb]
     \caption{IAA before after visual placards development}
     \label{table:IAA_sq}
     \centering
@@ -607,6 +609,40 @@ Table \ref{table:IAA_sq} illustrates the levels of inter-annotator agreement bet
 \subsection{LLM evaluation}
 %
 XoX
+
+
+\begin{table}[htb]
+    \caption{LLM accuracy}
+    \label{table:LLM_eval}
+    \centering
+    \begin{tabular}{llll}
+    \hline
+        Signalling question & Simple prompts & Detailed prompts & change \\
+    \hline
+        RoB 1\_1 & 24.44 & 55.02 & +30.58 \\ 
+        RoB 1\_2 & 50.28 & 44 & -6.28 \\ 
+        RoB 1\_3 & 20.44 & 90.9 & +70.46 \\ 
+        RoB 2\_1 & 1.34 & 67.26 & +65.92 \\ 
+        RoB 2\_2 & 7.23 & 38.66 & +31.43 \\ 
+        RoB 2\_3 & 5.42 & 0 & -5.42 \\ 
+        RoB 2\_4 & - & 0 & 0 \\ 
+        RoB 2\_5 & 0 & 0 & 0 \\ 
+        RoB 2\_6 & 68.85 & 83.25 & +14.4 \\ 
+        RoB 2\_7 & 6.52 & 0 & -6.52 \\ 
+        RoB 3\_1 & 23.57 & 39.68 & +16.11 \\ 
+        RoB 3\_2 & 0 & ~ & 0 \\ 
+        RoB 3\_3 & 0 & 0 & 0 \\ 
+        RoB 3\_4 & 0 & 0 & 0 \\ 
+        RoB 4\_1 & 6.51 & 61.71 & +55.2 \\ 
+        RoB 4\_2 & 0 & 0 & 0 \\ 
+        RoB 4\_3 & 13.85 & 30.21 & +16.36 \\ 
+        RoB 4\_4 & 0 & 56.25 & +56.25 \\ 
+        RoB 4\_5 & 0 & 0 & 0 \\ 
+        RoB 5\_1 & 0 & 0 & 0 \\ 
+        RoB 5\_2 & 0 & 49.49 & +49.49 \\ 
+        RoB 5\_3 & 0 & 0 & 0 \\ \hline
+    \end{tabular}
+\end{table}
 %
 %
 %
