@@ -142,22 +142,35 @@
 %%==================================%%
 %% sample for unstructured abstract %%
 %%==================================%%
-
-\abstract{The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. Authors are advised to check the author instructions for the journal they are submitting to for word limits and if structural elements like subheadings, citations, or equations are permitted.}
+% Do not go beyond 200 words for the abstract.
+%\abstract{The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. Authors are advised to check the author instructions for the journal they are submitting to for word limits and if structural elements like subheadings, citations, or equations are permitted.}
 
 %%================================%%
 %% Sample for structured abstract %%
 %%================================%%
 
-% \abstract{\textbf{Purpose:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+\abstract{\textbf{Purpose:} Risk of bias (RoB) assessment of randomized clinical trials (RCTs) is vital to answer a systematic review question accurately.
+Manual RoB assessment for hundreds of clinical trials is a cognitively demanding and lengthy process.
+LLMs (large language models) have immensely capable but necessitate evaluation in RoB assessment.
+Currently, no RoB annotation guidelines or annotated corpus exist for LLM evaluation.
 % 
-% \textbf{Methods:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+\textbf{Methods:} Taking the revised Cochrane Risk of Bias of randomized controlled trials, we develop a set of visual instructional placards that could be used as annotation guidelines to annotate RoB spans in RCTs.
+Expert annotators employed these visual guidelines to annotate a corpus of 60 full-text RCTs from physiotherapy and rehabilitation.
+We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 60) of the annotated corpus.
+The annotated corpus was used to evaluate ChatGPT using a straightforward accuracy evaluation framework.
 % 
-% \textbf{Results:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+\textbf{Results:} We present a corpus of 60 full-text RCTs with fine-grained span annotations comprising 100,000 tokens belonging to 22 RoB classes.
+The IAA ranges between 0\% for some bias classes and 90\%.
+\textbf{Add the results of LLM evaluation. The task: RoB span extraction.
+Evaluation measure: Accuracy}.
 % 
-% \textbf{Conclusion:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.}
+\textbf{Conclusion:} 
+Despite having comprehensive bias assessment guidelines, RoB annotation remains a complex text annotation task.
+Utilizing visual placards for bias assessment and annotation enhances inter-annotator agreement (IAA) compared to cases where visual placards are absent.
+While LLMs demonstrate potency, their accuracy falters with more subjective bias assessment categories.
+Lastly, we address the study's strengths and limitations, offering insights for future research in the field.}
 
-\keywords{risk of bias, data annotation, natural language processing, large language models}
+\keywords{risk of bias, dataset, natural language processing, large language models}
 
 %%\pacs[JEL Classification]{D8, H51}
 
@@ -267,17 +280,16 @@ Each risk domain decomposes into several signalling questions, each aiming to pr
  \centering
  %\captionsetup{justification=justified}
    \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2.0) and the number of signalling questions (SQ) in each domain.}\label{tab1}
-    \begin{tabular}{|l|l|r|}
-    \hline
+    \begin{tabular}{llr}
+    \toprule
      Class & Domain & SQ\\
-    \hline
-    \hline
+    \midrule
     RoB 1 & biases arising from the randomization process &  3\\
     RoB 2 & biases due to deviations from intended interventions & 7\\
     RoB 3 & bias due to missing outcome data & 4\\
     RoB 4 & bias in the measurement of the outcome & 5\\
     RoB 5 & bias in the selection of the reported result & 3\\
-    \hline
+    \bottomrule
     \end{tabular}
 \end{table*}
 %
@@ -321,7 +333,7 @@ In such situations, ``No Information'' label is acceptable.
 \begin{figure}
     \centering
     \includegraphics[width=0.60\columnwidth]{figures/flowchart.pdf}
-    \caption{Algorithm for suggested judgement of risk of bias arising from the randomization process. Taken from the revised Cochrane's risk of bias tool (RoB 2.0).}
+    \caption{Algorithm for suggested judgement of risk of bias arising from the randomization process. The figure is recreated from the revised Cochrane's risk of bias tool (RoB 2.0).~\cite{sterne2019rob}}
     \label{fig:flowchart}
 \end{figure}
 %
@@ -371,9 +383,9 @@ We list these studies and their licenses in the supplementary material.
 \subsection{Expert team}
 \label{experts}
 %
-As mentioned earlier, risk of bias annotation is a complex task that requires specialized expertise.
-It's mentally demanding due to the need to carefully go through the entire full-text of RCTs and identify 22 different bias categories for annotation.
-This level of task complexity would not be manageable for annotators without expertise in the field.
+As mentioned earlier, RoB annotation is a complex task that requires specialized expertise.
+It's cognitively demanding due to the need to carefully go through the entire full-text of RCTs and identify 22 different bias categories for annotation.
+This level of complexity would not be manageable for annotators without expertise in the field.
 Our annotation team consisted of two researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher and an assistant professor in physiotherapy.
 With a substantial background in both physiotherapy, advanced statistical methods and experience writing systematic reviews, both experts possesses a deep understanding of the complexities involved in assessing bias risk in research studies.
 Two additional physiotherapy experts, a post-doc and a senior PhD student, were a part of developing the visual annotation guidelines.
@@ -393,7 +405,7 @@ The inclusion of NLP researchers was particularly important because the guidelin
 \begin{figure}
     \centering
     \includegraphics[width=0.80\columnwidth]{figures/placard_3_1.pdf}
-    \caption{Example annotation instruction placard for the signalling question 3.1 from RoB 2.0 tool.}
+    \caption{Sample annotation instruction placard for the signalling question 3.1 designed and adapted using RoB 2.0 tool.}
     \label{fig:flowchart}
 \end{figure}
 %
@@ -434,7 +446,7 @@ To address this, the placards provide clear guidance on whether annotators shoul
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.80\columnwidth]{figures/pawls_layout.png}
-    \caption{PAWLS layout example.}
+    \caption{A screenshot of PAWLS interface with an example PDF and RoB annotations.}
     \label{fig:pawls}
 \end{figure}
 %
@@ -447,7 +459,7 @@ After double annotation, we performed conflict resolution to address conflicting
 The conflict resolution was followed by annotating 51 more RCTs.
 
 
-After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
+After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
 We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format (maintains the structure of sections and subsections, tables, and figures) that makes the annotation task quicker for the annotators and increases annotation quality.
 Post annotation, the feedback was taken from both the annotators details of which could be found in the supplementary material. %TODO Anjani: Prepare the supplementary material 
 %
@@ -494,26 +506,30 @@ We interpret F1 measure as shown in the Table~\ref{tab:iaa_interpret}~\cite{land
 \label{method:llm}
 %
 % Why are we conducting an LLM evaluation and not classical machine learning?
-Our annotation guidelines and annotations were adapted for benchmarking supervised machine learning approaches and not large language models.
-So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical machine learning model could not use without extensive modifications~\cite{li2019figure,li2023uttsr}.
+Our annotation guidelines and annotations were adapted for benchmarking classical supervised machine learning approaches and not large language models.
+So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical ML model could not use without extensive modifications~\cite{li2019figure,li2023uttsr}.
 However, with the advent of LLMs that encode vast amounts of knowledge, full supervision with large amounts of annotated data is not required.
 However, the bar for clinical applications is high and it is imperative to evaluate these models for the more challenging clinical tasks like bias extraction~\cite{singhal2023large}.
 Additionally, the tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allows direct interaction between ChatGPT and PDFs, negating the clumsy PDF to text conversion
 Therefore, we consider it essential to evaluate LLMs instead of forcefully adapting the evaluation to a classical machine learning problem.
 We begin with formulating the task as a zero-shot risk of bias extraction task.
-This is to gauge whether ChatGPT encodes knowledge related to clinical biases.
-We will use simple prompt constructs of the structure ``Answer the \textbf{Signalling question} + Action item to extract sentence supporting the answer''. Consider the following example.
+This is to gauge whether ChatGPT encodes knowledge related to clinical trial biases.
+We will use simple prompt constructs of the structure ``Answer the signalling question + Action item to extract sentence supporting the answer''. Consider the following example.
 
 \begin{quote}
 \itshape Example prompt: Question 4.3 Were outcome assessors aware of the intervention received by study participants? Extract sentences that you write your answer based on.
 \end{quote}
 
-ChatPDF is expected to extract sentences from RCT PDFs that acts as text evidence to answering the signalling questions.
-Basically the LLMs are required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
-If the text selected by LLMs is a part of the human selected text, then we attribute it as a correct answer.
-It has to be noted that the evaluation framework only aims to measure accuracy of the answer generated by ChatPDF and does not expect it to give labels as the manual task entails.
-
-
+ChatPDF is tasked with extracting sentences from RCT PDFs to serve as textual evidence for answering the signaling questions.
+%In the analyzing step, ChatPDF creates a semantic index over all paragraphs of the PDF.
+When answering a question, ChatPDF finds the most relevant paragraphs from the PDF and uses the ChatGPT API from OpenAI to generate an answer.
+Basically ChatGPT via ChatPDF is required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
+When the text extracted by LLMs as evidence for answering the signaling question fuzzy matches the text selected by humans, it is considered a correct answer.
+In several instances, there was no information found by the expert reviewer from the RCT to answer a question. 
+For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
+It's important to highlight that the evaluation framework is designed solely to measure the accuracy of the answers generated by ChatPDF.
+Unlike the manual task, the framework does not require ChatPDF to provide labels.
+This evaluation was conducted for 10 out of the 60 RCTs and each document was evaluated using all the 22 signalling questions.
 
 %
 %
@@ -521,7 +537,7 @@ It has to be noted that the evaluation framework only aims to measure accuracy o
 \section{Results}
 \label{sec:results}
 %
-This section describes the annotated corpus, reports inter-annotator agreement and the results of LLM evaluation.
+This section outlines the annotated dataset, presents the inter-annotator agreement findings, and discusses the outcomes of the LLM evaluation.
 %
 %
 %
