@@ -151,23 +151,23 @@
 
 \abstract{\textbf{Purpose:} Risk of bias (RoB) assessment of randomized clinical trials (RCTs) is vital to answer a systematic review question accurately.
 Manual RoB assessment for hundreds of clinical trials is a cognitively demanding and lengthy process.
-LLMs (large language models) have immensely capable but necessitate evaluation in RoB assessment.
+LLMs (large language models) are immensely capable but necessitate evaluation in RoB assessment.
 Currently, no RoB annotation guidelines or annotated corpus exist for LLM evaluation.
 % 
-\textbf{Methods:} Taking the revised Cochrane Risk of Bias of randomized controlled trials, we develop a set of visual instructional placards that could be used as annotation guidelines to annotate RoB spans in RCTs.
+\textbf{Methods:} Taking the revised Cochrane risk of bias assessment guidelines for RCTs, we develop a set of visual instructional placards that could be used as text annotation guidelines to annotate RoB spans in clinical trials.
 Expert annotators employed these visual guidelines to annotate a corpus of 60 full-text RCTs from physiotherapy and rehabilitation.
 We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 60) of the annotated corpus.
-The annotated corpus was used to evaluate ChatGPT using a straightforward accuracy evaluation framework.
+The annotated corpus was used to evaluate ChatGPT using a straightforward evaluation framework.
 % 
-\textbf{Results:} We present a corpus of 60 full-text RCTs with fine-grained span annotations comprising 100,000 tokens belonging to 22 RoB classes.
+\textbf{Results:} We present a corpus of 60 RCTs with fine-grained span annotations comprising 100,000 tokens belonging to 22 RoB classes.
 The IAA ranges between 0\% for some bias classes and 90\%.
 \textbf{Add the results of LLM evaluation. The task: RoB span extraction.
 Evaluation measure: Accuracy}.
 % 
 \textbf{Conclusion:} 
 Despite having comprehensive bias assessment guidelines, RoB annotation remains a complex text annotation task.
-Utilizing visual placards for bias assessment and annotation enhances inter-annotator agreement (IAA) compared to cases where visual placards are absent.
-While LLMs demonstrate potency, their accuracy falters with more subjective bias assessment categories.
+Utilizing visual placards for bias assessment and annotation enhances inter-annotator agreement (IAA) compared to case where visual placards are absent.
+While LLMs demonstrate potency, their accuracy falters with more subjective RoB categories.
 Lastly, we address the study's strengths and limitations, offering insights for future research in the field.}
 
 \keywords{risk of bias, dataset, natural language processing, large language models}
@@ -452,6 +452,12 @@ To address this, the placards provide clear guidance on whether annotators shoul
 %
 %
 %
+For every SQ, the annotators were guided to use the complete RoB 2.0 guidance document along with visual placards that were developed.
+They followed these instructions meticulously, going through each placard's signaling question one by one.
+The provided instructions directed the annotators to read specific sections of full-text RCT that needed annotation.
+Their task involved identifying and highlighting relevant text passages related to answering the signaling question.
+%A total of 60 full-text RCTs were annotated using this approach, covering 22 signaling questions across five risk domains defined by RoB 2.0.
+%Out of the 60, nine were doubly-annotated to capture IAA and the rest were singly annotated.
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
 Out of the 60 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
@@ -505,11 +511,10 @@ We interpret F1 measure as shown in the Table~\ref{tab:iaa_interpret}~\cite{land
 \subsection{LLM evaluation}
 \label{method:llm}
 %
-% Why are we conducting an LLM evaluation and not classical machine learning?
 Our annotation guidelines and annotations were adapted for benchmarking classical supervised machine learning approaches and not large language models.
 So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical ML model could not use without extensive modifications~\cite{li2019figure,li2023uttsr}.
-However, with the advent of LLMs that encode vast amounts of knowledge, full supervision with large amounts of annotated data is not required.
-However, the bar for clinical applications is high and it is imperative to evaluate these models for the more challenging clinical tasks like bias extraction~\cite{singhal2023large}.
+Moreover, recent advancements with LLMs that encode vast amounts of knowledge offers a better alternative made us rethink the evaluation.
+The bar for clinical applications is high and it is imperative to evaluate these models for the more challenging clinical tasks like bias extraction~\cite{singhal2023large}.
 Additionally, the tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allows direct interaction between ChatGPT and PDFs, negating the clumsy PDF to text conversion
 Therefore, we consider it essential to evaluate LLMs instead of forcefully adapting the evaluation to a classical machine learning problem.
 We begin with formulating the task as a zero-shot risk of bias extraction task.
@@ -517,20 +522,21 @@ This is to gauge whether ChatGPT encodes knowledge related to clinical trial bia
 We will use simple prompt constructs of the structure ``Answer the signalling question + Action item to extract sentence supporting the answer''. Consider the following example.
 
 \begin{quote}
-\itshape Example prompt: Question 4.3 Were outcome assessors aware of the intervention received by study participants? Extract sentences that you write your answer based on.
+\itshape Example prompt: Question 4.3 Were outcome assessors aware of the intervention received by study participants? Provide an answer and extract the supporting sentences that you write your answer based on.
 \end{quote}
 
-ChatPDF is tasked with extracting sentences from RCT PDFs to serve as textual evidence for answering the signaling questions.
-%In the analyzing step, ChatPDF creates a semantic index over all paragraphs of the PDF.
+The prompt serves two purposes for evaluating LLMs for correctness.
+It tasks ChatPDF with two 1) answering the signalling question, and 2) extract the text evidence to support your answer.
+%ChatPDF is tasked with extracting sentences from RCT PDFs to serve as textual evidence for answering the signaling questions.
 When answering a question, ChatPDF finds the most relevant paragraphs from the PDF and uses the ChatGPT API from OpenAI to generate an answer.
+ChatPDF employs GPT (Generative Pretrained Transformer) 3.5.
 Basically ChatGPT via ChatPDF is required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
-When the text extracted by LLMs as evidence for answering the signaling question fuzzy matches the text selected by humans, it is considered a correct answer.
-In several instances, there was no information found by the expert reviewer from the RCT to answer a question. 
+If LLM answer corresponds to response option selected by the expert annotator, it is considered a correct answer.
+If the text extracted by LLMs as evidence for answering the signaling question fuzzy matches the text selected by the expert annotator, it is considered a correct answer.
+In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
-It's important to highlight that the evaluation framework is designed solely to measure the accuracy of the answers generated by ChatPDF.
-Unlike the manual task, the framework does not require ChatPDF to provide labels.
-This evaluation was conducted for 10 out of the 60 RCTs and each document was evaluated using all the 22 signalling questions.
-
+It's important to highlight that the evaluation framework is designed solely to measure the accuracy of the answers generated and evidence extracted by ChatPDF.
+This evaluation was conducted for 25 out of the 60 RCTs and each document was evaluated for X out of the 22 signalling questions.
 %
 %
 %
@@ -544,13 +550,8 @@ This section outlines the annotated dataset, presents the inter-annotator agreem
 \subsection{The corpus}
 \label{subsec:corpus}
 %
-In this section, we provide statistical information about the annotations we obtained for each risk domain and its corresponding signaling questions.
-For every signaling question, the annotators were guided to use the complete RoB 2.0 guidance document along with visual placards that were developed.
-They followed these instructions meticulously, going through each placard's signaling question one by one.
-The provided instructions directed the annotators to read specific sections of full-text Randomized Controlled Trials (RCTs) that needed annotation.
-Their task involved identifying and highlighting relevant text passages related to answering the signaling question.
-A total of 60 full-text RCTs were annotated using this approach, covering 22 signaling questions across five risk domains defined by RoB 2.0.
-Out of the 60, nine were doubly-annotated to capture IAA and the rest were singly annotated.
+In this section, we provide primary statistical information about the annotations we obtained for each risk domain and its corresponding signaling questions.
+
 %Anjani - TODO: Ask Roger for the annotation files from PAWLS and start documenting with whatever annotations are already made.
 
 %
@@ -651,32 +652,32 @@ In the Table~\ref{table:LLM_eval}, we report the accuracy of simple prompts as p
     \caption{LLM accuracy}
     \label{table:LLM_eval}
     \centering
-    \begin{tabular}{llll}
+    \begin{tabular}{ll}
     \hline
-        Signalling question & Simple prompts & Detailed prompts & change \\
+        Signalling question & Simple prompts (Accuracy) \\
     \hline
-        RoB 1\_1 &  &  &  \\ 
-        RoB 1\_2 &  &  &  \\ 
-        RoB 1\_3 &  &  &  \\ 
-        RoB 2\_1 &  &  &  \\ 
-        RoB 2\_2 &  &  &  \\ 
-        RoB 2\_3 &  &  &  \\ 
-        RoB 2\_4 &  &  &  \\ 
-        RoB 2\_5 &  &  &  \\ 
-        RoB 2\_6 &  &  &  \\ 
-        RoB 2\_7 &  &  &  \\ 
-        RoB 3\_1 &  &  &  \\ 
-        RoB 3\_2 &  &  &  \\ 
-        RoB 3\_3 &  &  &  \\ 
-        RoB 3\_4 &  &  &  \\ 
-        RoB 4\_1 &  &  &  \\ 
-        RoB 4\_2 &  &  &  \\ 
-        RoB 4\_3 &  &  &  \\ 
-        RoB 4\_4 &  &  &  \\ 
-        RoB 4\_5 &  &  &  \\ 
-        RoB 5\_1 &  &  &  \\ 
-        RoB 5\_2 &  &  &  \\ 
-        RoB 5\_3 &  &  &  \\ \hline
+        RoB 1\_1 &   \\ 
+        RoB 1\_2 &   \\ 
+        RoB 1\_3 &   \\ 
+        RoB 2\_1 &   \\ 
+        RoB 2\_2 &   \\ 
+        RoB 2\_3 &   \\ 
+        RoB 2\_4 &   \\ 
+        RoB 2\_5 &   \\ 
+        RoB 2\_6 &   \\ 
+        RoB 2\_7 &   \\ 
+        RoB 3\_1 &   \\ 
+        RoB 3\_2 &   \\ 
+        RoB 3\_3 &   \\ 
+        RoB 3\_4 &   \\ 
+        RoB 4\_1 &   \\ 
+        RoB 4\_2 &   \\ 
+        RoB 4\_3 &   \\ 
+        RoB 4\_4 &   \\ 
+        RoB 4\_5 &   \\ 
+        RoB 5\_1 &   \\ 
+        RoB 5\_2 &   \\ 
+        RoB 5\_3 &   \\ \hline
     \end{tabular}
 \end{table}
 %
@@ -718,6 +719,12 @@ After instructing ChatPDF to look into the uploaded PDF and not generate sentenc
 ``I apologize, but as an AI language model, I do not have access to any uploaded PDFs or any external sources. Please provide me with the PDF you are referring to, and I will be happy to extract the sentences related to answering the signalling question RoB 1.1.''
 When no information was found to answer a RoB question, ChatPDF generates a response by itself giving example sentences that could be used to answer that question.
 Can retrieve multiple related answers for a RoB question prompt and one of that has to be the correct answer and should be the same as what the annotators annotated.
+
+SQ 1.3 and tabular information.
+ChatPDF can not yet read images in the PDF, including images that consist of scanned text. Text in tables is read by ChatPDF, but it might have problems correlating the correct rows and columns.
+
+In one particular instance, LLM answered correctly saying that the sequence was randomly generated and also extracted the sentence related to answering the question, but the generated sentence was not found in the PDF.
+
 %
 %
 %
