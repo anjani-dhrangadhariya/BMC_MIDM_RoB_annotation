@@ -346,8 +346,7 @@ In such situations, ``No Information'' label is acceptable.
 \subsection{Data collection}
 \label{data}
 %
-The epidemiology researcher from our team created an annotation dataset of 60 RCTs from the domain of physiotherapy and rehabilitation.
-Our corpus is focused on these domains because our annotators have RoB assessment expertise in this domain.
+%Our corpus is focused on these domains because our annotators have RoB assessment expertise in this domain.
 Savović~\textit{et al.} categorized outcome measures as mortality, other objective outcome, or subjective outcome and estimated the associations of bias judgments with intervention effect estimates~\cite{savovic2018association}.
 Trials assessing subjective outcomes are more prone to bias, therefore, had we used only one outcome type, we would have limited label types for different risk classes~\cite{page2016empirical}.
 In context of RCTs, subjective outcomes are measurements that rely on individuals' perceptions, opinions, or feelings about their own health or well-being.
@@ -358,13 +357,13 @@ These outcomes are typically collected by trained assessors or through laborator
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
 Mortality outcomes refer to the occurrence of death during the course of the randomized controlled trial.
 To ensure these different outcome types are represented in the corpus, we restricted including 26, 23 and 11 RCTs addressing objective, subjective and mortality primary outcomes.
-These 60 studies were selected from four journals: journal 1, journal 2, journal 3 and journal 4. 
-PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol wherever available.
+The epidemiology researcher from our team created this 60 RCTs dataset from the domain of physiotherapy and rehabilitation.
+%These 60 studies were selected from four journals: journal 1, journal 2, journal 3 and journal 4. 
 %TODO Anjani: Justify why only these journals were considered?
+PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol wherever available.
 %TODO Anjani: Add if some studies were randomly added. Ask Roger for more information.
 All these RCT PDFs have CC-BY-0 licences~\footnote{\url{https://creativecommons.org/share-your-work/public-domain/cc0/}}.
-We list these studies and their licenses in the supplementary material.
-
+We list the details of these studies in a separate supplementary material file.
 %
 %
 %
@@ -526,13 +525,15 @@ We will use simple prompt constructs of the structure ``Answer the signalling qu
 \end{quote}
 
 The prompt serves two purposes for evaluating LLMs for correctness.
-It tasks ChatPDF with two 1) answering the signalling question, and 2) extract the text evidence to support your answer.
+ChatPDF is tasked with 1) answering the signalling question, and 2) extract the text evidence to support your answer.
 %ChatPDF is tasked with extracting sentences from RCT PDFs to serve as textual evidence for answering the signaling questions.
 When answering a question, ChatPDF finds the most relevant paragraphs from the PDF and uses the ChatGPT API from OpenAI to generate an answer.
 ChatPDF employs GPT (Generative Pretrained Transformer) 3.5.
 Basically ChatGPT via ChatPDF is required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
-If LLM answer corresponds to response option selected by the expert annotator, it is considered a correct answer.
+If LLM answer corresponds to response option selected by the expert annotator, it is considered a correct answer. 
+%This will be measured by $$.
 If the text extracted by LLMs as evidence for answering the signaling question fuzzy matches the text selected by the expert annotator, it is considered a correct answer.
+%This will be measured by $$.
 In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
 It's important to highlight that the evaluation framework is designed solely to measure the accuracy of the answers generated and evidence extracted by ChatPDF.
@@ -550,16 +551,17 @@ This section outlines the annotated dataset, presents the inter-annotator agreem
 \subsection{The corpus}
 \label{subsec:corpus}
 %
-In this section, we provide primary statistical information about the annotations we obtained for each risk domain and its corresponding signaling questions.
-
 %Anjani - TODO: Ask Roger for the annotation files from PAWLS and start documenting with whatever annotations are already made.
+In this section, we provide primary statistical information about the corpus annotations.
+
+
 
 %
 %
 %
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.60\columnwidth]{figures/rob_annot_freq.png}
+    \includegraphics[width=0.60\columnwidth]{figures/sq_ann_raw_counts.png}
     \caption{Total number of annotations made for each signalling question.}
     \label{fig:flowchart}
 \end{figure}
@@ -572,7 +574,7 @@ In this section, we provide primary statistical information about the annotation
     \centering
     \caption{General statistics for the annotated corpus}
     \label{table:stats}
-    \begin{tabular}{lrrrrr}
+    \begin{tabular}{crrrrr}
     \hline
          Signalling Question & Total tokens & Mean tokens & Average length & Total documents \\ \hline
         RoB 1.1 & 0 & 0 & 0 & 0 \\ 
@@ -612,7 +614,7 @@ Table \ref{table:IAA_sq} illustrates the levels of inter-annotator agreement bet
     \caption{IAA before after visual placards development}
     \label{table:IAA_sq}
     \centering
-    \begin{tabular}{llll}
+    \begin{tabular}{crrr}
     \hline
         Signalling question & before guideline improvement & after guidelines improvement & change \\
     \hline
@@ -652,32 +654,33 @@ In the Table~\ref{table:LLM_eval}, we report the accuracy of simple prompts as p
     \caption{LLM accuracy}
     \label{table:LLM_eval}
     \centering
-    \begin{tabular}{ll}
+    \begin{tabular}{crr}
     \hline
-        Signalling question & Simple prompts (Accuracy) \\
+     & \multicolumn{2}{c}{Simple prompts} \\
+        Signalling question & Accuracy (response option) & Accuracy (evidence extraction) \\ 
     \hline
-        RoB 1\_1 &   \\ 
-        RoB 1\_2 &   \\ 
-        RoB 1\_3 &   \\ 
-        RoB 2\_1 &   \\ 
-        RoB 2\_2 &   \\ 
-        RoB 2\_3 &   \\ 
-        RoB 2\_4 &   \\ 
-        RoB 2\_5 &   \\ 
-        RoB 2\_6 &   \\ 
-        RoB 2\_7 &   \\ 
-        RoB 3\_1 &   \\ 
-        RoB 3\_2 &   \\ 
-        RoB 3\_3 &   \\ 
-        RoB 3\_4 &   \\ 
-        RoB 4\_1 &   \\ 
-        RoB 4\_2 &   \\ 
-        RoB 4\_3 &   \\ 
-        RoB 4\_4 &   \\ 
-        RoB 4\_5 &   \\ 
-        RoB 5\_1 &   \\ 
-        RoB 5\_2 &   \\ 
-        RoB 5\_3 &   \\ \hline
+        RoB 1\_1 & 88\% & 72\% \\ 
+        RoB 1\_2 & 69.56\% & 58.33\%  \\ 
+        RoB 1\_3 & 40\% & 40\% \\ 
+        RoB 2\_1 & &  \\ 
+        RoB 2\_2 & &  \\ 
+        RoB 2\_3 & &  \\ 
+        RoB 2\_4 & &  \\ 
+        RoB 2\_5 & &  \\ 
+        RoB 2\_6 & &  \\ 
+        RoB 2\_7 & &  \\ 
+        RoB 3\_1 & &  \\ 
+        RoB 3\_2 & &  \\ 
+        RoB 3\_3 & &  \\ 
+        RoB 3\_4 & &  \\ 
+        RoB 4\_1 & & \\ 
+        RoB 4\_2 & & \\ 
+        RoB 4\_3 & &  \\ 
+        RoB 4\_4 & &  \\ 
+        RoB 4\_5 & &  \\ 
+        RoB 5\_1 & &  \\ 
+        RoB 5\_2 & &  \\ 
+        RoB 5\_3 & &  \\ \hline
     \end{tabular}
 \end{table}
 %
