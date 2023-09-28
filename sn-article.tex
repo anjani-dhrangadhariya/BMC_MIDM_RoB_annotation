@@ -601,6 +601,21 @@ In this section, we provide primary statistical information about the corpus ann
         RoB 5.3 & 0 & 0 & 0 & 0 \\ \hline
     \end{tabular}
 \end{table}
+
+%
+%
+%
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.90\columnwidth]{figures/bias_judgment_count.png}
+    \caption{Distribution of bias judgment across risk domains in RoBuster.}
+    \label{fig:flowchart}
+\end{figure}
+%
+%
+%
+
+
 %
 %
 %
@@ -758,11 +773,13 @@ Google's Bard does interact but the results were more unstable than ChatPDF.
 \section{Conclusion}
 \label{sec:conclusion}
 %
-We have presented RoBuster: a new, publicly-available corpus, comprising 60 full-text randomized controlled trials richly annotated with 22 signalling questions.
+We have presented RoBuster: a new, publicly-available corpus, comprising 60 full-text randomized controlled trials richly annotated with risk of bias span information for 22 risk of bias questions.
 The dataset fills a need for a corpus to evaluate risk of bias span extraction using machine learning technologies.
 Our corpus has detailed and fine-grained information in form of individual risk of bias spans along with annotator decision on the bias risk (high or low).
+We used RoBuster as a benchmark to evaluate LLMs for how well LLMs agree with human-led bias assessment.
 As it has been developed by bias assessors and natural language processing experts, RoBuster can support automated approaches to bias assessment and can also be a part SLR (living systematic review) systems.
-Throughout our journey, we've encountered several challenges during RoB annotation. These experiences have led us to outline refinements in the discussion section, offering insights to guide future studies in this domain.
+Throughout this work, we've encountered several challenges during RoB annotation.
+These experiences have led us to outline refinements in the discussion section, offering insights to guide future studies in this domain.
 In the future, we plan to extend this corpus by adding more annotated full-texts.
 %In addition, LLMs could be fine-tuned with the available annotations to further refine the corpus with new annotations which could have been missed.
 Another direction to test whether the developed visual placards could be used to train fresh risk of bias assessors.
