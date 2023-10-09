@@ -539,7 +539,7 @@ Both of these skills will be evaluated using a percentage agreement metric, whic
 In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
 It's important to highlight that the evaluation framework is designed solely to measure the agreement of the answers between ChatPDF and the expert.
-This evaluation was conducted for 25 out of the 60 RCTs and each document was evaluated for X out of the 22 signalling questions.
+This evaluation was conducted for 25 out of the 60 RCTs and each document was evaluated for X out of the 22 signalling questions. %TODO - replace X with the number of bias questions evaluated
 %
 %
 %
@@ -556,23 +556,23 @@ This section outlines the annotated dataset, presents the inter-annotator agreem
 %Anjani - TODO: Ask Roger for the annotation files from PAWLS and start documenting with whatever annotations are already made.
 In this section, we provide key statistical information about the annotations in our corpus.
 
-The histogram in Figure \ref{fig:ann_counts} shows a visual representation of the absolute counts of annotations (tokens) for each of the Risk of Bias (RoB) signaling questions in descending order.
-SQ 1.3 has disproportionately higher number of annotated tokens because it involving annotating full tables for coming to a bias judgement.
+The histogram in Figure \ref{fig:ann_counts} shows a visual representation of the absolute counts of annotations (tokens) for each of the RoB signaling questions.
+SQ 1.3 has disproportionately higher number of annotated tokens because it involved annotating full tables for coming to a bias judgement.
 In contrast, for all other SQs, the number of annotated tokens remains consistently below 1000 across the entire corpus.
 
  
 There are no token annotations for the bias question 2.4 ``Were these deviations likely to have affected the outcome?'' which hinges on the previous question 2.3.
-Table~\ref{table:stats} lists down primary information on the absolute and average annotation lengths along for each RoB signalling question along with the total number of documents the annotations are identified from.
-Annotations from risk domain one are found in almost all the documents, while information related to answering the other risk questions is only available in a small subset of the total annotated Randomized Controlled Trials (RCTs), as also depicted in Figure~\ref{fig:rob_information}.
-The figure also shows that for the majority of the RoB questions, there was no information available pertaining to answer or make a judgment as to whether the bias was high or low.
-In cases where information was available, the bias tended to be low, as indicated by the prevalence of green bars, except for signaling questions 2.1, 2.2, 3.1, 4.3, 4.4, and 5.2.
+Table~\ref{table:stats} lists down essential information on the absolute and average annotation lengths for each RoB SQ along with the total number of documents the annotations are identified from.
+Annotations from risk domain one are found in almost all the documents, while information related to answering the other risk questions is only available in a small subset of the total annotated RCTs, as also depicted in Figure~\ref{fig:rob_information}.
+The figure also shows that for the majority of the RoB questions, there was no information (yellow bar) available pertaining to answer or make a judgment as to whether the bias was high or low.
+In cases where information was available, the bias tended to be low, as indicated by the prevalence of green bars, except for signaling questions 2.1, 2.2, 3.1, 4.3, 4.4, and 5.2 where bias was high (red bars).
 %
 %
 %
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.60\columnwidth]{figures/sq_ann_raw_counts.png}
-    \caption{Total number of annotations made for each signalling question.}
+    \caption{Total number of token annotations for each RoB signalling question.}
     \label{fig:ann_counts}
 \end{figure}
 %
@@ -622,7 +622,7 @@ In cases where information was available, the bias tended to be low, as indicate
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.90\columnwidth]{figures/judgment_dist.png}
-    \caption{Distribution of bias judgment across risk domains in RoBuster.}
+    \caption{Distribution of bias judgment across RoB signalling questions in RoBuster.}
     \label{fig:rob_information}
 \end{figure}
 %
@@ -635,13 +635,13 @@ In cases where information was available, the bias tended to be low, as indicate
 %
 \subsection{Inter-annotator agreement}
 %
-Table \ref{tab:IAA_sq} illustrates the levels of inter-annotator agreement between the two consensus annotators, both before and after the development of the guidelines.
+Table~\ref{tab:IAA_sq} illustrates the levels of inter-annotator agreement between the two consensus annotators, both before and after the development of the guidelines.
 The IAA scores before and after the guideline improvement are calculated on a different set of documents.
 We saw an improvement in the IAA for many signalling questions and a considerable improvement of more than 50 points for the questions 1.3, 2.1, 4.1 and 4.4.
 The IAA between the two reference annotators for a total of 11 out of 22 questions stood to zero before the guideline improvement.
 Only for two signalling questions (4.4 and 5.2) did the guideline improvement raise the IAA from zero to 56.25 and 49.49 respectively.
 However, for the signalling questions 2.3 and 2.7, the agreement dropped from meagre 5.42 and 6.52 to zero.
-Inferring from the table~\ref{tab:iaa_interpret} and \ref{tab:IAA_sq}, 11/22 signalling questions had a poor agreement, 3/22 questions had a fair agreement, 4/ 22 questions had a good agreement and 2/22 questions had a substantial agreement while 2/22 questions had an almost perfect agreement of beyond 81 IAA points.
+Inferring from the table~\ref{tab:iaa_interpret} and table~\ref{tab:IAA_sq}, 11 of the 22 signalling questions had a poor agreement, three of the 22 questions had a fair agreement, four out of the 22 questions had a good agreement and two out of the 22 questions had a substantial agreement while only two of the 22 questions had an almost perfect agreement of beyond 81 IAA points.
 As expected, none of the SQ annotations had a perfect IAA of 100.
 %
 %
@@ -683,7 +683,7 @@ As expected, none of the SQ annotations had a perfect IAA of 100.
 %
 \subsection{LLM evaluation}
 %
-In the Table~\ref{table:LLM_eval}, we report the accuracy of simple prompts as previously described. 
+In the Table~\ref{table:LLM_eval}, we report the accuracy of simple prompts as described in section~\ref{method:llm}.
 
 %
 %
@@ -773,23 +773,20 @@ In one particular instance, LLM answered correctly saying that the sequence was 
 \label{subsec:limits}
 %
 Our study has the following limitations.
-Firstly, a limitation arises from the relatively small scale of our annotations, with only 60 documents undergoing the annotation process.
+The first limitation arises from the relatively small scale of our annotations, with only 60 documents undergoing the annotation process.
 This constraint is primarily due to financial constraints, as the availability of funds limited our ability to hire a larger number of expert annotators.
-%Despite this limitation, the robustness of the annotations provided by the experts remains noteworthy, as they diligently scrutinized the selected documents within the resources at hand.
+Despite the limitation, the robustness of the annotations provided by the experts remains noteworthy, as they thoroughly assessed the selected RCTs within the resources at hand.
 A second limitation stems from the narrow focus of annotations, concentrated exclusively on physiotherapy and rehabilitation clinical trials.
 This specificity arises from our reliance on domain experts for annotations, who possess the requisite expertise in these areas.
 While this targeted approach guarantees high-quality annotations within the specified domains, it could inadvertently restrict the broader applicability of the annotated corpus.
-%Nonetheless, the in-depth and accurate annotations derived from expert knowledge substantially contribute to the reliability of the study's outcomes within the designated domains.
-Thirdly, our study's scope is limited by the selection of particular journals to construct the corpus in addition to certain RCTs selected randomly.
-This choice was necessitated by the desire to incorporate articles of the utmost quality, ensuring the inclusion of high-caliber research in the analysis.
-While this decision ensures a certain standard of literature, it inadvertently excludes a wider spectrum of articles, potentially biasing the corpus toward a specific subset of clinical trials.
-It's important to note that the chosen journals might have their own editorial policies, thereby limiting the diversity of included studies.
-This methodological trade-off, while benefiting the corpus's overall quality, might inadvertently influence the representation of risk of bias annotations, particularly in relation to lower quality trials.
-
-
+%Thirdly, our study's scope is limited by the selection of particular journals to construct the corpus in addition to certain RCTs selected randomly.
+%This choice was necessitated by the desire to incorporate articles of the utmost quality, ensuring the inclusion of high-caliber research in the analysis.
+%While this decision ensures a certain standard of literature, it inadvertently excludes a wider spectrum of articles, potentially biasing the corpus toward a specific subset of clinical trials.
+%It's important to note that the chosen journals might have their own editorial policies, thereby limiting the diversity of included studies.
+%This methodological trade-off, while benefiting the corpus's overall quality, might inadvertently influence the representation of risk of bias annotations, particularly in relation to lower quality trials.
 Our LLM evaluation was limited by the fact that we chose to work with PDFs. 
-There are limited platforms that interact with PDFs. 
-Google's Bard does interact but the results were more unstable than ChatPDF.
+There are limited platforms that interact with PDFs and this restricts our choice of the models to evaluate.
+Google's Bard does interact with PDFs, but we observed that the Bard results were less deterministic than ChatPDF.
 %
 %
 %
