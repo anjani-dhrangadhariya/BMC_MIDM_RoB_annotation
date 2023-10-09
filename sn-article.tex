@@ -245,7 +245,7 @@ Our contributions with this paper are five-fold.
 %
 This section describes the annotation scheme, annotation softwares and guidelines.
 Since there are no annotation guidelines available for RoB span annotation task, we take pleasure in formulating them from scratch. 
-We first developed a draft version of our visual annotation guidelines, doubly annotated a fraction of documents using it and used this exercise to refine the guidelines.
+We first developed a draft version of our visual annotation guidelines, doubly annotated a fraction of documents using it and used the conflicts identified during this exercise to refine the guidelines.
 %
 %
 %
@@ -269,11 +269,11 @@ We first developed a draft version of our visual annotation guidelines, doubly a
 
 
 Creating a new annotated corpus involves defining an annotation scheme or adopting an existing one.
-To our knowledge the only available annotation scheme for RoB span annotation was presented by ~\cite{dhrangadhariya2023first}.
+To our knowledge the only available annotation scheme for RoB span annotation was presented by~\cite{dhrangadhariya2023first}.
 Rather than creating a new scheme, we adapt and enhance their approach by learning from its drawbacks.
 Their annotation scheme was directly adapted from the RoB 2 assessment procedure and hence it is imperative to understand the RoB 2 structure to understand the annotation scheme.
-RoB 2 divides biases into five risk domains, each corresponding to different parts of the trial design.
-Each risk domain decomposes into several signalling questions, each aiming to prompt a relevant response to bias assessment (refer to Table~\ref{tab1}).
+RoB 2 divides biases into five risk domains, each loosely corresponding to different parts of the trial design.
+Each risk domain decomposes into several signalling questions, each aiming to prompt a relevant response to bias assessment (refer to Table~\ref{tab:robdomains}).
 
 
 %
@@ -282,7 +282,7 @@ Each risk domain decomposes into several signalling questions, each aiming to pr
 \begin{table*}
  \centering
  %\captionsetup{justification=justified}
-   \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2) and the number of signalling questions (SQ) in each domain.}\label{tab1}
+   \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2) and the number of signalling questions (SQ) in each domain.}\label{tab:robdomains}
     \begin{tabular}{llr}
     \toprule
      Class & Domain & SQ\\
@@ -313,12 +313,12 @@ In RoB span annotation, we mimic this assessment process by considering evidence
 Each span corresponds to answering a signalling question and is annotated with the most informative label. 
 The label incorporates information about the signalling question number and the domain it assesses (for the above example, ``1.1'' for the first domain and first signalling question of the domain)
 Additionally, the response judgement is incorporated in the label, such as ``1.1 Yes Good'' for a well-executed randomization (see Figure~\ref{fig:annotationscheme}).
-Dhrangadhariya \textit{et al.} suggests collapsing the response options ``yes'' and ``probably yes'' into a single ``yes'', and ``no'' and ``probably no'' together into a single ``no'' to increase the inter-annotator agreement (IAA)~\cite{dhrangadhariya2023first}.
-Except for some special case signalling questions, we too collapse these response option as suggested.
+Dhrangadhariya \textit{et al.} suggests collapsing the response options ``yes'' and ``probably yes'' into a single ``yes'', and ``no'' and ``probably no'' together into a single ``no'' to increase the inter-annotator agreement (IAA) without altering the final risk domain judgment~\cite{dhrangadhariya2023first}.
 As shown in Figure~\ref{fig:flowchart} responding to any signalling question for the risk domain 2 as either ``Probably yes'' or ``Yes'' does not alter the final risk judgment for this domain (low, high, or some concerns).
+Therefore, except for some special case signalling questions, we too collapse these response option as suggested.
 In summary, the reviewer needs to label the identified text span with the RoB entity along with one of the response options.
 In this regard, we have a hierarchical span annotation scheme comprising 22 entities corresponding to the 22 signalling questions, each with typically two response options and two directions (mutually exclusive).
-We also remove the ``No Information'' labels since it is meant for the situations where actually no text evidence is found to answer a SQ leaving on text to be labelled with it.
+We also remove the ``No Information'' labels since it is meant for the situations where actually no text evidence is found in the RCT to answer a SQ.
 However, for selected signalling questions, ``probably yes'', ``probably no'' and ``No Information'' may still be used.
 For example, consider that an RCT uses ``...random number generator and sealed envelopes for patient randomization...'', but the trial provided no information on whether the envelop was ``opaque'' or not.
 In such situations, ``No Information'' label is acceptable.
@@ -358,15 +358,15 @@ For example, in a study on rheumatoid arthritis, subjective outcome measures inc
 Objective outcomes are measurements that are independent of individual opinions or perceptions and are based on observable and measurable data.
 These outcomes are typically collected by trained assessors or through laboratory tests, imaging studies, or other objective methods.
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
-Mortality outcomes refer to the occurrence of death during the course of the randomized controlled trial.
-To ensure these different outcome types are represented in the corpus, we restricted including 26, 23 and 11 RCTs addressing objective, subjective and mortality primary outcomes.
+Mortality outcomes refer to the occurrence of death during the course of the trial.
+To ensure these different outcome types are represented in the corpus, we restricted including 26, 23 and 11 RCTs addressing objective, subjective and mortality primary outcomes. %TODO: Recheck the distribution of 26, 23, and 11
 The epidemiology researcher from our team created this 60 RCTs dataset from the domain of physiotherapy and rehabilitation.
 %These 60 studies were selected from four journals: journal 1, journal 2, journal 3 and journal 4. 
 %TODO Anjani: Justify why only these journals were considered?
-PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol wherever available.
+PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol from wherever available.
 %TODO Anjani: Add if some studies were randomly added. Ask Roger for more information.
 All these RCT PDFs have CC-BY-0 licences~\footnote{\url{https://creativecommons.org/share-your-work/public-domain/cc0/}}.
-We list the details of these studies in a separate supplementary material file.
+%We list the details of these studies in a separate supplementary material file.
 %
 %
 %
@@ -408,7 +408,7 @@ The inclusion of NLP researchers was particularly important because the guidelin
     \centering
     \includegraphics[width=0.80\columnwidth]{figures/placard_3_1.pdf}
     \caption{Sample annotation instruction placard for the signalling question 3.1 designed and adapted using RoB 2 tool.}
-    \label{fig:flowchart}
+    \label{fig:placard}
 \end{figure}
 %
 %
@@ -432,7 +432,7 @@ Each placard takes the form of a flowchart and provides instructions for annotat
 These placards address various facets of RoB 2 subjectivity and the actual process of annotation.
 For instance, a common reason for low inter-annotator agreement is when annotators correctly address a bias question but annotate evidence from different parts of the full text. 
 To tackle this, our placards restrict annotations for a question to a specific part of the text, such as the Methods section, Results section, Flowchart in the Methods section, etc.
-Detailed guidelines and these visual placards are available in the Supplementary material, with an example placard shown in the Figure.
+Detailed guidelines and these visual placards are available in the Supplementary material, with an example placard shown in the Figure~\ref{fig:placard}.
 These placards also tackle another factor contributing to the low inter-annotator agreement.
 For example, while some annotators might annotate an entire paragraph as text evidence to answer a question, others might focus on the most informative portion of the text.
 To address this, the placards provide clear guidance on whether annotators should annotate a phrase, a sentence, or a combination of sentences.
@@ -457,18 +457,19 @@ To address this, the placards provide clear guidance on whether annotators shoul
 For every SQ, the annotators were guided to use the complete RoB 2 guidance document along with visual placards that were developed.
 They followed these instructions meticulously, going through each placard's signaling question one by one.
 The provided instructions directed the annotators to read specific sections of full-text RCT that needed annotation.
-Their task involved identifying and highlighting relevant text passages related to answering the signaling question.
+Their task involved identifying and highlighting relevant text related to answering the signaling question.
 %A total of 60 full-text RCTs were annotated using this approach, covering 22 signaling questions across five risk domains defined by RoB 2.
 %Out of the 60, nine were doubly-annotated to capture IAA and the rest were singly annotated.
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
 Out of the 60 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
-After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the placards.
-The conflict resolution was followed by annotating 51 more RCTs.
+After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the visual placards.
+The conflict resolution was followed by annotating 51 additional RCTs.
 
 
 After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
-We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format (maintains the structure of sections and subsections, tables, and figures) that makes the annotation task quicker for the annotators and increases annotation quality.
+We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format that will be lost upon converting to text. 
+For example the structure pertaining to sections and subsections, tables, and figures makes the annotation task quicker for the annotators and increases annotation quality.
 Post annotation, the feedback was taken from both the annotators details of which could be found in the supplementary material. %TODO Anjani: Prepare the supplementary material 
 %
 %
@@ -477,8 +478,8 @@ Post annotation, the feedback was taken from both the annotators details of whic
 \label{subsec:corpus}
 %
 Cohen's kappa $\kappa$ is the standard annotation reliability measure for many classification annotation tasks, but it is not a relevant measure for token-level annotation tasks like span annotation and entity annotation.
-Therefore, instead of $\kappa$, we reporting the pairwise F1 measure that disregards out-of-the-span tokens (unannotated tokens), which is the ideal measure of annotation reliability for the token-level annotation tasks~\cite{deleger2012building}.
-Pairwise F1 calculates the F1 score for each pair of annotators, treating one annotator's labels as the "true" labels and the other annotator's labels as the "predicted" labels.~\cite{brandsen2020creating}.
+Therefore, instead of $\kappa$, we report the pairwise F1 measure that disregards out-of-the-span tokens (unannotated tokens), which is the ideal measure of annotation reliability for the token-level annotation tasks~\cite{deleger2012building}.
+Pairwise F1 calculates the F1 score for each pair of annotators, treating one annotator's labels as the ``true'' labels and the other annotator's labels as the ``predicted'' labels~\cite{brandsen2020creating}.
 We interpret F1 measure as shown in the Table~\ref{tab:iaa_interpret}~\cite{landis1977measurement}.
 
 
@@ -513,33 +514,31 @@ We interpret F1 measure as shown in the Table~\ref{tab:iaa_interpret}~\cite{land
 \subsection{LLM evaluation}
 \label{method:llm}
 %
-Our annotation guidelines and annotations were adapted for benchmarking classical supervised machine learning approaches and not large language models.
+Our annotation guidelines and annotations were adapted for benchmarking classical supervised machine learning approaches and not LLMs.
 So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical ML model could not use without extensive modifications~\cite{li2019figure,li2023uttsr}.
-Moreover, recent advancements with LLMs that encode vast amounts of knowledge offers a better alternative made us rethink the evaluation.
-The bar for clinical applications is high and it is imperative to evaluate these models for the more challenging clinical tasks like bias extraction~\cite{singhal2023large}.
-Additionally, the tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allows direct interaction between ChatGPT and PDFs, negating the clumsy PDF to text conversion
+However, recent advancements with LLMs that encode vast amounts of knowledge offers a better alternative made us rethink the evaluation.
+The bar for clinical applications is high and it is imperative to evaluate these models for the more challenging clinical tasks like bias span extraction~\cite{singhal2023large}.
+Additionally, the tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allows direct interaction between ChatGPT and PDFs, negating the clumsy PDF to text conversion.
 Therefore, we consider it essential to evaluate LLMs instead of forcefully adapting the evaluation to a classical machine learning problem.
-We begin with formulating the task as a zero-shot risk of bias extraction task.
+We formulated the task as a zero-shot RoB extraction task.
 This is to gauge whether ChatGPT encodes knowledge related to clinical trial biases.
 We will use simple prompt constructs of the structure ``Answer the signalling question + Action item to extract sentence supporting the answer''. Consider the following example.
 
 \begin{quote}
-\itshape Example prompt: Question 4.3 Were outcome assessors aware of the intervention received by study participants? Provide an answer and extract the supporting sentences that you write your answer based on.
+\itshape Example prompt: Question 4.3 Were outcome assessors aware of the intervention received by study participants? Provide an answer and extract the supporting sentences that you write your answer based on. Extract the sentences in JSON~\footnote{JSON = JavaScript Object Notation}.
 \end{quote}
 
 The prompt serves two purposes for evaluating LLMs for correctness.
-ChatPDF is tasked with 1) answering the signalling question, and 2) extract the text evidence to support your answer.
-%ChatPDF is tasked with extracting sentences from RCT PDFs to serve as textual evidence for answering the signaling questions.
+ChatPDF is tasked with 1) answering the signalling question with a response option (the judgment), and 2) extract the text evidence to support your answer.
 When answering a question, ChatPDF finds the most relevant paragraphs from the PDF and uses the ChatGPT API from OpenAI to generate an answer.
 ChatPDF employs GPT (Generative Pretrained Transformer) 3.5.
 Basically ChatGPT via ChatPDF is required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
 If LLM answer corresponds to response option selected by the expert annotator, it is considered a correct answer. 
-%This will be measured by $$.
 If the text extracted by LLMs as evidence for answering the signaling question fuzzy matches the text selected by the expert annotator, it is considered a correct answer.
-%This will be measured by $$.
+Both of these skills will be evaluated using a percentage agreement metric, which is essentially the number of documents for a RoB SQ where ChatGPT's responses align with those of the human expert, divided by the total number of documents assessed.
 In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
-It's important to highlight that the evaluation framework is designed solely to measure the accuracy of the answers generated and evidence extracted by ChatPDF.
+It's important to highlight that the evaluation framework is designed solely to measure the agreement of the answers between ChatPDF and the expert.
 This evaluation was conducted for 25 out of the 60 RCTs and each document was evaluated for X out of the 22 signalling questions.
 %
 %
