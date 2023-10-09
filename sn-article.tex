@@ -161,10 +161,9 @@ Expert annotators employed these visual guidelines to annotate a corpus of 60 fu
 We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 60) of the annotated corpus.
 The annotated corpus was used to evaluate ChatGPT using a straightforward evaluation framework.
 % 
-\textbf{Results:} We present a corpus of 60 RCTs with fine-grained span annotations comprising 100,000 tokens belonging to 22 RoB classes.
-The IAA ranges between 0\% for some bias classes and 90\%.
-\textbf{Add the results of LLM evaluation. The task: RoB span extraction.
-Evaluation measure: Accuracy}.
+\textbf{Results:} We present a corpus of 60 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
+The IAA ranges between 0\% and 99\%.
+LLMs show promising but variable agreements across the different bias questions.
 % 
 \textbf{Conclusion:} 
 Despite having comprehensive bias assessment guidelines, RoB annotation remains a complex text annotation task.
@@ -190,52 +189,54 @@ Systematic reviews (SRs) synthesized using randomized controlled trials (RCTs) a
 SRs aid medical professionals make educated decisions about an individual's health and help governments enact informed health policies~\cite{mogo2022systematic,mctigue2006obesity}.
 An RCT is a scientific experiment aiming to evaluate the efficacy of an intervention on particular patient outcomes.
 In these trials, patients are randomly divided and allocated to either an active intervention group or a comparator group, and the impact of intervention compared to the comparator is measured in a controlled setting~\cite{sibbald1998understanding}.
-Theoretically, RCTs are less susceptible to biases given the randomized study design but are still prone to unavoidable flaws in the trial's design, conduction, or reporting.
+Theoretically, RCTs are low on biases given the randomized study design but are still prone to unavoidable biases creeping into the trial's design, execution, or reporting.
 Biased clinical trials make medical practitioners systematically overestimate or underestimate the intervention effect on patient outcomes, leading to harmful health practices and policies~\cite{kjaergard1999randomized,naci2019design}.
-Thus, Reviewers conducting SRs must thoroughly screen RCTs for biases before inclusion in writing SRs.
+Thus, reviewers conducting SRs must thoroughly screen RCTs for biases before inclusion in writing SRs.
 
 
 The biases in RCTs cannot be quantified, but an RCT can be assessed for biases to minimize the overall risk and judge its quality.
-Various terms are used for bias assessment, like validity or quality assessment, but in this study, we refer to bias assessment as risk-of-bias (RoB) assessment.
-There are several tools to assess RoB, including the Cochrane Collaborations RoB Tool, Physiotherapy Evidence Database (PEDro) RoB scale, revised Cochrane RoB 2.0 tool, AMSTAR/AMSTAR 2, EPOC RoB Tool and several other independent checklists~\cite{higgins2011cochrane,elkins2013growth,sterne2019rob,shea2017amstar,farrah2019risk}.
+In this study, we refer to bias assessment as risk-of-bias (RoB) assessment.
+There are several tools to assess RoB, including the Cochrane Collaborations RoB Tool, Physiotherapy Evidence Database (PEDro) RoB scale, revised Cochrane RoB 2 tool (RoB 2), AMSTAR/AMSTAR 2, EPOC RoB Tool and several other independent checklists~\cite{higgins2011cochrane,elkins2013growth,sterne2019rob,shea2017amstar,farrah2019risk}.
 These tools are structured as a series of questions aiming to elicit factual information from the RCTs, which could then be used for RoB assessment.
 %These tools are a series of questions aiming to elicit factual information from the RCTs, which can then be used to assess their quality.
 Manual quality assessment requires the reviewers to go through full-text RCTs and manually inspect every question from the chosen bias assessment tool.
 The process takes about 3-10 months per person per SR and requires a high degree of methodological expertise on the reviewer's part.
-Moreover, RoB assessment is a part of writing systematic reviews, which is highly resource-heavy, taking about six months to several years to complete~\cite{tsertsvadze2015conduct, khangura2012evidence}.
-review~\cite{higgins2019cochrane}.
-The pace at which RCTs are published makes RoB assessment a lengthy process and underscores the need for automation..
-%~\footnote{\url{https://pubmed.ncbi.nlm.nih.gov/?term=randomized\%20controlled\%20trial&filter=pubt.randomizedcontrolledtrial}
+Moreover, RoB assessment is a part of writing systematic reviews, which is highly resource-heavy, taking about six months to several years to complete the review~\cite{tsertsvadze2015conduct,khangura2012evidence,higgins2019cochrane}.
+The pace at which RCTs are published makes RoB assessment a lengthy process and underscores the need for automation.
+
+
 
 Machine learning (ML) can help accelerate the assessment process by directly pointing the reviewers to the parts of the RCT text relevant to identifying bias, leading to quickly judging the trial quality.
 Marshall \textit{et al.}~\cite{marshall2015automating} attempted automation of RoB assessment using distant supervision approach supported by proprietary data from the Cochrane Database of Systematic Reviews (CDSR). 
 They formulated the trial quality assessment as binary classification into \textit{low-risk} and \textit{unclear-risk/high-risk} quality attributes for each risk domain.
-The study was supported by the manually-entered data from CDSR, which is behind a paywall and automates based on Cochrane's RoB 1.0 guidelines and not the latest RoB 2.0~\cite{higgins2011cochrane}.
-Even though Cochrane's RoB tool (version 1) is the most frequently used to assess RCT quality, a recently revised Cochrane RoB 2.0 offers significant differences in comparison~\cite{ma2020methodological}.
-Compared to the original RoB version released in 2008, the 2.0 version provides a more reliable and concrete structure to the RoB evaluation by developing comprehensive guidelines that enforce consistency~\cite{higgins2011cochrane,sterne2019rob}.
-A study analyzing Cochrane systematic reviews and protocols found that the use of RoB 2.0 increased from 0\% in 2019 to 24.1\% in 2022~\cite{martimbianco2023most}.
-This indicates a growing recognition of the importance of using an updated and standardized tool to assess bias in RCTs.
+The study was supported by the manually-entered data from CDSR, which is behind a paywall and automates based on Cochrane's RoB 1.0 guidelines and not the latest RoB 2~\cite{higgins2011cochrane}.
+Even though Cochrane's RoB tool (version 1) is the most frequently used to assess RCT quality, a recently revised Cochrane RoB 2 offers significant differences in comparison~\cite{ma2020methodological}.
+Compared to the original RoB version released in 2008, the RoB 2 version provides a more reliable and concrete structure to the RoB evaluation by developing comprehensive guidelines that enforce consistency~\cite{higgins2011cochrane,sterne2019rob}.
+A study analyzing Cochrane systematic reviews and protocols found that the use of RoB 2 increased from 0\% in 2019 to 24.1\% in 2022~\cite{martimbianco2023most}.
+This indicates the importance of using an updated and standardized tool to assess bias in RCTs.
 
 Millard \textit{et al.} attempted automating RoB assessment using supervised machine learning trained on proprietary data as well~\cite{millard2016machine}.
 In fact, the research utilising this pay-walled data was used to develop RobotReviewer that has been evaluated by several studies for its human-competent performance~\cite{marshall2016robotreviewer,soboczenski2019machine,vinkers2021methodological,jardim2022automating,hirt2021agreement}.
 The question, however, remains of the unavailability of a publicly-available RoB annotated corpus that hinders community efforts for automation. 
 Wang \textit{et al.} recently released three RoB annotated datasets, but for preclinical animal studies with RoB assessments pertaining to animals~\cite{wang2022risk}.
+A manually annotated corpus of RoB spans for human clinical trials is still necessary.
 Manual RoB assessment is a complex, expert-led task laden with subjective judgements.
 Systematically translating this manual process for developing an RoB annotated corpus requires a carefully designed annotation scheme and detailed annotation guidelines.
-Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether RoB 2.0 guidelines could be utilized as guidelines to manually annotate a corpus of randomized controlled trials with RoB using a multi-level annotation scheme adapted from the same guidelines.
-They neither provide any annotation guidelines and their dataset is comparatively small with 10 annotated RCTs~\cite{dhrangadhariya2023first}.
-Our objective is to develop clear cut annotation guidelines to annotate RCTs with RoB categories corresponding to RoB 2.0 tool for randomized trials~\cite{sterne2019rob}.
+Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether RoB 2 guidelines could be effectively utilized as guidelines to manually annotate a corpus of RCTs with RoB using a multi-level annotation scheme adapted from the same guidelines.
+They conclude that the assesment guidelines cannot be used as text annotation guidelines, but neither provide any annotation guidelines from their end.
+Additionally, the dataset they provide is comparatively small with 10 annotated RCTs~\cite{dhrangadhariya2023first}.
+Our objective is to develop clear cut annotation guidelines to annotate RCTs with RoB spans corresponding to RoB 2 tool for randomized controlled trials~\cite{sterne2019rob}.
 
 
 
 Recently, large language models (LLMs) have demonstrated exceptional performance on unseen tasks when only the task instructions are provided~\cite{chang2023survey}.
-However, till date, no one has evaluated their performance on the cognitively complex task of identifying RoB text descriptions from RCTs and providing their risk judgments based on text.
+However, till date, no one has evaluated their performance on the cognitively complex task of identifying RoB text descriptions from RCTs and providing their RCT quality judgments based on text.
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We annotate a corpus of 60 full-text RCTs with more than 20 risk of bias span types which could be used to train machine learning models or LLMs and could also be used as a validation benchmark.
+3) We annotate a corpus of 60 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions using prompt generation.
-5) We make the annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
+5) We make the visual annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
 %
 %
 %
@@ -270,8 +271,8 @@ We first developed a draft version of our visual annotation guidelines, doubly a
 Creating a new annotated corpus involves defining an annotation scheme or adopting an existing one.
 To our knowledge the only available annotation scheme for RoB span annotation was presented by ~\cite{dhrangadhariya2023first}.
 Rather than creating a new scheme, we adapt and enhance their approach by learning from its drawbacks.
-Their annotation scheme was directly adapted from the RoB 2.0 assessment procedure and hence it is imperative to understand the RoB 2.0 structure to understand the annotation scheme.
-RoB 2.0 divides biases into five risk domains, each corresponding to different parts of the trial design.
+Their annotation scheme was directly adapted from the RoB 2 assessment procedure and hence it is imperative to understand the RoB 2 structure to understand the annotation scheme.
+RoB 2 divides biases into five risk domains, each corresponding to different parts of the trial design.
 Each risk domain decomposes into several signalling questions, each aiming to prompt a relevant response to bias assessment (refer to Table~\ref{tab1}).
 
 
@@ -281,7 +282,7 @@ Each risk domain decomposes into several signalling questions, each aiming to pr
 \begin{table*}
  \centering
  %\captionsetup{justification=justified}
-   \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2.0) and the number of signalling questions (SQ) in each domain.}\label{tab1}
+   \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2) and the number of signalling questions (SQ) in each domain.}\label{tab1}
     \begin{tabular}{llr}
     \toprule
      Class & Domain & SQ\\
@@ -335,7 +336,7 @@ In such situations, ``No Information'' label is acceptable.
 \begin{figure}
     \centering
     \includegraphics[width=0.60\columnwidth]{figures/flowchart.pdf}
-    \caption{Algorithm for suggested judgement of risk of bias arising from the randomization process. The figure is recreated from the revised Cochrane's risk of bias tool (RoB 2.0).~\cite{sterne2019rob}}
+    \caption{Algorithm for suggested judgement of risk of bias arising from the randomization process. The figure is recreated from the revised Cochrane's risk of bias tool (RoB 2).~\cite{sterne2019rob}}
     \label{fig:flowchart}
 \end{figure}
 %
@@ -406,21 +407,21 @@ The inclusion of NLP researchers was particularly important because the guidelin
 \begin{figure}
     \centering
     \includegraphics[width=0.80\columnwidth]{figures/placard_3_1.pdf}
-    \caption{Sample annotation instruction placard for the signalling question 3.1 designed and adapted using RoB 2.0 tool.}
+    \caption{Sample annotation instruction placard for the signalling question 3.1 designed and adapted using RoB 2 tool.}
     \label{fig:flowchart}
 \end{figure}
 %
 %
 %
 
-RoB 2.0 guidelines consist of extensive and step-by-step set of instructions that utilize signaling questions, which are detailed in subsection~\ref{met:annot_scheme}.
-Even though RoB 2.0 guidelines are widely used for bias assessment, there have been some research on the reliability of these guidelines.
-This reliability concern of RoB 2.0 has been extensively investigated by Minozzi \textit{et al.}. 
-They formulated specific instructions on how to approach and answer the signaling questions of RoB 2.0.
-These instructions, referred to as the Instruction Document (ID), address the subjectivity present in the RoB 2.0 guidelines and provide clear guidance for the assessment process.
+RoB 2 guidelines consist of extensive and step-by-step set of instructions that utilize signaling questions, which are detailed in subsection~\ref{met:annot_scheme}.
+Even though RoB 2 guidelines are widely used for bias assessment, there have been some research on the reliability of these guidelines.
+This reliability concern of RoB 2 has been extensively investigated by Minozzi \textit{et al.}. 
+They formulated specific instructions on how to approach and answer the signaling questions of RoB 2.
+These instructions, referred to as the Instruction Document (ID), address the subjectivity present in the RoB 2 guidelines and provide clear guidance for the assessment process.
 Subjectivity in assessment could potentially result in different evaluators coming to disparate conclusions when analyzing the same trial.
 Before implementing the ID, the agreement among four expert RoB assessors was zero, but it improved after adopting the ID.
-Several other papers explored subjectivity and reliability of the Cochrane RoB 1.0 and 2.0 tools~\cite{minozzi2022reliability,da2017effect,loef2022interrater,minozzi2020revised}.
+Several other papers explored subjectivity and reliability of the Cochrane RoB 1.0 and 2 tools~\cite{minozzi2022reliability,da2017effect,loef2022interrater,minozzi2020revised}.
 %Anjani: Comments from Roger and Martin about the inherent subjectivity
 %The signalling questions are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
 
@@ -428,7 +429,7 @@ Several other papers explored subjectivity and reliability of the Cochrane RoB 1
 Given the significance of maintaining consistency and reliability among annotators, we undertook the development of precise and clear annotation guidelines.
 Working closely with our team of experts, we formatted these guidelines into visual placards.
 Each placard takes the form of a flowchart and provides instructions for annotating a single signaling question.
-These placards address various facets of RoB 2.0 subjectivity and the actual process of annotation.
+These placards address various facets of RoB 2 subjectivity and the actual process of annotation.
 For instance, a common reason for low inter-annotator agreement is when annotators correctly address a bias question but annotate evidence from different parts of the full text. 
 To tackle this, our placards restrict annotations for a question to a specific part of the text, such as the Methods section, Results section, Flowchart in the Methods section, etc.
 Detailed guidelines and these visual placards are available in the Supplementary material, with an example placard shown in the Figure.
@@ -453,11 +454,11 @@ To address this, the placards provide clear guidance on whether annotators shoul
 %
 %
 %
-For every SQ, the annotators were guided to use the complete RoB 2.0 guidance document along with visual placards that were developed.
+For every SQ, the annotators were guided to use the complete RoB 2 guidance document along with visual placards that were developed.
 They followed these instructions meticulously, going through each placard's signaling question one by one.
 The provided instructions directed the annotators to read specific sections of full-text RCT that needed annotation.
 Their task involved identifying and highlighting relevant text passages related to answering the signaling question.
-%A total of 60 full-text RCTs were annotated using this approach, covering 22 signaling questions across five risk domains defined by RoB 2.0.
+%A total of 60 full-text RCTs were annotated using this approach, covering 22 signaling questions across five risk domains defined by RoB 2.
 %Out of the 60, nine were doubly-annotated to capture IAA and the rest were singly annotated.
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
@@ -554,15 +555,18 @@ This section outlines the annotated dataset, presents the inter-annotator agreem
 \label{subsec:corpus}
 %
 %Anjani - TODO: Ask Roger for the annotation files from PAWLS and start documenting with whatever annotations are already made.
-In this section, we provide primary statistical information about the corpus annotations.
-The histogram of the absolute annotation counts (tokens)~\ref{fig:ann_counts} shows the number of tokens annotated for each RoB signalling questions.
+In this section, we provide key statistical information about the annotations in our corpus.
+
+The histogram in Figure \ref{fig:ann_counts} shows a visual representation of the absolute counts of annotations (tokens) for each of the Risk of Bias (RoB) signaling questions in descending order.
 SQ 1.3 has disproportionately higher number of annotated tokens because it involving annotating full tables for coming to a bias judgement.
-For the rest of the SQs, the number of annotated tokens are less than 1000 over the entire corpus. 
-There are no token annotations for the bias question 2.4 ``Were these deviations likely to have affected the outcome?'' which depends upon the previous question 2.3.
-Table~\ref{table:stats} lists down primary information on the absolute and average annotation length along for each RoB signalling question along with the total number of documents the annotations are identified from.
-Annotations from risk domain one are found in almost all the documents while the information pertaining to answering the other risk questions is available only from a handful of the total RCTs annotated in the corpus as also shown in the figure~\ref{fig:rob_information}.
+In contrast, for all other SQs, the number of annotated tokens remains consistently below 1000 across the entire corpus.
+
+ 
+There are no token annotations for the bias question 2.4 ``Were these deviations likely to have affected the outcome?'' which hinges on the previous question 2.3.
+Table~\ref{table:stats} lists down primary information on the absolute and average annotation lengths along for each RoB signalling question along with the total number of documents the annotations are identified from.
+Annotations from risk domain one are found in almost all the documents, while information related to answering the other risk questions is only available in a small subset of the total annotated Randomized Controlled Trials (RCTs), as also depicted in Figure~\ref{fig:rob_information}.
 The figure also shows that for the majority of the RoB questions, there was no information available pertaining to answer or make a judgment as to whether the bias was high or low.
-While for most questions were information was available, the bias was low as shown by the green bar in comparison to the red bar except for the signalling question number 2.1, 2.2, 3.1, 4.3, 4.4 and 5.2.
+In cases where information was available, the bias tended to be low, as indicated by the prevalence of green bars, except for signaling questions 2.1, 2.2, 3.1, 4.3, 4.4, and 5.2.
 %
 %
 %
@@ -632,18 +636,20 @@ While for most questions were information was available, the bias was low as sho
 %
 \subsection{Inter-annotator agreement}
 %
-Table \ref{table:IAA_sq} illustrates the levels of inter-annotator agreement between the two consensus annotators, both before and after the development of the guidelines.
+Table \ref{tab:IAA_sq} illustrates the levels of inter-annotator agreement between the two consensus annotators, both before and after the development of the guidelines.
 The IAA scores before and after the guideline improvement are calculated on a different set of documents.
 We saw an improvement in the IAA for many signalling questions and a considerable improvement of more than 50 points for the questions 1.3, 2.1, 4.1 and 4.4.
 The IAA between the two reference annotators for a total of 11 out of 22 questions stood to zero before the guideline improvement.
 Only for two signalling questions (4.4 and 5.2) did the guideline improvement raise the IAA from zero to 56.25 and 49.49 respectively.
 However, for the signalling questions 2.3 and 2.7, the agreement dropped from meagre 5.42 and 6.52 to zero.
+Inferring from the table~\ref{tab:iaa_interpret} and \ref{tab:IAA_sq}, 11/22 signalling questions had a poor agreement, 3/22 questions had a fair agreement, 4/ 22 questions had a good agreement and 2/22 questions had a substantial agreement while 2/22 questions had an almost perfect agreement of beyond 81 IAA points.
+As expected, none of the SQ annotations had a perfect IAA of 100.
 %
 %
 %
 \begin{table}[htb]
     \caption{IAA before after visual placards development}
-    \label{table:IAA_sq}
+    \label{tab:IAA_sq}
     \centering
     \begin{tabular}{crrr}
     \hline
@@ -680,7 +686,9 @@ However, for the signalling questions 2.3 and 2.7, the agreement dropped from me
 %
 In the Table~\ref{table:LLM_eval}, we report the accuracy of simple prompts as previously described. 
 
-
+%
+%
+%
 \begin{table}[htb]
     \caption{LLM accuracy}
     \label{table:LLM_eval}
