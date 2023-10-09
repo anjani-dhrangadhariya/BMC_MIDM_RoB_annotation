@@ -124,6 +124,8 @@
 \author[4]{\fnm{Rahel} \sur{Caliesch}}\email{rahel.caliesch@hevs.ch}
 \equalcont{These authors contributed equally to this work.}
 
+\author[1]{\fnm{Stéphane} \sur{Marchand-Maillet}}\email{stephane.marchand-maillet@unige.ch}
+
 \author[1,2]{\fnm{Henning} \sur{Müller}}\email{henning.mueller@hevs.ch}
 
 
@@ -544,7 +546,7 @@ This evaluation was conducted for 25 out of the 60 RCTs and each document was ev
 \section{Results}
 \label{sec:results}
 %
-This section outlines the annotated dataset, presents the inter-annotator agreement findings, and discusses the outcomes of the LLM evaluation.
+This section outlines the annotated dataset, presents the inter-annotator agreement findings, and the outcomes of the LLM evaluation on certain RoB signalling questions.
 %
 %
 %
@@ -553,9 +555,14 @@ This section outlines the annotated dataset, presents the inter-annotator agreem
 %
 %Anjani - TODO: Ask Roger for the annotation files from PAWLS and start documenting with whatever annotations are already made.
 In this section, we provide primary statistical information about the corpus annotations.
-
-
-
+The histogram of the absolute annotation counts (tokens)~\ref{fig:ann_counts} shows the number of tokens annotated for each RoB signalling questions.
+SQ 1.3 has disproportionately higher number of annotated tokens because it involving annotating full tables for coming to a bias judgement.
+For the rest of the SQs, the number of annotated tokens are less than 1000 over the entire corpus. 
+There are no token annotations for the bias question 2.4 ``Were these deviations likely to have affected the outcome?'' which depends upon the previous question 2.3.
+Table~\ref{table:stats} lists down primary information on the absolute and average annotation length along for each RoB signalling question along with the total number of documents the annotations are identified from.
+Annotations from risk domain one are found in almost all the documents while the information pertaining to answering the other risk questions is available only from a handful of the total RCTs annotated in the corpus as also shown in the figure~\ref{fig:rob_information}.
+The figure also shows that for the majority of the RoB questions, there was no information available pertaining to answer or make a judgment as to whether the bias was high or low.
+While for most questions were information was available, the bias was low as shown by the green bar in comparison to the red bar except for the signalling question number 2.1, 2.2, 3.1, 4.3, 4.4 and 5.2.
 %
 %
 %
@@ -563,44 +570,48 @@ In this section, we provide primary statistical information about the corpus ann
     \centering
     \includegraphics[width=0.60\columnwidth]{figures/sq_ann_raw_counts.png}
     \caption{Total number of annotations made for each signalling question.}
-    \label{fig:flowchart}
+    \label{fig:ann_counts}
 \end{figure}
 %
 %
 %
 
-
+%
+%
+%
 \begin{table}[htb]
     \centering
     \caption{General statistics for the annotated corpus}
     \label{table:stats}
     \begin{tabular}{crrrrr}
     \hline
-         Signalling Question & Total tokens & Mean tokens & Average length & Total documents \\ \hline
-        RoB 1.1 & 0 & 0 & 0 & 0 \\ 
-        RoB 1.2 & 0 & 0 & 0 & 0 \\ 
-        RoB 1.3 & 0 & 0 & 0 & 0 \\ 
-        RoB 2.1 & 0 & 0 & 0 & 0 \\ 
-        RoB 2.2 & 0 & 0 & 0 & 0 \\ 
-        RoB 2.3 & 0 & 0 & 0 & 0 \\ 
-        RoB 2.4 & 0 & 0 & 0 & 0 \\ 
-        RoB 2.5 & 0 & 0 & 0 & 0 \\ 
-        RoB 2.6 & 0 & 0 & 0 & 0 \\ 
-        RoB 2.7 & 0 & 0 & 0 & 0 \\ 
-        RoB 3.1 & 0 & 0 & 0 & 0 \\ 
-        RoB 3.2 & 0 & 0 & 0 & 0 \\ 
-        RoB 3.3 & 0 & 0 & 0 & 0 \\ 
-        RoB 3.4 & 0 & 0 & 0 & 0 \\ 
-        RoB 4.1 & 0 & 0 & 0 & 0 \\ 
-        RoB 4.2 & 0 & 0 & 0 & 0 \\ 
-        RoB 4.3 & 0 & 0 & 0 & 0 \\ 
-        RoB 4.4 & 0 & 0 & 0 & 0 \\ 
-        RoB 4.5 & 0 & 0 & 0 & 0 \\ 
-        RoB 5.1 & 0 & 0 & 0 & 0 \\ 
-        RoB 5.2 & 0 & 0 & 0 & 0 \\ 
-        RoB 5.3 & 0 & 0 & 0 & 0 \\ \hline
+        Signalling question & Total tokens & Average length & Total documents \\ \hline
+        RoB 1.1 & 372 & 24.8 & 15 \\ 
+        RoB 1.2 & 305 & 19.0625 & 16 \\ 
+        RoB 1.3 & 6649 & 415.5625 & 16 \\ 
+        RoB 2.1 & 260 & 37.14285714 & 7 \\ 
+        RoB 2.2 & 710 & 59.16666667 & 12 \\ 
+        RoB 2.3 & 262 & 65.5 & 4 \\ 
+        RoB 2.5 & 14 & 14 & 1 \\ 
+        RoB 2.6 & 278 & 30.88888889 & 9 \\ 
+        RoB 2.7 & 52 & 17.33333333 & 3 \\ 
+        RoB 3.1 & 754 & 62.83333333 & 12 \\ 
+        RoB 3.2 & 78 & 39 & 2 \\ 
+        RoB 3.3 & 56 & 18.66666667 & 3 \\ 
+        RoB 3.4 & 140 & 17.5 & 8 \\ 
+        RoB 4.1 & 101 & 25.25 & 4 \\ 
+        RoB 4.2 & 235 & 29.375 & 8 \\ 
+        RoB 4.3 & 135 & 22.5 & 6 \\ 
+        RoB 4.4 & 134 & 22.33333333 & 6 \\ 
+        RoB 4.5 & 390 & 55.71428571 & 7 \\ 
+        RoB 5.1 & 198 & 28.28571429 & 7 \\ 
+        RoB 5.2 & 94 & 47 & 2 \\ 
+        RoB 5.3 & 287 & 57.4 & 5 \\ \hline
     \end{tabular}
 \end{table}
+%
+%
+%
 
 %
 %
@@ -609,7 +620,7 @@ In this section, we provide primary statistical information about the corpus ann
     \centering
     \includegraphics[width=0.90\columnwidth]{figures/judgment_dist.png}
     \caption{Distribution of bias judgment across risk domains in RoBuster.}
-    \label{fig:flowchart}
+    \label{fig:rob_information}
 \end{figure}
 %
 %
@@ -622,6 +633,11 @@ In this section, we provide primary statistical information about the corpus ann
 \subsection{Inter-annotator agreement}
 %
 Table \ref{table:IAA_sq} illustrates the levels of inter-annotator agreement between the two consensus annotators, both before and after the development of the guidelines.
+The IAA scores before and after the guideline improvement are calculated on a different set of documents.
+We saw an improvement in the IAA for many signalling questions and a considerable improvement of more than 50 points for the questions 1.3, 2.1, 4.1 and 4.4.
+The IAA between the two reference annotators for a total of 11 out of 22 questions stood to zero before the guideline improvement.
+Only for two signalling questions (4.4 and 5.2) did the guideline improvement raise the IAA from zero to 56.25 and 49.49 respectively.
+However, for the signalling questions 2.3 and 2.7, the agreement dropped from meagre 5.42 and 6.52 to zero.
 %
 %
 %
@@ -644,7 +660,7 @@ Table \ref{table:IAA_sq} illustrates the levels of inter-annotator agreement bet
         RoB 2\_6 & 68.85 & 83.25 & +14.4 \\ 
         RoB 2\_7 & 6.52 & 0 & -6.52 \\ 
         RoB 3\_1 & 23.57 & 39.68 & +16.11 \\ 
-        RoB 3\_2 & 0 & ~ & 0 \\ 
+        RoB 3\_2 & 0 & 0 & 0 \\ 
         RoB 3\_3 & 0 & 0 & 0 \\ 
         RoB 3\_4 & 0 & 0 & 0 \\ 
         RoB 4\_1 & 6.51 & 61.71 & +55.2 \\ 
