@@ -96,7 +96,7 @@
 \begin{document}
 
 %\title[Article Title]{Developing Comprehensive Annotation Guidelines and a Corpus of Risk of Bias Assessment for Rehabilitation: A Methodological Approach}
-\title[Article Title]{RoBuster: A Validation Corpus with Risk of Bias span annotations in Randomized Controlled Trials}
+\title[Article Title]{RoBuster: A Richly Annotated Corpus with Risk of Bias Text spans in Randomized Controlled Trials}
 
 %%=============================================================%%
 %% Prefix	-> \pfx{Dr}
@@ -196,7 +196,7 @@ Thus, reviewers conducting SRs must thoroughly screen RCTs for biases before inc
 
 The biases in RCTs cannot be quantified, but an RCT can be assessed for biases to minimize the overall risk and judge its quality.
 In this study, we refer to bias assessment as risk-of-bias (RoB) assessment.
-There are several tools to assess RoB, including the Cochrane Collaborations RoB Tool, Physiotherapy Evidence Database (PEDro) RoB scale, revised Cochrane RoB 2 tool (RoB 2), AMSTAR/AMSTAR 2, EPOC RoB Tool and several other independent checklists~\cite{higgins2011cochrane,elkins2013growth,sterne2019rob,shea2017amstar,farrah2019risk}.
+There are several tools to assess RoB, including the Cochrane Collaborations RoB Tool, Physiotherapy Evidence Database (PEDro) RoB scale, revised Cochrane RoB 2 tool (RoB 2), AMSTAR/AMSTAR 2, EPOC RoB Tool and several other independent checklists~\cite{higgins2019,higgins2011cochrane,elkins2013growth,sterne2019rob,shea2017amstar,farrah2019risk}.
 These tools are structured as a series of questions aiming to elicit factual information from the RCTs, which could then be used for RoB assessment.
 %These tools are a series of questions aiming to elicit factual information from the RCTs, which can then be used to assess their quality.
 Manual quality assessment requires the reviewers to go through full-text RCTs and manually inspect every question from the chosen bias assessment tool.
@@ -475,7 +475,7 @@ Post annotation, the feedback was taken from both the annotators details of whic
 %
 %
 \subsection{Inter-Annotator Agreement}
-\label{subsec:corpus}
+\label{method:iaa}
 %
 We report agreement at two levels. 
 We check whether the annotators agree on the text spans to answer signalling questions using the pairwise F1 measure.
@@ -518,11 +518,11 @@ Cohen's kappa $\kappa$ is the standard annotation reliability measure for many c
 Our annotation guidelines and annotations were adapted for benchmarking classical supervised machine learning approaches and not LLMs.
 So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical ML model could not use without extensive modifications~\cite{li2019figure,li2023uttsr}.
 However, recent advancements with LLMs that encode vast amounts of knowledge offers a better alternative made us rethink the evaluation.
-The bar for clinical applications is high and it is imperative to evaluate these models for the more challenging clinical tasks like bias span extraction~\cite{singhal2023large}.
-Additionally, the tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allows direct interaction between ChatGPT and PDFs, negating the clumsy PDF to text conversion.
-Therefore, we consider it essential to evaluate LLMs instead of forcefully adapting the evaluation to a classical machine learning problem.
+The bar for clinical applications is high and it is imperative to evaluate these models for the more challenging clinical tasks like RoB text span extraction~\cite{singhal2023large}.
+Additionally, the tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allows direct interaction between GPT-3.5 (Generative Pretrained Model) and PDFs, negating the clumsy PDF to text conversion.
+Therefore, we consider it essential to evaluate LLMs instead of forcefully adapting the evaluation to a classical ML problem.
 We formulated the task as a zero-shot RoB extraction task.
-This is to gauge whether ChatGPT encodes knowledge related to clinical trial biases.
+This is to gauge whether GPT-3.5 encodes knowledge related to clinical trial biases.
 We will use simple prompt constructs of the structure ``Answer the signalling question + Action item to extract sentence supporting the answer''. Consider the following example.
 
 \begin{quote}
@@ -536,19 +536,20 @@ ChatPDF employs GPT (Generative Pretrained Transformer) 3.5.
 Basically ChatGPT via ChatPDF is required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
 If LLM answer corresponds to response option selected by the expert annotator, it is considered a correct answer. 
 If the text extracted by LLMs as evidence for answering the signaling question fuzzy matches the text selected by the expert annotator, it is considered a correct answer.
-Both of these skills will be evaluated using a percentage agreement metric, which is essentially the number of documents for a RoB SQ where ChatGPT's responses align with those of the human expert, divided by the total number of documents assessed.
+Both of these skills will be evaluated using a percentage agreement metric, which is essentially the number of documents for a RoB SQ where ChatPDF's responses align with those of the human expert, divided by the total number of documents assessed.
 In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
 It's important to highlight that the evaluation framework is designed solely to measure the agreement of the answers between ChatPDF and the expert.
-This evaluation was conducted for 25 out of the 60 RCTs and each document was evaluated for X out of the 22 signalling questions. %TODO - replace X with the number of bias questions evaluated
-Whenever ChatGPT came to same response judgment but using different text compared to the expert identified one, we sought to confirm with the expert on whether ChatGPT was correct or misinterpreting the text or completely hallucinating.
+This evaluation was conducted for 10 out of the 40 RCTs.
+Whenever ChatPDF came to same response judgment but using different text compared to the expert identified one, we sought to confirm with the expert on whether ChatPDF was correct or misinterpreting the text or hallucinating.
+Sometimes, ChatPDF did not extract sentences in JSON format and in those cases, the answer was still correct. %TODO: Discussion section
 %
 %
 %
 \section{Results}
 \label{sec:results}
 %
-This section outlines the annotated dataset, presents the inter-annotator agreement findings, and the outcomes of the LLM evaluation on certain RoB signalling questions.
+This section outlines the annotated dataset, presents the inter-annotator agreement findings, and the outcomes of the LLM evaluation.
 %
 %
 %
@@ -564,8 +565,10 @@ SQ 1.3 has disproportionately higher number of annotated tokens, while for all o
 There are no token annotations for the bias question 2.4 ``Were these deviations likely to have affected the outcome?'' which hinges on the previous question 2.3.
 Table~\ref{table:stats} lists down essential information on the absolute and average annotation lengths for each RoB SQ along with the total number of documents the annotations are identified from.
 Annotations from risk domain one (randomization process) are found in almost all the documents, while information related to answering the other risk questions is only available in a small subset of the total annotated RCTs, as also depicted in Figure~\ref{fig:rob_information}.
-The figure also shows that for the majority of the RoB questions, there was no information (yellow bar) available both pertaining to answering it and make a judgment as to whether the bias was high or low.
-In cases where information was available, the bias tended to be low, as indicated by the prevalence of green bars, except for signaling questions 2.1, 2.2, 3.1, 4.3, 4.4, and 5.2 where bias was high as indicated by the red bars.
+The figure highlights that, for most of the RoB questions, there was no information available (represented by the yellow bars) for both answering the question and making a judgment about whether the bias was high or low.
+In cases where information was available, bias tended to be low, as indicated by the prevalence of green bars. 
+However, there were exceptions, such as SQs 2.1, 2.2, 3.1, 4.3, 4.4, and 5.2, where bias was high, as shown by the presence of red bars.
+Check Supplementary material for the references of included studies. %TODO: add to supplementary material
 %
 %
 %
@@ -590,24 +593,24 @@ In cases where information was available, the bias tended to be low, as indicate
     \hline
         Signalling question & Total tokens & Average length & Total documents \\ \hline
         RoB 1.1 & 372 & 24.8 & 15 \\ 
-        RoB 1.2 & 305 & 19.0625 & 16 \\ 
-        RoB 1.3 & 6649 & 415.5625 & 16 \\ 
-        RoB 2.1 & 260 & 37.14285714 & 7 \\ 
-        RoB 2.2 & 710 & 59.16666667 & 12 \\ 
+        RoB 1.2 & 305 & 19.06 & 16 \\ 
+        RoB 1.3 & 6649 & 415.56 & 16 \\ 
+        RoB 2.1 & 260 & 37.14 & 7 \\ 
+        RoB 2.2 & 710 & 59.16 & 12 \\ 
         RoB 2.3 & 262 & 65.5 & 4 \\ 
         RoB 2.5 & 14 & 14 & 1 \\ 
-        RoB 2.6 & 278 & 30.88888889 & 9 \\ 
-        RoB 2.7 & 52 & 17.33333333 & 3 \\ 
-        RoB 3.1 & 754 & 62.83333333 & 12 \\ 
+        RoB 2.6 & 278 & 30.88 & 9 \\ 
+        RoB 2.7 & 52 & 17.33 & 3 \\ 
+        RoB 3.1 & 754 & 62.83 & 12 \\ 
         RoB 3.2 & 78 & 39 & 2 \\ 
-        RoB 3.3 & 56 & 18.66666667 & 3 \\ 
+        RoB 3.3 & 56 & 18.66 & 3 \\ 
         RoB 3.4 & 140 & 17.5 & 8 \\ 
         RoB 4.1 & 101 & 25.25 & 4 \\ 
-        RoB 4.2 & 235 & 29.375 & 8 \\ 
+        RoB 4.2 & 235 & 29.37 & 8 \\ 
         RoB 4.3 & 135 & 22.5 & 6 \\ 
-        RoB 4.4 & 134 & 22.33333333 & 6 \\ 
-        RoB 4.5 & 390 & 55.71428571 & 7 \\ 
-        RoB 5.1 & 198 & 28.28571429 & 7 \\ 
+        RoB 4.4 & 134 & 22.33 & 6 \\ 
+        RoB 4.5 & 390 & 55.71 & 7 \\ 
+        RoB 5.1 & 198 & 28.28 & 7 \\ 
         RoB 5.2 & 94 & 47 & 2 \\ 
         RoB 5.3 & 287 & 57.4 & 5 \\ \hline
     \end{tabular}
@@ -634,9 +637,16 @@ In cases where information was available, the bias tended to be low, as indicate
 %
 %
 \subsection{Inter-annotator agreement}
+\label{result:iaa}
 %
-Table~\ref{tab:IAA_sq} illustrates the levels of inter-annotator agreement between the two consensus annotators, both before and after the development of the guidelines.
+Table~\ref{tab:IAA_sq} illustrates the levels of inter-annotator agreement between the two consensus annotators, both before and after the development of the visual placards.
 The IAA scores before and after the guideline improvement are calculated on a different set of documents.
+The average overall IAA across the corpus before the visual placards stood at a poor 10.87\% and after the visual placards increased by 17.14\% points and stands at a fair 28.01\%.
+We doubled the agreement from $\kappa$ 31.72 (poor) to $\kappa$ 63.30 (substantial) for the ``randomization'' domain, it increased from 12.76 (slight) to 27.02 (fair) for the ``deviations from intended interventions'' domain, it increased from 5.89 to 9.92 for the ``missing outcomes'' domain, although it remained within the slight agreement category.
+For the ``missing outcome measurement'' domain $\kappa$ increased from 4.072 to 17.29 and for the ``selection of reported results'' domain the agreement before the placard development was none (0) and it increased to slight ($\kappa$ 16.49).
+
+
+
 We saw an improvement in the agreement for many signalling questions, but considerable improvement of more than 50\% points for the signalling questions number 1.3, 2.1, 4.1 and 4.4.
 The IAA between the two reference annotators for a total of 11 out of 22 questions stood to zero before the guideline improvement.
 Only for two signalling questions, 4.4 and 5.2, did the guideline improvement raise the IAA from zero to 56.25 and 49.49 respectively.
@@ -684,17 +694,21 @@ The average overall IAA across the corpus before the visual placards stood at a 
 %
 %
 
-We report Cohen's Kappa $\kappa$ scores in the Table~\ref{tab:IAA_response}~\cite{mchugh2012interrater} along with raw agreements.
-We also report the percentage of this agreement coming from the ``No Information'' judgments.
-Overall Cohen's kappa agreement between the raters 51.87\% with the highest agreement of 100\% for the SQ 2.6.
-Notice that more than half of the agreement are coming from ``No Information'' judgments.
-Other than that none of the SQs have either almost perfect or strong agreement.
-Agreements for the SQs 2.1, 3.1 and 4.3 fall under the moderate agreement group (between 0.60 and 0.80) and not a considerable agreement comes from the ``No Information'' judgments.
-For six of 22 signalling questions (2.4, 2.5, 4.1, 4.2, 4.5, and 5.3) the agreement was worse than chance with most of these agreements coming from the ``No Information'' judgments.
-For three of the 22 SQs (1.3, 2.3, 5.1), the agreement was none or chance agreement. 
-With no annotations available for the SQ 3.2, the agreement was not calculated.
+We present the Cohen's Kappa ($\kappa$) scores in Table~\ref{tab:IAA_response}~\cite{mchugh2012interrater} which measures agreement at the SQ response judgment level.
+Additionally, we provide the percentage of $\kappa$ agreement that stems from the ``No Information'' judgments.
+The overall Cohen's kappa agreement between the raters stands at 0.5187.
+Notably, the highest $\kappa$ agreement of 1.0 is observed for SQ 2.6.
+It's important to note that more than half of this overall agreement arises from the assumed ``No Information'' judgments.
+For the remaining signaling questions, we do not find any instances of either almost perfect or strong agreement.
+Agreements for SQs 2.1, 3.1, and 4.3 fall within the moderate agreement category (ranging from 0.60 to 0.80), with no substantial agreement originating from the ``No Information'' judgments for either of them.
+In contrast, six of the 22 signaling questions (2.4, 2.5, 4.1, 4.2, 4.5, and 5.3) exhibit agreement worse than what would be expected by chance, and considerable percentage of them stems from ``No Information'' judgments.
+For three of the 22 SQs (1.3, 2.3, 5.1), the agreement is merely chance agreement.
+%Lastly, for SQ 3.2, the agreement could not be calculated due to the unavailability of annotations.
 
 
+%
+%
+%
 \begin{table}[]
     \caption{Cohens Kappa between annotator pairs for agreement at the response option level for each signalling question}
     \label{tab:IAA_response}
@@ -731,48 +745,48 @@ With no annotations available for the SQ 3.2, the agreement was not calculated.
 %
 %
 %
-%\subsection{LLM evaluation}
+\subsection{LLM evaluation}
 %
-%In the Table~\ref{table:LLM_eval}, we report the accuracy of simple prompts as described in section~\ref{method:llm}.
+In the Table~\ref{table:LLM_eval}, we report the accuracy of simple prompts as described in section~\ref{method:llm}.
 
-%For the first risk domain, ChatGPT has high agreement for the SQ 1.1, good agreement for SQ 1.2 but comparatively low agreement for 1.3.
-%The agreement considerably drops for the risk domain ``deviations from intended interventions''.
+For the first risk domain, ChatGPT has high agreement for the SQ 1.1, good agreement for SQ 1.2 but comparatively low agreement for 1.3.
+The agreement considerably drops for the risk domain ``deviations from intended interventions''.
 %
 %
 %
-%\begin{table}[htb]
-%    \caption{LLM accuracy}
-%    \label{table:LLM_eval}
-%    \centering
-%    \begin{tabular}{crr}
-%    \hline
-%     & \multicolumn{2}{c}{Simple prompts} \\
-%        Signalling question & Accuracy (response option) & Accuracy (evidence extraction) \\ 
-%    \hline
-%        RoB 1\_1 & 88\% & 72\% \\ 
-%        RoB 1\_2 & 69.56\% & 58.33\%  \\ 
-%        RoB 1\_3 & 40\% & 40\% \\ 
-%        RoB 2\_1 & &  \\ 
-%        RoB 2\_2 & &  \\ 
-%        RoB 2\_3 & &  \\ 
-%        RoB 2\_4 & &  \\ 
-%        RoB 2\_5 & &  \\ 
-%        RoB 2\_6 & &  \\ 
-%        RoB 2\_7 & &  \\ 
-%        RoB 3\_1 & &  \\ 
-%        RoB 3\_2 & &  \\ 
-%        RoB 3\_3 & &  \\ 
-%        RoB 3\_4 & &  \\ 
-%        RoB 4\_1 & & \\ 
-%        RoB 4\_2 & & \\ 
-%        RoB 4\_3 & &  \\ 
-%        RoB 4\_4 & &  \\ 
-%        RoB 4\_5 & &  \\ 
-%        RoB 5\_1 & &  \\ 
-%        RoB 5\_2 & &  \\ 
-%        RoB 5\_3 & &  \\ \hline
-%   \end{tabular}
-%\end{table}
+\begin{table}[htb]
+    \caption{LLM accuracy}
+    \label{table:LLM_eval}
+    \centering
+    \begin{tabular}{crr}
+    \hline
+     & \multicolumn{2}{c}{Simple prompts} \\
+        Signalling question & Accuracy (response option) & Accuracy (evidence extraction) \\ 
+    \hline
+        RoB 1\_1 & 88\% & 72\% \\ 
+        RoB 1\_2 & 69.56\% & 58.33\%  \\ 
+        RoB 1\_3 & 40\% & 40\% \\ 
+        RoB 2\_1 & &  \\ 
+        RoB 2\_2 & &  \\ 
+        RoB 2\_3 & &  \\ 
+        RoB 2\_4 & &  \\ 
+        RoB 2\_5 & &  \\ 
+        RoB 2\_6 & &  \\ 
+        RoB 2\_7 & &  \\ 
+        RoB 3\_1 & &  \\ 
+        RoB 3\_2 & &  \\ 
+        RoB 3\_3 & &  \\ 
+        RoB 3\_4 & &  \\ 
+        RoB 4\_1 & & \\ 
+        RoB 4\_2 & & \\ 
+        RoB 4\_3 & &  \\ 
+        RoB 4\_4 & &  \\ 
+        RoB 4\_5 & &  \\ 
+        RoB 5\_1 & &  \\ 
+        RoB 5\_2 & &  \\ 
+        RoB 5\_3 & &  \\ \hline
+   \end{tabular}
+\end{table}
 %
 %
 %
@@ -783,6 +797,12 @@ With no annotations available for the SQ 3.2, the agreement was not calculated.
 %
 % Why do some RoB questions have more annotations compared to the other? Does it mean papers have more information on certain aspects compared to the other questions?
 The immediate point we noticed is that SQ 1.3 has disproportionately higher number of annotated tokens because it involved annotating full tables for coming to a bias judgement.
+The number of tokens annotated for the other signalling questions remain under 1000 tokens.
+The reason for varying number of tokens annotated for each SQ could be because some questions are objective vs others subjective.
+Availability of detailed description on the study design, methods and results can impact the amount of tokens annotated along with the ease of bias assessment.
+The more information a study provided, the easier it is to evaluate a bias question.
+Some studies tend to not report key details making it tougher to assess certain bias questions.
+
 
 % Were the visual placards effective?
 % Why were agreements on certain questions zero?
@@ -900,12 +920,12 @@ In case, one annotator selected a part of text and another the same text but an 
 \label{subsec:limits}
 %
 Our study has the following limitations.
-The first limitation arises from the relatively small scale of our annotations, with only 60 documents undergoing the annotation process.
+The first limitation arises from the relatively scale of our annotations, with only 40 documents undergoing the annotation process.
 This constraint is primarily due to financial constraints, as the availability of funds limited our ability to hire a larger number of expert annotators.
 Despite the limitation, the robustness of the annotations provided by the experts remains noteworthy, as they thoroughly assessed the selected RCTs within the resources at hand.
 A second limitation stems from the narrow focus of annotations, concentrated exclusively on physiotherapy and rehabilitation clinical trials.
 This specificity arises from our reliance on domain experts for annotations, who possess the requisite expertise in these areas.
-While this targeted approach guarantees high-quality annotations within the specified domains, it could inadvertently restrict the broader applicability of the annotated corpus.
+Though this approach inadvertently restricts the broader applicability of the annotated corpus, it guarantees high-quality annotations within the specified domains.
 %Thirdly, our study's scope is limited by the selection of particular journals to construct the corpus in addition to certain RCTs selected randomly.
 %This choice was necessitated by the desire to incorporate articles of the utmost quality, ensuring the inclusion of high-caliber research in the analysis.
 %While this decision ensures a certain standard of literature, it inadvertently excludes a wider spectrum of articles, potentially biasing the corpus toward a specific subset of clinical trials.
