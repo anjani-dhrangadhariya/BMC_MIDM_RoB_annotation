@@ -157,11 +157,11 @@ LLMs (large language models) are immensely capable but necessitate evaluation in
 Currently, no RoB annotation guidelines to annotate a corpus or an annotated corpus exist for LLM evaluation.
 % 
 \textbf{Methods:} Taking the revised Cochrane risk of bias assessment guidelines for RCTs, we develop a set of visual instructional placards that could be used as text annotation instructions to annotate RoB spans in RCTs.
-Expert annotators employed these visual guidelines to annotate a corpus of 60 full-text RCTs from physiotherapy and rehabilitation.
-We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 60) of the annotated corpus.
-A portion of the corpus (25 out of 60) was used to evaluate ChatGPT using a straightforward evaluation framework.
+Expert annotators employed these visual guidelines to annotate a corpus of 40 full-text RCTs from physiotherapy and rehabilitation.
+We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 40) of the annotated corpus.
+A portion of the corpus (10 out of 40) was used to evaluate ChatGPT using a straightforward evaluation framework.
 % 
-\textbf{Results:} We present a corpus of 60 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
+\textbf{Results:} We present a corpus of 40 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
 The IAA ranges between 0\% and 99\%.
 LLMs show promising but variable agreements across the different bias questions.
 % 
@@ -234,7 +234,7 @@ However, till date, no one has evaluated their performance on the cognitively co
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We annotate a corpus of 60 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
+3) We annotate a corpus of 40 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions using prompt generation.
 5) We make the visual annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
 %
@@ -360,8 +360,8 @@ These outcomes are typically collected by trained assessors or through laborator
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
 Mortality outcomes refer to the occurrence of death during the course of the trial.
 To ensure these different outcome types are represented in the corpus, we restricted including 26, 23 and 11 RCTs addressing objective, subjective and mortality primary outcomes. %TODO: Recheck the distribution of 26, 23, and 11
-The epidemiology researcher from our team created this 60 RCTs dataset from the domain of physiotherapy and rehabilitation.
-%These 60 studies were selected from four journals: journal 1, journal 2, journal 3 and journal 4. 
+The epidemiology researcher from our team created this 40 RCTs dataset from the domain of physiotherapy and rehabilitation.
+%These 40 studies were selected from four journals: journal 1, journal 2, journal 3 and journal 4. 
 %TODO Anjani: Justify why only these journals were considered?
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol from wherever available.
 %TODO Anjani: Add if some studies were randomly added. Ask Roger for more information.
@@ -371,7 +371,7 @@ All these RCT PDFs have CC-BY-0 licences~\footnote{\url{https://creativecommons.
 %
 %
 %\begin{itemize}
-%    \item 60 RCTs
+%    \item 40 RCTs
 %    \item Between 2001:2021
 %    \item CC0, CC BY, CC BY non-commercial
 %    \item Eutils search - Include search query for PubMed
@@ -458,13 +458,13 @@ For every SQ, the annotators were guided to use the complete RoB 2 guidance docu
 They followed these instructions meticulously, going through each placard's signaling question one by one.
 The provided instructions directed the annotators to read specific sections of full-text RCT that needed annotation.
 Their task involved identifying and highlighting relevant text related to answering the signaling question.
-%A total of 60 full-text RCTs were annotated using this approach, covering 22 signaling questions across five risk domains defined by RoB 2.
-%Out of the 60, nine were doubly-annotated to capture IAA and the rest were singly annotated.
+%A total of 40 full-text RCTs were annotated using this approach, covering 22 signaling questions across five risk domains defined by RoB 2.
+%Out of the 40, nine were doubly-annotated to capture IAA and the rest were singly annotated.
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
-Out of the 60 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
+Out of the 40 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
 After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the visual placards.
-The conflict resolution was followed by annotating 51 additional RCTs.
+The conflict resolution was followed by annotating 31 additional RCTs.
 
 
 After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
@@ -521,7 +521,7 @@ However, recent advancements with LLMs that encode vast amounts of knowledge off
 The bar for clinical applications is high and it is imperative to evaluate these models for the more challenging clinical tasks like RoB text span extraction~\cite{singhal2023large}.
 Additionally, the tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allows direct interaction between GPT-3.5 (Generative Pretrained Model) and PDFs, negating the clumsy PDF to text conversion.
 Therefore, we consider it essential to evaluate LLMs instead of forcefully adapting the evaluation to a classical ML problem.
-We formulated the task as a zero-shot RoB extraction task.
+We formulated the task as a zero-shot RoB text span extraction task.
 This is to gauge whether GPT-3.5 encodes knowledge related to clinical trial biases.
 We will use simple prompt constructs of the structure ``Answer the signalling question + Action item to extract sentence supporting the answer''. Consider the following example.
 
@@ -530,19 +530,19 @@ We will use simple prompt constructs of the structure ``Answer the signalling qu
 \end{quote}
 
 The prompt serves two purposes for evaluating LLMs for correctness.
-ChatPDF is tasked with 1) answering the signalling question with a response option (the judgment), and 2) extract the text evidence to support your answer.
+ChatPDF is tasked with 1) answering the SQ with a response option (the judgment), and 2) extract the text evidence to support their answer.
 When answering a question, ChatPDF finds the most relevant paragraphs from the PDF and uses the ChatGPT API from OpenAI to generate an answer.
 ChatPDF employs GPT (Generative Pretrained Transformer) 3.5.
-Basically ChatGPT via ChatPDF is required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
-If LLM answer corresponds to response option selected by the expert annotator, it is considered a correct answer. 
+ChatPDF is required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
+If ChatPDF answer corresponds to response option selected by the expert annotator, it is considered a correct answer. 
 If the text extracted by LLMs as evidence for answering the signaling question fuzzy matches the text selected by the expert annotator, it is considered a correct answer.
-Both of these skills will be evaluated using a percentage agreement metric, which is essentially the number of documents for a RoB SQ where ChatPDF's responses align with those of the human expert, divided by the total number of documents assessed.
+Both of these skills will be evaluated using a raw agreement metric, which is essentially the number of documents for a RoB SQ where ChatPDF's responses align with those of the human expert, divided by the total number of documents assessed.
 In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
 It's important to highlight that the evaluation framework is designed solely to measure the agreement of the answers between ChatPDF and the expert.
-This evaluation was conducted for 10 out of the 40 RCTs.
-Whenever ChatPDF came to same response judgment but using different text compared to the expert identified one, we sought to confirm with the expert on whether ChatPDF was correct or misinterpreting the text or hallucinating.
-Sometimes, ChatPDF did not extract sentences in JSON format and in those cases, the answer was still correct. %TODO: Discussion section
+This evaluation was manually conducted by a bias assessment assessor for 10 out of the 40 RCTs.
+%Whenever ChatPDF came to same response judgment but using different text compared to the expert identified one, we sought to confirm with the expert on whether ChatPDF was correct or misinterpreting the text or hallucinating.
+%Sometimes, ChatPDF did not extract sentences in JSON format and in those cases, the answer was still correct. %TODO: Discussion section
 %
 %
 %
@@ -795,6 +795,9 @@ The agreement considerably drops for the risk domain ``deviations from intended 
 %
 %
 %
+\subsection{The Corpus}
+\label{disc:corpus}
+%
 % Why do some RoB questions have more annotations compared to the other? Does it mean papers have more information on certain aspects compared to the other questions?
 The immediate point we noticed is that SQ 1.3 has disproportionately higher number of annotated tokens because it involved annotating full tables for coming to a bias judgement.
 The number of tokens annotated for the other signalling questions remain under 1000 tokens.
@@ -802,11 +805,18 @@ The reason for varying number of tokens annotated for each SQ could be because s
 Availability of detailed description on the study design, methods and results can impact the amount of tokens annotated along with the ease of bias assessment.
 The more information a study provided, the easier it is to evaluate a bias question.
 Some studies tend to not report key details making it tougher to assess certain bias questions.
+%TODO: How did the annotators perceive the difficulty of each signalling question? -> Make a scale
+%
+%
+%
+\subsection{Inter-Annotator Agreement}
+\label{disc:iaa}
+%
 
 
 % Were the visual placards effective?
 % Why were agreements on certain questions zero?
-IAA agreement was calculated before and after visual placard development.
+$\kappa$ agreement was calculated before and after visual placard development.
 Using the visual placards improves the agreement for choosing the RCT text evidence for 10 of the 22 SQs showing their utility in aiding decision making.
 However, we also notice that some questions had zero agreement.
 After the annotation process, we recorded the annotators opinion on how difficult was it for them to annotate text evidence for answering each signalling question.
@@ -865,54 +875,60 @@ OXO
 It had to be noted that for answering the questions for risk domain five, it was imperative to attach a trials protocol with the trial literature.
 The visual placards restricted answering the SQs in this domain only from the trial protocol. 
 
-
 % Improvements suggested by Julian Higgins.
 Discuss the improvements suggested by Julian Higgins. For example, his hesitations with the thresholds used to simplify the judgment.
 Explain how some RoB SQ assessments needed to be made simpler to ensure translation to text annotation.
-
 %
 %
 %
-\subsection{Conflict resolution}
+\subsubsection{Conflict Resolution}
+\label{dis:conflict}
 %
-Our aim was to use the annotated corpus and resolve the conflicts between the annotators to increase the annotation agreement and also improve the instructions in the placards.
+Post the IAA calculation for the doubly annotated documents, we conducted a face-to-face conflict resolution session to address every case of conflict.
+Our aim was to use the annotated corpus and resolve the conflicts between the annotators to improve the instructions in the placards.
 For multiple conflicting cases, the instructions were either unclear, interpreted differently, or the annotators forgot to annotate.
 However, when the annotators went through the conflicts, they were able to resolve them.
+Three conflict groups were resolved.
 
-% Discuss the kind of conflict identified in the doubly-annotated documents.
-% How were these conflicts resolved?
-During conflict resolution, we found that certain instances where both annotators marked the same text evidence to answer the same SQ but gave different judgment responses.
-We resorted to face-to-face conflict resolution in this case for every conflict case and updated the visual placards.
-We went for conflict resolution in the scenarios when
-1) the annotators marked different parts of text to answer the same question with same judgment. (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=1107412538})
-2) the annotators marked same part of text to answer the same question, but gave different judgment option for it. (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=0})
-Both annotators use different parts of text to answer the same signalling question, but give different judgment options. \url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=1107412538}
-In case, one annotator selected a part of text and another the same text but an additional text too, then we will select the annotations from the longer annotation.
+\textbf{Disparate regions conflict} was when both the annotators select different parts of text to answer the same SQ using the same response option.
+For example, in~\cite{darlow2019fear} to answer the SQ 2.2, one of the annotators select the text ``GPs were aware of group allocation (but not intervention content) when they completed their baseline measures'' and another annotators selected the text ``Practices and GPs were necessarily unblinded post randomisation to facilitate planning and delivery of intervention workshops and related data collection.'' and came to the same response option judgment of ``Yes Bad''.
+Even though the annotators were restricted to annotating this SQ in the Methods section of the paper, they selected different parts of the text within the same section leading to this conflict.
+To resolve this conflict, we annotated both the parts of text as consensus annotation in the final version.
+% (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=1107412538})
+
+\textbf{Polarity conflict} was when the annotators marked same part of text to answer the same question, but labelled them with polar opposite judgment option.
+For instance, in~\cite{solomons2020intramuscular} to answer the SQ 1.2, both the annotators select the text ``Only AS and a research assistant not involved in participant intervention or assessments had access to the random allocation sequence.'' but one labels the text with response judgement ``No Bad'' and another with ``Yes Good''.
+Both annotators agreed that it was a badly formulated sentence in the RCT and agreed to judge the SQ with ``Yes Good'' giving the study authors a benefit of doubt. 
+% (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=0})
+
+\textbf{Text span conflict} was when one annotator selected a part of text and another the same text but an additional text too.
+For instance, in~\cite{solomons2020intramuscular} to answer the signalling question number 4.3, one annotator selected the complete sentence, ``\textit{The primary outcome for which the study was powered was the change from baseline in 12 week VISA-A (Victorian Institute of Sports Assessment–Achilles),} a valid and reliable disease-specific outcome measure [37] which also includes an activity-related pain scale.'' while the other annotators only selected the text in italics. 
+It was easier to resolve this conflict and we selected the longer annotation as the representative and used it as a consensus label.
+% (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=0})
 %
 %
 %
-%\subsection{LLM evaluation}
-%\label{disc:llm}
+\subsection{LLM evaluation}
+\label{disc:llm}
 %
-%TODO: Discuss how the prompt was set to only extract the sentences from the uploaded PDF.
-%In our initial experiments, we had a few examples where ChatPDF generated an answer to the signalling question, but these sentences comprising the answer were not to be found in the input PDF document.
-%In one particular instance, LLM answered correctly saying that the sequence was randomly generated and also extracted the sentence related to answering the question, but the generated sentence was not found in the PDF.
-%These are likely the cases of hallucination.
-%In such cases, the PDF was reloaded into ChatPDF and the re-prompted for that particular signalling question.
-% -------------- Additional --------------
-%In cases where no information was found to answer a SQ, ChatPDF generated a response by itself giving example sentences that could be used to answer that question.
-%Can retrieve multiple related answers for a RoB question prompt and one of that has to be the correct answer and should be the same as what the annotators annotated.
-%After instructing ChatPDF to look into the uploaded PDF and not generate sentences by itself, it gives the following output.
-%``I apologize, but as an AI language model, I do not have access to any uploaded PDFs or any external sources. Please provide me with the PDF you are referring to, and I will be happy to extract the sentences related to answering the signalling question RoB 1.1.''
+%There were certain challenges for the manual LLM evaluation given its stochastic nature leading to some subjectivity in the evaluation process.
+Manual LLM evaluation highlighted the tricky nature of manual bias assessment as well as its own subjective nature too.
+Manual bias annotation entails labelling RCTs with text spans corresponding to the answering the SQs in the RoB 2 guidelines followed by labelling the selected text span with a response option also called as bias judgment (``Yes'', ``No'' or ``No Information'').
+For the LLM, in some cases ChatPDF straightforward answered a SQ with ``Yes'' or ``No'' or ``No Information'', but in certain cases it answered the SQ indirectly.
+For instance, in the Gleason study~\cite{gleason2015effects}, for SQ 1.1, LLM directly and correctly answered ``\textbf{Yes}, the allocation sequence was random. Extracted sentences: A random number generator (Excel, Microsoft) was used to devise a randomization series. The order of randomization was incorporated into a KEEPS database, so that treatment allocation occurred when a study identification number was assigned.''
+In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regarding RoB 5.2, the study authors reported that to correct for multiple comparisons, they divided the p-value by the number of outcomes. For example, there were five cognitive outcomes (four domain factors and one global cognition score) and six POMS mood scores. Splitting the significance value of 0.05 equally between the five cognitive and six mood sub-domains resulted in a p-value of 0.01 for each of the two primary domains investigated (cognition and mood). However, \textbf{the study authors did not provide information} on whether the numerical result being assessed was selected on the basis of the results from multiple eligible outcome measurements within the outcome domain.'' implying it found ``No Information'' for the SQ 5.2.
+
 
 
 % -------------- LLM Risk Domain one --------------
-%For the first risk domain SQ 1.3, we saw a comparatively lower agreement between ChatGPT and the experts because the answer to this SQ is typically found in the table text of RCT.
-%ChatPDF can not yet read images in the PDF, including images that consist of scanned text. Text in tables is read by ChatPDF, but it might have problems correlating the correct rows and columns.
-%Maybe this was the reason why ChatPDF sought to answer this question typically using RCT text rather than the table text.
+Coming to the results of LLM evaluation, for the first risk domain SQ 1.3, we saw a comparatively lower agreement between ChatGPT and the experts because the answer to this SQ is typically found in the table text of RCT.
+%ChatPDF can not yet read images in the PDF, including images that consist of scanned text.
+Text in tables is read by ChatPDF, but it might have problems correlating the correct rows and columns leading to a distorted understanding of the tables.
+This could be the reason why ChatPDF sought to answer this question typically using RCT text rather than the table text.
 
 % Risk Domain two
 %OXO
+
 %
 %
 %
@@ -920,8 +936,8 @@ In case, one annotator selected a part of text and another the same text but an 
 \label{subsec:limits}
 %
 Our study has the following limitations.
-The first limitation arises from the relatively scale of our annotations, with only 40 documents undergoing the annotation process.
-This constraint is primarily due to financial constraints, as the availability of funds limited our ability to hire a larger number of expert annotators.
+The first limitation arises from the relative scale of our annotations, with only 40 documents undergoing the annotation process.
+This limitation is primarily due to financial constraints, as the availability of funds limited our ability to hire a larger number of expert annotators.
 Despite the limitation, the robustness of the annotations provided by the experts remains noteworthy, as they thoroughly assessed the selected RCTs within the resources at hand.
 A second limitation stems from the narrow focus of annotations, concentrated exclusively on physiotherapy and rehabilitation clinical trials.
 This specificity arises from our reliance on domain experts for annotations, who possess the requisite expertise in these areas.
@@ -940,8 +956,8 @@ Google's Bard does interact with PDFs, but we observed that the Bard results wer
 \section{Conclusion}
 \label{sec:conclusion}
 %
-We have presented RoBuster: a new, publicly-available corpus, comprising 60 full-text RCTs richly annotated with RoB span information for 22 risk of bias questions.
-The dataset fills a need for a corpus to evaluate risk of bias span extraction using machine learning technologies.
+We have presented RoBuster: a new, publicly-available corpus, comprising 40 full-text RCTs richly annotated with RoB span information for 22 risk of bias questions.
+The dataset fills a need for a corpus to evaluate risk of bias text span extraction using machine learning technologies.
 Our corpus has detailed and fine-grained information in form of individual risk of bias spans along with annotator decision on the bias risk (high or low).
 We used RoBuster as a benchmark to evaluate LLMs for how well LLMs agree with human-led bias assessment.
 As it has been developed by bias assessors and natural language processing experts, RoBuster can support automated approaches to bias assessment and can also be a part SLR (living systematic review) systems.
@@ -985,12 +1001,12 @@ The visual placards along with detailed annotation instructions, the RCTs used i
 %
 %
 %
-\bmhead{Acknowledgments}
+%\bmhead{Acknowledgments}
 
 %Acknowledgements are not compulsory. Where included, they should be brief. Grant or contribution numbers may be acknowledged.
 
 %Please refer to Journal-level guidance for any specific requirements.
-We thank Dr. Julian Higgins for detailed comments and improvements on our visual annotation placards that helped us further refine them post conflict resolution. 
+%We thank Dr. Julian Higgins for detailed comments and improvements on our visual annotation placards that helped us further refine them post conflict resolution. 
 %
 %
 %
@@ -998,7 +1014,7 @@ We thank Dr. Julian Higgins for detailed comments and improvements on our visual
 %
 \subsection*{Funding}
 %
-This research was supported by HES-SO, Valais-Wallis, Sierre, Switzerland. 
+This research was supported by HES-SO, Valais-Wallis, Switzerland. 
 %
 %
 %
@@ -1054,17 +1070,17 @@ The notebooks used analyze the corpus will be available on GitHub.
 %% \bigskip command. please ignore this.             %%
 %%===================================================%%
 %
-\begin{appendices}
+%\begin{appendices}
 %
 %
 %
-\section{Annotation guidelines}\label{annot_guidelines}
+%\section{Annotation guidelines}\label{annot_guidelines}
 %
-An appendix contains supplementary information that is not an essential part of the text itself but which may be helpful in providing a more comprehensive understanding of the research problem or it is information that is too cumbersome to be included in the body of the paper.
+%An appendix contains supplementary information that is not an essential part of the text itself but which may be helpful in providing a more comprehensive understanding of the research problem or it is information that is too cumbersome to be included in the body of the paper.
 %
 %
 %
-\end{appendices}
+%\end{appendices}
 
 %%===========================================================================================%%
 %% If you are submitting to one of the Nature Portfolio journals, using the eJP submission   %%
