@@ -676,6 +676,7 @@ As expected, none of the SQ annotations had a perfect IAA of 100.
     \centering
     \begin{tabular}{crrr}
     \toprule[1.0pt]
+         & \multicolumn{2}{c}{F1-measure IAA} & \\
         Signalling question & before guideline improvement & after guidelines improvement & change \\
     \midrule[1.0pt]
         \multicolumn{4}{c}{Biases arising from the randomization process} \\
@@ -862,9 +863,9 @@ Availability of detailed description on the study design, methods and results ca
 The more information a study provided, the easier it is to evaluate a bias question.
 Some studies tend to not report key details making it tougher to assess certain bias questions.
 In feedback received, it is worth noting that for all the signal questions with fewer than 100 annotated tokens, both annotators consistently rated the availability of information to answer those questions as either ``low" or ``very low."
-In contrast, for the top five signal questions shown in Figure~\ref{fig:ann_counts}, both annotators consistently rated the availability of information as ``high", ``very high" (except once as ``normal"). 
-However, take this qualitative feedback with a grain of salt because the annotator feedback depends on the number and kind of RCTs they annotated.
-The annotator who annotated more documents tended to rate the availability of information on the lower ends while the annotator who annotated less documents was lenient.
+In contrast, for the top five signal questions shown in Figure~\ref{fig:ann_counts}, both annotators consistently rated the availability of information as ``high'' and ``normal''.
+However, it's important to interpret this qualitative feedback with caution, as annotator ratings are influenced by the number and types of RCTs they annotated.
+Annotators who reviewed a greater number of documents tended to be more stringent in their assessments of information availability, while those who annotated fewer documents may have been more lenient in their ratings.
 %
 %
 %
@@ -873,18 +874,29 @@ The annotator who annotated more documents tended to rate the availability of in
 %
 
 
+
 % Were the visual placards effective?
+F1-measure agreement was calculated before and after visual placard development.
+Using the visual placards improves the F1 IAA for choosing the RCT text evidence for 10 of the 22 SQs showing their utility in aiding decision making.
+% For which SQs did the agreement increase and why?
+SQ 1.3 has the highest increase of 70.46 F1 IAA points thanks to the visual placards requesting to look for the text evidence to answer this question first priority in the table recording patient characteristics and instructs to mark the entire table along with the table caption.
+Before the development of these placards, annotators would only mark a portion of the table text to answer this question. 
+The specific text selected by an annotator depended on which part of the table text they noticed first as potentially indicating bias given any of the listed patient characteristics could show imbalances between the groups.
+This variability in selection led to lower agreement on this SQ, which has significantly improved with the introduction of the placards.
+SQ 1.1 recorded an improvement of more than 30 F1 IAA points thanks to the placards instructing the annotators to mark the text evidence in the Methods section as a priority. 
+The evidence to answer the SQ 1.1 could be found in both abstract and the methods section and annotators variably marked the answer to this question leading to a lower agreement.
+We restricted annotating this text in the methods section in the visual placards because a more detailed textual description is found in this section and saw an increase in agreement by 30.58 F1 IAA.
+These improvements were also the reason for an increased agreement for the SQs 2.1 and 2.2.
+For SQ 2.1, there was a remarkable increase of 67.26 points in F1 IAA.
+This can be attributed to the comprehensive instructions provided by the visual placards, which instruct annotators to specifically identify and label text descriptions related to intervention administration and placebo administration.
+Prior to the placard development the annotators were inconsistently annotating either the description of intervention administration or placebo administration, leading to low IAA.
+
+
 % Why were agreements on certain questions zero?
-%
-$\kappa$ agreement was calculated before and after visual placard development.
-Using the visual placards improves the agreement for choosing the RCT text evidence for 10 of the 22 SQs showing their utility in aiding decision making.
-However, we also notice that some questions had zero agreement.
-After the annotation process, we recorded the annotators opinion on how difficult was it for them to annotate text evidence for answering each signalling question.
-The form collected opinions of the annotators on how difficult each RoB question was for annotation on a scale of 1 to 5, with 1 being very easy and 5 being very difficult.
-These results correlate with the opinion from the form filling.
-Almost all the RoB questions where the IAA between the annotators was zero (2.3, 2.4, 2.5, 2.7, 3.3, 3.4, 4.5) were marked with ``difficult'' to annotate.
-The poor agreement is caused by the subjectivity of the signalling questions, lack of information to annotate in the clinical trial, theoretical nature of the signalling questions and the complex process of analysing trials rather than it being about the expertise of the annotators.
-The annotators / reviewers have years of experience writing SRs and carrying out RoB assessment.
+While the agreement drastically increased for certain SQs, for other questions it remained zero.
+These outcomes align with the feedback forms' findings.
+Almost all the RoB questions where the IAA between the annotators was zero (2.3, 2.4, 2.5, 2.7, 3.2, 3.3, 3.4, 4.2, 4.5, 5.1, 5.3) consistently received remarks from one or both annotators regarding their higher subjectivity, difficulty in assessment, and lower availability of information for evaluation.
+The poor agreement hence can be well assumed to caused by the subjectivity of the signalling questions, lack of information to annotate in the clinical trial, theoretical nature of the signalling questions and the complex process of analysing trials.
 
 % Why are these questions difficult to answer? - subjective judgment, lack of information to annotate, unclear information or ambiguous information?
 % Were certain RoB questions more subjective than the others?
@@ -916,7 +928,6 @@ The same goes for the question 4.5 which depends upon the results of the questio
 It was for the signalling question 1.3 that the agreement increased the most. 
 The reason is because the visual placards restrict looking for answering this question only from the patient characteristics table from the RCT leading to both annotators consistently annotating only tables for this SQ and raising the IAA in the process.
 The agreement increased for the SQ 1.1 as well in which the visual placards limited to annotating the information about the randomization methodology employed in the trial and limiting it to annotating in a particular section of the RCT.
-These improvements were also the reason for an increased agreement for the SQs 2.1 and 2.2.
 
 
 % Why was the agreement for question 2.3, 2.4 and 2.5 zero?
@@ -936,7 +947,9 @@ To assess risk domain five it was imperative to attach a trial protocol with the
 The visual placards restricted answering the SQs in this domain only from the trial protocol. 
 
 % Improvements suggested by Julian Higgins.
-Discuss the improvements suggested by Julian Higgins. For example, his hesitations with the thresholds used to simplify the judgment.
+Finally, we discuss the improvements suggested by a stalwart in the area of bias assessment.
+In order to tackle subjectivity posed by signalling questions XX and XX, we added the concept of threshold.
+For example, his hesitations with the thresholds used to simplify the judgment.
 Explain how some RoB SQ assessments needed to be made simpler to ensure translation to text annotation.
 %
 %
