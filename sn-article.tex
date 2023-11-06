@@ -569,7 +569,7 @@ Check Supplementary material for the references of included studies. %TODO: add 
 %
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.60\columnwidth]{figures/sq_ann_raw_counts.png}
+    \includegraphics[width=0.90\columnwidth]{figures/sq_ann_raw_counts.png}
     \caption{Total number of token annotations for each RoB signalling question.}
     \label{fig:ann_counts}
 \end{figure}
@@ -582,7 +582,7 @@ Check Supplementary material for the references of included studies. %TODO: add 
 %
 \begin{table}[htb]
     \centering
-    \caption{General statistics for the annotated corpus.}
+    \caption{General statistics for the annotated corpus: This table provides an overview of the annotated corpus, including the total number of annotated tokens, the average length of token sequences, and the number of documents in which annotations were identified, out of a total of 41 annotated documents.}
     \label{table:stats}
     \begin{tabular}{crrr}
     \toprule[1.0pt]
@@ -670,7 +670,7 @@ As expected, none of the SQ annotations had a perfect IAA of 100.
 %
 %
 \begin{table}[htb]
-    \caption{F1-measure (IAA) before and after the visual placards development}
+    \caption{F1-Measure (Inter-Annotator Agreement) Comparison Before and After Visual Placard Development: This table displays the F1-Measure at the text span answer level before and after the development of visual placards. The change in F1-Measure is presented in terms of absolute IAA points.}
     \label{tab:IAA_sq}
     \centering
     \begin{tabular}{crrr}
@@ -736,7 +736,7 @@ For three of the 22 SQs (1.3, 2.3, 5.1), the agreement is merely chance agreemen
 %
 %
 \begin{table}[]
-    \caption{Cohens Kappa between annotator pairs for agreement at the response option level for each signalling question}
+    \caption{Cohen's Kappa $\kappa$ and raw agreement between annotator pairs for agreement at the response option level for each signalling question.}
     \label{tab:IAA_response}
     \begin{tabular}{crrr}
     \toprule[1.0pt]
@@ -969,12 +969,11 @@ It's crucial to emphasize that while both text span conflicts and disparities in
 \subsection{LLM evaluation}
 \label{disc:llm}
 %
-%There were certain challenges for the manual LLM evaluation given its stochastic nature leading to some subjectivity in the evaluation process.
-Manual LLM evaluation highlighted the tricky nature of manual bias assessment as well as its own subjective nature too.
-Manual bias annotation entails labelling RCTs with text spans corresponding to the answering the SQs in the RoB 2 guidelines followed by labelling the selected text span with a response option also called as bias judgment (``Yes'', ``No'' or ``No Information'').
-For the LLM, in some cases ChatPDF straightforward answered a SQ with ``Yes'' or ``No'' or ``No Information'', but in certain cases it answered the SQ indirectly.
+Manual LLM evaluation highlighted the tricky nature of bias assessment as well as its own subjective nature too.
+Bias annotation entails labelling RCTs with text spans corresponding to answering the SQs in the RoB 2 guidelines followed by labelling the selected text span with a response option also called as bias judgment (``Yes'', ``No'' or ``No Information'').
+For the LLM, in some cases ChatPDF straightforward answered a SQ with a response option - ``Yes'' or ``No'' or ``No Information'', but in certain cases it answered the SQ indirectly.
 For instance, in the Gleason study~\cite{gleason2015effects}, for SQ 1.1, LLM directly and correctly answered ``\textbf{Yes}, the allocation sequence was random. Extracted sentences: A random number generator (Excel, Microsoft) was used to devise a randomization series. The order of randomization was incorporated into a KEEPS database, so that treatment allocation occurred when a study identification number was assigned.''
-In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regarding RoB 5.2, the study authors reported that to correct for multiple comparisons, they divided the p-value by the number of outcomes. For example, there were five cognitive outcomes (four domain factors and one global cognition score) and six POMS mood scores. Splitting the significance value of 0.05 equally between the five cognitive and six mood sub-domains resulted in a p-value of 0.01 for each of the two primary domains investigated (cognition and mood). However, \textbf{the study authors did not provide information} on whether the numerical result being assessed was selected on the basis of the results from multiple eligible outcome measurements within the outcome domain.'' implying it found ``No Information'' for the SQ 5.2.
+In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regarding RoB 5.2, the study authors reported that to correct for multiple comparisons, they divided the p-value by the number of outcomes. For example, there were five cognitive outcomes (four domain factors and one global cognition score) and six POMS mood scores. Splitting the significance value of 0.05 equally between the five cognitive and six mood sub-domains resulted in a p-value of 0.01 for each of the two primary domains investigated (cognition and mood). However, \textbf{the study authors did not provide information} on whether the numerical result being assessed was selected on the basis of the results from multiple eligible outcome measurements within the outcome domain.'' implying it found ``No Information'' for answering the signalling question 5.2.
 
 
 
@@ -982,6 +981,12 @@ In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regardin
 Coming to the results of LLM evaluation, for the first risk domain SQ 1.3, we saw a comparatively lower agreement between ChatGPT and the experts because the answer to this SQ is typically found in the table text of RCT.
 Text in tables is read by ChatPDF, but it might have problems correlating the correct rows and columns leading to a distorted understanding of the tables.
 This could be the reason why ChatPDF sought to answer this question typically using RCT text rather than the table text.
+For instance, for Stuck et al RCT, both the expert and LLM answered SQ 1.3 with ``No Good'', but expert used Table 2 as the evidence to answer the question while LLM used the text evidence not found in the table.
+
+\begin{quote}
+    LLM answer: No, there were no significant differences (p < 0.05; based on z-statistics from generalized estimating equation models) between the intervention and control groups in any of the baseline characteristics listed in Table 2 .
+\end{quote}
+
 %TODO: Give an example of this claim.
 
 % -------------- LLM Risk Domain two --------------
