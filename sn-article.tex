@@ -157,11 +157,11 @@ LLMs (large language models) are immensely capable but necessitate evaluation in
 Currently, no RoB annotation guidelines to annotate a corpus or an annotated corpus exist for LLM evaluation.
 % 
 \textbf{Methods:} Taking the revised Cochrane risk of bias assessment guidelines for RCTs, we develop a set of visual instructional placards that could be used as text annotation instructions to annotate RoB spans in RCTs.
-Expert annotators employed these visual guidelines to annotate a corpus of 40 full-text RCTs from physiotherapy and rehabilitation.
-We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 40) of the annotated corpus.
-A portion of the corpus (10 out of 40) was used to evaluate ChatGPT using a straightforward evaluation framework.
+Expert annotators employed these visual guidelines to annotate a corpus of 41 full-text RCTs from physiotherapy and rehabilitation.
+We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 41) of the annotated corpus.
+A portion of the corpus (10 out of 41) was used to evaluate ChatGPT using a straightforward evaluation framework.
 % 
-\textbf{Results:} We present a corpus of 40 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
+\textbf{Results:} We present a corpus of 41 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
 The IAA ranges between 0\% and 99\%.
 LLMs show promising but variable agreements across the different bias questions.
 % 
@@ -234,7 +234,7 @@ However, till date, no one has evaluated their performance on the cognitively co
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We annotate a corpus of 40 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
+3) We annotate a corpus of 41 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions using prompt generation.
 5) We make the visual annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
 %
@@ -349,7 +349,6 @@ In such situations, ``No Information'' label is acceptable.
 \subsection{Data collection}
 \label{data}
 %
-%Our corpus is focused on these domains because our annotators have RoB assessment expertise in this domain.
 Savović~\textit{et al.} categorized outcome measures as mortality, other objective outcome, or subjective outcome and estimated the associations of bias judgments with intervention effect estimates~\cite{savovic2018association}.
 Trials assessing subjective outcomes are more prone to bias, therefore, had we used only one outcome type, we would have limited label types for different risk classes~\cite{page2016empirical}.
 In context of RCTs, subjective outcomes are measurements that rely on individuals' perceptions, opinions, or feelings about their own health or well-being.
@@ -359,14 +358,10 @@ Objective outcomes are measurements that are independent of individual opinions 
 These outcomes are typically collected by trained assessors or through laboratory tests, imaging studies, or other objective methods.
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
 Mortality outcomes refer to the occurrence of death during the course of the trial.
-To ensure these different outcome types are represented in the corpus, we restricted including 26, 23 and 11 RCTs addressing objective, subjective and mortality primary outcomes. %TODO: Recheck the distribution of 26, 23, and 11
-The epidemiology researcher from our team created this 40 RCTs dataset from the domain of physiotherapy and rehabilitation.
-%These 40 studies were selected from four journals: journal 1, journal 2, journal 3 and journal 4. 
-%TODO Anjani: Justify why only these journals were considered?
+To ensure these different outcome types are represented in the corpus, we restricted including 17, 17 and 7 RCTs addressing objective, subjective and mortality primary outcomes.
+The epidemiology researcher from our team created this 41 RCTs dataset from the domain of physiotherapy and rehabilitation.
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol from wherever available.
-%TODO Anjani: Add if some studies were randomly added. Ask Roger for more information.
 All these RCT PDFs have CC-BY-0 licences~\footnote{\url{https://creativecommons.org/share-your-work/public-domain/cc0/}}.
-%We list the details of these studies in a separate supplementary material file.
 %
 %
 %
@@ -458,11 +453,11 @@ For every SQ, the annotators were guided to use the complete RoB 2 guidance docu
 They followed these instructions meticulously, going through each placard's signaling question one by one.
 The provided instructions directed the annotators to read specific sections of full-text RCT that needed annotation.
 Their task involved identifying and highlighting relevant text related to answering the signaling question.
-%A total of 40 full-text RCTs were annotated using this approach, covering 22 signaling questions across five risk domains defined by RoB 2.
-%Out of the 40, nine were doubly-annotated to capture IAA and the rest were singly annotated.
+
+
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
-Out of the 40 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
+Out of the 41 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
 After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the visual placards.
 The conflict resolution was followed by (singly) annotating 31 additional RCTs.
 
@@ -470,8 +465,8 @@ The conflict resolution was followed by (singly) annotating 31 additional RCTs.
 After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
 We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format that will be lost upon converting to text. 
 For example the structure pertaining to sections and subsections, tables, and figures makes the annotation task quicker for the annotators and increases annotation quality.
-Post annotation, a feedback was taken from both the annotators and the experts involved in formulating the visual placards to gauge the general difficulty, subjectivity and availability of information for bias assessment of each signalling question.
-The forms and the responses could be found in the Supplementary material. %TODO Anjani: Prepare the supplementary material 
+Post annotation, a feedback was taken from all the annotators and the experts involved in formulating the visual placards to gauge the general difficulty, subjectivity and availability of information for bias assessment of each signalling question.
+The forms and the responses could be found in the Supplementary material 2. %TODO Anjani: Prepare the supplementary material 
 %
 %
 %
@@ -540,7 +535,7 @@ Both of these skills will be evaluated using a raw agreement metric, which is es
 In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
 It's important to highlight that the evaluation framework is designed solely to measure the agreement of the answers between ChatPDF and the expert.
-This evaluation was manually conducted by a bias assessment assessor for 10 out of the 40 RCTs.
+This evaluation was manually conducted by a bias assessment assessor for 10 out of the 41 RCTs.
 %Whenever ChatPDF came to same response judgment but using different text compared to the expert identified one, we sought to confirm with the expert on whether ChatPDF was correct or misinterpreting the text or hallucinating.
 %Sometimes, ChatPDF did not extract sentences in JSON format and in those cases, the answer was still correct. %TODO: Discussion section
 %
@@ -810,8 +805,8 @@ The agreement considerably drops for the risk domain ``deviations from intended 
     \midrule[1.0pt]
         \multicolumn{4}{c}{Biases arising from the randomization process} \\
         \hline
-        RoB 1\_1 & 88\% & 72\% & \\ 
-        RoB 1\_2 & 69.56\% & 58.33\% &  \\ 
+        RoB 1\_1 & 80\% & 100\% & \\ 
+        RoB 1\_2 & 70\% & 70\% &  \\ 
         RoB 1\_3 & 40\% & 40\% & \\ 
         \hline
         \multicolumn{4}{c}{Biases due to deviations from intended interventions} \\
@@ -917,7 +912,7 @@ The same goes for the question 4.5 which depends upon the results of the questio
 % Why did agreement increase for certain questions?
 It was for the signalling question 1.3 that the agreement increased the most. 
 The reason is because the visual placards restrict looking for answering this question only from the patient characteristics table from the RCT leading to both annotators consistently annotating only tables for this SQ and raising the IAA in the process.
-The agreement increased for the SQ 1.1 as well in which the visual placards limited to annotating the information about the randomization methodology employed in the trial and limiting it to annotating in a particular sections of the RCT.
+The agreement increased for the SQ 1.1 as well in which the visual placards limited to annotating the information about the randomization methodology employed in the trial and limiting it to annotating in a particular section of the RCT.
 These improvements were also the reason for an increased agreement for the SQs 2.1 and 2.2.
 
 
@@ -934,7 +929,7 @@ OXO
 
 
 % Risk domain five and low IAA. Reasons?
-It had to be noted that for answering the questions for risk domain five, it was imperative to attach a trials protocol with the trial literature.
+To assess risk domain five it was imperative to attach a trial protocol with the trial literature.
 The visual placards restricted answering the SQs in this domain only from the trial protocol. 
 
 % Improvements suggested by Julian Higgins.
@@ -987,6 +982,7 @@ In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regardin
 Coming to the results of LLM evaluation, for the first risk domain SQ 1.3, we saw a comparatively lower agreement between ChatGPT and the experts because the answer to this SQ is typically found in the table text of RCT.
 Text in tables is read by ChatPDF, but it might have problems correlating the correct rows and columns leading to a distorted understanding of the tables.
 This could be the reason why ChatPDF sought to answer this question typically using RCT text rather than the table text.
+%TODO: Give an example of this claim.
 
 % -------------- LLM Risk Domain two --------------
 %OXO
@@ -1010,7 +1006,7 @@ This could be the reason why ChatPDF sought to answer this question typically us
 \label{subsec:limits}
 %
 Our study has the following limitations.
-The first limitation arises from the relative scale of our annotations, with only 40 documents undergoing the annotation process.
+The first limitation arises from the relative scale of our annotations, with only 41 documents undergoing the annotation process.
 This limitation is primarily due to financial constraints, as the availability of funds limited our ability to hire a larger number of expert annotators.
 Despite the limitation, the robustness of the annotations provided by the experts remains noteworthy, as they thoroughly assessed the selected RCTs within the resources at hand.
 A second limitation stems from the narrow focus of annotations, concentrated exclusively on physiotherapy and rehabilitation clinical trials.
@@ -1030,7 +1026,7 @@ Google's Bard does interact with PDFs, but we observed that the Bard results wer
 \section{Conclusion}
 \label{sec:conclusion}
 %
-We have presented RoBuster: a new, publicly-available corpus, comprising 40 full-text RCTs richly annotated with RoB span information for 22 risk of bias questions.
+We have presented RoBuster: a new, publicly-available corpus, comprising 41 full-text RCTs richly annotated with RoB span information for 22 risk of bias questions.
 The dataset fills a need for a corpus to evaluate risk of bias text span extraction using machine learning technologies.
 Our corpus has detailed and fine-grained information in form of individual risk of bias spans along with annotator decision on the bias risk (high or low).
 We used RoBuster as a benchmark to evaluate LLMs for how well LLMs agree with human-led bias assessment.
