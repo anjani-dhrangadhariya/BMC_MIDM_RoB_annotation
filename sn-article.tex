@@ -474,13 +474,13 @@ The forms and the responses could be found in the Supplementary material 2. %TOD
 \subsection{Inter-Annotator Agreement}
 \label{method:iaa}
 %
-We report agreement at two levels. 
+We report inter-annotator agreement at two levels. 
 We check whether the annotators agree on the text spans to answer signalling questions using the pairwise F1 measure.
 Pairwise F1 measure disregards out-of-the-span tokens (unannotated tokens) during agreement calculation and is an ideal measure of annotation reliability for the token-level annotation tasks.
 Pairwise F1 calculates the F1 score for each pair of annotators, treating one annotator's labels as the ``true'' labels and the other annotator's labels as the ``predicted'' labels~\cite{deleger2012building,brandsen2020creating}.
-We also check how strong the annotators agree on the response level judgment for each signalling question using Cohen's kappa $\kappa$.
-Cohen's kappa $\kappa$ is the standard annotation reliability measure for many classification annotation tasks~\cite{mchugh2012interrater}.
-We interpret F1 measure and $\kappa$ as shown in the Table~\ref{tab:iaa_interpret}~\cite{landis1977measurement}.
+We also check how strongly the annotators agree on the response level judgment for each signalling question using Cohen's kappa $\kappa$ and compare it with raw percent agreement.
+Cohen's kappa $\kappa$ is the standard annotation reliability measure for many classification annotation tasks.
+We interpret F1 measure and $\kappa$ as shown in the Table~\ref{tab:iaa_interpret}~\cite{mchugh2012interrater,cohen1960coefficient,landis1977measurement}.
 %
 %
 %
@@ -493,8 +493,8 @@ We interpret F1 measure and $\kappa$ as shown in the Table~\ref{tab:iaa_interpre
     \multicolumn{2}{c|}{F1 Measure} & \multicolumn{2}{c}{Cohen's Kappa}  \\ 
     Agreement interpretation & IAA range & Agreement interpretation & IAA range \\ 
     \midrule[1.0pt]
-        Poor & 0-0.99 &  Worse than chance & $\leq$ 0\\ 
-        Slight & 1 - 20.99 &  None or chance agreement & 0-0.20\\ 
+        Poor & 0-0.99 &  No agreement& $\leq$ 0\\ 
+        Slight & 1 - 20.99 &  None to slight agreement & 0-0.20\\ 
         Fair & 21 - 40.99 &  Minimal & 0.21-0.39\\ 
         Good & 41 - 60.99 & Weak & 0.40-0.59\\ 
         Substantial & 61 - 80.99 & Moderate & 0.60-0.79 \\ 
@@ -730,9 +730,7 @@ It is, however, important to note that more than half of this overall agreement 
 For the remaining signaling questions, we do not find any instances of either almost perfect or strong agreement.
 Agreements for SQs 2.1, 3.1, and 4.3 fall within the moderate agreement category (ranging from 0.60 to 0.80 IAA), with no substantial agreement originating from the ``No Information'' judgments for either of them.
 In contrast, six of the 22 signaling questions (2.4, 2.5, 4.1, 4.2, 4.5, and 5.3) exhibit agreement worse than what would be expected by chance, and considerable percentage of them stems from ``No Information'' judgments.
-For three of the 22 SQs (1.3, 2.3, 5.1), the agreement is merely chance agreement.
-%Lastly, for SQ 3.2, the agreement could not be calculated due to the unavailability of annotations.
-
+The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable percent agreement.
 
 %
 %
@@ -872,9 +870,6 @@ Annotators who reviewed a greater number of documents tended to be more stringen
 \subsection{Inter-Annotator Agreement}
 \label{disc:iaa}
 %
-
-
-
 % Were the visual placards effective?
 F1-measure agreement was calculated before and after visual placard development.
 Using the visual placards improves the F1 IAA for choosing the RCT text evidence for 10 of the 22 SQs showing their utility in aiding decision making.
@@ -897,6 +892,8 @@ While the agreement drastically increased for certain SQs, for other questions i
 These outcomes align with the feedback forms' findings.
 Almost all the RoB questions where the IAA between the annotators was zero (2.3, 2.4, 2.5, 2.7, 3.2, 3.3, 3.4, 4.2, 4.5, 5.1, 5.3) consistently received remarks from one or both annotators regarding their higher subjectivity, difficulty in assessment, and lower availability of information for evaluation.
 The poor agreement hence can be well assumed to caused by the subjectivity of the signalling questions, lack of information to annotate in the clinical trial, theoretical nature of the signalling questions and the complex process of analysing trials.
+% TODO: Why was the agreement for question 2.3, 2.4 and 2.5 zero?
+Also, we didn't have F1 IAA score on SQ 2.4 because, while two out of the nine annotations had annotations for 2.4, these annotations were made by only one of the annotators and not by both annotators lading to no agreement at the span level.
 
 
 % Theoretical nature of the signalling questions and zero agreement?
@@ -908,11 +905,9 @@ The same applies to SQ 4.5, which relies on the results of SQ 4.4.
 It seeks to gauge the 'likelihood' that the assessment of the outcome was influenced by knowledge of whether the intervention was received or not.
 Such ``theoretical'' questions require making judgments that rely on hypothetical scenarios rather than direct observations or concrete evidence leading to higher subjectivity of assessment results.
 As these questions pertain to aspects of study design, conduct, or reporting that may not be explicitly addressed in the trial documentation these questions also suffer from a lack of information that could be annotated in a trial.
+To ensure some kind of annotations are always available to make a judgment, we instruct annotators to annotate the outcome and outcome measurement descriptions in the paper.
 
 
-
-
-% Why are these questions difficult to answer? - subjective judgment, lack of information to annotate, unclear information or ambiguous information?
 % Were certain RoB questions more subjective than the others?
 There were certain aspects where question subjectivity might have led to low agreement score.
 For example, for the SQ 2.4, it is asked whether deviations from the intended intervention could have affected the outcome.
@@ -923,29 +918,49 @@ Assessors may have limited information available to make a judgment.
 They may not have access to detailed data or explanations regarding the deviations, making it challenging to assess their potential impact accurately.
 Similar subjectivity occurs for the signalling question 3.3: Could missingness in the outcome depend on its true value?
 The SQ involves assessors making a judgment about the relationship between missing data and the true outcome, which can be challenging to determine objectively.
-For most part, the assessors might not not have access to complete information about why data is missing, which can make it difficult to assess the dependence of missingness on the true outcome.
-This could be seen from prevalence of yellow bar in the Figure~\ref{fig:rob_information}.
 Therefore for the most part the annotators ended up marking the outcome description itself which could lead them to judge whether missingness of outcomes data could influence its true value.
 For example, the outcome fatigue.
 If the authors write a sentence about some patients who were not showing up at the follow-up because they said they were too tired, then annotate this because the missingness depends on the actual/true value of fatigue.
 Therefore, the judgment of a particular SQ could be dependent on the biases that a particular outcome could cause.
-For example, it is not possible to blind the intervention administrators for certain interventions in physiotherapy and rehabilitation. therefore, wherever the reviewers found such an intervention, they had to use this information to mark the judgment.
-
-% Why was the agreement for question 2.3, 2.4 and 2.5 zero?
-OXO
-
-
-% Was the bias in subjective outcomes higher than in the objective outcomes?
-OXO
+For example, it is not possible to blind the intervention administrators for certain interventions in physiotherapy and rehabilitation.
+Therefore, wherever the reviewers found such an intervention, they had to use this information to mark the judgment.
+For most part, the assessors might not not have access to complete information about why data is missing, which can make it difficult to assess the dependence of missingness on the true outcome.
+This could be seen from prevalence of yellow bar in the Figure~\ref{fig:rob_information} which indicates prevalence of ``No Information'' judgment.
 
 
-% Was information not available to answer certain RoB SQs?
-OXO
+% TODO: Discuss the Kappa agreements for the response option judgements?
+%What caused the conflict between selecting the judgment options for IAA?
+Cohen's kappa quantifies the extent to which two raters' classifications agree beyond what would be expected by chance.
+The disagreements arise because of two reasons.
+The most apparent cause of disagreement occurs when two annotators choose a text section to address a signaling question but do not reach a consensus on the response option judgement.
+The other less obvious reason for a disagreement is when one of the annotators annotates a part of text to answer a SQ and gives it a response judgment, but the other one does not annotate anything for this SQ leading to an automatic assumption of ``No Information'' for that SQ.
+Notably, 82.85\% of these conflicts fall into the second category, with only about 17\% involving discrepancies in response judgments (see details in \ref{dis:conflict}).
+Similarly, agreements were of two types too, the agreements when both annotators chose a text span for answering a SQ and labelled them with the same response options and the agreements when none of the annotators answered a signalling question leading to both their annotations being set to ``No Information''.
+The agreements are evenly distributed between these two categories.
+Therefore, we suggest caution when interpreting the kappa agreement values.
+
+
+% TODO: Was the bias in subjective outcomes higher than in the objective outcomes?
+% Discuss the negative agreements
+Negative $\kappa$ are unlikely to occur in practice, but we had six SQ's where the response judgment agreement measured by Cohen's kappa was negative.
+The SQ with negative agreement were 2.4, 2.5, 4.1, 4.2, 4.5 and 5.3.
+Though the $\kappa$ values for these SQs are lower than $-0.10$, they are not much larger.
+However, according to~\cite{mchugh2012interrater}, a $\kappa$ value smaller than $-0.10$ represents great disagreement among the raters and the collect data are not meaningful.
+
+% Discuss the no agreement
+The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable percent agreement.
+
+% Discuss the adequate agreement (>60%)
+It was only for the SQ 2.1, 3.1, and 4.3 did we notice adequate agreement. ($>$60 IAA)
+
+% Discuss the low agreements (<60%)
+Apart from this the agreement for other SQs was inadequate ($<$60 IAA)
+
 
 
 % Risk domain five and low IAA. Reasons?
-To assess risk domain five it was imperative to attach a trial protocol with the trial literature.
-The visual placards restricted answering the SQs in this domain only from the trial protocol. 
+%To assess risk domain five it was imperative to attach a trial protocol with the trial literature.
+%The visual placards restricted answering the SQs in this domain only from the trial protocol. 
 
 % Improvements suggested by Julian Higgins.
 Finally, we discuss the improvements suggested by a stalwart in the area of bias assessment.
@@ -1042,6 +1057,9 @@ Though this approach inadvertently restricts the broader applicability of the an
 Our LLM evaluation was limited by the fact that we chose to work with PDFs. 
 There are limited platforms that interact with PDFs and this restricts our choice of the models to evaluate.
 Google's Bard does interact with PDFs, but we observed that the Bard results were less deterministic than ChatPDF.
+
+Another limitation of the study is calculating Cohen's kappa as agreement measure for signalling question response option judgment. %TODO: Discuss Cohen's kappa paradox
+
 %
 %
 %
