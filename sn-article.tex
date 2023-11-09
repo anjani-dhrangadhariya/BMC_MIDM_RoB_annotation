@@ -724,6 +724,7 @@ As expected, none of the SQ annotations had a perfect IAA of 100.
 
 We present the Cohen's Kappa ($\kappa$) scores in Table~\ref{tab:IAA_response}~\cite{mchugh2012interrater} which measure agreement at the SQ response judgment level.
 Additionally, we provide the percentage of $\kappa$ agreement that stems from the ``No Information'' judgments.
+Cohen's kappa quantifies the extent to which two raters' classifications agree beyond what would be expected by chance.
 The overall $\kappa$ agreement between the raters stands at a weak 0.5187 IAA.
 Notably, the highest $\kappa$ agreement of 1.0 is observed for SQ 2.6.
 It is, however, important to note that more than half of this overall agreement arises from the assumed ``No Information'' judgments.
@@ -731,6 +732,12 @@ For the remaining signaling questions, we do not find any instances of either al
 Agreements for SQs 2.1, 3.1, and 4.3 fall within the moderate agreement category (ranging from 0.60 to 0.80 IAA), with no substantial agreement originating from the ``No Information'' judgments for either of them.
 In contrast, six of the 22 signaling questions (2.4, 2.5, 4.1, 4.2, 4.5, and 5.3) exhibit agreement worse than what would be expected by chance, and considerable percentage of them stems from ``No Information'' judgments.
 The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable percent agreement.
+
+The average $\kappa$ agreement for randomization domain was 0.27 IAA which is a minimal agreement.
+For the ``deviations due to intended interventions'', there was minimal agreement of 0.33 IAA and for the ``due to missing outcome data'' domain there was a better though weak agreement of 0.494 IAA.
+The last two domains ``measurement of the outcome'' and ``selection of the reported result'' had agreements 0.0996 IAA and -0.0036 IAA interpreted as zero and negative.
+
+
 
 %
 %
@@ -929,8 +936,7 @@ Therefore, wherever the reviewers found such an intervention, they had to use th
 
 % TODO: Discuss the Kappa agreements for the response option judgements?
 %What caused the conflict between selecting the judgment options for IAA?
-Cohen's kappa quantifies the extent to which two raters' classifications agree beyond what would be expected by chance.
-The disagreements arise because of two reasons.
+The disagreements at response option judgments arose because of two reasons.
 The most apparent cause of disagreement occurs when two annotators choose a text section to address a signaling question but do not reach a consensus on the response option judgement.
 The other less obvious reason for a disagreement is when one of the annotators annotates a part of text to answer a SQ and gives it a response judgment, but the other one does not annotate anything for this SQ leading to an automatic assumption of ``No Information'' for that SQ.
 Notably, 82.85\% of these conflicts fall into the second category, with only about 17\% involving discrepancies in response judgments (see details in \ref{dis:conflict}).
@@ -944,7 +950,7 @@ Consequently, we suggest caution when interpreting the kappa agreement values.
 
 % TODO: Was the bias in subjective outcomes higher than in the objective outcomes?
 % Discuss the negative agreements
-Negative $\kappa$ are unlikely to occur in practice, but we had six SQ's where the response judgment agreement measured by Cohen's kappa was negative.
+Negative $\kappa$ are unlikely to occur in practice, but we had six SQs where the response judgment agreement measured by Cohen's kappa was negative.
 The SQ with negative agreement were 2.4, 2.5, 4.1, 4.2, 4.5 and 5.3.
 Though the $\kappa$ values for these SQs are lower than $-0.10$, they are not much larger.
 However, according to~\cite{mchugh2012interrater}, a $\kappa$ value smaller than $-0.10$ represents great disagreement among the raters and the collect data are not meaningful.
