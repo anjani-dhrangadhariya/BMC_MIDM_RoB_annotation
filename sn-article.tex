@@ -57,6 +57,7 @@
 \usepackage{algorithmicx}%
 \usepackage{algpseudocode}%
 \usepackage{listings}%
+\usepackage{xcolor}
 %%%%
 %\usepackage{caption}
 
@@ -365,18 +366,6 @@ All these RCT PDFs have CC-BY-0 licences~\footnote{\url{https://creativecommons.
 %
 %
 %
-%\begin{itemize}
-%    \item 40 RCTs
-%    \item Between 2001:2021
-%    \item CC0, CC BY, CC BY non-commercial
-%    \item Eutils search - Include search query for PubMed
-%    \item Search for each year, retmax=not defined, randomly selected 20 studies from the retrieved
-%    \item Take the first three studies with free-full text available.
-%    \item Upload to tagtog
-%\end{itemize}
-%
-%
-%
 \subsection{Expert team}
 \label{experts}
 %
@@ -474,32 +463,32 @@ The forms and the responses could be found in the Supplementary material 2. %TOD
 \subsection{Inter-Annotator Agreement}
 \label{method:iaa}
 %
-We report inter-annotator agreement at two levels. 
-We check whether the annotators agree on the text spans to answer signalling questions using the pairwise F1 measure.
+We report IAA at two levels. 
+We check whether the annotators agree on the text spans to answer SQs using the pairwise F1 measure.
 Pairwise F1 measure disregards out-of-the-span tokens (unannotated tokens) during agreement calculation and is an ideal measure of annotation reliability for the token-level annotation tasks.
 Pairwise F1 calculates the F1 score for each pair of annotators, treating one annotator's labels as the ``true'' labels and the other annotator's labels as the ``predicted'' labels~\cite{deleger2012building,brandsen2020creating}.
-We also check how strongly the annotators agree on the response level judgment for each signalling question using Cohen's kappa $\kappa$ and compare it with raw percent agreement.
+We also check how strongly the annotators agree on the response option judgment for each SQ using Cohen's kappa $\kappa$ and compare it with raw percent agreement.
 Cohen's kappa $\kappa$ is the standard annotation reliability measure for many classification annotation tasks.
-We interpret F1 measure and $\kappa$ as shown in the Table~\ref{tab:iaa_interpret}~\cite{mchugh2012interrater,cohen1960coefficient,landis1977measurement}.
+We interpret both IAA measures as shown in the Table~\ref{tab:iaa_interpret}~\cite{mchugh2012interrater,cohen1960coefficient,landis1977measurement}.
 %
 %
 %
 \begin{center}
  \begin{table}[htb]
-   \caption{The table details interpretation of pairwise F1-measure (Left) and Cohen's kappa (Right)}\label{tab:iaa_interpret}
+   \caption{The table details interpretation of pairwise F1-measure (Left), Cohen's kappa (Middle) and Observed or raw agreement (Left)}\label{tab:iaa_interpret}
  \centering
-    \begin{tabular}{lr|lr}
+    \begin{tabular}{lr|lr|lr}
     \toprule[1.0pt]
-    \multicolumn{2}{c|}{F1 Measure} & \multicolumn{2}{c}{Cohen's Kappa}  \\ 
-    Agreement interpretation & IAA range & Agreement interpretation & IAA range \\ 
+    \multicolumn{2}{c|}{F1 Measure} & \multicolumn{2}{c|}{Cohen's Kappa}& \multicolumn{2}{c}{Raw Agreement}  \\ 
+    interpretation & range & interpretation & range & interpretation & range \\ 
     \midrule[1.0pt]
-        Poor & 0-0.99 &  No agreement& $\leq$ 0\\ 
-        Slight & 1 - 20.99 &  None to slight agreement & 0-0.20\\ 
-        Fair & 21 - 40.99 &  Minimal & 0.21-0.39\\ 
-        Good & 41 - 60.99 & Weak & 0.40-0.59\\ 
-        Substantial & 61 - 80.99 & Moderate & 0.60-0.79 \\ 
-        Almost perfect & 81 - 99.99 & Strong & 0.80-0.90 \\ 
-        Perfect & 100 & Almost Perfect & $\geq$ 0.90 \\ 
+        Poor & 0-0.99 &  No agreement& $\leq$ 0 & None & 0 \\ 
+        Slight & 1 - 20.99 &  None to slight agreement & 0-0.20 & Very low & 1-10\% \\ 
+        Fair & 21 - 40.99 &  Minimal & 0.21-0.39 & Low & 11-30\% \\ 
+        Good & 41 - 60.99 & Weak & 0.40-0.59 & Moderate & 31-50\% \\ 
+        Substantial & 61 - 80.99 & Moderate & 0.60-0.79 & High & 51-70\% \\ 
+        Almost perfect & 81 - 99.99 & Strong & 0.80-0.90 & Very high & 71-90\% \\ 
+        Perfect & 100 & Almost Perfect & $\geq$ 0.90 & Perfect & $>$90\% \\ 
          & & Perfect & 1.0 \\ 
     \bottomrule[1.0pt]
     \end{tabular}
@@ -518,8 +507,9 @@ The bar for clinical applications is high and it is imperative to evaluate these
 Additionally, the tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allows direct interaction between GPT-3.5 (Generative Pretrained Model) and PDFs, negating the clumsy PDF to text conversion.
 Therefore, we consider it essential to evaluate LLMs instead of forcefully adapting the evaluation to a classical ML problem.
 We formulated the task as a zero-shot RoB text span extraction task.
-This is to gauge whether GPT-3.5 encodes knowledge related to clinical trial biases.
-We will use simple prompt constructs of the structure ``Answer the signalling question + Action item to extract sentence supporting the answer''. Consider the following example.
+This was to gauge whether GPT-3.5 encodes knowledge related to assessing trial biases.
+We will use simple prompt constructs of the structure ``Answer the \{\textit{signalling question}\} + Action item to extract sentence supporting the answer''.
+Consider the following example.
 
 \begin{quote}
 \itshape Example prompt: Question 4.3 Were outcome assessors aware of the intervention received by study participants? Provide an answer and extract the supporting sentences that you write your answer based on. Extract the sentences in JSON~\footnote{JSON = JavaScript Object Notation}.
@@ -530,15 +520,14 @@ ChatPDF is tasked with 1) answering the SQ with a response option (the judgment)
 When answering a question, ChatPDF finds the most relevant paragraphs from the PDF and uses the ChatGPT API from OpenAI to generate an answer.
 ChatPDF employs GPT (Generative Pretrained Transformer) 3.5.
 ChatPDF is required to do the same task as human annotators and they will be evaluated on the basis of correctness of the answer.
-If ChatPDF answer corresponds to response option selected by the expert annotator, it is considered a correct answer. 
-If the text extracted by LLMs as evidence for answering the signaling question fuzzy matches the text selected by the expert annotator, it is considered a correct answer.
-Both of these skills will be evaluated using a raw agreement metric, which is essentially the number of documents for a RoB SQ where ChatPDF's responses align with those of the human expert, divided by the total number of documents assessed.
+If ChatPDF answer corresponds to response option selected by the expert annotator, it is considered a correct answer for that SQ. 
+If the text extracted by LLMs as evidence for answering the SQ fuzzy matches the text selected by the expert annotator, it is considered a correct answer.
+Both of these skills will be evaluated using a raw or observed agreement metrics $P_{O} (Extraction)$  for measuring agreement over extraction and $P_{O} (Response)$ for measuring agreement over response judgments and interpreted as per Table~\ref{tab:iaa_interpret}. 
+Observed agreement is essentially the number of documents for a RoB SQ where ChatPDFs responses align with those of the human expert, divided by the total number of documents assessed~\cite{artstein2017inter}.
 In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
 It's important to highlight that the evaluation framework is designed solely to measure the agreement of the answers between ChatPDF and the expert.
 This evaluation was manually conducted by a bias assessment assessor for 10 out of the 41 RCTs.
-%Whenever ChatPDF came to same response judgment but using different text compared to the expert identified one, we sought to confirm with the expert on whether ChatPDF was correct or misinterpreting the text or hallucinating.
-%Sometimes, ChatPDF did not extract sentences in JSON format and in those cases, the answer was still correct. %TODO: Discussion section
 %
 %
 %
@@ -733,6 +722,8 @@ Agreements for SQs 2.1, 3.1, and 4.3 fall within the moderate agreement category
 In contrast, six of the 22 signaling questions (2.4, 2.5, 4.1, 4.2, 4.5, and 5.3) exhibit agreement worse than what would be expected by chance, and considerable percentage of them stems from ``No Information'' judgments.
 The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable percent agreement.
 
+
+
 The average $\kappa$ agreement for randomization domain was 0.27 IAA which is a minimal agreement.
 For the ``deviations due to intended interventions'', there was minimal agreement of 0.33 IAA and for the ``due to missing outcome data'' domain there was a better though weak agreement of 0.494 IAA.
 The last two domains ``measurement of the outcome'' and ``selection of the reported result'' had agreements 0.0996 IAA and -0.0036 IAA interpreted as zero and negative.
@@ -751,40 +742,40 @@ The last two domains ``measurement of the outcome'' and ``selection of the repor
     \midrule[1.0pt]
         \multicolumn{4}{c}{Biases arising from the randomization process} \\
         \hline
-        RoB 1\_1 & 0.571 & 0.889 & 22.22\% \\
-        RoB 1\_2 & 0.25 & 0.667 & 33.33\% \\
-        RoB 1\_3 & 0 & 0.778 & 11.11\% \\
-        \hline
+        RoB 1\_1 & 0.571 & 88.9\%  & 22.22\% \\
+        RoB 1\_2 & 0.25 & 66.7\%  & 33.33\% \\
+        RoB 1\_3 & 0 & 77.8\%  & 11.11\% \\
+        \hline 
         \multicolumn{4}{c}{Biases due to deviations from intended interventions} \\
         \hline
-        RoB 2\_1 & 0.727 & 0.778 & 5.55\% \\
-        RoB 2\_2 & 0.449 & 0.667 & 38.88\% \\
-        RoB 2\_3 & 0 & 0.667 & 77.77\% \\
-        RoB 2\_4 & -0.125 & 0.778 & 88.88\% \\
-        RoB 2\_5 & -0.08 & 0.778 & 83.33\% \\
-        RoB 2\_6 & 1 & 1 & 55.55\% \\
-        RoB 2\_7 & 0.357 & 0.778 & 77.77\% \\
+        RoB 2\_1 & 0.727 & 77.8\%  & 5.55\% \\
+        RoB 2\_2 & 0.449 & 66.7\%  & 38.88\% \\
+        RoB 2\_3 & 0 & 66.7 & 77.77\% \\
+        RoB 2\_4 & -0.125 & 77.8\%  & 88.88\% \\
+        RoB 2\_5 & -0.08 & 77.8\%  & 83.33\% \\
+        RoB 2\_6 & 1 & 100\%  & 55.55\% \\
+        RoB 2\_7 & 0.357 & 77.8\%  & 77.77\% \\
         \hline
         \multicolumn{4}{c}{Bias due to missing outcome data} \\
         \hline
-        RoB 3\_1 & 0.75 & 0.889 & 11.11\% \\
+        RoB 3\_1 & 0.75 & 88.9\%  & 11.11\% \\
         RoB 3\_2 & - & 1 & 100\% \\
-        RoB 3\_3 & 0.206 & 0.333 & 55.55\% \\
-        RoB 3\_4 & 0.526 & 0.556 & 33.33\% \\
+        RoB 3\_3 & 0.20.6 & 33.3\%  & 55.55\% \\
+        RoB 3\_4 & 0.52.6 & 55.6\%  & 33.33\% \\
         \hline
         \multicolumn{4}{c}{Bias in the measurement of the outcome} \\
         \hline
-        RoB 4\_1 & -0.125 & 0.778 & 11.11\% \\
-        RoB 4\_2 & -0.235 & 0.222 & 38.88\% \\
-        RoB 4\_3 & 0.63 & 0.778 & 27.77\% \\
-        RoB 4\_4 & 0.308 & 0.444 & 22.22\% \\
-        RoB 4\_5 & -0.08 & 0.333 & 66.66\% \\
+        RoB 4\_1 & -0.125 & 77.8\%  & 11.11\% \\
+        RoB 4\_2 & -0.235 & 22.2\%  & 38.88\% \\
+        RoB 4\_3 & 0.63 & 77.8\%  & 27.77\% \\
+        RoB 4\_4 & 0.308 & 44.4\%  & 22.22\% \\
+        RoB 4\_5 & -0.08 & 33.3\%  & 66.66\% \\
         \hline
         \multicolumn{4}{c}{Bias in the selection of the reported result} \\
         \hline
-        RoB 5\_1 & 0 & 0.222 & 61.11\% \\
-        RoB 5\_2 & 0.143 & 0.667 & 22.22\% \\
-        RoB 5\_3 & -0.154 & 0.556 & 72.22\% \\
+        RoB 5\_1 & 0 & 22.2\%  & 61.11\% \\
+        RoB 5\_2 & 0.143 & 66.7\%  & 22.22\% \\
+        RoB 5\_3 & -0.154 & 55.6\%  & 72.22\% \\
     \bottomrule[1.0pt]
     \end{tabular}
 \end{table}
@@ -794,10 +785,11 @@ The last two domains ``measurement of the outcome'' and ``selection of the repor
 %
 \subsection{LLM evaluation}
 %
-In the Table~\ref{table:LLM_eval}, we report the accuracy of LLMs in extracting and responding to all the SQs over a subset of the annotation corpus~\ref{method:llm}.
+In the Table~\ref{table:LLM_eval}, we report the observed/raw agreement between LLMs in extracting and responding to the SQs over a subset (n=10 labelled RCTs) of RoBuster~\ref{method:llm}.
+For the first risk domain, ChatGPT has an high $P_{O} (Extraction)$ and $P_{O} (Response)$ agreements (66.6\% and 55.3\% IAA respectively) with experts with none of these agreements coming from ``No Information'' responses.
+These agreements for the the second domain are even higher 64.28\% and 60\% respectively, but 40\% of these agreements emanate from ``No Information'' responses.
+\textcolor{blue}{The results for risk domain 3, 4 and 5 remain.}
 
-For the first risk domain, ChatGPT has high agreement with the expert for the SQ 1.1, good agreement for SQ 1.2 but comparatively low agreement for 1.3.
-The agreement considerably drops for the risk domain ``deviations from intended interventions''.
 %
 %
 %
@@ -807,24 +799,24 @@ The agreement considerably drops for the risk domain ``deviations from intended 
     \centering
     \begin{tabular}{crrr}
     \toprule[1.0pt]
-     & \multicolumn{2}{c}{Agreement} \\
-        SQ & response option & evidence extraction & Contribution of ``No Information'' \\ 
+     & \multicolumn{2}{c}{Observed Agreement $P_{O}$} \\
+        SQ & $P_{O} (Extraction)$ & $P_{O} (Response)$ & ``No Information'' \\ 
     \midrule[1.0pt]
         \multicolumn{4}{c}{Biases arising from the randomization process} \\
         \hline
-        RoB 1\_1 & 80\% & 100\% & \\ 
-        RoB 1\_2 & 70\% & 70\% &  \\ 
-        RoB 1\_3 & 40\% & 40\% & \\ 
+        RoB 1\_1 & 90\% & 70\% & 0\% \\ 
+        RoB 1\_2 & 70\% & 60\% & 0\% \\ 
+        RoB 1\_3 & 40\% & 30\% & 0\% \\ 
         \hline
         \multicolumn{4}{c}{Biases due to deviations from intended interventions} \\
         \hline
-        RoB 2\_1 & & & \\ 
-        RoB 2\_2 & & & \\ 
-        RoB 2\_3 & & & \\ 
-        RoB 2\_4 & & & \\ 
-        RoB 2\_5 & & & \\ 
-        RoB 2\_6 & & & \\ 
-        RoB 2\_7 & & & \\ 
+        RoB 2\_1 & 50\% & 40\% & 0\% \\
+        RoB 2\_2 & 30\% & 30\% & 10\% \\ 
+        RoB 2\_3 & 60\% & 60\% & 50\% \\ 
+        RoB 2\_4 & 90\% & 90\% & 100\% \\ 
+        RoB 2\_5 & 90\% & 90\% & 100\% \\ 
+        RoB 2\_6 & 80\% & 50\% & 10\% \\ 
+        RoB 2\_7 & 50\% & 60\% & 40\% \\
         \hline
         \multicolumn{4}{c}{Bias due to missing outcome data} \\
         \hline
@@ -952,29 +944,43 @@ Consequently, we suggest caution when interpreting the kappa agreement values.
 % Discuss the negative agreements
 Negative $\kappa$ are unlikely to occur in practice, but we had six SQs where the response judgment agreement measured by Cohen's kappa was negative.
 The SQ with negative agreement were 2.4, 2.5, 4.1, 4.2, 4.5 and 5.3.
-Though the $\kappa$ values for these SQs are lower than $-0.10$, they are not much larger.
-However, according to~\cite{mchugh2012interrater}, a $\kappa$ value smaller than $-0.10$ represents great disagreement among the raters and the collect data are not meaningful.
+Though the $\kappa$ values for these SQs are lower than $-0.10$, they are not much smaller.
+However, according to~\cite{mchugh2012interrater}, a $\kappa$ value smaller than $-0.10$ represents strong disagreement among the raters and the collected data are considered not meaningful.
+% Risk domain five and low IAA. Reasons?
+Domain 5 had an average negative $\kappa$ and the reason for this could be the complexity for analysing this domain.
+To assess this risk domain it was imperative to attach a trial protocol with the RCT document.
+Consequently, the annotators needed to mark the information in both the RCT and its corresponding protocol.
+
 
 % Discuss the no agreement
 The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable percent agreement.
+Analysing zero agreements should take into account the difference between the raw agreement and $\kappa$.
+For SQ 1.3 $\kappa$ score is 0 while raw agreement is 0.778 leading to a very high difference between them.
+We judge that the annotators had an organic good agreement for the SQ 1.3, the $\kappa$ score was 0.
+This points out the fallacy of Cohen's kappa.
+It measures the agreement between annotators without considering the prevalence of different categories.
+%Corrected kappa adjusts for chance agreement based on the prevalence of categories, providing a more accurate measure of agreement.
+
 
 % Discuss the adequate agreement (>60%)
-It was only for the SQ 2.1, 3.1, and 4.3 did we notice adequate agreement. ($>$60 IAA)
-
+It was only for the SQ 2.1, 3.1, and 4.3 did we notice adequate agreement ($>$60 IAA) and rightly so because upon inspection we found a high number of agreements coming from organic annotation while only a few disagreements stemmed from ``No Information''.
 % Discuss the low agreements (<60%)
-Apart from this the agreement for other SQs was inadequate ($<$60 IAA)
+Apart from this the agreement for other SQs was inadequate ($<$60 IAA).
 
 
 
-% Risk domain five and low IAA. Reasons?
-%To assess risk domain five it was imperative to attach a trial protocol with the trial literature.
-%The visual placards restricted answering the SQs in this domain only from the trial protocol. 
+% Improvements suggested by J.H.
+Finally, we discuss the concerns suggested by a stalwart in the area of bias assessment.
+In order to tackle subjectivity posed by signalling questions 2.7 (Was there potential for a substantial impact (on the result) of the failure to analyse participants in the group to which they were randomized?) and 3.1 (Were the data for this outcome available for all or nearly all participants randomized?), we added the concept of threshold. However, using thresholds is not adherent to the RoB guidance. Either we find a solution to produce signaling questions to guide the annotator to find information how to decide (rate risk) without using thresholds. This could be done by giving examples on when low numbers still can produce bias (ie. we should provide guidance on which numbers in the results the annotator should look). 
 
-% Improvements suggested by Julian Higgins.
-Finally, we discuss the improvements suggested by a stalwart in the area of bias assessment.
-In order to tackle subjectivity posed by signalling questions XX and XX, we added the concept of threshold.
-For example, his hesitations with the thresholds used to simplify the judgment.
+For example, their hesitations with the thresholds used to simplify the judgment.
 Explain how some RoB SQ assessments needed to be made simpler to ensure translation to text annotation.
+
+For the placard regarding 5.2, we would still need some input from Julian - we are not sure that we really understand this item within the context of a systematic review where the review authors decide on which outcome-measurement to extract. 
+
+
+For multiple SQs, their advice was to add a ``flag'' to the flowchart diamonds where making judgment was subjective. 
+Which questions and judgments were subjective to make %TODO: Describe it here.
 %
 %
 %
@@ -1031,6 +1037,10 @@ For instance, for~\cite{stuck2015effect} RCT, both the expert and LLM answered S
 
 % -------------- LLM Risk Domain two --------------
 %OXO
+In one instance for the domain two, LLM evaluation led to identification of incorrect label from the expert. 
+Hassett for SQ 2.6 had annotated this text to answer the question with Yes Good, but the extraction for incorrect.
+LLM correctly extracted information about the intention-to-treat analysis which led to correcting the final annotations from the expert.
+
 
 % -------------- LLM Risk Domain three --------------
 %OXO
@@ -1066,7 +1076,7 @@ Our LLM evaluation was limited by the fact that we chose to work with PDFs.
 There are limited platforms that interact with PDFs and this restricts our choice of the models to evaluate.
 Google's Bard does interact with PDFs, but we observed that the Bard results were less deterministic than ChatPDF.
 
-Another limitation of the study is calculating Cohen's kappa as agreement measure for signalling question response option judgment. %TODO: Discuss Cohen's kappa paradox
+Another limitation of the study is calculating Cohen's kappa as agreement measure for signalling question response option judgment where a percentage of both agreement and disagreement scores came from the ``No information'' judgment meaning from not annotating the evidence. %TODO: Also discuss the Cohen's kappa paradox
 
 %
 %
