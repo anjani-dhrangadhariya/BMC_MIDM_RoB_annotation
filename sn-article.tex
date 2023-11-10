@@ -158,11 +158,11 @@ LLMs (large language models) are immensely capable but necessitate evaluation in
 Currently, no RoB annotation guidelines to annotate a corpus or an annotated corpus exist for LLM evaluation.
 % 
 \textbf{Methods:} Taking the revised Cochrane risk of bias assessment guidelines for RCTs, we develop a set of visual instructional placards that could be used as text annotation instructions to annotate RoB spans in RCTs.
-Expert annotators employed these visual guidelines to annotate a corpus of 41 full-text RCTs from physiotherapy and rehabilitation.
-We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 41) of the annotated corpus.
-A portion of the corpus (10 out of 41) was used to evaluate ChatGPT using a straightforward evaluation framework.
+Expert annotators employed these visual guidelines to annotate a corpus of 40 full-text RCTs from physiotherapy and rehabilitation.
+We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 40) of the annotated corpus.
+A portion of the corpus (10 out of 40) was used to evaluate ChatGPT using a straightforward evaluation framework.
 % 
-\textbf{Results:} We present a corpus of 41 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
+\textbf{Results:} We present a corpus of 40 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
 The IAA ranges between 0\% and 99\%.
 LLMs show promising but variable agreements across the different bias questions.
 % 
@@ -235,7 +235,7 @@ However, till date, no one has evaluated their performance on the cognitively co
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We annotate a corpus of 41 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
+3) We annotate a corpus of 40 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions using prompt generation.
 5) We make the visual annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
 %
@@ -360,7 +360,7 @@ These outcomes are typically collected by trained assessors or through laborator
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
 Mortality outcomes refer to the occurrence of death during the course of the trial.
 To ensure these different outcome types are represented in the corpus, we restricted including 17, 17 and 7 RCTs addressing objective, subjective and mortality primary outcomes.
-The epidemiology researcher from our team created this 41 RCTs dataset from the domain of physiotherapy and rehabilitation.
+The epidemiology researcher from our team created this 40 RCTs dataset from the domain of physiotherapy and rehabilitation.
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol from wherever available.
 All these RCT PDFs have CC-BY-0 licences~\footnote{\url{https://creativecommons.org/share-your-work/public-domain/cc0/}}.
 %
@@ -446,7 +446,7 @@ Their task involved identifying and highlighting relevant text related to answer
 
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
-Out of the 41 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
+Out of the 40 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
 After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the visual placards.
 The conflict resolution was followed by (singly) annotating 31 additional RCTs.
 
@@ -527,7 +527,7 @@ Observed agreement is essentially the number of documents for a RoB SQ where Cha
 In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
 It's important to highlight that the evaluation framework is designed solely to measure the agreement of the answers between ChatPDF and the expert.
-This evaluation was manually conducted by a bias assessment assessor for 10 out of the 41 RCTs.
+This evaluation was manually conducted by a bias assessment assessor for 10 out of the 40 RCTs.
 %
 %
 %
@@ -541,25 +541,26 @@ This section outlines the annotated dataset, presents the inter-annotator agreem
 \subsection{The corpus}
 \label{subsec:corpus}
 %
-%Anjani - TODO: Ask Roger for the annotation files from PAWLS and start documenting with whatever annotations are already made.
 In this section, we provide key statistical information about the annotations in our corpus.
 The histogram in Figure \ref{fig:ann_counts} shows a visual representation of the absolute counts of annotations (tokens) for each of the RoB signaling questions.
-SQ 1.3 has disproportionately higher number of annotated tokens, while for all other SQs, the number of annotated tokens remains consistently below 2000 across the entire corpus.
+SQ 1.3 had disproportionately higher number of annotated tokens, while for all other SQs, the number of annotated tokens remained consistently below 2000 across the entire corpus.
+The only exception to this trend was for SQ 3.1 which had slightly more than 2000 annotated tokens.
+There were only 25 annotated tokens for SQ 2.4 ``Were these deviations likely to have affected the outcome?''.
 
- 
-There are least number of token annotations for the bias question 2.4 ``Were these deviations likely to have affected the outcome?'' which hinges on the previous question 2.3.
-Table~\ref{table:stats} lists down essential information on the absolute and average annotation lengths for each RoB SQ along with the total number of documents the annotations are identified from.
-Annotations from risk domain one (randomization process) are found in almost all the documents, while information related to answering the other risk questions is only available in a small subset of the total annotated RCTs, as also depicted in Figure~\ref{fig:rob_information}.
-The figure highlights that, for most of the RoB questions, there was no information available (represented by the yellow bars) for both answering the question and making a judgment about whether the bias was high or low.
+
+Table~\ref{table:stats} lists down essential information on the absolute and average annotation lengths for each RoB SQ along with the total number of documents the annotations were identified from.
+Annotations from risk domain one (biases arising due to randomization process) were found in an average of 35 of the 41 documents, while information related to answering the other risk questions was available only in a small subset of the total annotated RCTs, as also depicted in Figure~\ref{fig:rob_information}.
+Notably, SQs 2.2, 2.6, 3.1, 4.3, and 4.4 stood out as exceptions, with information available in more than 50\% of the annotated documents.
+The figure highlights that, for most RoB questions, no information was available (indicated by yellow bars) for both answering the question and making a judgment about the bias level. 
 In cases where information was available, bias tended to be low, as indicated by the prevalence of green bars. 
-However, there were exceptions, such as SQs 2.1, 2.2, 3.1, 4.3, 4.4, and 5.2, where bias was high, as shown by the presence of red bars.
-Check Supplementary material for the references of included studies. %TODO: add to supplementary material
+However, exceptions were observed, such as in SQs 2.1, 2.2, 3.1, 4.3, and 4.4, where bias was high, as indicated by the prevalence of red bars.
+Check the Supplementary material for the references of included studies.
 %
 %
 %
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.90\columnwidth]{figures/sq_ann_raw_counts.png}
+    \includegraphics[width=0.90\columnwidth]{figures/annot_counts.png}
     \caption{Total number of token annotations for each RoB signalling question.}
     \label{fig:ann_counts}
 \end{figure}
@@ -572,47 +573,48 @@ Check Supplementary material for the references of included studies. %TODO: add 
 %
 \begin{table}[htb]
     \centering
-    \caption{General statistics for the annotated corpus: This table provides an overview of the annotated corpus, including the total number of annotated tokens, the average length of token sequences, and the number of documents in which annotations were identified, out of a total of 41 annotated documents.}
+    \caption{General statistics for the annotated corpus: This table provides an overview of the annotated corpus, including the total number of annotated tokens, the average length of token sequences, and the number of documents in which annotations were identified, out of a total of 40 annotated documents.}
     \label{table:stats}
     \begin{tabular}{crrr}
     \toprule[1.0pt]
         Signalling question & Total tokens & Average length & Total documents \\
     \midrule[1.0pt]
-        \multicolumn{4}{c}{Biases arising from the randomization process} \\
+        \multicolumn{4}{c}{Domain 1: Biases arising from the randomization process} \\
         \hline
-        RoB 1.1 & 372 & 24.8 & 15 \\ 
-        RoB 1.2 & 305 & 19.06 & 16 \\ 
-        RoB 1.3 & 6649 & 415.56 & 16 \\ 
+        RoB1.1 & 960 & 32 & 30 \\
+        RoB1.2 & 838 & 24.65 & 34 \\
+        RoB1.3 & 16446 & 411.15 & 40 \\
         \hline
-        \multicolumn{4}{c}{Biases due to deviations from intended interventions} \\
+        \multicolumn{4}{c}{Domain 2: Biases due to deviations from intended interventions} \\
         \hline
-        RoB 2.1 & 260 & 37.14 & 7 \\ 
-        RoB 2.2 & 710 & 59.16 & 12 \\ 
-        RoB 2.3 & 262 & 65.5 & 4 \\ 
-        RoB 2.5 & 14 & 14 & 1 \\ 
-        RoB 2.6 & 278 & 30.88 & 9 \\ 
-        RoB 2.7 & 52 & 17.33 & 3 \\ 
+        RoB2.1 & 455 & 32.5 & 14 \\
+        RoB2.2 & 1502 & 55.63 & 27 \\
+        RoB2.3 & 282 & 56.4 & 5 \\
+        RoB2.4 & 25 & 25 & 1 \\
+        RoB2.5 & 58 & 29 & 2 \\
+        RoB2.6 & 544 & 20.92 & 26 \\
+        RoB2.7 & 126 & 25.2 & 5 \\
         \hline
-        \multicolumn{4}{c}{Bias due to missing outcome data} \\
+        \multicolumn{4}{c}{Domain 3: Bias due to missing outcome data} \\
         \hline
-        RoB 3.1 & 754 & 62.83 & 12 \\ 
-        RoB 3.2 & 78 & 39 & 2 \\ 
-        RoB 3.3 & 56 & 18.66 & 3 \\ 
-        RoB 3.4 & 140 & 17.5 & 8 \\ 
+        RoB3.1 & 2529 & 74.38 & 34 \\
+        RoB3.2 & 103 & 34.33 & 3 \\
+        RoB3.3 & 75 & 15 & 5 \\
+        RoB3.4 & 276 & 21.23 & 13 \\
         \hline
-        \multicolumn{4}{c}{Bias in the measurement of the outcome} \\
+        \multicolumn{4}{c}{Domain 4: Bias in the measurement of the outcome} \\
         \hline
-        RoB 4.1 & 101 & 25.25 & 4 \\ 
-        RoB 4.2 & 235 & 29.37 & 8 \\ 
-        RoB 4.3 & 135 & 22.5 & 6 \\ 
-        RoB 4.4 & 134 & 22.33 & 6 \\ 
-        RoB 4.5 & 390 & 55.71 & 7 \\ 
+        RoB4.1 & 240 & 24 & 10 \\
+        RoB4.2 & 572 & 33.65 & 17 \\
+        RoB4.3 & 698 & 30.35 & 23 \\
+        RoB4.4 & 585 & 27.86 & 21 \\
+        RoB4.5 & 622 & 41.47 & 15 \\
         \hline
-        \multicolumn{4}{c}{Bias in the selection of the reported result} \\
+        \multicolumn{4}{c}{Domain 5: Bias in the selection of the reported result} \\
         \hline
-        RoB 5.1 & 198 & 28.28 & 7 \\ 
-        RoB 5.2 & 94 & 47 & 2 \\ 
-        RoB 5.3 & 287 & 57.4 & 5 \\
+        RoB5.1 & 628 & 69.78 & 9 \\
+        RoB5.2 & 235 & 19.58 & 12 \\
+        RoB5.3 & 628 & 89.71 & 7 \\
     \bottomrule[1.0pt]
     \end{tabular}
 \end{table}
@@ -625,7 +627,7 @@ Check Supplementary material for the references of included studies. %TODO: add 
 %
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.90\columnwidth]{figures/judgment_dist.png}
+    \includegraphics[width=0.90\columnwidth]{figures/bias_chart.png}
     \caption{Distribution of bias judgment across RoB signalling questions in RoBuster.}
     \label{fig:rob_information}
 \end{figure}
@@ -1061,7 +1063,7 @@ LLM correctly extracted information about the intention-to-treat analysis which 
 \label{subsec:limits}
 %
 Our study has the following limitations.
-The first limitation arises from the relative scale of our annotations, with only 41 documents undergoing the annotation process.
+The first limitation arises from the relative scale of our annotations, with only 40 documents undergoing the annotation process.
 This limitation is primarily due to financial constraints, as the availability of funds limited our ability to hire a larger number of expert annotators.
 Despite the limitation, the robustness of the annotations provided by the experts remains noteworthy, as they thoroughly assessed the selected RCTs within the resources at hand.
 A second limitation stems from the narrow focus of annotations, concentrated exclusively on physiotherapy and rehabilitation clinical trials.
@@ -1084,7 +1086,7 @@ Another limitation of the study is calculating Cohen's kappa as agreement measur
 \section{Conclusion}
 \label{sec:conclusion}
 %
-We have presented RoBuster: a new, publicly-available corpus, comprising 41 full-text RCTs richly annotated with RoB span information for 22 risk of bias questions.
+We have presented RoBuster: a new, publicly-available corpus, comprising 40 full-text RCTs richly annotated with RoB span information for 22 risk of bias questions.
 The dataset fills a need for a corpus to evaluate risk of bias text span extraction using machine learning technologies.
 Our corpus has detailed and fine-grained information in form of individual risk of bias spans along with annotator decision on the bias risk (high or low).
 We used RoBuster as a benchmark to evaluate LLMs for how well LLMs agree with human-led bias assessment.
