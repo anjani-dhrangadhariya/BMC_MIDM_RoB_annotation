@@ -158,11 +158,11 @@ LLMs (large language models) are immensely capable but necessitate evaluation in
 Currently, no RoB annotation guidelines to annotate a corpus or an annotated corpus exist for LLM evaluation.
 % 
 \textbf{Methods:} Taking the revised Cochrane risk of bias assessment guidelines for RCTs, we develop a set of visual instructional placards that could be used as text annotation instructions to annotate RoB spans in RCTs.
-Expert annotators employed these visual guidelines to annotate a corpus of 40 full-text RCTs from physiotherapy and rehabilitation.
-We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 40) of the annotated corpus.
+Expert annotators employed these visual guidelines to annotate a corpus of 41 full-text RCTs from physiotherapy and rehabilitation.
+We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 41) of the annotated corpus.
 A portion of the corpus (10 out of 40) was used to evaluate ChatGPT using a straightforward evaluation framework.
 % 
-\textbf{Results:} We present a corpus of 40 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
+\textbf{Results:} We present a corpus of 41 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
 The IAA ranges between 0\% and 99\%.
 LLMs show promising but variable agreements across the different bias questions.
 % 
@@ -235,7 +235,7 @@ However, till date, no one has evaluated their performance on the cognitively co
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We annotate a corpus of 40 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
+3) We annotate a corpus of 41 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions using prompt generation.
 5) We make the visual annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
 %
@@ -360,7 +360,7 @@ These outcomes are typically collected by trained assessors or through laborator
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
 Mortality outcomes refer to the occurrence of death during the course of the trial.
 To ensure these different outcome types are represented in the corpus, we restricted including 17, 17 and 7 RCTs addressing objective, subjective and mortality primary outcomes.
-The epidemiology researcher from our team created this 40 RCTs dataset from the domain of physiotherapy and rehabilitation.
+The epidemiology researcher from our team created this 41 RCTs dataset from the domain of physiotherapy and rehabilitation.
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol from wherever available.
 All these RCT PDFs have CC-BY-0 licences~\footnote{\url{https://creativecommons.org/share-your-work/public-domain/cc0/}}.
 %
@@ -446,7 +446,7 @@ Their task involved identifying and highlighting relevant text related to answer
 
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
-Out of the 40 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
+Out of the 41 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
 After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the visual placards.
 The conflict resolution was followed by (singly) annotating 31 additional RCTs.
 
@@ -527,7 +527,7 @@ Observed agreement is essentially the number of documents for a RoB SQ where Cha
 In several instances, there was no information found by the expert annotator from the RCT to answer a question. 
 For such instances, if ChatPDF correctly identifies the absence of relevant information to answer a question, it is considered a correct response.
 It's important to highlight that the evaluation framework is designed solely to measure the agreement of the answers between ChatPDF and the expert.
-This evaluation was manually conducted by a bias assessment assessor for 10 out of the 40 RCTs.
+This evaluation was manually conducted by a bias assessment assessor for 10 out of the 41 RCTs.
 %
 %
 %
@@ -573,7 +573,7 @@ Check the Supplementary material for the references of included studies.
 %
 \begin{table}[htb]
     \centering
-    \caption{General statistics for the annotated corpus: This table provides an overview of the annotated corpus, including the total number of annotated tokens, the average length of token sequences, and the number of documents in which annotations were identified, out of a total of 40 annotated documents.}
+    \caption{General statistics for the annotated corpus: This table provides an overview of the annotated corpus, including the total number of annotated tokens, the average length of token sequences, and the number of documents in which annotations were identified, out of a total of 41 annotated documents.}
     \label{table:stats}
     \begin{tabular}{crrr}
     \toprule[1.0pt]
@@ -856,23 +856,27 @@ These agreements for the the second domain are even higher 64.28\% and 60\% resp
 \subsection{The Corpus}
 \label{disc:corpus}
 %
-% Why do some RoB questions have more annotations compared to the other? Does it mean papers have more information on certain aspects compared to the other questions?
-%How did the annotators perceive the difficulty of each signalling question? -> Make a scale
-The immediate point we noticed is that SQ 1.3 has disproportionately higher number of annotated tokens because it involved annotating full tables for coming to a bias judgement.
-In contrast, the remaining signal questions had fewer than 900 tokens each annotated.
-Availability of detailed description on the study design, methods and results can impact the amount of tokens annotated along with the ease of bias assessment.
+The immediate points we noticed in the Figure~\ref{fig:ann_counts} was that SQ 1.3 had a disproportionately higher number of annotated tokens (n=16,446) while the remaining signal questions had fewer than 2600 tokens each annotated.
+The reason behind this is that the answer to SQ 1.3 is found in the table detailing baseline patient characteristics of the intervention groups.
+To ensure good annotator agreement, instructions on visual placards directed annotators to label the entire table, leading to a higher count of annotated tokens for this question.
+For the rest of the question, it is the availability of detailed description on the study design, methods and results that could impact the amount of tokens annotated and also the ease of bias assessment.
 The more information a study provided, the easier it is to evaluate a bias question.
 Some studies tend to not report key details making it tougher to assess certain bias questions.
-In feedback received, it is worth noting that for all the signal questions with fewer than 100 annotated tokens, both annotators consistently rated the availability of information to answer those questions as either ``low" or ``very low."
+Feedback received indicates that for signal questions with fewer than 100 annotated tokens, annotators consistently rated the availability of information to answer those questions as either ``low'' or ``very low''.
 In contrast, for the top five signal questions shown in Figure~\ref{fig:ann_counts}, both annotators consistently rated the availability of information as ``high'' and ``normal''.
-However, it's important to interpret this qualitative feedback with caution, as annotator ratings are influenced by the number and types of RCTs they annotated.
-Annotators who reviewed a greater number of documents tended to be more stringent in their assessments of information availability, while those who annotated fewer documents may have been more lenient in their ratings.
+Though it is important to interpret this qualitative feedback with caution, as annotator ratings are influenced by the number and types of RCTs they annotated.
+Annotator who reviewed a greater number of documents in RoBuster experienced that it was more difficult to assess certain questions and the availability of information was lower than the other annotator who annotated fewer documents.
 %
 %
 %
 \subsection{Inter-Annotator Agreement}
 \label{disc:iaa}
 %
+\subsubsection{Text span agreement}
+\label{disc:f1}
+%
+% Why do some RoB questions have more annotations compared to the other? Does it mean papers have more information on certain aspects compared to the other questions?
+%How did the annotators perceive the difficulty of each signalling question? -> Make a scale
 % Were the visual placards effective?
 F1-measure agreement was calculated before and after visual placard development.
 Using the visual placards improves the F1 IAA for choosing the RCT text evidence for 10 of the 22 SQs showing their utility in aiding decision making.
@@ -927,9 +931,12 @@ If the authors write a sentence about some patients who were not showing up at t
 Therefore, the judgment of a particular SQ could be dependent on the biases that a particular outcome could cause.
 For example, it is not possible to blind the intervention administrators for certain interventions in physiotherapy and rehabilitation.
 Therefore, wherever the reviewers found such an intervention, they had to use this information to mark the judgment.
-
-
-
+%
+%
+%
+\subsubsection{Response option agreement}
+\label{disc:cohen}
+%
 % TODO: Discuss the Kappa agreements for the response option judgements?
 %What caused the conflict between selecting the judgment options for IAA?
 The disagreements at response option judgments arose because of two reasons.
@@ -991,27 +998,29 @@ Which questions and judgments were subjective to make %TODO: Describe it here.
 \subsubsection{Conflict Resolution}
 \label{dis:conflict}
 %
-Post the IAA calculation for the doubly annotated documents, we conducted a face-to-face conflict resolution session to address every case of conflict.
-Our aim was to use the annotated corpus and resolve the conflicts between the annotators to improve the instructions in the placards.
+Post the IAA calculation for the doubly annotated documents (n=9), we conducted a face-to-face conflict resolution session to address every case of conflict.
+Our aim was to use the annotated corpus and resolve the conflicts between the annotators to improve the instructions in the visual placards.
 For multiple conflicting cases, the instructions were either unclear, interpreted differently, or the annotators forgot to annotate.
 However, when the annotators went through the conflicts, they were able to resolve them.
 Three conflict groups were resolved.
 
 \textbf{Disparate regions conflict} was when both the annotators select different parts of text to answer the same SQ using the same response option.
-For example, in~\cite{darlow2019fear} to answer the SQ 2.2, one of the annotators select the text ``GPs were aware of group allocation (but not intervention content) when they completed their baseline measures'' and another annotators selected the text ``Practices and GPs were necessarily unblinded post randomisation to facilitate planning and delivery of intervention workshops and related data collection.'' and came to the same response option judgment of ``Yes Bad''.
+For example, in~\cite{darlow2019fear} to answer the SQ 2.2, one of the annotators selected the text ``GPs were aware of group allocation (but not intervention content) when they completed their baseline measures'' and another annotators selected the text ``Practices and GPs were necessarily unblinded post randomisation to facilitate planning and delivery of intervention workshops and related data collection.'' and came to the same response option judgment of ``Yes Bad''.
 Even though the annotators were restricted to annotating this SQ in the Methods section of the paper, they selected different parts of the text within the same section leading to this conflict.
 To resolve this conflict, we annotated both the parts of text as consensus annotation in the final version.
 % (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=1107412538})
 
-\textbf{Polarity conflict} was when the annotators marked same part of text to answer the same signalling question in the same document being annotated, but labelled them with polar opposite judgment option (``Yes'' vs. ``No'').
-For instance, in~\cite{solomons2020intramuscular} to answer the SQ 1.2, both the annotators select the text ``Only AS and a research assistant not involved in participant intervention or assessments had access to the random allocation sequence.'' but one labels the text with response judgement ``No Bad'' and another with ``Yes Good''.
-Both annotators agreed that it was a badly formulated sentence in the RCT and agreed to judge the SQ with ``Yes Good'' giving the study authors a benefit of doubt. 
-% (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=0})
 
 \textbf{Text span conflict} was when one annotator selected a part of text and another the same text but a longer span.
 For instance, in~\cite{solomons2020intramuscular} to answer the signalling question number 4.3, one annotator selected the complete sentence, ``\textsc{The primary outcome for which the study was powered was the change from baseline in 12 week VISA-A (Victorian Institute of Sports Assessment–Achilles),} a valid and reliable disease-specific outcome measure [37] which also includes an activity-related pain scale.'' while the other annotators only selected the text in CAPS. 
 It was easier to resolve this conflict and we selected the longer annotation as the representative and used it as a consensus label.
 It's crucial to emphasize that while both text span conflicts and disparities in the region do not impact $\kappa$, they could result in a lower F1-measure score.
+% (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=0})
+
+
+\textbf{Polarity conflict} was when the annotators marked same part of text to answer the same signalling question in the same document being annotated, but labelled them with polar opposite judgment options (``Yes'' vs. ``No'').
+For instance, in~\cite{solomons2020intramuscular} to answer the SQ 1.2, both the annotators select the text ``Only AS and a research assistant not involved in participant intervention or assessments had access to the random allocation sequence.'' but one labels the text with response judgement ``No Bad'' and another with ``Yes Good''.
+Both annotators agreed that it was a badly formulated sentence in the RCT and agreed to judge the SQ with ``Yes Good'' giving the study authors a benefit of doubt. 
 % (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=0})
 %
 %
@@ -1019,12 +1028,11 @@ It's crucial to emphasize that while both text span conflicts and disparities in
 \subsection{LLM evaluation}
 \label{disc:llm}
 %
-Manual LLM evaluation highlighted the tricky nature of bias assessment as well as its own subjective nature too.
+Manual LLM evaluation highlighted the tricky nature of bias assessment and annotation as well as the subjective nature of evaluation.
 Bias annotation entails labelling RCTs with text spans corresponding to answering the SQs in the RoB 2 guidelines followed by labelling the selected text span with a response option also called as bias judgment (``Yes'', ``No'' or ``No Information'').
 For the LLM, in some cases ChatPDF straightforward answered a SQ with a response option - ``Yes'' or ``No'' or ``No Information'', but in certain cases it answered the SQ indirectly.
 For instance, in the Gleason study~\cite{gleason2015effects}, for SQ 1.1, LLM directly and correctly answered ``\textbf{Yes}, the allocation sequence was random. Extracted sentences: A random number generator (Excel, Microsoft) was used to devise a randomization series. The order of randomization was incorporated into a KEEPS database, so that treatment allocation occurred when a study identification number was assigned.''
 In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regarding RoB 5.2, the study authors reported that to correct for multiple comparisons, they divided the p-value by the number of outcomes. For example, there were five cognitive outcomes (four domain factors and one global cognition score) and six POMS mood scores. Splitting the significance value of 0.05 equally between the five cognitive and six mood sub-domains resulted in a p-value of 0.01 for each of the two primary domains investigated (cognition and mood). However, \textbf{the study authors did not provide information} on whether the numerical result being assessed was selected on the basis of the results from multiple eligible outcome measurements within the outcome domain.'' implying it found ``No Information'' for answering the signalling question 5.2.
-
 
 
 % -------------- LLM Risk Domain one --------------
@@ -1065,7 +1073,7 @@ LLM correctly extracted information about the intention-to-treat analysis which 
 \label{subsec:limits}
 %
 Our study has the following limitations.
-The first limitation arises from the relative scale of our annotations, with only 40 documents undergoing the annotation process.
+The first limitation arises from the relative scale of our annotations, with only 41 documents undergoing the annotation process.
 This limitation is primarily due to financial constraints, as the availability of funds limited our ability to hire a larger number of expert annotators.
 Despite the limitation, the robustness of the annotations provided by the experts remains noteworthy, as they thoroughly assessed the selected RCTs within the resources at hand.
 A second limitation stems from the narrow focus of annotations, concentrated exclusively on physiotherapy and rehabilitation clinical trials.
@@ -1078,27 +1086,26 @@ Though this approach inadvertently restricts the broader applicability of the an
 %This methodological trade-off, while benefiting the corpus's overall quality, might inadvertently influence the representation of risk of bias annotations, particularly in relation to lower quality trials.
 Our LLM evaluation was limited by the fact that we chose to work with PDFs. 
 There are limited platforms that interact with PDFs and this restricts our choice of the models to evaluate.
-Google's Bard does interact with PDFs, but we observed that the Bard results were less deterministic than ChatPDF.
-
-Another limitation of the study is calculating Cohen's kappa as agreement measure for signalling question response option judgment where a percentage of both agreement and disagreement scores came from the ``No information'' judgment meaning from not annotating the evidence. %TODO: Also discuss the Cohen's kappa paradox
-
+Another limitation is the stochastic nature of LLMs.
+Specifically, Google's Bard is freely available tool that interacts with PDFs, but we observed that the Bard results were less deterministic than ChatPDF.
+%Another limitation of the study is calculating Cohen's kappa as agreement measure for signalling question response option judgment where a percentage of both agreement and disagreement scores came from the ``No information'' judgment meaning from not annotating the evidence. %TODO: Also discuss the Cohen's kappa paradox
 %
 %
 %
 \section{Conclusion}
 \label{sec:conclusion}
 %
-We have presented RoBuster: a new, publicly-available corpus, comprising 40 full-text RCTs richly annotated with RoB span information for 22 risk of bias questions.
-The dataset fills a need for a corpus to evaluate risk of bias text span extraction using machine learning technologies.
-Our corpus has detailed and fine-grained information in form of individual risk of bias spans along with annotator decision on the bias risk (high or low).
+We have presented RoBuster, a new, publicly-available corpus, comprising 41 full-text RCTs richly annotated with RoB span information for 22 risk of bias questions.
+The dataset fills a need for a corpus to evaluate risk of bias text span extraction using machine learning approaches.
+Our corpus provides a comprehensive resource with detailed, fine-grained information, presenting individual risk of bias spans and annotator decisions on bias risk (high or low). 
 We used RoBuster as a benchmark to evaluate LLMs for how well LLMs agree with human-led bias assessment.
-As it has been developed by bias assessors and natural language processing experts, RoBuster can support automated approaches to bias assessment and can also be a part SLR (living systematic review) systems.
+Developed collaboratively by bias assessors and natural language processing experts, RoBuster not only supports automated approaches to bias assessment but can also contribute to Systematic Literature Review (SLR) systems.
 
 
-Our work confirms the complexity of RoB assessment requiring deep knowledge of clinical trial methodology, statistical methods and experience in study quality assessment.
-We've encountered several challenges during the development of both RoB annotation guidelines and the actual annotation.
+Our work in RoB corpus annotation reaffirm the complexity of RoB assessment and the necessity of developing comprehensive instruction guidelines to increase inter annotator reliability across both tasks (assessment and annotation).
+We've encountered several challenges during the development of both RoB annotation guidelines and the actual annotation attributed to how well each RCT reports the study methodology, statistical methods and outcome information along with how subjective the assessment of each RoB question is in RoB 2 tool.
 These experiences have led us to outline refinements in the discussion section, offering insights to guide future studies in this domain.
-In the future, we plan to extend this corpus by adding more annotated RCT full-texts.
+In the future, we plan to refine our visual placards and extend RoBuster by adding more annotated RCT full-texts.
 We also plan to test the visual annotation placards to guide trainee risk of bias assessors.
 %
 %
