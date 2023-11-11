@@ -60,6 +60,7 @@
 \usepackage{xcolor}
 %%%%
 %\usepackage{caption}
+%\linespread{2.5} % Adds line spacing across the overleaf document
 
 %%%%%=============================================================================%%%%
 %%%%  Remarks: This template is provided to aid authors with the preparation
@@ -979,21 +980,32 @@ It measures the agreement between annotators without considering the prevalence 
 It was only for the SQ 2.1, 3.1, and 4.3 did we notice adequate agreement ($>$60 IAA) and rightly so because upon inspection we found a high number of agreements coming from organic annotation while only a few disagreements stemmed from ``No Information''.
 % Discuss the low agreements (<60%)
 Apart from this the agreement for other SQs was inadequate ($<$60 IAA).
-
+\textcolor{blue}{Calculate and analyse the results of correct kappa score (corrected for considering the prevalence of classes).}
 
 
 % Improvements suggested by J.H.
-Finally, we discuss the concerns suggested by a stalwart in the area of bias assessment.
-In order to tackle subjectivity posed by signalling questions 2.7 (Was there potential for a substantial impact (on the result) of the failure to analyse participants in the group to which they were randomized?) and 3.1 (Were the data for this outcome available for all or nearly all participants randomized?), we added the concept of threshold. However, using thresholds is not adherent to the RoB guidance. Either we find a solution to produce signaling questions to guide the annotator to find information how to decide (rate risk) without using thresholds. This could be done by giving examples on when low numbers still can produce bias (ie. we should provide guidance on which numbers in the results the annotator should look). 
+We will now address the concerns raised by a stalwart in bias assessment.
+To address subjectivity arising from signaling questions 2.7 and 3.1, which inquire about the potential impact of failure to analyze participants in their randomized groups and the availability of data for all participants, respectively, we introduced the concept of a threshold.
+Specifically, SQ 2.7 ``Was there potential for a substantial impact (on the result) of the failure to analyse participants in the group to which they were randomized?''.
+To annotate for this question, the visual placard instructs the annotators to find the data about the number of participants included and excluded from the intention-to-treat (ITT) analysis.
+The placard then goes to instructs that if more than 5\% of participants were excluded from the ITT analysis, it was a substantial number and mark this information and label it a higher risk of bias.
+On our end, to simply the annotation process, we chose a threshold but enforcing a threshold deviates from the recommended RoB guidance.
+Thus, we must find an alternative approach to guide annotators in assessing risk without relying on thresholds.
+One potential solution is to provide examples illustrating instances where low numbers may still introduce bias, offering guidance on specific result figures that annotators should scrutinize.
+%Finally, we discuss the concerns suggested by a stalwart in the area of bias assessment.
+%In order to tackle subjectivity posed by signalling questions 2.7 (Was there potential for a substantial impact (on the result) of the failure to analyse participants in the group to which they were randomized?) and 3.1 (Were the data for this outcome available for all or nearly all participants randomized?), we added the concept of threshold. However, using thresholds is not adherent to the RoB guidance. Either we find a solution to produce signaling questions to guide the annotator to find information how to decide (rate risk) without using thresholds. This could be done by giving examples on when low numbers still can produce bias (ie. we should provide guidance on which numbers in the results the annotator should look). 
+%For example, their hesitations with the thresholds used to simplify the judgment.
+%Explain how some RoB SQ assessments needed to be made simpler to ensure translation to text annotation.
 
-For example, their hesitations with the thresholds used to simplify the judgment.
-Explain how some RoB SQ assessments needed to be made simpler to ensure translation to text annotation.
-
-For the placard regarding 5.2, we would still need some input from Julian - we are not sure that we really understand this item within the context of a systematic review where the review authors decide on which outcome-measurement to extract. 
 
 
-For multiple SQs, their advice was to add a ``flag'' to the flowchart diamonds where making judgment was subjective. 
-Which questions and judgments were subjective to make %TODO: Describe it here.
+We received guidance to designate specific SQ placards with a ``Subjective'' flag to signal the presence of subjective judgments.
+Therefore, for several SQs, we incorporated the the recommendation added a ``subjective flag'' to the placards wherever subjective judgments were necessary.
+Previously, we had marked a subjective judgment flag for the SQ 2.4 and after the recommendation we marked it also for the SQs 3.3, 3.4 and 4.5.
+
+
+
+\textcolor{blue}{For the placard regarding 5.2, we would still need some input from Julian - we are not sure that we really understand this item within the context of a systematic review where the review authors decide on which outcome-measurement to extract. }
 %
 %
 %
