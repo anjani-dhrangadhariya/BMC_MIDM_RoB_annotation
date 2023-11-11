@@ -875,50 +875,52 @@ Annotator who reviewed a greater number of documents in RoBuster experienced tha
 \subsubsection{Text span agreement}
 \label{disc:f1}
 %
-% Why do some RoB questions have more annotations compared to the other? Does it mean papers have more information on certain aspects compared to the other questions?
-%How did the annotators perceive the difficulty of each signalling question? -> Make a scale
 % Were the visual placards effective?
 F1-measure agreement was calculated before and after visual placard development.
-Using the visual placards improves the F1 IAA for choosing the RCT text evidence for 10 of the 22 SQs showing their utility in aiding decision making.
+Using the visual placards improves the F1 agreement for choosing the RCT text spans for 10 of the 22 SQs showing their utility in aiding decision making.
 % For which SQs did the agreement increase and why?
-SQ 1.3 has the highest increase of 70.46 F1 IAA points thanks to the visual placards requesting to look for the text evidence to answer this question first priority in the table recording patient characteristics and instructs to mark the entire table along with the table caption.
-Before the development of these placards, annotators would only mark a portion of the table text to answer this question. 
+SQ 1.3 had the highest increase of 70.46 F1 IAA points thanks to the visual placards requesting to look for the text evidence to answer this question first priority in the table recording patient characteristics and instructs to mark the entire table along with the table caption.
+Before the development of these placards, annotators would only mark a portion of the table to answer this question. 
 The specific text selected by an annotator depended on which part of the table text they noticed first as potentially indicating bias given any of the listed patient characteristics could show imbalances between the groups.
-This variability in selection led to lower agreement on this SQ, which has significantly improved with the introduction of the placards.
+This variability in selection led to lower F1 agreement on this SQ, which has significantly improved with the introduction of the placards.
 SQ 1.1 recorded an improvement of more than 30 F1 IAA points thanks to the placards instructing the annotators to mark the text evidence in the Methods section as a priority. 
-The evidence to answer the SQ 1.1 could be found in both abstract and the methods section and annotators variably marked the answer to this question leading to a lower agreement.
-We restricted annotating this text in the methods section in the visual placards because a more detailed textual description is found in this section and saw an increase in agreement by 30.58 F1 IAA.
+The evidence to answer the SQ 1.1 could be found in both abstract and the methods section and prior to placard development, the annotators variably marked the answer to this question leading to a lower agreement.
+We restricted annotating this text in the methods section in the visual placards because a more detailed textual description is found in this section and consequently saw an increase in agreement by 30.58 F1 IAA.
 These improvements were also the reason for an increased agreement for the SQs 2.1 and 2.2.
-For SQ 2.1, there was a remarkable increase of 67.26 points in F1 IAA.
+For SQ 2.1, there was a remarkable increase of 67.26 IAA points.
 This can be attributed to the comprehensive instructions provided by the visual placards, which instruct annotators to specifically identify and label text descriptions related to intervention administration and placebo administration.
-Prior to the placard development the annotators were inconsistently annotating either the description of intervention administration or placebo administration, leading to low IAA.
+Prior to the placard development the annotators were inconsistently annotating either the description of intervention administration or placebo administration, leading to lower agreement.
 
 
+% Why do some RoB questions have more annotations compared to the other? Does it mean papers have more information on certain aspects compared to the other questions?
+%How did the annotators perceive the difficulty of each signalling question? -> Make a scale
 % Why were agreements on certain questions zero?
 While the agreement drastically increased for certain SQs, for other questions it remained zero.
 These outcomes align with the feedback forms' findings.
 Almost all the RoB questions where the IAA between the annotators was zero (2.3, 2.4, 2.5, 2.7, 3.2, 3.3, 3.4, 4.2, 4.5, 5.1, 5.3) consistently received remarks from one or both annotators regarding their higher subjectivity, difficulty in assessment, and lower availability of information for evaluation.
-The poor agreement hence can be well assumed to caused by the subjectivity of the signalling questions, lack of information to annotate in the clinical trial, theoretical nature of the signalling questions and the complex process of analysing trials.
+The poor agreement hence can be well assumed to caused by the subjectivity of the signalling questions, lack of information to annotate in the RCT, theoretical nature of the signalling questions and the overall complex process of analysing trials.
 % TODO: Why was the agreement for question 2.3, 2.4 and 2.5 zero?
-Also, we didn't have F1 IAA score on SQ 2.4 because, while two out of the nine annotations had annotations for 2.4, these annotations were made by only one of the annotators and not by both annotators lading to no agreement at the span level.
+Also, we did not have F1 IAA score on SQ 2.4 because, while two out of the nine annotations had annotations for 2.4, these annotations were made by only one of the annotators and not by both annotators lading to no agreement at the span level.
 
 
 % Theoretical nature of the signalling questions and zero agreement?
+A lower IAA score could also be attributed to the theoretical nature of certain signalling question.
 Consider the questions 3.4 and 4.5.
-The SQ 3.4 in RoB assesses the 'likelihood' that missing data on outcome measures is related to the true values of those outcomes. 
+The SQ 3.4 in RoB assesses the ``likelihood'' that missing data on outcome measures is related to the true values of those outcomes. 
 It evaluates the risk of bias associated with missing outcome data.
 This question is theoretical and depends on the assessment of whether there could be a relationship between the outcome missingness and the true values of the outcomes.
 The same applies to SQ 4.5, which relies on the results of SQ 4.4.
-It seeks to gauge the 'likelihood' that the assessment of the outcome was influenced by knowledge of whether the intervention was received or not.
+It seeks to gauge the ``likelihood'' that the assessment of the outcome was influenced by knowledge of whether the intervention was received or not.
 Such ``theoretical'' questions require making judgments that rely on hypothetical scenarios rather than direct observations or concrete evidence leading to higher subjectivity of assessment results.
 As these questions pertain to aspects of study design, conduct, or reporting that may not be explicitly addressed in the trial documentation these questions also suffer from a lack of information that could be annotated in a trial.
-To ensure some kind of annotations are always available to make a judgment, we instruct annotators to annotate the outcome and outcome measurement descriptions in the paper.
+Availability of annotations is also important to train and evaluate ML models and therefore determine the utility of a corpus.
+To ensure some kind of annotations are always available to make a judgment , we instruct annotators to annotate the outcome and outcome measurement descriptions in the paper for these questions.
 
 
 % Were certain RoB questions more subjective than the others?
 There were certain aspects where question subjectivity might have led to low agreement score.
 For example, for the SQ 2.4, it is asked whether deviations from the intended intervention could have affected the outcome.
-Assessing whether deviations are could have affected outcomes requires a subjective judgment.
+Assessing whether deviations could have affected outcomes requires a subjective judgment.
 What one person considers likely to affect outcomes, another might not.
 This leaves room for variability in how different assessors may interpret and score this question.
 Assessors may have limited information available to make a judgment.
@@ -1036,6 +1038,7 @@ In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regardin
 
 
 % -------------- LLM Risk Domain one --------------
+
 Coming to the results of LLM evaluation, for the first risk domain SQ 1.3, we saw a comparatively lower agreement between ChatGPT and the experts because the answer to this SQ is typically found in the table text of RCT.
 Text in tables is read by ChatPDF, but it might have problems correlating the correct rows and columns leading to a distorted understanding of the tables.
 This could be the reason why ChatPDF sought to answer this question typically using RCT text rather than the table text.
