@@ -745,13 +745,13 @@ The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable ob
     \toprule[1.0pt]
         SQ & $\kappa$ agreement & Raw agreement & Contribution from ``No Information'' \\
     \midrule[1.0pt]
-        \multicolumn{4}{c}{Biases arising from the randomization process} \\
+        \multicolumn{4}{c}{Domain 1: Biases arising from the randomization process} \\
         \hline
         RoB 1\_1 & 0.571 & 88.9\%  & 22.22\% \\
         RoB 1\_2 & 0.25 & 66.7\%  & 33.33\% \\
         RoB 1\_3 & 0 & 77.8\%  & 11.11\% \\
         \hline 
-        \multicolumn{4}{c}{Biases due to deviations from intended interventions} \\
+        \multicolumn{4}{c}{Domain 2: Biases due to deviations from intended interventions} \\
         \hline
         RoB 2\_1 & 0.727 & 77.8\%  & 5.55\% \\
         RoB 2\_2 & 0.449 & 66.7\%  & 38.88\% \\
@@ -761,14 +761,14 @@ The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable ob
         RoB 2\_6 & 1 & 100\%  & 55.55\% \\
         RoB 2\_7 & 0.357 & 77.8\%  & 77.77\% \\
         \hline
-        \multicolumn{4}{c}{Bias due to missing outcome data} \\
+        \multicolumn{4}{c}{Domain 3: Bias due to missing outcome data} \\
         \hline
         RoB 3\_1 & 0.75 & 88.9\%  & 11.11\% \\
         RoB 3\_2 & - & 1 & 100\% \\
         RoB 3\_3 & 0.20.6 & 33.3\%  & 55.55\% \\
         RoB 3\_4 & 0.52.6 & 55.6\%  & 33.33\% \\
         \hline
-        \multicolumn{4}{c}{Bias in the measurement of the outcome} \\
+        \multicolumn{4}{c}{Domain 4: Bias in the measurement of the outcome} \\
         \hline
         RoB 4\_1 & -0.125 & 77.8\%  & 11.11\% \\
         RoB 4\_2 & -0.235 & 22.2\%  & 38.88\% \\
@@ -776,7 +776,7 @@ The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable ob
         RoB 4\_4 & 0.308 & 44.4\%  & 22.22\% \\
         RoB 4\_5 & -0.08 & 33.3\%  & 66.66\% \\
         \hline
-        \multicolumn{4}{c}{Bias in the selection of the reported result} \\
+        \multicolumn{4}{c}{Domain 5: Bias in the selection of the reported result} \\
         \hline
         RoB 5\_1 & 0 & 22.2\%  & 61.11\% \\
         RoB 5\_2 & 0.143 & 66.7\%  & 22.22\% \\
@@ -793,6 +793,7 @@ The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable ob
 In the Table~\ref{table:LLM_eval}, we report the observed or raw agreement ($P_{O}$) between LLMs and the expert in extracting and responding to the SQs over a subset (n=10) of RoBuster~\ref{method:llm}.
 The evaluation was conducted on four RCTs reporting objective outcome, three RCTs evaluating subjective outcome and the rest three RCTs reporting mortality outcome.
 For the first risk domain, ChatGPT has high $P_{O} (Extraction)$ and $P_{O} (Response)$ agreements (66.6\% and 55.3\% IAA respectively) with experts with none of these agreements coming from ``No Information'' responses. % Shows good availability of information for judging bias
+For individual SQs in domain 1, $P_{O} (Extraction)$ was greater than $P_{O} (Response)$.
 The observed agreements for the the second domain are even higher 64.28\% and 60\% respectively, but 40\% of these agreements emanate from ``No Information'' responses. % Shows a low availability of information to answer a question
 \textcolor{blue}{The results for risk domain 3, 4 and 5 remain.}
 Details about the RCTs used for LLM evaluation are found in the Supplementary material.
@@ -808,13 +809,13 @@ Details about the RCTs used for LLM evaluation are found in the Supplementary ma
      & \multicolumn{2}{c}{Observed Agreement $P_{O}$} \\
         SQ & $P_{O} (Extraction)$ & $P_{O} (Response)$ & ``No Information'' \\ 
     \midrule[1.0pt]
-        \multicolumn{4}{c}{Biases arising from the randomization process} \\
+        \multicolumn{4}{c}{Domain 1: Biases arising from the randomization process} \\
         \hline
         RoB 1\_1 & 90\% & 70\% & 0\% \\ 
         RoB 1\_2 & 70\% & 60\% & 0\% \\ 
         RoB 1\_3 & 40\% & 30\% & 0\% \\ 
         \hline
-        \multicolumn{4}{c}{Biases due to deviations from intended interventions} \\
+        \multicolumn{4}{c}{Domain 2: Biases due to deviations from intended interventions} \\
         \hline
         RoB 2\_1 & 50\% & 40\% & 0\% \\
         RoB 2\_2 & 30\% & 30\% & 10\% \\ 
@@ -824,14 +825,14 @@ Details about the RCTs used for LLM evaluation are found in the Supplementary ma
         RoB 2\_6 & 80\% & 50\% & 10\% \\ 
         RoB 2\_7 & 50\% & 60\% & 40\% \\
         \hline
-        \multicolumn{4}{c}{Bias due to missing outcome data} \\
+        \multicolumn{4}{c}{Domain 3: Bias due to missing outcome data} \\
         \hline
-        RoB 3\_1 & & & \\ 
-        RoB 3\_2 & & & \\ 
-        RoB 3\_3 & & & \\ 
-        RoB 3\_4 & & & \\ 
+        RoB 3\_1 & 30\% & 40\% & 0\% \\ 
+        RoB 3\_2 & 60\% & 40\% & 40\% \\ 
+        RoB 3\_3 & 30\% & 30\% & 30\% \\ 
+        RoB 3\_4 & 70\% & 80\% & 70\% \\ 
         \hline
-        \multicolumn{4}{c}{Bias in the measurement of the outcome} \\
+        \multicolumn{4}{c}{Domain 4: Bias in the measurement of the outcome} \\
         \hline
         RoB 4\_1 & & & \\ 
         RoB 4\_2 & & & \\ 
@@ -839,7 +840,7 @@ Details about the RCTs used for LLM evaluation are found in the Supplementary ma
         RoB 4\_4 & & & \\ 
         RoB 4\_5 & & & \\ 
         \hline
-        \multicolumn{4}{c}{Bias in the selection of the reported result} \\
+        \multicolumn{4}{c}{Domain 5: Bias in the selection of the reported result} \\
         \hline
         RoB 5\_1 & & & \\ 
         RoB 5\_2 & & & \\ 
@@ -1051,27 +1052,31 @@ In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regardin
 
 
 % -------------- LLM Risk Domain one --------------
-
-Coming to the results of LLM evaluation, for the first risk domain SQ 1.3, we saw a comparatively lower agreement between ChatGPT and the experts because the answer to this SQ is typically found in the table text of RCT.
+LLM evaluation results for the first risk domain SQ 1.3, we saw a comparatively lower agreement between LLM and the experts because the answer to this SQ is typically found in the table text of RCT.
 Text in tables is read by ChatPDF, but it might have problems correlating the correct rows and columns leading to a distorted understanding of the tables.
-This could be the reason why ChatPDF sought to answer this question typically using RCT text rather than the table text.
-For instance, for~\cite{stuck2015effect} RCT, both the expert and LLM answered SQ 1.3 with ``No Good'', but expert used Table 2 as the evidence to answer the question while LLM used the text evidence not found in the table.
+This could be the reason why ChatPDF sought to answer this question typically using RCT text rather than the table text wherever available.
+To elaborate, for~\cite{stuck2015effect}, both the expert and LLM answered SQ 1.3 with ``No Good'', but expert used Table 2 as the evidence to answer the question while LLM used the text evidence not found in the table.
 
 \begin{quote}
-    LLM answer: No, there were no significant differences (p < 0.05; based on z-statistics from generalized estimating equation models) between the intervention and control groups in any of the baseline characteristics listed in Table 2 .
+    LLM answer: No, there were no significant differences (p < 0.05; based on z-statistics from generalized estimating equation models) between the intervention and control groups in any of the baseline characteristics listed in Table 2~\cite{stuck2015effect}.
 \end{quote}
 
-%TODO: Give an example of this claim.
+The LLM correctly extracts information about participant randomization and allocation concealment procedures pertaining to answer SQ 1.1 and 1.2 leading to a rightly good $P_{O} (Extraction)$ agreements. 
+As shown in the Table, for individual SQs in domain 1, $P_{O} (Extraction)$ was greater than $P_{O} (Response)$ but in an example, LLM came to a correct response judgment without correctly extracting complete evidence.
+To elaborate, in~\cite{stuck2015effect}, LLM used this part of text ``'PRO-AGE Solothurn CONSORT diagram. The randomisation ratio (intervention to control group) was 1:1 in the first project phase (November 16, 2000, to March 27, 2001), and 1:2 in the second project phase (March 28, 2001, to January 8, 2002), resulting in a ratio overall of 1:1.6'' to answer SQ 1.1 with ``Yes Good'' (low risk of randomization bias) even though the extracted sentence does not contain information about the randomization method.
+
 
 % -------------- LLM Risk Domain two --------------
-%OXO
-In one instance for the domain two, LLM evaluation led to identification of incorrect label from the expert. 
-Hassett for SQ 2.6 had annotated this text to answer the question with Yes Good, but the extraction for incorrect.
-LLM correctly extracted information about the intention-to-treat analysis which led to correcting the final annotations from the expert.
+The results for domain two where about 40\% of average $P_{O}$ agreement comes from ``No Information'' shows a lack of availability of information in RCTs for answering the SQs especially for the SQ 2.4 and 2.5.
+However, in one instance for the domain 2, LLM evaluation led to identification of incorrect label from the expert. 
+For SQ 2.6 in ~\cite{hassett2020digitally}, the expert had annotated this text (``The main analysis for each subgroup analysis was an interaction test in the regression models to determine whether the effect of treatment differed significantly across categories for that variable.'') to answer the question with Yes Good, but the extracted text evidence was incorrect.
+LLM correctly extracted information about the intention-to-treat analysis which led to correcting the final annotation in RoBuster.
+
 
 
 % -------------- LLM Risk Domain three --------------
 %OXO
+~\cite{thorndike2014activity}
 
 % -------------- LLM Risk Domain four --------------
 %OXO
@@ -1081,6 +1086,7 @@ LLM correctly extracted information about the intention-to-treat analysis which 
 
 % -------------- Comments in general --------------
 %TODO: Is LLM answering the questions with ``good'' response judgment most of the time?
+We specifically observe that the expert has a more skeptical stance compared to the LLM giving lower risk judgments in several cases.
 
 %
 %
