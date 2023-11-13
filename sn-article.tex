@@ -795,7 +795,8 @@ The evaluation was conducted on four RCTs reporting objective outcome, three RCT
 For the first risk domain, ChatGPT has high $P_{O} (Extraction)$ and $P_{O} (Response)$ agreements (66.6\% and 55.3\% IAA respectively) with experts with none of these agreements coming from ``No Information'' responses. % Shows good availability of information for judging bias
 For individual SQs in domain 1, $P_{O} (Extraction)$ was greater than $P_{O} (Response)$.
 The observed agreements for the the second domain are even higher 64.28\% and 60\% respectively, but 40\% of these agreements emanate from ``No Information'' responses. % Shows a low availability of information to answer a question
-\textcolor{blue}{The results for risk domain 3, 4 and 5 remain.}
+Domain 3 shows a moderate observed agreement of 0.475 for both $P_{O} (Response)$ and $P_{O} (Extraction)$.
+\textcolor{blue}{The results for risk domain 4 and 5 remain.}
 Details about the RCTs used for LLM evaluation are found in the Supplementary material.
 %
 %
@@ -994,10 +995,10 @@ The placard then goes to instructs that if more than 5\% of participants were ex
 On our end, to simply the annotation process, we chose a threshold but enforcing a threshold deviates from the recommended RoB guidance.
 Thus, we must find an alternative approach to guide annotators in assessing risk without relying on thresholds.
 One potential solution is to provide examples illustrating instances where low numbers may still introduce bias, offering guidance on specific result figures that annotators should scrutinize.
-%Finally, we discuss the concerns suggested by a stalwart in the area of bias assessment.
-%In order to tackle subjectivity posed by SQs 2.7 (Was there potential for a substantial impact (on the result) of the failure to analyse participants in the group to which they were randomized?) and 3.1 (Were the data for this outcome available for all or nearly all participants randomized?), we added the concept of threshold. However, using thresholds is not adherent to the RoB guidance. Either we find a solution to produce signaling questions to guide the annotator to find information how to decide (rate risk) without using thresholds. This could be done by giving examples on when low numbers still can produce bias (ie. we should provide guidance on which numbers in the results the annotator should look). 
-%For example, their hesitations with the thresholds used to simplify the judgment.
-%Explain how some RoB SQ assessments needed to be made simpler to ensure translation to text annotation.
+For the SQ 3.1 ``Were data for this outcome available for all, or nearly all, Participants randomized?'', the term ``all, or nearly all, participants'' can be interpreted differently by different reviewers.
+What one reviewer considers "nearly all" might be different from another reviewer's interpretation.
+This ambiguity can lead to subjective judgments when applying the tool.
+Therefore, we introduced the 95\% threshold meaning if the data were not available for at least 95\% or more participants, we instructed the assessors/annotators to judge the bias risk as high.
 
 
 
@@ -1075,8 +1076,16 @@ LLM correctly extracted information about the intention-to-treat analysis which 
 
 
 % -------------- LLM Risk Domain three --------------
-%OXO
-~\cite{thorndike2014activity}
+The evaluation for third domain of bias brought reinforced subjectivity of bias assessment. 
+An lenient assessor will judge a risk of bias as low in comparison to a stringent assessor judging a bias risk as high.
+In~\cite{thorndike2014activity}, LLM and the expert used the same text evidence ``...104 (82\%) were randomized in January 2011. Five residents withdrew during Phase 1, and 99 continued participation in Phase 2...'' to answer SQ 3.1 but LLM produced the response option ``Yes Good'' and the expert rated it as ``No Bad''.
+It was also because our placards have a stringent rule whereby if outcome data was not available for more than 95\% of the participants, the assessor/annotator was instructed to judge the risk as high risk of bias without considering other factors like total number of participants randomized and the kind of study.
+For answering SQ 3.2 across the evaluation RCTs~\cite{myer2018integration,taylor2016novel}, the LLM was more lenient than the experts and consistently extracted information about the sensitivity analysis carried out by the study authors to account for missing outcome data, but the authors do not explicit that there was no bias due to missing outcomes data.
+LLM judged signalling question 3.3 9/10 times as No information.
+It questions whether the missingness in outcomes depended on its true value and is quite subjective because assessor need to contemplate on the reasons for missingness for a particular outcomes and if its true value could have affected the missingness.
+In other words, they need to assess if the fact that data on falls is missing can be attributed to the actual occurrence of falls.
+
+
 
 % -------------- LLM Risk Domain four --------------
 %OXO
