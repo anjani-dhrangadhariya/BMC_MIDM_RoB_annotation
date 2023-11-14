@@ -870,15 +870,17 @@ Details about the RCTs used for LLM evaluation are in the Supplementary material
 \subsection{Visual Placards}
 \label{disc:placards}
 %
-The visual placards addressed various facets of RoB 2 subjectivity and the actual process of annotation.
-A common reason for low IAA was when annotators correctly address a bias SQ but annotate evidence from different parts of the full text leading to no agreement. 
+The visual placards addressed various facets of RoB 2 subjectivity and also when dealing with situations lacking information for bias risk annotation.
+A common reason for a low IAA was when annotators correctly address a bias SQ but annotate evidence from different parts of the full text leading to no agreement. 
 To tackle this, our placards restrict annotations for a question to a specific part of the text for specific SQs, such as the Methods section, Results section, Flowchart in the Methods section, etc.
 These placards also tackle another factor contributing to the low IAA.
 While some annotators might annotate an entire paragraph as text evidence to answer a SQ, others might focus on the most informative portion of the text.
 To address this, the placards provide clear guidance on whether annotators should annotate a phrase, a sentence, or a combination of sentences.
-
-The placards also tackle subjectivity of certain SQs.
-As shown in the Figure~\ref{fig:placard}, the SQ asks to 
+In one trial document annotation, both annotators selected the phrase ``71 allocated routine services, 67 allocated intervention service, 69 assessed at 8 weeks, 64 assessed at 8 weeks'' from the PRISMA flowchart to answer signaling question 3.1~\cite{gilbertson2000domiciliary}.
+However, one annotator responded with ``Yes'' while the other chose ``No''.
+This question asks whether outcome data were available for all or nearly all participants randomized, but it doesn't specify the exact cutoff for participant dropouts that increase the risk.
+Therefore, annotators make subjective judgments based on their experience regarding what percentage of participant dropout is considered valid.
+To address this subjectivity, we introduced a threshold of 95\% in the placard instructing annotation (see Figure~\ref{fig:placard}).
 
 %
 %
@@ -891,12 +893,12 @@ As shown in the Figure~\ref{fig:placard}, the SQ asks to
 The immediate points we noticed in the Figure~\ref{fig:ann_counts} was that SQ 1.3 had a disproportionately higher number of annotated tokens (n=16,446) while the remaining signal questions had fewer than 2600 tokens each annotated.
 The reason behind this is that the answer to SQ 1.3 is found in the table detailing baseline patient characteristics of the intervention groups.
 To ensure good annotator agreement, instructions on visual placards directed annotators to label the entire table, leading to a higher count of annotated tokens for this question.
-For the rest of the question, it is the availability of detailed description on the study design, methods and results that could impact the amount of tokens annotated and also the ease of bias assessment.
+For the rest of the SQs, it is the availability of detailed description on the study design, methods and results that could have impacted the amount of tokens annotated and also the subjectivity level of bias assessment.
 The more information a study provided, the easier it is to evaluate a bias question.
 Some studies tend to not report key details making it tougher to assess certain bias questions.
-Feedback received indicates that for signal questions with fewer than 100 annotated tokens, annotators consistently rated the availability of information to answer those questions as either ``low'' or ``very low''.
+Feedback forms received indicated that for signal questions with fewer than 100 annotated tokens, annotators consistently rated the availability of information to answer those questions as either ``low'' or ``very low''.
 In contrast, for the top five signal questions shown in Figure~\ref{fig:ann_counts}, both annotators consistently rated the availability of information as ``high'' and ``normal''.
-Though it is important to interpret this qualitative feedback with caution, as annotator ratings are influenced by the number and types of RCTs they annotated.
+It is important to interpret this qualitative feedback with caution, as annotator ratings are influenced by the number and types of RCTs they annotated.
 Annotator who reviewed a greater number of documents in RoBuster experienced that it was more difficult to assess certain questions and the availability of information was lower than the other annotator who annotated fewer documents.
 %
 %
@@ -1108,16 +1110,15 @@ Despite the limitation, the robustness of the annotations provided by the expert
 A second limitation stems from the narrow focus of annotations, concentrated exclusively on physiotherapy and rehabilitation clinical trials.
 This specificity arises from our reliance on domain experts for annotations, who possess the requisite expertise in these areas.
 Though this approach inadvertently restricts the broader applicability of the annotated corpus, it guarantees high-quality annotations within the specified domains.
-%Thirdly, our study's scope is limited by the selection of particular journals to construct the corpus in addition to certain RCTs selected randomly.
-%This choice was necessitated by the desire to incorporate articles of the utmost quality, ensuring the inclusion of high-caliber research in the analysis.
-%While this decision ensures a certain standard of literature, it inadvertently excludes a wider spectrum of articles, potentially biasing the corpus toward a specific subset of clinical trials.
-%It's important to note that the chosen journals might have their own editorial policies, thereby limiting the diversity of included studies.
-%This methodological trade-off, while benefiting the corpus's overall quality, might inadvertently influence the representation of risk of bias annotations, particularly in relation to lower quality trials.
-Our LLM evaluation was limited by the fact that we chose to work with PDFs. 
+
+
+The LLM evaluation was limited by the fact that we chose to work with PDFs. 
 There are limited platforms that interact with PDFs and this restricts our choice of the models to evaluate.
 Another limitation is the stochastic nature of LLMs.
-Specifically, Google's Bard is freely available tool that interacts with PDFs, but we observed that the Bard results were less deterministic than ChatPDF.
-%Another limitation of the study is calculating Cohen's kappa as agreement measure for SQ response option judgment where a percentage of both agreement and disagreement scores came from the ``No information'' judgment meaning from not annotating the evidence. %TODO: Also discuss the Cohen's kappa paradox
+Specifically, Google Bard is freely available tool that interacts with PDFs, but we observed that the Bard results were less deterministic than ChatPDF.
+Another drawback was associated with the prompts used.
+The prompts employed were relatively simple and lacked information about the target outcome assessed for bias.
+Consequently, for SQs seeking information on outcomes reporting for the target outcome, LLM provided general information about outcomes reported in the RCT but did not specifically consider the target outcome of interest, as it was not instructed to do so.
 %
 %
 %
