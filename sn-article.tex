@@ -98,7 +98,7 @@
 \begin{document}
 
 %\title[Article Title]{Developing Comprehensive Annotation Guidelines and a Corpus of Risk of Bias Assessment for Rehabilitation: A Methodological Approach}
-\title[Article Title]{RoBuster: A Richly Annotated Corpus with Risk of Bias Text Spans in Randomized Controlled Trials}
+\title[Article Title]{RoBuster: A Corpus Annotated with Risk of Bias Text Spans in Randomized Controlled Trials}
 
 %%=============================================================%%
 %% Prefix	-> \pfx{Dr}
@@ -153,25 +153,25 @@
 %% Sample for structured abstract %%
 %%================================%%
 
-\abstract{\textbf{Purpose:} Risk of bias (RoB) assessment of randomized clinical trials (RCTs) is vital to answer a systematic review question accurately.
+\abstract{\textbf{Purpose:} Risk of bias (RoB) assessment of randomized clinical trials (RCTs) is vital to accurately answer a systematic review question.
 Manual RoB assessment for hundreds of clinical trials is a cognitively demanding and lengthy process.
-LLMs (large language models) are immensely capable but necessitate evaluation in RoB assessment.
-Currently, no RoB annotation guidelines to annotate a corpus or an annotated corpus exist for LLM evaluation.
+Automation has the potential to assist reviewers in rapidly identifying text descriptions in RCTs that indicate potential bias.
+However, there is no annotated corpus for RoB to fine-tune large language models (LLMs) and no established guidelines for annotating the risk of bias in RCTs.
 % 
-\textbf{Methods:} Taking the revised Cochrane risk of bias assessment guidelines for RCTs, we develop a set of visual instructional placards that could be used as text annotation instructions to annotate RoB spans in RCTs.
+\textbf{Methods:} We utilized the revised Cochrane Risk of Bias Assessment 2 guidelines for RCTs to create visual instructional placards serving as text annotation guidelines for RoB spans and risk judgments.
 Expert annotators employed these visual guidelines to annotate a corpus of 41 full-text RCTs from physiotherapy and rehabilitation.
-We report inter-annotator agreement (IAA) among two expert annotators when applying the guidelines to a portion (9 of 41) of the annotated corpus.
-A portion of the corpus (10 out of 40) was used to evaluate ChatGPT using a straightforward evaluation framework.
+We report inter-annotator agreements (IAA) at two levels: agreement on text spans and risk judgments between two expert annotators when applying the guidelines to a subset (9 out of 41) of the annotated corpus.
+Additionally, a portion of the corpus (10 out of 40) was employed to evaluate an LLM using a straightforward evaluation framework.
 % 
-\textbf{Results:} We present a corpus of 41 RCTs with fine-grained span annotations comprising more than 11,500 tokens belonging to 22 RoB classes.
-The IAA ranges between 0\% and 99\%.
-LLMs show promising but variable agreements across the different bias questions.
+\textbf{Results:} We present a corpus of 41 RCTs with fine-grained text span annotations comprising more than 28,427 tokens belonging to 22 RoB classes.
+The IAA at the text span level varies from $0\%$ to $90\%$, while the IAA for risk judgments ranges between $-0.235$ and $1.0$.
+LLMs show promising but variable observed agreements with the expert annotation across the different bias questions.
 % 
 \textbf{Conclusion:} 
-Despite having comprehensive bias assessment guidelines, RoB annotation remains a complex text annotation task.
-Utilizing visual placards for bias assessment and annotation enhances IAA compared to case where visual placards are absent.
-While LLMs demonstrate potency, their accuracy falters with more subjective RoB questions.
-Lastly, we address the study's strengths and limitations, offering insights for future research in the field.}
+Despite having comprehensive bias assessment guidelines and visual instructional placards, RoB annotation remains a complex task.
+Utilizing visual placards for bias assessment and annotation enhances IAA compared to cases where visual placards are absent.
+However, text annotation remains challenging for the subjective, low information availability questions.
+While LLMs demonstrate efficacy, their accuracy diminishes with more subjective RoB questions and instances where RCT data is unavailable.}
 
 \keywords{risk of bias, dataset, natural language processing, large language models}
 
@@ -476,7 +476,7 @@ We interpret both IAA measures as shown in the Table~\ref{tab:iaa_interpret}~\ci
 %
 \begin{center}
  \begin{table}[htb]
-   \caption{The table details interpretation of pairwise F1-measure (Left), Cohen's kappa (Middle) and Observed or raw agreement (Left)}\label{tab:iaa_interpret}
+   \caption{The table details interpretation of pairwise F1-measure (Left), Cohen's kappa (Middle) and observed or raw agreement (Left)}\label{tab:iaa_interpret}
  \centering
     \begin{tabular}{lr|lr|lr}
     \toprule[1.0pt]
