@@ -352,12 +352,12 @@ For instance, consider that an RCT uses ``...random number generator and sealed 
 \label{experts}
 %
 As mentioned earlier, RoB annotation is a complex task that requires specialized expertise.
-It's cognitively demanding due to the need to carefully go through the entire full-text of RCTs and identify 22 different bias categories for annotation.
+It is cognitively demanding due to the need to carefully go through the entire full-text of RCTs and identify 22 different bias categories for annotation.
 This level of complexity would not be manageable for annotators without expertise in the field.
 Our annotation team consisted of two researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher and an assistant professor in physiotherapy.
-With a substantial background in both physiotherapy, advanced statistical methods and experience writing SRs, both experts possesses a deep understanding of the complexities involved in assessing bias risk in RCTs.
+With a substantial background in both physiotherapy, advanced statistical methods and experience writing SRs, both experts possessed a deep understanding of the complexities involved in bias assessment.
 Two additional physiotherapy experts, a post doctoral researcher and a senior PhD student, were a part of developing the visual annotation guidelines.
-Two additional researchers with expertise in natural language processing (NLP) were involved, one being a computational linguistics professor and the other a PhD student in computer science.
+Two additional researchers with expertise in natural language processing (NLP) were involved, a computational linguistics professor and a PhD student in computer science.
 Their inclusion was important because the guidelines and placards they helped create will be utilized to annotate a text corpus, serving as a benchmark for RoB text span extraction.
 %
 %
@@ -428,12 +428,12 @@ The conflict resolution was followed by (singly) annotating 31 additional RCTs.
 
 
 
-After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
+After the annotation of 9 doubly-annotated RCTs, we stop using tagtog for certain reasons and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
 We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format that will be lost upon converting to text. 
 For example the structure pertaining to sections and subsections, tables, and figures makes the annotation task quicker for the annotators and increases annotation quality.
 Post annotation, a feedback was taken from both annotators to gauge the 1) general difficulty, 2) subjectivity and 3) availability of information for bias assessment of each SQ.
 These factors were assessed on the scale of 1-5 with 1 being best and 5 being the worst on the respective scale.
-The forms and the responses could be found in the Supplementary material 2.
+The forms could be found in the Supplementary material 2.
 %
 %
 %
@@ -443,20 +443,20 @@ The forms and the responses could be found in the Supplementary material 2.
 We report IAA at two levels checking whether the annotators agree on the text spans to answer SQs using the pairwise F1 measure.
 F1-measure disregards out-of-the-span tokens (unannotated tokens) during agreement calculation and is an ideal measure of annotation reliability for the token-level annotation tasks.
 It measures the F1 score for each pair of annotators, treating one annotator's labels as the ``true'' labels and the other annotator's labels as the ``predicted'' labels~\cite{deleger2012building,brandsen2020creating}.
-We also check how strongly the annotators agree on the risk judgment for each SQ using prevalence and bias adjusted kappa (PABAK) $\kappa_{PABAK}$ and compare it with raw percent agreement.
-PABAK $\kappa_{PABAK}$ is the standard annotation reliability measure for many classification annotation tasks and is suitable to measure reliability at the risk judgment level.
-$\kappa_{PABAK}$ is an extension of Cohen's Kappa $\kappa$ that takes into account prevalence and bias in the agreement.
+We also check how strongly the annotators agree on the risk judgment for each SQ using prevalence and bias adjusted kappa (PABAK) $\kappa_{pabak}$ and compare it with raw percent agreement.
+PABAK $\kappa_{pabak}$ is the standard annotation reliability measure for many classification annotation tasks and is suitable to measure reliability at the risk judgment level.
+$\kappa_{pabak}$ is an extension of Cohen's Kappa $\kappa$ that takes into account prevalence and bias in the agreement.
 We interpret both IAA measures as shown in the Table~\ref{tab:iaa_interpret}~\cite{mchugh2012interrater,cohen1960coefficient,byrt1993bias,landis1977measurement}.
 %
 %
 %
 \begin{center}
  \begin{table}[htb]
-   \caption{The table details interpretation of pairwise F1-measure (Left), $\kappa_{PABAK}$ (Middle) and observed or raw agreement (Left)}\label{tab:iaa_interpret}
+   \caption{The table details interpretation of pairwise F1-measure (Left), $\kappa_{pabak}$ (Middle) and observed or raw agreement (Left)}\label{tab:iaa_interpret}
  \centering
     \begin{tabular}{lr|lr|lr}
     \toprule[1.0pt]
-    \multicolumn{2}{c|}{F1-measure} & \multicolumn{2}{c|}{$\kappa_{PABAK}$}& \multicolumn{2}{c}{Raw Agreement}  \\ 
+    \multicolumn{2}{c|}{F1-measure} & \multicolumn{2}{c|}{$\kappa_{pabak}$}& \multicolumn{2}{c}{Raw Agreement}  \\ 
     interpretation & range & interpretation & range & interpretation & range \\ 
     \midrule[1.0pt]
         Poor & 0-0.99 &  No agreement& $\leq$ 0 & None & 0 \\ 
@@ -510,7 +510,7 @@ LLM evaluation was manually conducted by a bias assessment expert and an NLP exp
 \section{Results}
 \label{sec:results}
 %
-This section outlines the visual placards developed, the annotated dataset, presents the inter-annotator agreement findings, and the outcomes of the LLM evaluation.
+This section outlines the visual placards, annotated dataset, reports the IAA findings, and the outcomes of the LLM evaluation.
 %
 %
 %
@@ -530,37 +530,35 @@ This section outlines the visual placards developed, the annotated dataset, pres
 %
 %
 A total of 27 placards were developed to address the 22 signalling questions in RoB 2 tool. 
-Detailed annotation guidelines and the developed visual placards are available in the Supplementary material, with an example placard instructing to annotate for SQ 3.1 shown in the Figure~\ref{fig:placard}.
-The SQ 3.1 ``Were data for this outcome available for all, or nearly all participants randomized?'' assesses the completeness of outcome data in a study.
-The question aims to determine if data for the specific outcome of interest were collected and available for analysis for a high proportion of the participants who were initially randomized.
-If the data for the outcome of interest were not available for a substantial number of participants or if there was a high degree of missing data, it raises concerns about the potential impact on the validity and reliability of the study's findings.
-Missing data can lead to reduced statistical power and imprecise estimates of treatment effects
-Following the above explanation and looking at the placard, the first diamond instructs the annotators to check the Results section (first priority) and the flowchart (second priority) to identify outcome data at the specific time point of interest.
-If the annotators find that the outcomes data were available for all or nearly all (at least 95\% of the total) participants, they mark the text descriptions mentioning it and label it with ``3.1 Yes Good''.
-If the outcomes data were available for less than 95\% of participants randomized, then they are asked to mark this information and label it with ``3.1 No Bad''.
-If no information regarding the availability of outcome data at the specified time point is found, it is considered the question as having ``No Information''.
-The placard via the yellow arrow on the first diamond hints that this information is likely found in the Results section of the RCT under consideration, but if not found there, then mark the information in results table. 
-If the information is to be found nowhere except in a flowchart, the annotators are instructed to mark the caption of the flowchart.
-However, flowchart annotation is used as a last resort and is marked with a red exclamation.
+Details of the annotation guidelines and visual placards are available in the Supplementary material.
+Figure~\ref{fig:placard} presents an example placard for annotating SQ 3.1 (``Were data for this outcome available for all, or nearly all participants randomized?'') which assesses the completeness of outcome data in an RCT.
+This question assesses whether data for the specific outcome of interest were collected and available for analysis for a high proportion of initially randomized participants.
+Missing data can compromise statistical power and treatment effect estimates. 
+The first diamond on the placard instructs annotators to check the Results section (first priority) and the flowchart (second priority) to identify outcome data at the specified time point.
+If outcomes data were available for at least 95\% of participants, annotators mark relevant text descriptions as ``3.1 Yes Good''.
+If data were available for less than 95\%, they mark it as ``3.1 No Bad''.
+Lack of information will lead to automatically assuming a ``No Information'' label.
+%If no information regarding the availability of outcome data at the specified time point is found, it is considered the question as having ``No Information''.
+The yellow arrow on the first diamond suggests checking the Results section first; if not found, annotators should look in the Results section table.
+If still not found, annotators are instructed to check the flowchart caption, marked with a red exclamation as a last resort.
 %
 %
 %
-\subsection{The corpus}
+\subsection{The corpus: RoBuster}
 \label{subsec:corpus}
 %
-In this section, we provide key statistical information about the annotations in our corpus.
+We provide key statistical information about the annotations in RoBuster in this section.
 The histogram in Figure \ref{fig:ann_counts} shows a visual representation of the absolute counts of annotations (tokens) for each of the RoB signaling questions.
 SQ 1.3 had disproportionately higher number of annotated tokens, while for all other SQs, the number of annotated tokens remained consistently below 2000 across the entire corpus.
 The only exception to this trend was for SQ 3.1 which had slightly more than 2000 annotated tokens.
-There were only 25 annotated tokens for SQ 2.4 ``Were these deviations likely to have affected the outcome?''.
+SQ 2.4 ("Were these deviations likely to have affected the outcome?") had only 25 annotated tokens.
 
 
 Table~\ref{table:stats} lists down essential information on the absolute and average annotation lengths for each RoB SQ along with the total number of documents the annotations were identified from.
-Annotations from risk domain one (biases arising due to randomization process) were found in an average of 35 of the 41 documents, while information related to answering the other risk questions was available only in a small subset of the total annotated RCTs, as also depicted in Figure~\ref{fig:rob_information}.
+Annotations for the ``randomization'' risk domain 1 were found in an average of 35 of the 41 documents, while information related to answering the other risk questions was available only in a small subset of the total annotated RCTs, as also depicted in Figure~\ref{fig:rob_information} which shows the distribution of risk judgments across RoBuster.
+The figure highlights that, for most RoB questions, no information was available (indicated by yellow bars) for answering the SQs and making the risk judgment.
 Notably, SQs 2.2, 2.6, 3.1, 4.3, and 4.4 stood out as exceptions, with information available in more than 50\% of the annotated documents.
-The figure highlights that, for most RoB questions, no information was available (indicated by yellow bars) for both answering the question and making a judgment about the bias level. 
-In cases where information was available, bias tended to be low, as indicated by the prevalence of green bars. 
-However, exceptions were observed, such as in SQs 2.1, 2.2, 3.1, 4.3, and 4.4, where bias was high, as indicated by the prevalence of red bars.
+In cases where information was available, bias tended to be low, as indicated by the prevalence of green bars with an exception for the SQs 2.2, 3.1, 4.3, and 4.4, where bias was high, as indicated by the prevalence of red bars.
 Check the Supplementary material for the references of included studies.
 %
 %
@@ -649,22 +647,21 @@ Check the Supplementary material for the references of included studies.
 \label{result:iaa}
 %
 Table~\ref{tab:IAA_sq} illustrates the levels of F1-measure (inter-annotator agreement) between the two annotators, both before and after the development of the visual placards.
-The F1-measure scores before and after the guideline improvement were calculated on a different set of documents.
-The average overall F1-measure agreement across the corpus exhibited a modest 10.87\% agreement before the introduction of visual placards.
+The F1-measure before and after the guideline improvement were calculated on a different set of documents.
+The average overall F1 agreement across the corpus exhibited a modest 10.87\% agreement before the introduction of visual placards.
 Following their implementation, this agreement increased significantly by 17.14 percent points, reaching a fair 28.01\%.
-%The increase in agreement was visible at the domain level.
-The F1-measure agreement for the ``randomization'' domain 1 doubled from a poor 31.72 to a substantial 63.30.
-For the ``deviations from intended interventions'' domain 2, the agreement increased from a slight 12.76 to a fair 27.02.
+The agreement for the ``randomization'' domain 1 doubled from a poor 31.72 to a substantial 63.30.
+For the ``deviations from intended interventions'' domain 2, the agreement increased from a slight 12.76 to fair 27.02.
 In the case of the ``missing outcomes'' domain 3, the agreement rose from 5.89 to 9.92, although it remained within the slight agreement category. 
 For the ``missing outcome measurement'' domain 4 the agreement increased from 4.072 to 17.29.
 The agreement before the placard development was none and it increased to slight (16.49) for the ``selection of reported results'' domain 5.
 
 
-Improvements in agreement were observed at individual signaling questions level too, with considerable gains exceeding 50\% points for signaling questions 1.3, 2.1, 4.1, and 4.4.
+Improvements in agreement were observed at individual SQs level too, with considerable gains exceeding 50\% points for signaling questions 1.3, 2.1, 4.1, and 4.4.
 The F1-measure between the two reference annotators for a total of 11 out of 22 questions remained zero both before and after the guideline development.
 Only for two SQs, 4.4 and 5.2, did the guideline improvement raised it from zero to 56.25 and 49.49 respectively.
 However, for SQs 2.3 and 2.7, the agreement experienced a modest decline of 5.42 and 6.52, reaching zero after the guideline development.
-For the SQ 1.2, the F1-measure dropped by 6.28\% points making it a drop in agreement for three SQs.
+For the SQ 1.2, the agreement dropped by 6.28\% points making it a drop in agreement for three SQs.
 Inferring from the table~\ref{tab:iaa_interpret} and table~\ref{tab:IAA_sq}, annotators for 11 of the 22 SQs had a poor agreement, three of the 22 questions had a fair agreement, four out of the 22 questions had a good agreement and two out of the 22 questions had a substantial agreement while only two of the 22 questions had an almost perfect agreement of beyond 81 IAA points.
 As expected, none of the SQ annotations had a perfect F1-measure.
 %
@@ -722,21 +719,21 @@ As expected, none of the SQ annotations had a perfect F1-measure.
 %
 %
 
-We present the Cohen's Kappa ($\kappa$) scores and raw agreement in Table~\ref{tab:IAA_response} which measure agreement at the SQ response judgment level~\cite{mchugh2012interrater}.
-Additionally, we provide the percentage of these agreements that stems from the ``No Information'' judgments.
-The overall $\kappa$ agreement between the raters stands at a weak 0.5187 IAA.
-The average $\kappa$ agreement for randomization domain was 0.27 IAA which is a minimal agreement.
-For the ``deviations due to intended interventions'', there was minimal agreement of 0.33 IAA and for the ``due to missing outcome data'' domain there was a better though weak agreement of 0.494 IAA.
-The last two domains ``measurement of the outcome'' and ``selection of the reported result'' had agreements 0.0996 IAA and -0.0036 IAA interpreted as zero and negative.
+We present the PABAK $\kappa_{pabak}$ agreement, raw agreement and the percentage of these agreements that stemmed from the ``No Information'' judgments in Table~\ref{tab:IAA_response} which measure agreement at the SQ risk judgment level~\cite{mchugh2012interrater}.
+The overall $\kappa_{pabak}$ agreement between the raters stands at a weak 0.41181 IAA.
+The average agreement for ``randomization'' domain was a moderate 0.629 IAA.
+For the ``deviations due to intended interventions'' too, there was a moderate agreement of 0.64 IAA and for the ``due to missing outcome data'' domain there was a minimal agreement of 0.388 IAA.
+The last two domains ``measurement of the outcome'' and ``selection of the reported result'' had agreements 0.166 IAA and 0.092 IAA interpreted slight and no agreement.
 
 
 
-The highest $\kappa$ agreement of 1.0 is observed for SQ 2.6.
-It is, however, important to note that more than half of this agreement arises from the assumed ``No Information'' judgments.
-For the remaining signaling questions, we do not find any instances of either almost perfect or strong agreement.
-Agreements for SQs 2.1, 3.1, and 4.3 fall within the moderate agreement category (ranging from 0.60 to 0.80 IAA), with no substantial agreement originating from the ``No Information'' judgments for either of them.
-In contrast, six of the 22 signaling questions (2.4, 2.5, 4.1, 4.2, 4.5, and 5.3) exhibit agreement worse than what would be expected by chance, and considerable percentage of them stems from ``No Information'' judgments.
-The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable observed agreement.
+The highest agreement of 1.0 is observed for SQ 2.6.
+It is, however, important to note that more than half of this agreement arises from the assumed ``No Information'' judgments for 2.6.
+For the remaining SQs, we do not find any instances of either almost perfect or strong agreement.
+Agreements for SQs 1.1, 2.1, 2.5, 3.1, and 4.3 fall within the moderate agreement category (ranging from 0.60 to 0.80 IAA).
+Amongst these SQs, only for the SQ 1.1, 2.1, 3.1 and 4.3 has no substantial agreement originating from the ``No Information'' judgments.
+In contrast, two of the 22 signaling questions (4.2 and 5.1) exhibit agreement worse than what would be expected by chance.
+The bias questions 3.3 and 4.5 show zero $\kappa_{pabak}$ agreement.
 
 
 
@@ -748,7 +745,7 @@ The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable ob
     \label{tab:IAA_response}
     \begin{tabular}{crrr}
     \toprule[1.0pt]
-        SQ & $\kappa$ agreement & Raw agreement & Contribution from ``No Information'' \\
+        SQ & $\kappa_{pabak}$ agreement & Raw agreement & Contribution from ``No Information'' \\
     \midrule[1.0pt]
         \multicolumn{4}{c}{Domain 1: Biases arising from the randomization process} \\
         \hline
@@ -769,7 +766,7 @@ The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable ob
         \multicolumn{4}{c}{Domain 3: Bias due to missing outcome data} \\
         \hline
         3\_1 & 0.8333 & 88.90\% & 11.11\% \\
-        3\_2 & 1 & 100.00\% & 100.00\% \\
+        3\_2 & - & 100.00\% & 100.00\% \\
         3\_3 & 0 & 33.30\% & 55.56\% \\
         3\_4 & 0.3333 & 55.60\% & 33.33\% \\
         \hline
@@ -795,14 +792,24 @@ The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable ob
 %
 \subsection{LLM evaluation}
 %
-In the Table~\ref{table:LLM_eval}, we report the observed or raw agreement ($P_{O}$) between LLMs and the expert in extracting and responding to the SQs over a subset (n=10) of RoBuster~\ref{method:llm}.
+In Table~\ref{table:LLM_eval}, we present the observed or raw agreement ($P_{O}$) between Language Models (LLMs) and expert assessments in extracting and responding to signaling questions (SQs) over a subset (n=10) of RoBuster~\ref{method:llm}. 
 The evaluation was conducted on four RCTs reporting objective outcome, three RCTs evaluating subjective outcome and the rest three RCTs reporting mortality outcome.
-For the first risk domain, ChatGPT has high $P_{O} (Extraction)$ and $P_{O} (Response)$ agreements (66.6\% and 55.3\% IAA respectively) with experts with none of these agreements coming from ``No Information'' responses. % Shows good availability of information for judging bias
-For individual SQs in domain 1, $P_{O} (Extraction)$ was greater than $P_{O} (Response)$.
-The observed agreements for the the second domain are even higher 64.28\% and 60\% respectively, but 40\% of these agreements emanate from ``No Information'' responses. % Shows a low availability of information to answer a question
-Domain 3 shows a moderate observed agreement of 0.475 for both $P_{O} (Response)$ and $P_{O} (Extraction)$.
-\textcolor{blue}{The results for risk domain 4 and 5 remain.}
+For the first risk domain, ChatGPT has high $P_{O} (Extraction)$ and $P_{O} (Response)$ agreements (66.6\% and 55.3\% IAA respectively) with experts with none of these agreements coming from ``No Information'' responses.
+None of these agreements arose from ``No Information'' responses, indicating a good availability of information for bias assessment. 
+Notably, for individual signaling questions within domain 1, the $P_{O} (Extraction)$ was greater than $P_{O} (Response)$.
+The observed agreements for the the second domain are even higher 64.28\% and 60\% respectively, but 40\% of these agreements emanate from ``No Information'' responses suggesting lower availability of information. 
+Domain 3 exhibited a moderate observed agreement of 0.475 for both $P_{O} (Response)$ and $P_{O} (Extraction)$ , while Domain 4 demonstrated a lower observed agreement of 0.28 and 0.26 for response and extraction, respectively.
+\textcolor{blue}{The results for risk domain 5 remain.}
 Details about the RCTs used for LLM evaluation are in the Supplementary material.
+%In the Table~\ref{table:LLM_eval}, we report the observed or raw agreement ($P_{O}$) between LLMs and the expert in extracting and responding to the SQs over a subset (n=10) of RoBuster~\ref{method:llm}.
+%The evaluation was conducted on four RCTs reporting objective outcome, three RCTs evaluating subjective outcome and the rest three RCTs reporting mortality outcome.
+%For the first risk domain, ChatGPT has high $P_{O} (Extraction)$ and $P_{O} (Response)$ agreements (66.6\% and 55.3\% IAA respectively) with experts with none of these agreements coming from ``No Information'' responses. % Shows good availability of information for judging bias
+%For individual SQs in domain 1, $P_{O} (Extraction)$ was greater than $P_{O} (Response)$.
+%The observed agreements for the the second domain are even higher 64.28\% and 60\% respectively, but 40\% of these agreements emanate from ``No Information'' responses suggesting lower availability of information. % Shows a low availability of information to answer a question
+%Domain 3 shows a moderate observed agreement of 0.475 for both $P_{O} (Response)$ and $P_{O} (Extraction)$.
+%Domain 4 shows a low observed agreement of 0.28 and 0.26 for both $P_{O} (Response)$ and $P_{O} (Extraction)$ respectively.
+%\textcolor{blue}{The results for risk domain 5 remain.}
+%Details about the RCTs used for LLM evaluation are in the Supplementary material.
 %
 %
 %
@@ -840,11 +847,11 @@ Details about the RCTs used for LLM evaluation are in the Supplementary material
         \hline
         \multicolumn{4}{c}{Domain 4: Bias in the measurement of the outcome} \\
         \hline
-        RoB 4\_1 & & & \\ 
-        RoB 4\_2 & & & \\ 
-        RoB 4\_3 & & & \\ 
-        RoB 4\_4 & & & \\ 
-        RoB 4\_5 & & & \\ 
+        RoB 4\_1 & 40\% & 30\% & 10\% \\ 
+        RoB 4\_2 & 40\% & 30\% & 20\% \\ 
+        RoB 4\_3 & 10\% & 10\% & 10\% \\ 
+        RoB 4\_4 & 10\% & 20\% & 10\% \\ 
+        RoB 4\_5 & 40\% & 40\% & 40\% \\
         \hline
         \multicolumn{4}{c}{Domain 5: Bias in the selection of the reported result} \\
         \hline
@@ -862,18 +869,6 @@ Details about the RCTs used for LLM evaluation are in the Supplementary material
 %
 \subsection{Visual Placards}
 \label{disc:placards}
-%
-%
-%
-%
-\begin{figure}
-    \centering
-    \includegraphics[width=0.80\columnwidth]{figures/placard_3_1.pdf}
-    \caption{Sample annotation instruction placard for the SQ 3.1 designed and adapted using RoB 2 tool.}
-    \label{fig:placard}
-\end{figure}
-%
-%
 %
 The visual placards addressed various facets of RoB 2 subjectivity and the actual process of annotation.
 A common reason for low IAA was when annotators correctly address a bias SQ but annotate evidence from different parts of the full text leading to no agreement. 
