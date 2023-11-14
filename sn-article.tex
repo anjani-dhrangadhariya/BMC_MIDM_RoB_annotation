@@ -245,8 +245,8 @@ Our contributions with this paper are five-fold.
 \section{Methodology}
 \label{sec:methods}
 %
-This section describes the annotation scheme, annotation softwares and guidelines.
-Since there are no annotation guidelines available for RoB span annotation task, we take pleasure in formulating them from scratch. 
+This section describes the annotation scheme, annotation softwares and visual placard development.
+Since there are no text annotation guidelines available for RoB span annotation task, we take pleasure in formulating them from scratch using the revised Cochrane RoB 2 tool.
 We first developed a draft version of our visual annotation guidelines, doubly annotated a fraction of documents using it and used the conflicts identified during this exercise to refine the guidelines.
 %
 %
@@ -272,10 +272,10 @@ We first developed a draft version of our visual annotation guidelines, doubly a
 
 Creating a new annotated corpus involves defining an annotation scheme or adopting an existing one.
 To our knowledge the only available annotation scheme for RoB span annotation was presented by~\cite{dhrangadhariya2023first}.
-Rather than creating a new scheme, we adapt and enhance their approach by learning from its drawbacks.
-Their annotation scheme was directly adapted from the RoB 2 assessment procedure and hence it is imperative to understand the RoB 2 structure to understand the annotation scheme.
-RoB 2 divides biases into five risk domains, each loosely corresponding to different parts of the trial design.
-Each risk domain decomposes into several SQs, each aiming to prompt a relevant response to bias assessment (refer to Table~\ref{tab:robdomains}).
+We adapt and enhance their approach by learning from its drawbacks rather than developing a new scheme.
+Their annotation scheme was directly adapted from the RoB 2 assessment procedure and hence it is imperative to understand the RoB 2 organization to understand the annotation scheme.
+RoB 2 divides biases into five risk domains, each loosely corresponding to different parts of the clinical trial design.
+Each risk domain decomposes into several SQs, each aiming to prompt the assessor to look for relevant RCT text evidence and elicit a relevant response for bias risk judgment for that SQ (refer to Table~\ref{tab:robdomains}).
 
 
 %
@@ -284,7 +284,7 @@ Each risk domain decomposes into several SQs, each aiming to prompt a relevant r
 \begin{table*}
  \centering
  %\captionsetup{justification=justified}
-   \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2) and the number of SQs (SQ) in each domain.}\label{tab:robdomains}
+   \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2) and the number of signalling questions (SQs) in each domain.}\label{tab:robdomains}
     \begin{tabular}{llr}
     \toprule[1.0pt]
      Class & Domain & SQ\\
@@ -302,28 +302,28 @@ Each risk domain decomposes into several SQs, each aiming to prompt a relevant r
 %
 
 
-The response options are restricted to ``Yes'', ``Probably yes'', ``No'', ``Probably no'', or ``No information''~\cite{sterne2019rob}.
+The response options for bias risk (or simply risk) judgment are restricted to ``Yes'', ``Probably yes'', ``No'', ``Probably no'', or ``No information''~\cite{sterne2019rob}.
 Reviewers assess these SQs by examining the factual evidence in the RCT.
-For instance, to answer the SQ ``Was the allocation sequence random?'', the reviewer reads through the study to identify how participants were randomized into intervention groups.
+For instance, to answer the SQ ``Was the allocation sequence random?'', the reviewer reads through the RCT to identify how participants were randomized into intervention groups.
 If a well-executed method of randomization is identified, the reviewer answers with ``yes'' (the allocation sequence is random) judging the risk of bias for this signaling question as low risk.
 Conversely, if a poorly executed method of randomization is found, the risk of bias is deemed  high risk with response option ``no''.
 %Similarly, each SQ prompts the reviewer to look for a piece(s) of factual evidence in the clinical study to respond with one of the five response options.
 
 
 
-In RoB span annotation, we mimic this assessment process by considering evidence text spans in the RCT as the main units of annotation. 
+In RoB span annotation, we mimic this assessment process by considering evidence text spans in the RCT as the main units of annotation.
 Each span corresponds to answering a SQ and is annotated with the most informative label. 
-The label incorporates information about the SQ number and the domain it assesses (for the above example, ``1.1'' for the first domain and first SQ of the domain)
-Additionally, the response judgement is incorporated in the label, such as ``1.1 Yes Good'' for a well-executed randomization (see Figure~\ref{fig:annotationscheme}).
-Dhrangadhariya \textit{et al.} suggests collapsing the response options ``yes'' and ``probably yes'' into a single ``yes'', and ``no'' and ``probably no'' together into a single ``no'' to increase the inter-annotator agreement (IAA) without altering the final risk domain judgment~\cite{dhrangadhariya2023first}.
-As shown in Figure~\ref{fig:flowchart} responding to any SQ for the risk domain 2 as either ``Probably yes'' or ``Yes'' does not alter the final risk judgment for this domain (low, high, or some concerns).
+In our adopted annotation scheme, the label incorporates information about the SQ number and the domain it assesses (for the above example, ``1.1'' for the first domain and first SQ of the domain)
+Additionally, the response option or risk judgement is incorporated in the label, such as ``1.1 Yes Good'' for a well-executed randomization procedure and ``1.1 No Bad'' otherwise (see Figure~\ref{fig:annotationscheme}).
+Dhrangadhariya \textit{et al.} suggests collapsing the response options ``Yes'' and ``Probably Yes'' into a single ``Yes'', and ``No'' and ``Probably No'' together into a single ``No'' to increase the inter-annotator agreement (IAA) without altering the final risk domain judgment~\cite{dhrangadhariya2023first}.
+As shown in Figure~\ref{fig:flowchart} responding to any SQ for the risk domain 2 as either ``Probably Yes'' or ``Yes'' does not alter the final risk judgment for this domain (low, high, or some concerns).
 Therefore, except for some special case SQs, we too collapse these response option as suggested.
-In summary, the reviewer needs to label the identified text span with the RoB entity along with one of the response options.
-In this regard, we have a hierarchical span annotation scheme comprising 22 entities corresponding to the 22 SQs, each with typically two response options and two directions (mutually exclusive).
-We also remove the ``No Information'' labels since it is meant for the situations where actually no text evidence is found in the RCT to answer a SQ.
-However, for selected SQs, ``probably yes'', ``probably no'' and ``No Information'' may still be used.
-For example, consider that an RCT uses ``...random number generator and sealed envelopes for patient randomization...'', but the trial provided no information on whether the envelop was ``opaque'' or not.
-In such situations, ``No Information'' label is acceptable.
+%In summary, the reviewer needs to label the identified text span with the RoB entity along with one of the response options.
+In this regard, we have a hierarchical span annotation scheme comprising 22 entities corresponding to the 22 SQs, each with typically two response options (``Yes'' or ``No'') and two directions (``good'' and ``bad'').
+We also remove the ``No Information'' response option because this was meant for the situations where actually no text evidence is found in the RCT to answer and label for a SQ.
+However, for selected SQs, ``Probably Yes'', ``Probably No'' and ``No Information'' may still be acceptable.
+For instance, consider that an RCT uses ``...random number generator and sealed envelopes for patient randomization...'', but the trial provided no information on whether the envelop was ``opaque'' or not.
+%In such situations, ``No Information'' judgment is acceptable.
 %Additionally, it is based on this span, the response judgment option is decided, and therefore even the response judgement information is incorporated in the label.
 %Consider the following span is found to answer the above-mentioned SQ, ``randomized participants using random number generation...'', which is a good randomization procedure and therefore the reviewer responds with ``yes''.
 %The label extends the example label to ``1.1 Yes''.
@@ -348,10 +348,24 @@ In such situations, ``No Information'' label is acceptable.
 %
 %
 %
+\subsection{Expert team}
+\label{experts}
+%
+As mentioned earlier, RoB annotation is a complex task that requires specialized expertise.
+It's cognitively demanding due to the need to carefully go through the entire full-text of RCTs and identify 22 different bias categories for annotation.
+This level of complexity would not be manageable for annotators without expertise in the field.
+Our annotation team consisted of two researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher and an assistant professor in physiotherapy.
+With a substantial background in both physiotherapy, advanced statistical methods and experience writing SRs, both experts possesses a deep understanding of the complexities involved in assessing bias risk in RCTs.
+Two additional physiotherapy experts, a post doctoral researcher and a senior PhD student, were a part of developing the visual annotation guidelines.
+Two additional researchers with expertise in natural language processing (NLP) were involved, one being a computational linguistics professor and the other a PhD student in computer science.
+Their inclusion was important because the guidelines and placards they helped create will be utilized to annotate a text corpus, serving as a benchmark for RoB text span extraction.
+%
+%
+%
 \subsection{Data collection}
 \label{data}
 %
-Savović~\textit{et al.} categorized outcome measures as mortality, other objective outcome, or subjective outcome and estimated the associations of bias judgments with intervention effect estimates~\cite{savovic2018association}.
+Savović~\textit{et al.} categorized outcome measures as mortality, other objective outcome, and subjective outcome and estimated the associations of bias judgments with intervention effect estimates~\cite{savovic2018association}.
 Trials assessing subjective outcomes are more prone to bias, therefore, had we used only one outcome type, we would have limited label types for different risk classes~\cite{page2016empirical}.
 In context of RCTs, subjective outcomes are measurements that rely on individuals' perceptions, opinions, or feelings about their own health or well-being.
 These outcomes are typically self-reported by the participants in the trial and can be influenced by factors such as  placebo effects, patient expectations, interpretation, and psychological factors.
@@ -360,67 +374,28 @@ Objective outcomes are measurements that are independent of individual opinions 
 These outcomes are typically collected by trained assessors or through laboratory tests, imaging studies, or other objective methods.
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
 Mortality outcomes refer to the occurrence of death during the course of the trial.
-To ensure these different outcome types are represented in the corpus, we restricted including 17, 17 and 7 RCTs addressing objective, subjective and mortality primary outcomes.
+To ensure these different outcome types are represented in the corpus, we included 17, 17 and 7 RCTs addressing objective, subjective and mortality primary outcomes.
 The epidemiology researcher from our team created this 41 RCTs dataset from the domain of physiotherapy and rehabilitation.
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol from wherever available.
-All these RCT PDFs have CC-BY-0 licences~\footnote{\url{https://creativecommons.org/share-your-work/public-domain/cc0/}}.
+Corpus details are in the Supplementary material.
 %
 %
 %
-\subsection{Expert team}
-\label{experts}
-%
-As mentioned earlier, RoB annotation is a complex task that requires specialized expertise.
-It's cognitively demanding due to the need to carefully go through the entire full-text of RCTs and identify 22 different bias categories for annotation.
-This level of complexity would not be manageable for annotators without expertise in the field.
-Our annotation team consisted of two researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher and an assistant professor in physiotherapy.
-With a substantial background in both physiotherapy, advanced statistical methods and experience writing systematic reviews, both experts possesses a deep understanding of the complexities involved in assessing bias risk in research studies.
-Two additional physiotherapy experts, a post-doc and a senior PhD student, were a part of developing the visual annotation guidelines.
-
-
-Additionally, two researchers with expertise in natural language processing (NLP) were involved, one being a computational linguistics professor and the other a PhD student in computer science.
-The inclusion of NLP researchers was particularly important because the guidelines and placards they helped create will be utilized to annotate a text corpus, which will serve as a benchmark for the NLP task of RoB span extraction.
-%
-%
-%
-\subsection{Guideline development}
+\subsection{Visual Placards Development}
 \label{guidelines}
 %
-%
-%
-%
-\begin{figure}
-    \centering
-    \includegraphics[width=0.80\columnwidth]{figures/placard_3_1.pdf}
-    \caption{Sample annotation instruction placard for the SQ 3.1 designed and adapted using RoB 2 tool.}
-    \label{fig:placard}
-\end{figure}
-%
-%
-%
-
-RoB 2 guidelines consist of extensive and step-by-step set of instructions that utilize signaling questions, which are detailed in subsection~\ref{met:annot_scheme}.
-Even though RoB 2 guidelines are widely used for bias assessment, there have been some research on the reliability of these guidelines.
-This reliability concern of RoB 2 has been extensively investigated by Minozzi \textit{et al.}. 
+RoB 2 tool consist of extensive and step-by-step set of instructions to answer signaling questions and even though RoB 2 guidelines are widely used for bias assessment, there have been some research on their reliability.
+This reliability concern has been extensively investigated by Minozzi \textit{et al.}. 
 They formulated specific instructions on how to approach and answer the signaling questions of RoB 2.
 These instructions, referred to as the Instruction Document (ID), address the subjectivity present in the RoB 2 guidelines and provide clear guidance for the assessment process.
 Subjectivity in assessment could potentially result in different evaluators coming to disparate conclusions when analyzing the same trial.
 Before implementing the ID, the agreement among four expert RoB assessors was zero, but it improved after adopting the ID.
 Several other papers explored subjectivity and reliability of the Cochrane RoB 1.0 and 2 tools~\cite{minozzi2022reliability,da2017effect,loef2022interrater,minozzi2020revised}.
-%Anjani: Comments from Roger and Martin about the inherent subjectivity
-%The SQs are broadly factual but leave room for subjective judgements and aim to facilitate judgements about the risk of bias.
-
-
-Given the significance of maintaining consistency and reliability among annotators, we undertook the development of precise and clear annotation guidelines.
-Working closely with our team of experts, we formatted these guidelines into visual placards.
-Each placard takes the form of a flowchart and provides instructions for annotating a single signaling question.
-These placards address various facets of RoB 2 subjectivity and the actual process of annotation.
-For instance, a common reason for low inter-annotator agreement is when annotators correctly address a bias question but annotate evidence from different parts of the full text. 
-To tackle this, our placards restrict annotations for a question to a specific part of the text, such as the Methods section, Results section, Flowchart in the Methods section, etc.
-Detailed guidelines and these visual placards are available in the Supplementary material, with an example placard shown in the Figure~\ref{fig:placard}.
-These placards also tackle another factor contributing to the low inter-annotator agreement.
-For example, while some annotators might annotate an entire paragraph as text evidence to answer a question, others might focus on the most informative portion of the text.
-To address this, the placards provide clear guidance on whether annotators should annotate a phrase, a sentence, or a combination of sentences.
+With this in mind, we developed precise and clear text annotation instructions using the RoB 2 tool with an aim to maintain the consistency and reliability among annotators.
+Working closely with our team of experts, we formatted these instructions into visual instructional placards.
+Each placard takes the form of a flowchart and provides instructions for annotating RCT text to answer a SQ.
+The flowchart also provides instructions on labelling the annotated text with risk judgment.
+The RoB 2 tool SQs are broadly factual but leave room for subjective judgements and our visual placards aim to facilitate judgements about the risk of bias.
 %
 %
 %
@@ -442,45 +417,46 @@ To address this, the placards provide clear guidance on whether annotators shoul
 For every SQ, the annotators were guided to use the complete RoB 2 guidance document along with visual placards that were developed.
 They followed these instructions meticulously, going through each placard's signaling question one by one.
 The provided instructions directed the annotators to read specific sections of full-text RCT that needed annotation.
-Their task involved identifying and highlighting relevant text related to answering the signaling question.
+Their task involved identifying and highlighting relevant text related to answering the signaling question and labelling the text with a relevant risk judgment as detailed in the section~\ref{met:annot_scheme}.
 
 
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
-Out of the 41 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
+Out of the 41 documents, 9 were doubly annotated by two experienced bias assessors (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
 After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the visual placards.
 The conflict resolution was followed by (singly) annotating 31 additional RCTs.
+
 
 
 After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
 We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format that will be lost upon converting to text. 
 For example the structure pertaining to sections and subsections, tables, and figures makes the annotation task quicker for the annotators and increases annotation quality.
-Post annotation, a feedback was taken from all the annotators and the experts involved in formulating the visual placards to gauge the 1) general difficulty, 2) subjectivity and 3) availability of information for bias assessment of each SQ.
-These factors were assessed on the scale of 1-5 with 1 being best and 5 being the worst.
-The forms and the responses could be found in the Supplementary material 2. %TODO Anjani: Prepare the supplementary material 
+Post annotation, a feedback was taken from both annotators to gauge the 1) general difficulty, 2) subjectivity and 3) availability of information for bias assessment of each SQ.
+These factors were assessed on the scale of 1-5 with 1 being best and 5 being the worst on the respective scale.
+The forms and the responses could be found in the Supplementary material 2.
 %
 %
 %
 \subsection{Inter-Annotator Agreement}
 \label{method:iaa}
 %
-We report IAA at two levels. 
-We check whether the annotators agree on the text spans to answer SQs using the pairwise F1 measure.
-Pairwise F1 measure disregards out-of-the-span tokens (unannotated tokens) during agreement calculation and is an ideal measure of annotation reliability for the token-level annotation tasks.
-Pairwise F1 calculates the F1 score for each pair of annotators, treating one annotator's labels as the ``true'' labels and the other annotator's labels as the ``predicted'' labels~\cite{deleger2012building,brandsen2020creating}.
-We also check how strongly the annotators agree on the response option judgment for each SQ using Cohen's kappa $\kappa$ and compare it with raw percent agreement.
-Cohen's kappa $\kappa$ is the standard annotation reliability measure for many classification annotation tasks and is suitable to measure reliability at the response option judgment level.
-We interpret both IAA measures as shown in the Table~\ref{tab:iaa_interpret}~\cite{mchugh2012interrater,cohen1960coefficient,landis1977measurement}.
+We report IAA at two levels checking whether the annotators agree on the text spans to answer SQs using the pairwise F1 measure.
+F1-measure disregards out-of-the-span tokens (unannotated tokens) during agreement calculation and is an ideal measure of annotation reliability for the token-level annotation tasks.
+It measures the F1 score for each pair of annotators, treating one annotator's labels as the ``true'' labels and the other annotator's labels as the ``predicted'' labels~\cite{deleger2012building,brandsen2020creating}.
+We also check how strongly the annotators agree on the risk judgment for each SQ using prevalence and bias adjusted kappa (PABAK) $\kappa_{PABAK}$ and compare it with raw percent agreement.
+PABAK $\kappa_{PABAK}$ is the standard annotation reliability measure for many classification annotation tasks and is suitable to measure reliability at the risk judgment level.
+$\kappa_{PABAK}$ is an extension of Cohen's Kappa $\kappa$ that takes into account prevalence and bias in the agreement.
+We interpret both IAA measures as shown in the Table~\ref{tab:iaa_interpret}~\cite{mchugh2012interrater,cohen1960coefficient,byrt1993bias,landis1977measurement}.
 %
 %
 %
 \begin{center}
  \begin{table}[htb]
-   \caption{The table details interpretation of pairwise F1-measure (Left), Cohen's kappa (Middle) and observed or raw agreement (Left)}\label{tab:iaa_interpret}
+   \caption{The table details interpretation of pairwise F1-measure (Left), $\kappa_{PABAK}$ (Middle) and observed or raw agreement (Left)}\label{tab:iaa_interpret}
  \centering
     \begin{tabular}{lr|lr|lr}
     \toprule[1.0pt]
-    \multicolumn{2}{c|}{F1 Measure} & \multicolumn{2}{c|}{Cohen's Kappa}& \multicolumn{2}{c}{Raw Agreement}  \\ 
+    \multicolumn{2}{c|}{F1-measure} & \multicolumn{2}{c|}{$\kappa_{PABAK}$}& \multicolumn{2}{c}{Raw Agreement}  \\ 
     interpretation & range & interpretation & range & interpretation & range \\ 
     \midrule[1.0pt]
         Poor & 0-0.99 &  No agreement& $\leq$ 0 & None & 0 \\ 
@@ -501,9 +477,9 @@ We interpret both IAA measures as shown in the Table~\ref{tab:iaa_interpret}~\ci
 \subsection{LLM evaluation}
 \label{method:llm}
 %
-Our annotation guidelines and annotations were adapted for benchmarking classical supervised machine learning approaches and not LLMs.
+Our annotation guidelines and annotations were adapted for benchmarking supervised machine learning approaches and not LLMs.
 So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical ML model could not use without extensive modifications~\cite{li2019figure,li2023uttsr}.
-However, recent advancements with LLMs that encode vast amounts of knowledge offers a better alternative made us rethink the evaluation.
+Recent advancements with LLMs that encode vast amounts of knowledge offers a better alternative made us rethink the evaluation.
 The bar for clinical applications is high and it is imperative to evaluate LLMs for the more challenging clinical tasks like RoB text span extraction~\cite{singhal2023large}.
 The tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allow direct interaction between LLMs and PDFs, negating the clumsy PDF to text conversion.
 Therefore, we consider it essential to evaluate LLMs instead of forcefully adapting the evaluation to a classical ML problem.
@@ -517,9 +493,8 @@ Consider the following example.
 \end{quote}
 
 The prompt serves two purposes for evaluating LLMs for correctness.
-LLM is tasked with 1) answering the SQ with a response option (the judgment), and 2) extract the text evidence to support their answer.
-When answering a question, ChatPDF finds the most relevant paragraphs from the PDF and uses the ChatGPT API from OpenAI to generate an answer.
-ChatPDF employs GPT (Generative Pretrained Transformer) 3.5.
+LLM is prompted to 1) answering the SQ with a response option (risk judgment), and 2) extract the text evidence to support their answer.
+When answering a question, ChatPDF finds the most relevant paragraphs from the PDF and uses the ChatGPT API from OpenAI to generate an answer~\footnote{ChatPDF employs GPT (Generative Pretrained Transformer) 3.5.}.
 LLM is required to do the same task as human annotators and will be evaluated on the basis of correctness of the answer.
 If LLM answer corresponds to response option selected by the expert annotator, it is considered a correct answer for that SQ. 
 If the text extracted by LLMs as evidence for answering the SQ fuzzy matches the text selected by the expert annotator, it is considered a correct answer.
@@ -535,7 +510,38 @@ LLM evaluation was manually conducted by a bias assessment expert and an NLP exp
 \section{Results}
 \label{sec:results}
 %
-This section outlines the annotated dataset, presents the inter-annotator agreement findings, and the outcomes of the LLM evaluation.
+This section outlines the visual placards developed, the annotated dataset, presents the inter-annotator agreement findings, and the outcomes of the LLM evaluation.
+%
+%
+%
+\subsection{Visual Placards}
+\label{result:placards}
+%
+%
+%
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=0.80\columnwidth]{figures/placard_3_1.pdf}
+    \caption{Sample annotation instruction placard for the SQ 3.1 designed and adapted using RoB 2 tool.}
+    \label{fig:placard}
+\end{figure}
+%
+%
+%
+A total of 27 placards were developed to address the 22 signalling questions in RoB 2 tool. 
+Detailed annotation guidelines and the developed visual placards are available in the Supplementary material, with an example placard instructing to annotate for SQ 3.1 shown in the Figure~\ref{fig:placard}.
+The SQ 3.1 ``Were data for this outcome available for all, or nearly all participants randomized?'' assesses the completeness of outcome data in a study.
+The question aims to determine if data for the specific outcome of interest were collected and available for analysis for a high proportion of the participants who were initially randomized.
+If the data for the outcome of interest were not available for a substantial number of participants or if there was a high degree of missing data, it raises concerns about the potential impact on the validity and reliability of the study's findings.
+Missing data can lead to reduced statistical power and imprecise estimates of treatment effects
+Following the above explanation and looking at the placard, the first diamond instructs the annotators to check the Results section (first priority) and the flowchart (second priority) to identify outcome data at the specific time point of interest.
+If the annotators find that the outcomes data were available for all or nearly all (at least 95\% of the total) participants, they mark the text descriptions mentioning it and label it with ``3.1 Yes Good''.
+If the outcomes data were available for less than 95\% of participants randomized, then they are asked to mark this information and label it with ``3.1 No Bad''.
+If no information regarding the availability of outcome data at the specified time point is found, it is considered the question as having ``No Information''.
+The placard via the yellow arrow on the first diamond hints that this information is likely found in the Results section of the RCT under consideration, but if not found there, then mark the information in results table. 
+If the information is to be found nowhere except in a flowchart, the annotators are instructed to mark the caption of the flowchart.
+However, flowchart annotation is used as a last resort and is marked with a red exclamation.
 %
 %
 %
@@ -643,29 +649,29 @@ Check the Supplementary material for the references of included studies.
 \label{result:iaa}
 %
 Table~\ref{tab:IAA_sq} illustrates the levels of F1-measure (inter-annotator agreement) between the two annotators, both before and after the development of the visual placards.
-The IAA scores before and after the guideline improvement were calculated on a different set of documents.
-The average overall F1-measure agreement across the corpus exhibited a modest 10.87\% agreement before the introduction of visual placards. Following the implementation, this agreement increased significantly by 17.14 percentage points, reaching a fair 28.01\%.
-The increase in agreement was visible at the domain level.
+The F1-measure scores before and after the guideline improvement were calculated on a different set of documents.
+The average overall F1-measure agreement across the corpus exhibited a modest 10.87\% agreement before the introduction of visual placards.
+Following their implementation, this agreement increased significantly by 17.14 percent points, reaching a fair 28.01\%.
+%The increase in agreement was visible at the domain level.
 The F1-measure agreement for the ``randomization'' domain 1 doubled from a poor 31.72 to a substantial 63.30.
-for the ``deviations from intended interventions'' domain 2, the agreement increased from a slight 12.76 to a fair 27.02.
-In the case of the ``missing outcomes'' domain 3, the agreement rose from 5.89 to 9.92, although it remained within the slight agreement category for this domain. 
-For the ``missing outcome measurement'' domain (domain 4) the agreement increased from 4.072 to 17.29.
-The agreement before the placard development was none (0) and it increased to slight (16.49) for the ``selection of reported results'' domain 5.
-
+For the ``deviations from intended interventions'' domain 2, the agreement increased from a slight 12.76 to a fair 27.02.
+In the case of the ``missing outcomes'' domain 3, the agreement rose from 5.89 to 9.92, although it remained within the slight agreement category. 
+For the ``missing outcome measurement'' domain 4 the agreement increased from 4.072 to 17.29.
+The agreement before the placard development was none and it increased to slight (16.49) for the ``selection of reported results'' domain 5.
 
 
 Improvements in agreement were observed at individual signaling questions level too, with considerable gains exceeding 50\% points for signaling questions 1.3, 2.1, 4.1, and 4.4.
-The IAA between the two reference annotators for a total of 11 out of 22 questions remained zero both before and after the guideline development.
-Only for two SQs, 4.4 and 5.2, did the guideline improvement raise the IAA from zero to 56.25 and 49.49 respectively.
-However, for signaling questions 2.3 and 2.7, the agreement experienced a modest decline of 5.42 and 6.52, reaching zero after the guideline development.
+The F1-measure between the two reference annotators for a total of 11 out of 22 questions remained zero both before and after the guideline development.
+Only for two SQs, 4.4 and 5.2, did the guideline improvement raised it from zero to 56.25 and 49.49 respectively.
+However, for SQs 2.3 and 2.7, the agreement experienced a modest decline of 5.42 and 6.52, reaching zero after the guideline development.
 For the SQ 1.2, the F1-measure dropped by 6.28\% points making it a drop in agreement for three SQs.
 Inferring from the table~\ref{tab:iaa_interpret} and table~\ref{tab:IAA_sq}, annotators for 11 of the 22 SQs had a poor agreement, three of the 22 questions had a fair agreement, four out of the 22 questions had a good agreement and two out of the 22 questions had a substantial agreement while only two of the 22 questions had an almost perfect agreement of beyond 81 IAA points.
-As expected, none of the SQ annotations had a perfect IAA of 100.
+As expected, none of the SQ annotations had a perfect F1-measure.
 %
 %
 %
 \begin{table}[htb]
-    \caption{F1-Measure (Inter-Annotator Agreement) Comparison Before and After Visual Placard Development: This table displays the F1-Measure at the text span answer level before and after the development of visual placards. The change in F1-Measure is presented in terms of absolute IAA points.}
+    \caption{The table displays the F1-Measure at the text span annotation level before and after the development of visual placards. The change in F1-Measure is presented in terms of absolute IAA points.}
     \label{tab:IAA_sq}
     \centering
     \begin{tabular}{crrr}
@@ -716,9 +722,8 @@ As expected, none of the SQ annotations had a perfect IAA of 100.
 %
 %
 
-We present the Cohen's Kappa ($\kappa$) scores and observed or raw agreement in Table~\ref{tab:IAA_response}~\cite{mchugh2012interrater} which measure agreement at the SQ response judgment level.
+We present the Cohen's Kappa ($\kappa$) scores and raw agreement in Table~\ref{tab:IAA_response} which measure agreement at the SQ response judgment level~\cite{mchugh2012interrater}.
 Additionally, we provide the percentage of these agreements that stems from the ``No Information'' judgments.
-Cohen's kappa quantifies the extent to which two raters' classifications agree beyond what would be expected by chance.
 The overall $\kappa$ agreement between the raters stands at a weak 0.5187 IAA.
 The average $\kappa$ agreement for randomization domain was 0.27 IAA which is a minimal agreement.
 For the ``deviations due to intended interventions'', there was minimal agreement of 0.33 IAA and for the ``due to missing outcome data'' domain there was a better though weak agreement of 0.494 IAA.
@@ -747,40 +752,40 @@ The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable ob
     \midrule[1.0pt]
         \multicolumn{4}{c}{Domain 1: Biases arising from the randomization process} \\
         \hline
-        RoB 1\_1 & 0.571 & 88.9\%  & 22.22\% \\
-        RoB 1\_2 & 0.25 & 66.7\%  & 33.33\% \\
-        RoB 1\_3 & 0 & 77.8\%  & 11.11\% \\
+        1\_1 & 0.743 & 88.9\% & 22.222\% \\
+        1\_2 & 0.357 & 66.7\% & 33.333\% \\
+        1\_3 & 0 & 77.8\% & 11.111\% \\
         \hline 
         \multicolumn{4}{c}{Domain 2: Biases due to deviations from intended interventions} \\
         \hline
-        RoB 2\_1 & 0.727 & 77.8\%  & 5.55\% \\
-        RoB 2\_2 & 0.449 & 66.7\%  & 38.88\% \\
-        RoB 2\_3 & 0 & 66.7 & 77.77\% \\
-        RoB 2\_4 & -0.125 & 77.8\%  & 88.88\% \\
-        RoB 2\_5 & -0.08 & 77.8\%  & 83.33\% \\
-        RoB 2\_6 & 1 & 100\%  & 55.55\% \\
-        RoB 2\_7 & 0.357 & 77.8\%  & 77.77\% \\
+        2\_1 & 0.571 & 77.8\% & 5.556\% \\
+        2\_2 & 0.386 & 66.7\% & 38.889\% \\
+        2\_3 & 0.182 & 66.7\% & 77.778\% \\
+        2\_4 & -0.125 & 77.8\% & 88.889\% \\
+        2\_5 & 0.25 & 77.8\% & 83.333\% \\
+        2\_6 & 1 & 100\% & 55.556\% \\
+        2\_7 & 0.357 & 77.8\% & 77.778\% \\
         \hline
         \multicolumn{4}{c}{Domain 3: Bias due to missing outcome data} \\
         \hline
-        RoB 3\_1 & 0.75 & 88.9\%  & 11.11\% \\
-        RoB 3\_2 & - & 1 & 100\% \\
-        RoB 3\_3 & 0.20.6 & 33.3\%  & 55.55\% \\
-        RoB 3\_4 & 0.52.6 & 55.6\%  & 33.33\% \\
+        3\_1 & 0.795 & 88.9\% & 11.111\% \\
+        3\_2 & nan & 100\% & 100\% \\
+        3\_3 & 0.143 & 33.3\% & 55.556\% \\
+        3\_4 & 0.4 & 55.6\% & 33.333\% \\
         \hline
         \multicolumn{4}{c}{Domain 4: Bias in the measurement of the outcome} \\
         \hline
-        RoB 4\_1 & -0.125 & 77.8\%  & 11.11\% \\
-        RoB 4\_2 & -0.235 & 22.2\%  & 38.88\% \\
-        RoB 4\_3 & 0.63 & 77.8\%  & 27.77\% \\
-        RoB 4\_4 & 0.308 & 44.4\%  & 22.22\% \\
-        RoB 4\_5 & -0.08 & 33.3\%  & 66.66\% \\
+        4\_1 & -0.125 & 77.8\% & 11.111\% \\
+        4\_2 & -0.235 & 22.2\% & 38.889\% \\
+        4\_3 & 0.66 & 77.8\% & 27.778\% \\
+        4\_4 & 0.211 & 44.4\% & 22.222\% \\
+        4\_5 & -0.149 & 33.3\% & 66.667\% \\
         \hline
         \multicolumn{4}{c}{Domain 5: Bias in the selection of the reported result} \\
         \hline
-        RoB 5\_1 & 0 & 22.2\%  & 61.11\% \\
-        RoB 5\_2 & 0.143 & 66.7\%  & 22.22\% \\
-        RoB 5\_3 & -0.154 & 55.6\%  & 72.22\% \\
+        5\_1 & 0 & 22.2\% & 61.111\% \\
+        5\_2 & 0.25 & 66.7\% & 22.222\% \\
+        5\_3 & 0 & 55.6\% & 72.222\% \\
     \bottomrule[1.0pt]
     \end{tabular}
 \end{table}
@@ -797,7 +802,7 @@ For individual SQs in domain 1, $P_{O} (Extraction)$ was greater than $P_{O} (Re
 The observed agreements for the the second domain are even higher 64.28\% and 60\% respectively, but 40\% of these agreements emanate from ``No Information'' responses. % Shows a low availability of information to answer a question
 Domain 3 shows a moderate observed agreement of 0.475 for both $P_{O} (Response)$ and $P_{O} (Extraction)$.
 \textcolor{blue}{The results for risk domain 4 and 5 remain.}
-Details about the RCTs used for LLM evaluation are found in the Supplementary material.
+Details about the RCTs used for LLM evaluation are in the Supplementary material.
 %
 %
 %
@@ -854,6 +859,34 @@ Details about the RCTs used for LLM evaluation are found in the Supplementary ma
 %
 \section{Discussion}
 \label{sec:discussion}
+%
+\subsection{Visual Placards}
+\label{disc:placards}
+%
+%
+%
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=0.80\columnwidth]{figures/placard_3_1.pdf}
+    \caption{Sample annotation instruction placard for the SQ 3.1 designed and adapted using RoB 2 tool.}
+    \label{fig:placard}
+\end{figure}
+%
+%
+%
+The visual placards addressed various facets of RoB 2 subjectivity and the actual process of annotation.
+A common reason for low IAA was when annotators correctly address a bias SQ but annotate evidence from different parts of the full text leading to no agreement. 
+To tackle this, our placards restrict annotations for a question to a specific part of the text for specific SQs, such as the Methods section, Results section, Flowchart in the Methods section, etc.
+These placards also tackle another factor contributing to the low IAA.
+While some annotators might annotate an entire paragraph as text evidence to answer a SQ, others might focus on the most informative portion of the text.
+To address this, the placards provide clear guidance on whether annotators should annotate a phrase, a sentence, or a combination of sentences.
+
+The placards also tackle subjectivity of certain SQs.
+As shown in the Figure~\ref{fig:placard}, the SQ asks to 
+
+%
+%
 %
 %
 %
@@ -1009,36 +1042,6 @@ Previously, we had marked a subjective judgment flag for the SQ 2.4 and after th
 
 
 \textcolor{blue}{For the placard regarding 5.2, we would still need some input from Julian - we are not sure that we really understand this item within the context of a systematic review where the review authors decide on which outcome-measurement to extract. }
-%
-%
-%
-\subsubsection{Conflict Resolution}
-\label{dis:conflict}
-%
-Post the IAA calculation for the doubly annotated documents (n=9), we conducted a face-to-face conflict resolution session to address every case of conflict.
-Our aim was to use the annotated corpus and resolve the conflicts between the annotators to improve the instructions in the visual placards.
-For multiple conflicting cases, the instructions were either unclear, interpreted differently, or the annotators forgot to annotate.
-However, when the annotators went through the conflicts, they were able to resolve them.
-Three conflict groups were resolved.
-
-\textbf{Disparate regions conflict} was when both the annotators select different parts of text to answer the same SQ using the same response option.
-For example, in~\cite{darlow2019fear} to answer the SQ 2.2, one of the annotators selected the text ``GPs were aware of group allocation (but not intervention content) when they completed their baseline measures'' and another annotators selected the text ``Practices and GPs were necessarily unblinded post randomisation to facilitate planning and delivery of intervention workshops and related data collection.'' and came to the same response option judgment of ``Yes Bad''.
-Even though the annotators were restricted to annotating this SQ in the Methods section of the paper, they selected different parts of the text within the same section leading to this conflict.
-To resolve this conflict, we annotated both the parts of text as consensus annotation in the final version.
-% (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=1107412538})
-
-
-\textbf{Text span conflict} was when one annotator selected a part of text and another the same text but a longer span.
-For instance, in~\cite{solomons2020intramuscular} to answer the SQ number 4.3, one annotator selected the complete sentence, ``\textsc{The primary outcome for which the study was powered was the change from baseline in 12 week VISA-A (Victorian Institute of Sports Assessment–Achilles),} a valid and reliable disease-specific outcome measure [37] which also includes an activity-related pain scale.'' while the other annotators only selected the text in CAPS. 
-It was easier to resolve this conflict and we selected the longer annotation as the representative and used it as a consensus label.
-It's crucial to emphasize that while both text span conflicts and disparities in the region do not impact $\kappa$, they could result in a lower F1-measure score.
-% (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=0})
-
-
-\textbf{Polarity conflict} was when the annotators marked same part of text to answer the same SQ in the same document being annotated, but labelled them with polar opposite judgment options (``Yes'' vs. ``No'').
-For instance, in~\cite{solomons2020intramuscular} to answer the SQ 1.2, both the annotators select the text ``Only AS and a research assistant not involved in participant intervention or assessments had access to the random allocation sequence.'' but one labels the text with response judgement ``No Bad'' and another with ``Yes Good''.
-Both annotators agreed that it was a badly formulated sentence in the RCT and agreed to judge the SQ with ``Yes Good'' giving the study authors a benefit of doubt. 
-% (\url{https://docs.google.com/spreadsheets/d/14jYqXTcnVzZsC5pbKQ2GcwtVrwl81DG9Yo5uhCJZzjo/edit#gid=0})
 %
 %
 %
