@@ -745,44 +745,44 @@ The bias questions 3.3 and 4.5 show zero $\kappa_{pabak}$ agreement.
     \label{tab:IAA_response}
     \begin{tabular}{crrr}
     \toprule[1.0pt]
-        SQ & $\kappa_{pabak}$ & Raw agreement & Contribution from ``No Information'' \\
+        SQ & $\kappa_{pabak}$ agreement & Raw agreement & Contribution from ``No Information'' \\
     \midrule[1.0pt]
         \multicolumn{4}{c}{Domain 1: Biases arising from the randomization process} \\
         \hline
-        1.1 & 0.8333 & 88.90\% & 22.22\% \\
-        1.2 & 0.5 & 66.70\% & 33.33\% \\
-        1.3 & 0.5556 & 77.80\% & 11.11\% \\
+        RoB 1.1 & 0.8333 & 88.90\% & 22.22\% \\
+        RoB 1.2 & 0.5 & 66.70\% & 33.33\% \\
+        RoB 1.3 & 0.5556 & 77.80\% & 11.11\% \\
         \hline 
         \multicolumn{4}{c}{Domain 2: Biases due to deviations from intended interventions} \\
         \hline
-        2.1 & 0.7037 & 77.80\% & 5.56\% \\
-        2.2 & 0.5 & 66.70\% & 38.89\% \\
-        2.3 & 0.5 & 66.70\% & 77.78\% \\
-        2.4 & 0.5556 & 77.80\% & 88.89\% \\
-        2.5 & 0.6667 & 77.80\% & 83.33\% \\
-        2.6 & 1 & 100.00\% & 55.56\% \\
-        2.7 & 0.5556 & 77.80\% & 77.78\% \\
+        RoB 2.1 & 0.7037 & 77.80\% & 5.56\% \\
+        RoB 2.2 & 0.5 & 66.70\% & 38.89\% \\
+        RoB 2.3 & 0.5 & 66.70\% & 77.78\% \\
+        RoB 2.4 & 0.5556 & 77.80\% & 88.89\% \\
+        RoB 2.5 & 0.6667 & 77.80\% & 83.33\% \\
+        RoB 2.6 & 1 & 100.00\% & 55.56\% \\
+        RoB 2.7 & 0.5556 & 77.80\% & 77.78\% \\
         \hline
         \multicolumn{4}{c}{Domain 3: Bias due to missing outcome data} \\
         \hline
-        3.1 & 0.8333 & 88.90\% & 11.11\% \\
-        3.2 & - & 100.00\% & 100.00\% \\
-        3.3 & 0 & 33.30\% & 55.56\% \\
-        3.4 & 0.3333 & 55.60\% & 33.33\% \\
+        RoB 3.1 & 0.8333 & 88.90\% & 11.11\% \\
+        RoB 3.2 & - & 100.00\% & 100.00\% \\
+        RoB 3.3 & 0 & 33.30\% & 55.56\% \\
+        RoB 3.4 & 0.3333 & 55.60\% & 33.33\% \\
         \hline
         \multicolumn{4}{c}{Domain 4: Bias in the measurement of the outcome} \\
         \hline
-        4.1 & 0.5556 & 77.80\% & 11.11\% \\
-        4.2 & -0.5556 & 22.20\% & 38.89\% \\
-        4.3 & 0.6667 & 77.80\% & 27.78\% \\
-        4.4 & 0.1667 & 44.40\% & 22.22\% \\
-        4.5 & 0 & 33.30\% & 66.67\% \\
+        RoB 4.1 & 0.5556 & 77.80\% & 11.11\% \\
+        RoB 4.2 & -0.5556 & 22.20\% & 38.89\% \\
+        RoB 4.3 & 0.6667 & 77.80\% & 27.78\% \\
+        RoB 4.4 & 0.1667 & 44.40\% & 22.22\% \\
+        RoB 4.5 & 0 & 33.30\% & 66.67\% \\
         \hline
         \multicolumn{4}{c}{Domain 5: Bias in the selection of the reported result} \\
         \hline
-        5.1 & -0.5556 & 22.20\% & 61.11\% \\
-        5.2 & 0.5 & 66.70\% & 22.22\% \\
-        5.3 & 0.3333 & 55.60\% & 72.22\% \\
+        RoB 5.1 & -0.5556 & 22.20\% & 61.11\% \\
+        RoB 5.2 & 0.5 & 66.70\% & 22.22\% \\
+        RoB 5.3 & 0.3333 & 55.60\% & 72.22\% \\
     \bottomrule[1.0pt]
     \end{tabular}
 \end{table}
@@ -970,49 +970,50 @@ Therefore, wherever the reviewers found such an intervention, they had to use th
 %
 %
 %
-\subsubsection{Risk Judgment agreement}
+\subsubsection{Response option agreement}
 \label{disc:kappa}
 %
 % TODO: Discuss the Kappa agreements for the response option judgements?
 %What caused the conflict between selecting the judgment options for IAA?
 The disagreements at response option judgments arose because of two reasons.
-The most apparent cause of disagreement occurs when two annotators choose a text section to address a signaling question but do not reach a consensus on the response option judgement.
-The other less obvious reason for a disagreement is when one of the annotators annotates a part of text to answer a SQ and gives it a response judgment, but the other one does not annotate anything for this SQ leading to an automatic assumption of ``No Information'' for that SQ.
+The most apparent cause of disagreement occurred when two annotators choose a text section to address a signaling question but did not reach a consensus on the response option judgement.
+The other less obvious reason was when one of the annotators annotates a part of text to answer a SQ and gives it a response option judgment, but the other one does not annotate anything for this SQ leading to an automatic assumption of ``No Information'' for that SQ.
 Notably, 82.85\% of these conflicts fall into the second category, with only about 17\% involving discrepancies in response judgments.
 Similarly, agreements were of two types too, the agreements when both annotators chose a text span for answering a SQ and labelled them with the same response options and the agreements when none of the annotators answered a SQ leading to both their annotations being set to ``No Information''.
-The agreements are evenly distributed between these two categories.
-Therefore, a considerable of chunk of both agreements and disagreements came from ``No Information'' meaning the assessors might not not have access to complete information about why data is missing, which can make it difficult to assess the dependence of missingness on the true outcome.
+The agreements were evenly distributed between these two categories.
+Therefore, a considerable of chunk of both agreements and disagreements came from ``No Information''.
 Recall the yellow bar in the Figure~\ref{fig:rob_information} which indicated prevalence of ``No Information'' judgment.
 
 
 % TODO: Was the bias in subjective outcomes higher than in the objective outcomes?
 % Discuss the negative agreements
 Negative $\kappa$ are unlikely to occur in practice, but we had two SQs (4.2 and 5.1) where the response judgment agreement measured by $\kappa_{pabak}$ was negative.
-Though the $\kappa$ values for these SQs are lower than $-0.10$, they are not much smaller.
+The reason for lower $\kappa_{pabak}$ was ``No Information'' disagreements over seven of the nine annotated documents. 
+Though the $\kappa_{pabak}$ values for these SQs are considerably smaller than $-0.10$.
 According to~\cite{mchugh2012interrater}, a $\kappa$ value smaller than $-0.10$ represents strong disagreement among the raters and the collected data are considered not meaningful.
-
-
 % Risk domain five and low IAA. Reasons?
-%Domain 5 had an average negative $\kappa$ and the reason for this could be the complexity for analysing this domain.
-%To assess this risk domain it was imperative to attach a trial protocol with the RCT document.
-%Consequently, the annotators needed to mark the information in both the RCT and its corresponding protocol.
+Domain 5 had an average overall agreement close to zero and the reason for this could be the complexity for analysing this domain.
+To assess this risk domain it was imperative to attach a trial protocol with the RCT document.
+Consequently, the annotators needed to mark the information in both the RCT and its corresponding protocol and make a judgment after summarizing information.
+
+% What SQs had higher agreement?
+The SQs (1.1, 2.1, 2.5, 2.6, 3.1, 4.3) with adequate agreement ($>0.60$ IAA) had higher number of agreements (refer Figure~\ref{fig:pabakagreement}) not coming from ``No Information'' judgments.
+This aligned with the results of the feedback form where the difficulty and subjectivity of these questions was consistently rated as ``Normal'' or ``very low'', the availability of information was rated ``normal'' or ``very high''.
+In contrast, for the SQs with zero and negative agreement, had a net higher number of disagreements.
 
 
-% Discuss the no agreement
-%The bias questions 1.3, 2.3 and 5.1 show zero $\kappa$ agreement and variable percent agreement.
-%Analysing zero agreements should take into account the difference between the raw agreement and $\kappa$.
-%For SQ 1.3 $\kappa$ score is 0 while raw agreement is 0.778 leading to a very high difference between them.
-%We judge that the annotators had an organic good agreement for the SQ 1.3, the $\kappa$ score was 0.
-%This points out the fallacy of Cohen's kappa.
-%It measures the agreement between annotators without considering the prevalence of different categories.
-%Corrected kappa adjusts for chance agreement based on the prevalence of categories, providing a more accurate measure of agreement.
-
-
-% Discuss the adequate agreement (>60%)
-%It was only for the SQ 2.1, 3.1, and 4.3 did we notice adequate agreement ($>$60 IAA) and rightly so because upon inspection we found a high number of agreements coming from organic annotation while only a few disagreements stemmed from ``No Information''.
-% Discuss the low agreements (<60%)
-%Apart from this the agreement for other SQs was inadequate ($<$60 IAA).
-%\textcolor{blue}{Calculate and analyse the results of correct kappa score (corrected for considering the prevalence of classes).}
+%
+%
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=0.99\columnwidth]{figures/agreements.pdf}
+    \caption{Our annotation scheme}
+    \label{fig:pabakagreement}
+\end{figure}
+%
+%
+%
 
 
 % Improvements suggested by J.H.
@@ -1093,7 +1094,7 @@ For example, they need to assess whether the fact that data on falls is missing 
 % -------------- Comments in general --------------
 %TODO: Is LLM answering the questions with ``good'' response judgment most of the time?
 %We specifically observe that the expert has a more skeptical stance compared to the LLM giving lower risk judgments in several cases.
-While the LLM demonstrates promise in automating RoB span extraction, additional research is necessary, particularly in the domains of prompt engineering and the formulation of prompts to tackle the subjectivity inherent in SQs and the scarcity of information in RCTs required to answer SQs.
+While the LLM demonstrates promise in automating RoB span extraction, additional research is necessary, particularly in the domains of prompt engineering to tackle the subjectivity inherent in SQs and the scarcity of information in RCTs required to answer SQs.
 One potential avenue for improvement involves exploring the adaptation of prompting styles, such as chain-of-thought (CoT) and tree-of-thought (ToT), typically employed in language generation, for RoB text extraction task here~\cite{wei2022chain}.
 %
 %
