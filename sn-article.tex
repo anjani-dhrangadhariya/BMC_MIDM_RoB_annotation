@@ -856,12 +856,16 @@ Details about the RCTs used for LLM evaluation are in the Supplementary material
 \subsection{Visual Placards}
 \label{disc:placards}
 %
-The visual placards addressed various facets of RoB 2 subjectivity and also when dealing with situations lacking information for bias risk annotation.
-A common reason for a low IAA was when annotators correctly address a bias SQ but annotate evidence from different parts of the full text leading to no agreement. 
-To tackle this, our placards restrict annotations for a question to a specific part of the text for specific SQs, such as the Methods section, Results section, Flowchart in the Methods section, etc.
-These placards also tackle another factor contributing to the low IAA.
+As per~\cite{dhrangadhariya2023first}, there were two reasons causing a low F1 IAA for annotating text span to answer a SQ.
+One reason was a lack of instructions whether the annotators should annotate a phrase, a sentence or sentences.
 While some annotators might annotate an entire paragraph as text evidence to answer a SQ, others might focus on the most informative portion of the text.
-To address this, the placards provide clear guidance on whether annotators should annotate a phrase, a sentence, or a combination of sentences.
+To address this, our placards provide clear guidance on whether annotators should annotate a phrase, a sentence, or a combination of sentences.
+Another common reason for a low F1 was when annotators correctly addressed a bias SQ but annotated evidence from different parts of the full text leading to no or low agreement. 
+To tackle this, our placards restrict annotations for a question to a specific part of the text for specific SQs, such as the Methods section, Results section, Flowchart in the Methods section, etc.
+
+
+
+The visual placards addressed various facets of RoB 2 subjectivity and also when dealing with situations lacking information for risk judgment annotation.
 In one trial document annotation, both annotators selected the phrase ``71 allocated routine services, 67 allocated intervention service, 69 assessed at 8 weeks, 64 assessed at 8 weeks'' from the PRISMA flowchart to answer signaling question 3.1~\cite{gilbertson2000domiciliary}.
 However, one annotator responded with ``Yes'' while the other chose ``No''.
 This question asks whether outcome data were available for all or nearly all participants randomized, but it doesn't specify the exact cutoff for participant dropouts that increase the risk.
