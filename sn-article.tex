@@ -961,7 +961,7 @@ Unfortunately, one annotator did not follow this instruction, resulting in zero 
 %What caused the conflict between selecting the judgment options for IAA?
 The disagreements at response option judgments arose because of two reasons.
 The most apparent cause of disagreement occurred when two annotators choose a text section to address a signaling question but did not reach a consensus on the response option judgement.
-The other less obvious reason was when one of the annotators annotates a part of text to answer a SQ and gives it a response option judgment, but the other one does not annotate anything for this SQ leading to an automatic assumption of ``No Information'' for that SQ.
+The other less obvious reason was when one of the annotators annotated a part of text to answer a SQ and gives it a response option judgment, but the other one did not annotate anything for this SQ leading to an automatic assumption of ``No Information''.
 Notably, 82.85\% of these conflicts fall into the second category, with only about 17\% involving discrepancies in response judgments.
 Similarly, agreements were of two types too, the agreements when both annotators chose a text span for answering a SQ and labelled them with the same response options and the agreements when none of the annotators answered a SQ leading to both their annotations being set to ``No Information''.
 The agreements were evenly distributed between these two categories.
@@ -972,18 +972,23 @@ Recall the yellow bar in the Figure~\ref{fig:rob_information} which indicated pr
 % TODO: Was the bias in subjective outcomes higher than in the objective outcomes?
 % Discuss the negative agreements
 Negative $\kappa$ are unlikely to occur in practice, but we had two SQs (4.2 and 5.1) where the response judgment agreement measured by $\kappa_{pabak}$ was negative.
-The reason for lower $\kappa_{pabak}$ was ``No Information'' disagreements over seven of the nine annotated documents. 
+The reason for lower $\kappa_{pabak}$ for these questions was disagreements over seven of the nine annotated documents which was the highest number of disagreements in the subset RCTs used for kappa calculation (refer Figure~\ref{fig:pabakagreement}).
+To note that these agreements came from ``No Information'' judgments.
 Though the $\kappa_{pabak}$ values for these SQs are considerably smaller than $-0.10$.
 According to~\cite{mchugh2012interrater}, a $\kappa$ value smaller than $-0.10$ represents strong disagreement among the raters and the collected data are considered not meaningful.
+
+
+% What SQs had higher agreement?
+The SQs (1.1, 2.1, 2.5, 2.6, 3.1, 4.3) with adequate agreement ($>0.60$ kappa) had higher number of agreements (refer Figure~\ref{fig:pabakagreement}) not coming from ``No Information'' judgments.
+This aligned with the results of the feedback form where the difficulty and subjectivity of these questions was consistently rated as ``Normal'' or ``very low'', the availability of information was rated ``normal'' or ``very high''.
+For the SQs with zero and negative agreement, had a net higher number of disagreements.
+In the nutshell, a decrease in disagreements and an increase in agreements led to improved $\kappa_{pabak}$ agreement.
+
+
 % Risk domain five and low IAA. Reasons?
 Domain 5 had an average overall agreement close to zero and the reason for this could be the complexity for analysing this domain.
 To assess this risk domain it was imperative to attach a trial protocol with the RCT document.
 Consequently, the annotators needed to mark the information in both the RCT and its corresponding protocol and make a judgment after summarizing information.
-
-% What SQs had higher agreement?
-The SQs (1.1, 2.1, 2.5, 2.6, 3.1, 4.3) with adequate agreement ($>0.60$ IAA) had higher number of agreements (refer Figure~\ref{fig:pabakagreement}) not coming from ``No Information'' judgments.
-This aligned with the results of the feedback form where the difficulty and subjectivity of these questions was consistently rated as ``Normal'' or ``very low'', the availability of information was rated ``normal'' or ``very high''.
-In contrast, for the SQs with zero and negative agreement, had a net higher number of disagreements.
 
 
 %
@@ -992,7 +997,7 @@ In contrast, for the SQs with zero and negative agreement, had a net higher numb
 \begin{figure}
     \centering
     \includegraphics[width=0.99\columnwidth]{figures/agreements.pdf}
-    \caption{Our annotation scheme}
+    \caption{The histogram of total number of conflicts and total number of agreements in the subset of RCTs used to calculate $\kappa_{pabak}$.}
     \label{fig:pabakagreement}
 \end{figure}
 %
