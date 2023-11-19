@@ -1088,6 +1088,13 @@ For example, they need to assess whether the fact that data on falls is missing 
 
 % -------------- LLM Risk Domain four --------------
 %Limitation with not mentioning what the target outcome was which confused LLM
+LLM exhibited a lower overall agreement with the annotators for the domain 4 despite the data for outcomes measurement was available in the RCTs.
+The reason for low agreement was use of simple prompts in our work.
+For RoB assessment, the annotators assess bias pertaining to the pre-decided target outcome and not all the outcomes reported in the trial.
+However, the information about the target outcome being assessed was not available in the simple prompts used to test LLMs.
+Consequently, LLMs extracted information that did not necessarily pertain to the target outcome but rather to other outcomes reported in the trial.
+This situation suggests a potential avenue for improvement, involving the exploration of adapted prompting styles, such as chain-of-thought (CoT) and tree-of-thought (ToT), commonly used in language generation tasks, for the RoB text extraction task~\cite{wei2022chain}.
+
 
 % -------------- LLM Risk Domain five --------------
 %OXO
@@ -1096,7 +1103,7 @@ For example, they need to assess whether the fact that data on falls is missing 
 %TODO: Is LLM answering the questions with ``good'' response judgment most of the time?
 %We specifically observe that the expert has a more skeptical stance compared to the LLM giving lower risk judgments in several cases.
 While the LLM demonstrates promise in automating RoB span extraction, additional research is necessary, particularly in the domains of prompt engineering to tackle the subjectivity inherent in SQs and the scarcity of information in RCTs required to answer SQs.
-One potential avenue for improvement involves exploring the adaptation of prompting styles, such as chain-of-thought (CoT) and tree-of-thought (ToT), typically employed in language generation, for RoB text extraction task here~\cite{wei2022chain}.
+
 %
 %
 %
