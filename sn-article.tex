@@ -898,20 +898,21 @@ Annotator who reviewed a greater number of documents in RoBuster experienced tha
 \label{disc:f1}
 %
 % Were the visual placards effective?
-F1-measure agreement was calculated before and after visual placard development.
-Using the visual placards improves the F1 agreement for choosing the RCT text spans for 10 of the 22 SQs showing their utility in aiding decision making.
+F1 agreement was calculated before and after visual placard development showing an improvement in the agreement for choosing the RCT text spans for 10 of the 22 SQs.
 % For which SQs did the agreement increase and why?
 SQ 1.3 had the highest increase of 70.46 F1 IAA points thanks to the visual placards requesting to look for the text evidence to answer this question first priority in the table recording patient characteristics and instructs to mark the entire table along with the table caption.
-Before the development of these placards, annotators would only mark a portion of the table to answer this question. 
+Earlier, the annotators would only mark a portion of the table to answer this question. 
 The specific text selected by an annotator depended on which part of the table text they noticed first as potentially indicating bias given any of the listed patient characteristics could show imbalances between the groups.
-This variability in selection led to lower F1 agreement on this SQ, which has significantly improved with the introduction of the placards.
-SQ 1.1 recorded an improvement of more than 30 F1 IAA points thanks to the placards instructing the annotators to mark the text evidence in the Methods section as a priority. 
+This variability in selection led to lower F1 on this SQ.
+Similarly, SQ 1.1 showed a 30-point increase, with placards emphasizing marking text evidence in the Methods section.
 The evidence to answer the SQ 1.1 could be found in both abstract and the methods section and prior to placard development, the annotators variably marked the answer to this question leading to a lower agreement.
-We restricted annotating this text in the methods section in the visual placards because a more detailed textual description is found in this section and consequently saw an increase in agreement by 30.58 F1 IAA.
+We restricted annotating this text in the methods section in the visual placards because a more detailed textual description is found in this section.
+In addition, prior to the placard development, the annotator marked the phrase ``randomized controlled trial'' to justify their decision for ``1.1 Yes Good''.
+The placards added a rule that ``Yes Good'' was to be marked only if the annotators found a proper method of randomization and annotated it in the text.
 These improvements were also the reason for an increased agreement for the SQs 2.1 and 2.2.
 For SQ 2.1, there was a remarkable increase of 67.26 IAA points.
 This can be attributed to the comprehensive instructions provided by the visual placards, which instruct annotators to specifically identify and label text descriptions related to intervention administration and placebo administration.
-Prior to the placard development the annotators were inconsistently annotating either the description of intervention administration or placebo administration, leading to lower agreement.
+Earlier, the annotators were inconsistently annotating either the description of intervention administration or placebo administration, leading to lower agreement.
 
 
 % Why do some RoB questions have more annotations compared to the other? Does it mean papers have more information on certain aspects compared to the other questions?
@@ -919,24 +920,17 @@ Prior to the placard development the annotators were inconsistently annotating e
 % Why were agreements on certain questions zero?
 While the agreement drastically increased for certain SQs, for other questions it remained zero.
 These outcomes align with the feedback forms' findings.
-Almost all the RoB questions where the IAA between the annotators was zero (2.3, 2.4, 2.5, 2.7, 3.2, 3.3, 3.4, 4.2, 4.5, 5.1, 5.3) consistently received remarks from one or both annotators regarding their higher subjectivity, difficulty in assessment, and lower availability of information for evaluation.
-The poor agreement hence can be well assumed to caused by the subjectivity of the SQs, lack of information to annotate in the RCT, theoretical nature of the SQs and the overall complex process of analysing trials.
-% TODO: Why was the agreement for question 2.3, 2.4 and 2.5 zero?
-Also, we did not have F1 IAA score on SQ 2.4 because, while two out of the nine annotations had annotations for 2.4, these annotations were made by only one of the annotators and not by both annotators lading to no agreement at the span level.
+Almost all the RoB questions where the IAA between the annotators was zero (2.3, 2.4, 2.5, 2.7, 3.2, 3.3, 3.4, 4.2, 4.5, 5.1, 5.3) consistently received remarks from one or both annotators regarding their higher subjectivity, difficulty in assessment, and lower availability of information for evaluation and hence annotating.
+The poor agreement hence can be well assumed to caused by the subjectivity of the SQs, lack of information to annotate in the RCT, and the overall complex process of analysing trials.
 
 
 % Theoretical nature of the SQs and zero agreement?
-A lower IAA score could also be attributed to the theoretical nature of certain SQ.
-Consider the questions 3.4 and 4.5.
-The SQ 3.4 in RoB assesses the ``likelihood'' that missing data on outcome measures is related to the true values of those outcomes. 
-It evaluates the risk of bias associated with missing outcome data.
-This question is theoretical and depends on the assessment of whether there could be a relationship between the outcome missingness and the true values of the outcomes.
-The same applies to SQ 4.5, which relies on the results of SQ 4.4.
-It seeks to gauge the ``likelihood'' that the assessment of the outcome was influenced by knowledge of whether the intervention was received or not.
-Such ``theoretical'' questions require making judgments that rely on hypothetical scenarios rather than direct observations or concrete evidence leading to higher subjectivity of assessment results.
+Zero IAA could also be attributed to the theoretical nature of certain SQs like 3.4 and 4.5.
+For instance, SQ 3.4 assesses the ``likelihood'' that missing outcomes data is related to the true values of those outcomes, examining the risk of bias associated with missing outcome data.
+Similarly, SQ 4.5, dependent on SQ 4.4 results, aims to gauge the ``likelihood'' that the assessment of the outcome was influenced by knowledge of whether the intervention was received. 
+Such ``theoretical'' questions require making judgments that rely on hypothetical scenarios rather than direct observations or concrete text evidence leading to higher subjectivity of assessment results.
 As these questions pertain to aspects of study design, conduct, or reporting that may not be explicitly addressed in the trial documentation these questions also suffer from a lack of information that could be annotated in a trial.
-Availability of annotations is also important to train and evaluate ML models and therefore determine the utility of a corpus.
-To ensure some kind of annotations are always available to make a judgment , we instruct annotators to annotate the outcome and outcome measurement descriptions in the paper for these questions.
+To address this, annotators are instructed to annotate outcome and outcome measurement descriptions in the paper for these questions, ensuring a basis for judgment and the availability of annotations for training and evaluating ML models on RoBuster.
 
 
 % Were certain RoB questions more subjective than the others?
@@ -945,16 +939,18 @@ For example, for the SQ 2.4, it is asked whether deviations from the intended in
 Assessing whether deviations could have affected outcomes requires a subjective judgment.
 What one person considers likely to affect outcomes, another might not.
 This leaves room for variability in how different assessors may interpret and score this question.
-Assessors may have limited information available to make a judgment.
+In addition, annotators may have limited information available annotate any text and to make a judgment.
 They may not have access to detailed data or explanations regarding the deviations, making it challenging to assess their potential impact accurately.
+Specifically, only two out of the nine RCTs had annotations for SQ 2.4 and these annotations were made only by one of the annotators and not by both annotators lading to no agreement at the text span level.
 Similar subjectivity occurs for the SQ 3.3: Could missingness in the outcome depend on its true value?
 The SQ involves assessors making a judgment about the relationship between missing data and the true outcome, which can be challenging to determine objectively.
-Therefore for the most part the annotators ended up marking the outcome description itself which could lead them to judge whether missingness of outcomes data could influence its true value.
-For example, the outcome fatigue.
-If the authors write a sentence about some patients who were not showing up at the follow-up because they said they were too tired, then annotate this because the missingness depends on the actual/true value of fatigue.
-Therefore, the judgment of a particular SQ could be dependent on the biases that a particular outcome could cause.
-For example, it is not possible to blind the intervention administrators for certain interventions in physiotherapy and rehabilitation.
-Therefore, wherever the reviewers found such an intervention, they had to use this information to mark the judgment.
+Annotating text evidence is even more difficult for this question because authors need to annotate the reasons for missing outcomes data that are related to the true value of the outcome, for the physiotherapy outcomes like `fatigue'.
+If the authors write a sentence about some patients who were not showing up at the follow-up reasoning they were too tired, then annotate this because the missingness depends on the actual/true value of fatigue.
+However, this information is not usually available in the RCT.
+Placards instructed annotators to mark outcome descriptions instead, aiding judgment.
+Unfortunately, one annotator did not follow this instruction, resulting in zero agreement at the text span level.
+%For example, it is not possible to blind the intervention administrators for certain interventions in physiotherapy and rehabilitation.
+%Therefore, wherever the reviewers found such an intervention, they had to use this information to mark the judgment.
 %
 %
 %
