@@ -949,6 +949,7 @@ If the authors write a sentence about some patients who were not showing up at t
 However, this information is not usually available in the RCT.
 Placards instructed annotators to mark outcome descriptions instead, aiding judgment.
 Unfortunately, one annotator did not follow this instruction, resulting in zero agreement at the text span level.
+Such instances suggest a longer training and several rounds of confict resolution and correction are required for the annotators.
 %For example, it is not possible to blind the intervention administrators for certain interventions in physiotherapy and rehabilitation.
 %Therefore, wherever the reviewers found such an intervention, they had to use this information to mark the judgment.
 %
@@ -966,7 +967,12 @@ Notably, 82.85\% of these conflicts fall into the second category, with only abo
 Similarly, agreements were of two types too, the agreements when both annotators chose a text span for answering a SQ and labelled them with the same response options and the agreements when none of the annotators answered a SQ leading to both their annotations being set to ``No Information''.
 The agreements were evenly distributed between these two categories.
 Therefore, a considerable of chunk of both agreements and disagreements came from ``No Information''.
-Recall the yellow bar in the Figure~\ref{fig:rob_information} which indicated prevalence of ``No Information'' judgment.
+%Recall the yellow bar in the Figure~\ref{fig:rob_information} which indicated prevalence of ``No Information'' judgment.
+% Should you use RCTs from specific high impact journals in your annotation corpus? This would warrant more and complete information is available to annotate and assess leading to a better corpus.
+%A large chunk of agreements and disagreements from ``No Information'' judgment warrant using.
+It is worth recalling the prevalence of the ``No Information'' judgment, as indicated by the yellow bar in Figure~\ref{fig:rob_information}.
+This underscores the significance of considering whether to use RCTs from specific high-quality journals in the annotation corpus.
+Doing so could potentially ensure more comprehensive information reported in the paper and is available for annotation and assessment, thereby contributing to the creation of a corpus that will not have as many ``No Information'' judgments.
 
 
 % TODO: Was the bias in subjective outcomes higher than in the objective outcomes?
@@ -1008,7 +1014,7 @@ Consequently, the annotators needed to mark the information in both the RCT and 
 %
 %
 % Improvements suggested by J.H.
-\subsection{Placard Improvements}
+\subsection{Feedback on Placards}
 \label{disc:improv}
 %
 We will now address the concerns raised by a stalwart in bias assessment.
@@ -1016,16 +1022,17 @@ To address subjectivity arising from signaling questions 2.7 and 3.1, which inqu
 Specifically, SQ 2.7 ``Was there potential for a substantial impact (on the result) of the failure to analyse participants in the group to which they were randomized?''.
 To annotate for this question, the visual placard instructs the annotators to find the data about the number of participants included and excluded from the intention-to-treat (ITT) analysis.
 The placard then goes to instructs that if more than 5\% of participants were excluded from the ITT analysis, it was a substantial number and mark this information and label it a higher risk of bias.
-On our end, to simply the annotation process, we chose a threshold but enforcing a threshold deviates from the recommended RoB guidance.
-Thus, we must find an alternative approach to guide annotators in assessing risk without relying on thresholds.
-One potential solution is to provide examples illustrating instances where low numbers may still introduce bias, offering guidance on specific result figures that annotators should scrutinize.
-For the SQ 3.1 ``Were data for this outcome available for all, or nearly all, Participants randomized?'', the term ``all, or nearly all, participants'' can be interpreted differently by different reviewers.
-What one reviewer considers "nearly all" might be different from another reviewer's interpretation.
+Similarly, for the SQ 3.1 ``Were data for this outcome available for all, or nearly all, Participants randomized?'', the term ``all, or nearly all, participants'' can be interpreted differently by different reviewers.
+What one reviewer considers ``nearly all'' might be different from another reviewer's interpretation.
 This ambiguity can lead to subjective judgments when applying the tool.
 Therefore, we introduced the 95\% threshold meaning if the data were not available for at least 95\% or more participants, we instructed the assessors/annotators to judge the bias risk as high.
+On our end, to simplify the annotation process, we chose these thresholds but enforcing a threshold deviates from the recommended RoB guidance as critiqued by this stalwart.
+Thus, we must find an alternative approach to guide annotators in assessing risk without relying on thresholds.
+One potential solution is to provide examples illustrating instances where low numbers may still introduce bias, offering guidance on specific result figures that annotators should scrutinize.
 
 
-We received guidance to designate specific SQ placards with a ``Subjective'' flag to signal the presence of subjective judgments.
+
+We also received guidance to designate specific SQ placards with a ``Subjective'' flag to signal the presence of subjective judgments.
 Therefore, for several SQs, we incorporated the the recommendation added a ``subjective flag'' to the placards wherever subjective judgments were necessary.
 Previously, we had marked a subjective judgment flag for the SQ 2.4 and after the recommendation we marked it also for the SQs 3.3, 3.4 and 4.5.
 
