@@ -116,7 +116,7 @@
 
 \author[3]{\fnm{Roger} \sur{Hilfiker}}\email{roger.hilfiker@proton.me}
 
-\author[4]{\fnm{Martin} \sur{Sattelmayer}}\email{martin.sattelmayer@hevs.ch}
+\author[4]{\fnm{Karl Martin} \sur{Sattelmayer}}\email{martin.sattelmayer@hevs.ch}
 
 \author[5,6]{\fnm{Nona} \sur{Naderi}}\email{nona.naderi@hesge.ch}
 
@@ -222,7 +222,7 @@ In fact, the research utilising this pay-walled data was used to develop RobotRe
 The question, however, remains of the unavailability of a publicly-available RoB annotated corpus that hinders community efforts for automation. 
 Wang \textit{et al.} recently released three RoB annotated datasets, but for preclinical animal studies with RoB assessments pertaining to animals~\cite{wang2022risk}.
 A manually annotated corpus of RoB spans for human clinical trials is still necessary.
-Manual RoB assessment is a complex, expert-led task laden with subjective judgements.
+Manual RoB assessment is a complex, expert-led task laden with subjective judgements~\cite{minozzi2022reliability,hartling2009risk}.
 Systematically translating this manual process for developing an RoB annotated corpus requires a carefully designed annotation scheme and detailed annotation guidelines.
 Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether RoB 2 guidelines could be effectively utilized as guidelines to manually annotate a corpus of RCTs with RoB using a multi-level annotation scheme adapted from the same guidelines.
 They conclude that the assesment guidelines cannot be used as text annotation guidelines, but neither provide any annotation guidelines from their end.
@@ -261,7 +261,7 @@ We first developed a draft version of our visual annotation guidelines, doubly a
 \begin{figure}
     \centering
     \includegraphics[width=0.99\columnwidth]{figures/annotation_schema.pdf}
-    \caption{Our annotation scheme}
+    \caption{Our RoB annotation scheme as explained in the Section~\ref{met:annot_scheme}}
     \label{fig:annotationscheme}
 \end{figure}
 %
@@ -321,7 +321,7 @@ Therefore, except for some special case SQs, we too collapse these response opti
 %In summary, the reviewer needs to label the identified text span with the RoB entity along with one of the response options.
 In this regard, we have a hierarchical span annotation scheme comprising 22 entities corresponding to the 22 SQs, each with typically two response options (``Yes'' or ``No'') and two directions (``good'' and ``bad'').
 We also remove the ``No Information'' response option because this was meant for the situations where actually no text evidence is found in the RCT to answer and label for a SQ.
-However, for selected SQs, ``Probably Yes'', ``Probably No'' and ``No Information'' may still be acceptable.
+However, for selected SQs (currently only SQ 2.1), ``Probably Yes'', ``Probably No'' and ``No Information'' may still be acceptable.
 For instance, consider that an RCT uses ``...random number generator and sealed envelopes for patient randomization...'', but the trial provided no information on whether the envelop was ``opaque'' or not.
 %In such situations, ``No Information'' judgment is acceptable.
 %Additionally, it is based on this span, the response judgment option is decided, and therefore even the response judgement information is incorporated in the label.
@@ -354,10 +354,10 @@ For instance, consider that an RCT uses ``...random number generator and sealed 
 As mentioned earlier, RoB annotation is a complex task that requires specialized expertise.
 It is cognitively demanding due to the need to carefully go through the entire full-text of RCTs and identify 22 different bias categories for annotation.
 This level of complexity would not be manageable for annotators without expertise in the field.
-Our annotation team consisted of two researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher and an assistant professor in physiotherapy.
+Our annotation team consisted of two researchers specializing in RoB assessment in physiotherapy and rehabilitation domains, including an epidemiology researcher (ID: E1MA~\footnote{Expert 1 Major Annotator}) and an associate professor (ID: E2IRAA~\footnote{Expert 2 Inter-Rater Agreement Annotator}) in physiotherapy.
 With a substantial background in both physiotherapy, advanced statistical methods and experience writing SRs, both experts possessed a deep understanding of the complexities involved in bias assessment.
-Two additional physiotherapy experts, a post doctoral researcher and a senior PhD student, were a part of developing the visual annotation guidelines.
-Two additional researchers with expertise in natural language processing (NLP) were involved, a computational linguistics professor and a PhD student in computer science.
+Two additional physiotherapy experts, two senior PhD students, were a part of developing the visual annotation guidelines.
+Two additional researchers with expertise in natural language processing (NLP) were involved, a computational linguistics associate professor and a PhD student in computer science.
 Their inclusion was important because the guidelines and placards they helped create will be utilized to annotate a text corpus, serving as a benchmark for RoB text span extraction.
 %
 %
@@ -365,8 +365,8 @@ Their inclusion was important because the guidelines and placards they helped cr
 \subsection{Data collection}
 \label{data}
 %
-Savović~\textit{et al.} categorized outcome measures as mortality, other objective outcome, and subjective outcome and estimated the associations of bias judgments with intervention effect estimates~\cite{savovic2018association}.
-Trials assessing subjective outcomes are more prone to bias, therefore, had we used only one outcome type, we would have limited label types for different risk classes~\cite{page2016empirical}.
+Different outcome categories exist in SRs: subjective, objective and mortality outcomes (a sub-category of Objective).
+Savović~\textit{et al.} found that trials assessing subjective outcomes are more prone to bias, therefore, had we used only one outcome type, we would have limited label types for different risk classes~\cite{page2016empirical,savovic2018association}.
 In context of RCTs, subjective outcomes are measurements that rely on individuals' perceptions, opinions, or feelings about their own health or well-being.
 These outcomes are typically self-reported by the participants in the trial and can be influenced by factors such as  placebo effects, patient expectations, interpretation, and psychological factors.
 For example, in a study on rheumatoid arthritis, subjective outcome measures included patient-reported pain ratings~\cite{vollert2020assessment}.
@@ -375,7 +375,7 @@ These outcomes are typically collected by trained assessors or through laborator
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
 Mortality outcomes refer to the occurrence of death during the course of the trial.
 To ensure these different outcome types are represented in the corpus, we included 17, 17 and 7 RCTs addressing objective, subjective and mortality primary outcomes.
-The epidemiology researcher from our team created this 41 RCTs dataset from the domain of physiotherapy and rehabilitation.
+The epidemiology researcher (E1MA) from our team created this 41 RCTs dataset from the domain of physiotherapy and rehabilitation.
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol from wherever available.
 Corpus details are in the Supplementary material.
 %
@@ -421,7 +421,7 @@ Their task involved identifying and highlighting relevant text related to answer
 
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
-Out of the 60 documents, 9 were doubly annotated by two experienced annotators (a epidemiology researcher and an assistant professor) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by the epidemiology researcher.
+Out of the 60 documents, 9 were doubly annotated by two experienced annotators (E1MA and E2IRAA) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by E1MA.
 After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the visual placards.
 The conflict resolution was followed by annotating 51 additional RCTs.
 
@@ -663,7 +663,7 @@ As expected, none of the SQ annotations had a perfect F1-measure.
 %
 %
 \begin{table}[htb]
-    \caption{The table displays the F1-Measure at the text span annotation level before and after the development of visual placards. The change in F1-Measure is presented in terms of absolute IAA points.}
+    \caption{The table displays the F1-Measure at the text span annotation level before and after the development of visual placards. The change in F1-Measure is presented in terms of absolute IAA points. Note: A dash (-) shows that one of the annotators did not annotate any text for a particular SQ.}
     \label{tab:IAA_sq}
     \centering
     \begin{tabular}{crrr}
@@ -887,7 +887,7 @@ Some studies tend to not report key details making it tougher to assess certain 
 Feedback forms received indicated that for SQs with fewer than 100 annotated tokens, annotators consistently rated the availability of information to answer those questions as either ``low'' or ``very low''.
 In contrast, for the top five signal questions shown in Figure~\ref{fig:ann_counts}, both annotators consistently rated the availability of information as ``high'' and ``normal''.
 It is important to interpret this qualitative feedback with caution though, as annotator ratings are influenced by the number and types of RCTs they annotated.
-Annotator who reviewed a greater number of documents in RoBuster experienced that it was more difficult to assess certain questions and the availability of information was lower than the other annotator who annotated fewer documents (for IAA calculation).
+The annotator who reviewed a greater number of documents in RoBuster experienced that it was more difficult to assess certain questions and the availability of information was lower than the other annotator who annotated fewer documents (for IAA calculation).
 %
 %
 %
@@ -945,11 +945,12 @@ Specifically, only two out of the nine RCTs had annotations for SQ 2.4 and these
 Similar subjectivity occurs for the SQ 3.3: Could missingness in the outcome depend on its true value?
 The SQ involves assessors making a judgment about the relationship between missing data and the true outcome, which can be challenging to determine objectively.
 Annotating text evidence is even more difficult for this question because authors need to annotate the reasons for missing outcomes data that are related to the true value of the outcome, for the physiotherapy outcomes like `fatigue'.
-If the authors write a sentence about some patients who were not showing up at the follow-up reasoning they were too tired, then annotate this because the missingness depends on the actual/true value of fatigue.
+%If the authors write a sentence about some patients who were not showing up at the follow-up reasoning they were too tired, then annotate this because the missingness depends on the actual/true value of fatigue.
+If authors describe the reasons for missing outcomes data as patients not showing up at follow-up owing to fatigue, annotating this is necessary because missingness of outcomes data in this case depends on the true value of outcome (here fatigue).
 However, this information is not usually available in the RCT.
 Placards instructed annotators to mark outcome descriptions instead, aiding judgment.
 Unfortunately, one annotator did not follow this instruction, resulting in zero agreement at the text span level.
-Such instances suggest a longer training and several rounds of confict resolution and correction are required for the annotators.
+Such instances suggest a longer training and several rounds of conflict resolution and correction are required for the annotators.
 %For example, it is not possible to blind the intervention administrators for certain interventions in physiotherapy and rehabilitation.
 %Therefore, wherever the reviewers found such an intervention, they had to use this information to mark the judgment.
 %
@@ -1026,7 +1027,8 @@ Similarly, for the SQ 3.1 ``Were data for this outcome available for all, or nea
 What one reviewer considers ``nearly all'' might be different from another reviewer's interpretation.
 This ambiguity can lead to subjective judgments when applying the tool.
 Therefore, we introduced the 95\% threshold meaning if the data were not available for at least 95\% or more participants, we instructed the assessors/annotators to judge the bias risk as high.
-On our end, to simplify the annotation process, we chose these thresholds but enforcing a threshold deviates from the recommended RoB guidance as critiqued by this stalwart.
+On our end, to simplify the annotation process and increase the IAA, we chose these thresholds but enforcing a threshold deviates from the recommended RoB guidance as critiqued by this stalwart.
+In practical, thresholds are not one-solution-fits-all and are difficult to apply in different trial conditions.
 Thus, we must find an alternative approach to guide annotators in assessing risk without relying on thresholds.
 One potential solution is to provide examples illustrating instances where low numbers may still introduce bias, offering guidance on specific result figures that annotators should scrutinize.
 
@@ -1103,7 +1105,6 @@ This situation suggests a potential avenue for improvement, involving the explor
 %TODO: Is LLM answering the questions with ``good'' response judgment most of the time?
 %We specifically observe that the expert has a more skeptical stance compared to the LLM giving lower risk judgments in several cases.
 While the LLM demonstrates promise in automating RoB span extraction, additional research is necessary, particularly in the domains of prompt engineering to tackle the subjectivity inherent in SQs and the scarcity of information in RCTs required to answer SQs.
-
 %
 %
 %
