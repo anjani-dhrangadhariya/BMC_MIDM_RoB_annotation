@@ -220,12 +220,12 @@ This indicates the importance of using an updated and standardized tool to asses
 Millard \textit{et al.} attempted automating RoB assessment using supervised machine learning trained on proprietary data as well~\cite{millard2016machine}.
 In fact, the research utilizing this pay-walled data was used to develop RobotReviewer that has been evaluated by several studies for its human-competent performance~\cite{marshall2016robotreviewer,soboczenski2019machine,vinkers2021methodological,jardim2022automating,hirt2021agreement}.
 The question, however, remains of the unavailability of a publicly-available RoB annotated corpus that hinders community efforts for automation. 
-Wang \textit{et al.} recently released three RoB annotated datasets, but for preclinical animal studies with RoB assessments pertaining to animals~\cite{wang2022risk}.
+Wang \textit{et al.} recently released three RoB annotated datasets, but for preclinical studies with RoB assessments pertaining to animals~\cite{wang2022risk}.
 A manually annotated corpus of RoB spans for human clinical trials is still necessary.
 Manual RoB assessment is a complex, expert-led task laden with subjective judgements~\cite{minozzi2022reliability,hartling2009risk}.
 Systematically translating this manual process for developing an RoB annotated corpus requires a carefully designed annotation scheme and detailed annotation guidelines.
 Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether RoB 2 guidelines could be effectively utilized as guidelines to manually annotate a corpus of RCTs with RoB using a multi-level annotation scheme adapted from the same guidelines.
-They conclude that the assessment guidelines cannot be used as text annotation guidelines, but neither provide any annotation guidelines from their end.
+They conclude that the assessment guidelines cannot be used as text annotation guidelines, but did not provide any annotation guidelines from their end.
 Additionally, the dataset they provide is comparatively small with 10 annotated RCTs~\cite{dhrangadhariya2023first}.
 Our objective is to develop clear cut annotation guidelines to annotate RCTs with RoB spans corresponding to RoB 2 tool for randomized controlled trials~\cite{sterne2019rob}.
 
@@ -324,7 +324,7 @@ Any label containing ``Good'' denoted a low risk of bias and any label containin
 We also remove the ``No Information'' response option because this was meant for the situations where actually no text evidence is found in the RCT to answer and label for a SQ.
 However, for selected SQs (currently only SQ 2.1), ``Probably Yes'', ``Probably No'' and ``No Information'' may still be acceptable.
 For instance, consider that an RCT uses ``...random number generator and sealed envelopes for patient randomization...'', but the trial provided no information on whether the envelop was ``opaque'' or not.
-%In such situations, ``No Information'' judgment is acceptable.
+In such situations, ``No Information'' judgment is acceptable.
 %Additionally, it is based on this span, the response judgment option is decided, and therefore even the response judgement information is incorporated in the label.
 %Consider the following span is found to answer the above-mentioned SQ, ``randomized participants using random number generation...'', which is a good randomization procedure and therefore the reviewer responds with ``yes''.
 %The label extends the example label to ``1.1 Yes''.
@@ -339,7 +339,7 @@ For instance, consider that an RCT uses ``...random number generator and sealed 
 \begin{figure}
     \centering
     \includegraphics[width=0.80\columnwidth]{figures/flowchart.pdf}
-    \caption{Algorithm for suggested judgement of risk of bias arising from the randomization process. The figure is recreated from the revised Cochrane's risk of bias tool (RoB 2).~\cite{sterne2019rob}}
+    \caption{Algorithm for suggested judgement of risk of bias arising from the randomization process. The figure is recreated from the revised Cochrane's risk of bias tool (RoB 2). Note: Y = Yes, N = No and NI = No Information.~\cite{sterne2019rob}}
     \label{fig:flowchart}
 \end{figure}
 %
@@ -375,10 +375,10 @@ Objective outcomes are measurements that are independent of individual opinions 
 These outcomes are typically collected by trained assessors or through laboratory tests, imaging studies, or other objective methods.
 For instance, in a study on peripheral artery disease, objective outcome measures included angiography and molecular imaging to evaluate the effectiveness of cell therapy~\cite{grimaldi2016imaging}.
 Mortality outcomes refer to the occurrence of death during the course of the trial.
-To ensure these different outcome types are represented in the corpus, we included 17, 17 and 7 RCTs addressing objective, subjective and mortality primary outcomes.
+To ensure that these various outcome types are represented in the corpus, we included 17, 17, and 7 RCTs addressing objective, subjective, and mortality primary outcomes, respectively.
 The epidemiology researcher (E1MA) from our team created this 41 RCTs dataset from the domain of physiotherapy and rehabilitation.
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol from wherever available.
-Each PDF was renamed with the primary outcome that was to be examined using RoB 2 before uploading to the annotation software.
+Each PDF was renamed with the primary outcome that was to be examined using RoB 2 before uploading to the annotation software~\footnote{tagtog text annotation software, PAWLS annotation software}.
 Corpus details are in the Supplementary material.
 %
 %
@@ -417,22 +417,26 @@ The RoB 2 tool SQs are broadly factual but leave room for subjective judgements 
 %
 %
 For every SQ, the annotators were guided to use the complete RoB 2 guidance document along with visual placards that were developed.
-Specifically, we considered evaluating risk domain two for effect of assignment to the intervention and not for the effect of adherence.
 They followed these instructions meticulously, going through each placard's signaling question one by one.
 The provided instructions directed the annotators to read specific sections of full-text RCT that needed annotation.
 Their task involved identifying and highlighting relevant text related to answering the signaling question.
+It has to be noted that the domain 2 of RoB 2 focuses on assessing the risk of bias due to deviation from the intended intervention.
+This domain evaluates both the effect of assignment to the intervention and the effect of adherence to the intervention.
+RoB 2 offers distinct sets of SQs for each aspect.
+In our study, we specifically focus on assessing Domain 2 for the effect of assignment to the intervention.
+As a result, we only address the signaling questions corresponding to this aspect.
 
 
 Tagtog~\footnote{\url{https://www.tagtog.net/}}, a commercial text annotation web application, allows for annotating PDF (Portable Document Format) documents, was used for the annotation~\cite{cejuela2014tagtog}.
-Out of the 60 documents, 9 were doubly annotated by two experienced annotators (E1MA and E2IRAA) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by E1MA.
+Out of the 41 documents, 9 were doubly annotated by two experienced annotators (E1MA and E2IRAA) to calculate inter-annotator agreement (IAA) over these documents and the rest were singly annotated by E1MA.
 After double annotation, we performed conflict resolution to address conflicting annotations, which helped us further calibrate the visual placards.
 The conflict resolution was followed by annotating 51 additional RCTs.
 
 
-After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
+After the annotation of 9 doubly-annotated RCTs, we switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
 We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format that will be lost upon converting to text. 
 For example the structure pertaining to sections and subsections, tables, and figures makes the annotation task quicker for the annotators and increases annotation quality.
-Post annotation, the feedback was taken from both the annotators details of which could be found in the supplementary material. %TODO Anjani: Prepare the supplementary material 
+Post annotation, the feedback was taken from both the annotators, details of which could be found in the supplementary material.
 %
 %
 %
