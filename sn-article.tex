@@ -118,13 +118,15 @@
 
 \author[4]{\fnm{Karl Martin} \sur{Sattelmayer}}\email{martin.sattelmayer@hevs.ch}
 
-\author[5,6]{\fnm{Nona} \sur{Naderi}}\email{nona.naderi@hesge.ch}
+\author[5]{\fnm{Nona} \sur{Naderi}}\email{nona.naderi@lisn.fr}
 
 \author[4]{\fnm{Katia} \sur{Giacomino}}\email{katia.giacomino@hevs.ch}
 \equalcont{These authors contributed equally to this work.}
 
 \author[4]{\fnm{Rahel} \sur{Caliesch}}\email{rahel.caliesch@hevs.ch}
 \equalcont{These authors contributed equally to this work.}
+
+\author[6]{\fnm{Julian PT} \sur{Higgins}}\email{julian.higgins@bristol.ac.uk}
 
 \author[1]{\fnm{Stéphane} \sur{Marchand-Maillet}}\email{stephane.marchand-maillet@unige.ch}
 
@@ -139,9 +141,9 @@
 
 \affil[4]{\orgdiv{School of Health Sciences}, \orgname{HES-SO Valais-Wallis}, \orgaddress{\city{Leukerbad}, \country{Switzerland}}}
 
-\affil[5]{\orgdiv{Geneva School of Business Administration}, \orgname{HES-SO Geneva}, \orgaddress{\city{Geneva}, \country{Switzerland}}}
+\affil[5]{\orgdiv{CNRS, Laboratoire Interdisciplinaire des Sciences du Numérique}, \orgname{Université Paris-Saclay}, \orgaddress{\city{Orsay}, \country{France}}}
 
-\affil[6]{\orgname{Swiss Institute of Bioinformatics (SIB)}, \orgaddress{\city{Geneva}, \country{Switzerland}}}
+\affil[6]{\orgdiv{Population Health Sciences, Bristol Medical School}, \orgname{University of Bristol}, \orgaddress{\city{Bristol}, \country{United Kingdom}}}
 
 %%==================================%%
 %% sample for unstructured abstract %%
@@ -153,15 +155,15 @@
 %% Sample for structured abstract %%
 %%================================%%
 
-\abstract{\textbf{Purpose:} Risk of bias (RoB) assessment of randomized clinical trials (RCTs) is vital to accurately answer a systematic review question.
+\abstract{\textbf{Purpose:} Risk of bias (RoB) assessment of randomized clinical trials (RCTs) is vital to accurately answer systematic review questions.
 Manual RoB assessment for hundreds of clinical trials is a cognitively demanding and lengthy process.
 Automation has the potential to assist reviewers in rapidly identifying text descriptions in RCTs that indicate potential bias.
 However, there is no annotated corpus for RoB to fine-tune large language models (LLMs) and no established guidelines for annotating the risk of bias in RCTs.
 % 
 \textbf{Methods:} We utilized the revised Cochrane Risk of Bias Assessment 2 guidelines for RCTs to create visual instructional placards serving as text annotation guidelines for RoB spans and risk judgments.
-Expert annotators employed these visual guidelines to annotate a corpus of 41 full-text RCTs from physiotherapy and rehabilitation.
-We report inter-annotator agreements (IAA) at two levels: agreement on text spans and risk judgments between two expert annotators when applying the guidelines to a subset (9 out of 41) of the annotated corpus.
-Additionally, a portion of the corpus (10 out of 40) was employed to evaluate an LLM using a straightforward evaluation framework.
+Expert annotators employed these visual guidelines to  to annotate a dataset named RoBuster, consisting of 41 full-text RCTs from the field of physiotherapy and rehabilitation domain.
+We report inter-annotator agreements (IAA) at two levels: agreement on text spans and risk of bias judgments between two expert annotators when applying the guidelines to a subset (9 out of 41) of the annotated corpus.
+Additionally, a portion of the corpus (10 out of 41) was employed to evaluate an LLM using a straightforward evaluation framework.
 % 
 \textbf{Results:} We present a corpus of 41 RCTs with fine-grained text span annotations comprising more than 28,427 tokens belonging to 22 RoB classes.
 The IAA at the text span level varies from $0\%$ to $90\%$, while the IAA for risk judgments ranges between $-0.235$ and $1.0$.
@@ -190,15 +192,15 @@ While LLMs demonstrate efficacy, their accuracy diminishes with more subjective 
 Systematic reviews (SRs) synthesized using randomized controlled trials (RCTs) are the highest quality of evidence in the evidence pyramid.
 SRs aid medical professionals make educated decisions about an individual's health and help governments enact informed health policies~\cite{mogo2022systematic,mctigue2006obesity}.
 An RCT is a scientific experiment aiming to evaluate the efficacy of an intervention on particular patient outcomes.
-In these trials, patients are randomly divided and allocated to either an active intervention group or a comparator group, and the impact of intervention compared to the comparator is measured in a controlled setting~\cite{sibbald1998understanding}.
+In these trials, patients are randomly divided and allocated to different intervention groups, and the impact of intervention under investigation is compared to the rest in a controlled setting~\cite{sibbald1998understanding}.
 Theoretically, RCTs are low on biases given the randomized study design but are still prone to unavoidable biases creeping into the trial's design, execution, or reporting.
 Biased clinical trials make medical practitioners systematically overestimate or underestimate the intervention effect on patient outcomes, leading to harmful health practices and policies~\cite{kjaergard1999randomized,naci2019design}.
-Thus, reviewers conducting SRs must thoroughly screen RCTs for biases before inclusion in writing SRs.
+Thus, reviewers conducting SRs must thoroughly screen RCTs for biases.
 
 
 The biases in RCTs cannot be quantified, but an RCT can be assessed for biases to minimize the overall risk and judge its quality.
 In this study, we refer to bias assessment as risk-of-bias (RoB) assessment.
-There are several tools to assess RoB, including the Cochrane Collaborations RoB Tool, Physiotherapy Evidence Database (PEDro) RoB scale, revised Cochrane RoB 2 tool (RoB 2), AMSTAR/AMSTAR 2, EPOC RoB Tool and several other independent checklists~\cite{higgins2019,higgins2011cochrane,elkins2013growth,sterne2019rob,shea2017amstar,farrah2019risk}.
+There are several tools to assess RoB, including the Cochrane Collaborations RoB Tool, Physiotherapy Evidence Database (PEDro) RoB scale, revised Cochrane RoB 2 tool (RoB 2), AMSTAR/AMSTAR 2~\footnote{A tool to assess bias risk in SRs}, EPOC RoB Tool and several other independent checklists~\cite{higgins2019,higgins2011cochrane,elkins2013growth,sterne2019rob,shea2017amstar,farrah2019risk}.
 These tools are structured as a series of questions aiming to elicit factual information from the RCTs, which could then be used for RoB assessment.
 %These tools are a series of questions aiming to elicit factual information from the RCTs, which can then be used to assess their quality.
 Manual quality assessment requires the reviewers to go through full-text RCTs and manually inspect every question from the chosen bias assessment tool.
@@ -211,7 +213,7 @@ Marshall \textit{et al.}~\cite{marshall2015automating} attempted automation of R
 They formulated the trial quality assessment as binary classification into \textit{low-risk} and \textit{unclear-risk/high-risk} quality attributes for each risk domain.
 The study was supported by the manually-entered data from CDSR, which is behind a paywall and automates based on Cochrane's RoB 1.0 guidelines and not the latest RoB 2~\cite{higgins2011cochrane}.
 Even though Cochrane's RoB tool (version 1) is the most frequently used to assess RCT quality, a recently revised Cochrane RoB 2 offers significant differences in comparison~\cite{ma2020methodological}.
-Compared to the original RoB version released in 2008, the RoB 2 version provides a more reliable and concrete structure to the RoB evaluation by developing comprehensive guidelines that enforce consistency~\cite{higgins2011cochrane,sterne2019rob}.
+Compared to the original RoB version released in 2008, the RoB 2 version provides a more reliable and concrete structure to the RoB evaluation by developing comprehensive guidelines that aim to increase consistency~\cite{higgins2011cochrane,sterne2019rob}.
 A study analyzing Cochrane systematic reviews and protocols found that the use of RoB 2 increased from 0\% in 2019 to 24.1\% in 2022~\cite{martimbianco2023most}.
 This indicates the importance of using an updated and standardized tool to assess bias in RCTs.
 
@@ -375,6 +377,7 @@ Mortality outcomes refer to the occurrence of death during the course of the tri
 To ensure these different outcome types are represented in the corpus, we included 17, 17 and 7 RCTs addressing objective, subjective and mortality primary outcomes.
 The epidemiology researcher (E1MA) from our team created this 41 RCTs dataset from the domain of physiotherapy and rehabilitation.
 PDFs of the full-text RCTs were extracted and each article was collated with its trial protocol from wherever available.
+Each PDF was renamed with the primary outcome that was to be examined using RoB 2 before uploading to the annotation software.
 Corpus details are in the Supplementary material.
 %
 %
@@ -382,7 +385,7 @@ Corpus details are in the Supplementary material.
 \subsection{Visual Placards Development}
 \label{guidelines}
 %
-RoB 2 tool consist of extensive and step-by-step set of instructions to answer signaling questions and even though RoB 2 guidelines are widely used for bias assessment, there have been some research on their reliability.
+RoB 2 tool consist of an extensive and step-by-step set of instructions to answer signaling questions and even though RoB 2 guidelines are widely used for bias assessment, there have been some research on their reliability.
 This reliability concern has been extensively investigated by Minozzi \textit{et al.}. 
 They formulated specific instructions on how to approach and answer the signaling questions of RoB 2.
 These instructions, referred to as the Instruction Document (ID), address the subjectivity present in the RoB 2 guidelines and provide clear guidance for the assessment process.
@@ -413,6 +416,7 @@ The RoB 2 tool SQs are broadly factual but leave room for subjective judgements 
 %
 %
 For every SQ, the annotators were guided to use the complete RoB 2 guidance document along with visual placards that were developed.
+Specifically, we considered evaluating risk domain two for effect of assignment to the intervention and not for the effect of adherence.
 They followed these instructions meticulously, going through each placard's signaling question one by one.
 The provided instructions directed the annotators to read specific sections of full-text RCT that needed annotation.
 Their task involved identifying and highlighting relevant text related to answering the signaling question.
@@ -436,11 +440,15 @@ Post annotation, the feedback was taken from both the annotators details of whic
 %
 We report IAA at two levels checking whether the annotators agree on the text spans to answer SQs using the pairwise F1 measure.
 F1-measure disregards out-of-the-span tokens (unannotated tokens) during agreement calculation and is an ideal measure of annotation reliability for the token-level annotation tasks.
-It measures the F1 score for each pair of annotators, treating one annotator's labels as the ``true'' labels and the other annotator's labels as the ``predicted'' labels~\cite{deleger2012building,brandsen2020creating}.
+It measures the F1 score as shown below for each pair of annotators, treating one annotator's labels as the ``true'' labels and the other annotator's labels as the ``predicted'' labels~\cite{deleger2012building,brandsen2020creating}.
+
+\[ F1-measure = \frac{2 \times \text{True Positives}}{2 \times \text{True Positives} + \text{False Positives} + \text{False Negatives}} \]
+
+
 We also check how strongly the annotators agree on the risk judgment for each SQ using prevalence and bias adjusted kappa (PABAK) $\kappa_{pabak}$ and compare it with raw percent agreement.
 PABAK $\kappa_{pabak}$ is the standard annotation reliability measure for many classification annotation tasks and is suitable to measure reliability at the risk judgment level.
 $\kappa_{pabak}$ is an extension of Cohen's Kappa $\kappa$ that takes into account prevalence and bias in the agreement.
-We interpret both IAA measures as shown in the Table~\ref{tab:iaa_interpret}~\cite{mchugh2012interrater,cohen1960coefficient,byrt1993bias,landis1977measurement}.
+We interpret both the IAA measures as shown in the Table~\ref{tab:iaa_interpret}~\cite{mchugh2012interrater,cohen1960coefficient,byrt1993bias,landis1977measurement}.
 %
 %
 %
@@ -860,6 +868,12 @@ While some annotators might annotate an entire paragraph as text evidence to ans
 To address this, our placards provide clear guidance on whether annotators should annotate a phrase, a sentence, or a combination of sentences.
 Another common reason for a low F1 was when annotators correctly addressed a bias SQ but annotated evidence from different parts of the full text leading to no or low agreement. 
 To tackle this, our placards restrict annotations for a question to a specific part of the text for specific SQs, such as the Methods section, Results section, Flowchart in the Methods section, etc.
+Annotations in Flowcharts and Tables are restricted as last priority for all SQs except 1.3.
+We had this restriction since ML models face challenges in directly interpreting Tables and Figures.
+Reiterating the details presented in Figure~\ref{fig:placard}, the information related to answering SQ 3.1 is found in the RCT flowchart.
+However, the first diamond instructs annotators to locate the information in the Results section for annotation.
+This decision is made to facilitate ML models, as training on text data from the Results section is deemed more effective.
+
 
 
 
@@ -883,7 +897,7 @@ For the rest of the SQs, it is the availability of detailed description on the s
 The more information a study provided, the easier it is to evaluate a bias question.
 Some studies tend to not report key details making it tougher to assess certain bias questions.
 Feedback forms received indicated that for SQs with fewer than 100 annotated tokens, annotators consistently rated the availability of information to answer those questions as either ``low'' or ``very low''.
-In contrast, for the top five signal questions shown in Figure~\ref{fig:ann_counts}, both annotators consistently rated the availability of information as ``high'' and ``normal''.
+In contrast, for the top five signalling questions shown in Figure~\ref{fig:ann_counts}, both annotators consistently rated the availability of information as ``high'' and ``normal''.
 It is important to interpret this qualitative feedback with caution though, as annotator ratings are influenced by the number and types of RCTs they annotated.
 The annotator who reviewed a greater number of documents in RoBuster experienced that it was more difficult to assess certain questions and the availability of information was lower than the other annotator who annotated fewer documents (for IAA calculation).
 %
@@ -1079,7 +1093,7 @@ The evaluation for third domain of bias brought to light the subjectivity of bia
 A lenient assessor will judge a risk of bias as low in comparison to a stringent assessor judging a bias risk as high for any SQ, but it is more pronounced in subjective SQs.
 In~\cite{thorndike2014activity}, LLM and the expert used the same text evidence ``...104 (82\%) were randomized in January 2011. Five residents withdrew during Phase 1, and 99 continued participation in Phase 2...'' to answer SQ 3.1 but LLM produced the response option ``Yes Good'' and the expert rated it as ``No Bad''.
 It was also because our placards have a stringent rule whereby if outcome data was not available for more than 95\% of the participants, the assessor/annotator was instructed to judge the risk as high risk of bias without considering other factors like total number of participants randomized and the kind of study.
-For answering SQ 3.2 across the evaluation RCTs~\cite{myer2018integration,taylor2016novel}, the LLM was more lenient than the experts and consistently extracted information about the sensitivity analysis carried out by the study authors to account for missing outcome data, but the authors do not explicit that there was no bias due to missing outcomes data.
+For answering SQ 3.2 across the evaluation RCTs~\cite{myer2018integration,taylor2016novel}, the LLM was more lenient than the experts and consistently extracted information about the sensitivity analysis carried out by the study authors to account for missing outcome data, but the authors were not explicit that there was no bias due to missing outcomes data.
 LLM judged signalling question 3.3 9/10 times as No information.
 It questions whether the missingness in outcomes depended on its true value and is quite subjective because assessor need to contemplate on the reasons for missingness for a particular outcomes and if its true value could have affected the missingness.
 For example, they need to assess whether the fact that data on falls is missing can be attributed to the actual occurrence of falls in the study.
@@ -1152,7 +1166,7 @@ We also plan to test the visual annotation placards to guide trainee risk of bia
     \item RoB - Risk of Bias
     \item SR - Systematic review
     \item SQ - Signalling Question
-    \item SLR - Living Systematic Review
+    \item SLR - Systematic Literature Review
     \item LLM - Large Language Model
     \item GPT - Generative Pretrained Transformer
     \item NLP - Natural Language Processing
