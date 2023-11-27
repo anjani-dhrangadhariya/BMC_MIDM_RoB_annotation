@@ -218,7 +218,7 @@ A study analyzing Cochrane systematic reviews and protocols found that the use o
 This indicates the importance of using an updated and standardized tool to assess bias in RCTs.
 
 Millard \textit{et al.} attempted automating RoB assessment using supervised machine learning trained on proprietary data as well~\cite{millard2016machine}.
-In fact, the research utilising this pay-walled data was used to develop RobotReviewer that has been evaluated by several studies for its human-competent performance~\cite{marshall2016robotreviewer,soboczenski2019machine,vinkers2021methodological,jardim2022automating,hirt2021agreement}.
+In fact, the research utilizing this pay-walled data was used to develop RobotReviewer that has been evaluated by several studies for its human-competent performance~\cite{marshall2016robotreviewer,soboczenski2019machine,vinkers2021methodological,jardim2022automating,hirt2021agreement}.
 The question, however, remains of the unavailability of a publicly-available RoB annotated corpus that hinders community efforts for automation. 
 Wang \textit{et al.} recently released three RoB annotated datasets, but for preclinical animal studies with RoB assessments pertaining to animals~\cite{wang2022risk}.
 A manually annotated corpus of RoB spans for human clinical trials is still necessary.
@@ -387,7 +387,7 @@ Corpus details are in the Supplementary material.
 \label{guidelines}
 %
 RoB 2 tool consist of an extensive and step-by-step set of instructions to answer signaling questions and even though RoB 2 guidelines are widely used for bias assessment, there have been some research on their reliability.
-This reliability concern has been extensively investigated by Minozzi \textit{et al.}. 
+This reliability concern has been extensively investigated by Minozzi \textit{et al.}~\cite{minozzi2020revised,minozzi2022reliability}. 
 They formulated specific instructions on how to approach and answer the signaling questions of RoB 2.
 These instructions, referred to as the Instruction Document (ID), address the subjectivity present in the RoB 2 guidelines and provide clear guidance for the assessment process.
 Subjectivity in assessment could potentially result in different evaluators coming to disparate conclusions when analyzing the same trial.
@@ -429,7 +429,7 @@ After double annotation, we performed conflict resolution to address conflicting
 The conflict resolution was followed by annotating 51 additional RCTs.
 
 
-After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog for certain reasons and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
+After the annotation of 9 doubly-annotated RCTs, we had to stop using tagtog and switched to the PAWLS~\footnote{\url{https://pawls.apps.allenai.org/}} annotation tool, which allows users to annotate PDFs for free~\cite{neumann2021pawls}.
 We chose to annotate PDFs rather than plain text because RCT PDFs have a visual format that will be lost upon converting to text. 
 For example the structure pertaining to sections and subsections, tables, and figures makes the annotation task quicker for the annotators and increases annotation quality.
 Post annotation, the feedback was taken from both the annotators details of which could be found in the supplementary material. %TODO Anjani: Prepare the supplementary material 
@@ -795,7 +795,7 @@ The bias questions 3.3 and 4.5 show 0 $\kappa_{pabak}$ agreement.
 %
 \subsection{LLM evaluation}
 %
-In Table~\ref{table:LLM_eval}, we present the observed or raw agreement ($P_{O}$) between LLM and expert assessments in extracting and responding to SQ over a subset (n=10) of RoBuster~\ref{method:llm}. 
+In Table~\ref{table:LLM_eval}, we present the observed or raw agreement between LLM and expert assessments in extracting and responding to SQ over a subset (n=10) of RoBuster~\ref{method:llm}. 
 The evaluation was conducted on four RCTs reporting objective outcome, three RCTs evaluating subjective outcome and the rest three RCTs reporting mortality outcome.
 For the first risk domain, ChatGPT had high $P_{O} (Extraction)$ and $P_{O} (Response)$ agreements (66.6\% and 55.3\% IAA respectively) with experts and none of these agreements came from ``No Information'' responses indicating a good availability of information for bias assessment. 
 Notably, for individual SQs within domain 1, the $P_{O} (Extraction)$ was greater than $P_{O} (Response)$.
@@ -1033,7 +1033,7 @@ Consequently, the annotators needed to mark the information in both the RCT and 
 %
 We now address the concerns raised by a stalwart in bias assessment.
 To address subjectivity arising from signaling questions 2.7 and 3.1, which inquire about the potential impact of failure to analyze participants in their randomized groups and the availability of data for all participants, respectively, we introduced the concept of a threshold.
-Specifically, SQ 2.7 ``Was there potential for a substantial impact (on the result) of the failure to analyse participants in the group to which they were randomized?''.
+Specifically, SQ 2.7 ``Was there potential for a substantial impact (on the result) of the failure to analyze participants in the group to which they were randomized?''.
 To annotate for this question, the visual placard instructs the annotators to find the data about the number of participants included and excluded from the intention-to-treat (ITT) analysis.
 The placard then goes to instructs that if more than 5\% of participants were excluded from the ITT analysis, it was a substantial number and mark this information and label it a higher risk of bias.
 Similarly, for the SQ 3.1 ``Were data for this outcome available for all, or nearly all, Participants randomized?'', the term ``all, or nearly all, participants'' can be interpreted differently by different reviewers.
@@ -1078,7 +1078,7 @@ To elaborate, for~\cite{stuck2015effect}, both the expert and LLM answered SQ 1.
 
 The LLM correctly extracts information about participant randomization and allocation concealment procedures pertaining to answer SQ 1.1 and 1.2 leading to a rightly good $P_{O} (Extraction)$ agreements. 
 As shown in the Table, for individual SQs in domain 1, $P_{O} (Extraction)$ was greater than $P_{O} (Response)$ but in an example, LLM came to a correct response judgment without correctly extracting complete evidence.
-To elaborate, in~\cite{stuck2015effect}, LLM used this part of text ``'PRO-AGE Solothurn CONSORT diagram. The randomisation ratio (intervention to control group) was 1:1 in the first project phase (November 16, 2000, to March 27, 2001), and 1:2 in the second project phase (March 28, 2001, to January 8, 2002), resulting in a ratio overall of 1:1.6'' to answer SQ 1.1 with ``Yes Good'' (low risk of randomization bias) even though the extracted sentence does not contain information about the randomization method.
+To elaborate, in~\cite{stuck2015effect}, LLM used this part of text ``'PRO-AGE Solothurn CONSORT diagram. The randomization ratio (intervention to control group) was 1:1 in the first project phase (November 16, 2000, to March 27, 2001), and 1:2 in the second project phase (March 28, 2001, to January 8, 2002), resulting in a ratio overall of 1:1.6'' to answer SQ 1.1 with ``Yes Good'' (low risk of randomization bias) even though the extracted sentence does not contain information about the randomization method.
 
 
 % -------------- LLM Risk Domain two --------------
@@ -1095,7 +1095,7 @@ A lenient assessor will judge a risk of bias as low in comparison to a stringent
 In~\cite{thorndike2014activity}, LLM and the expert used the same text evidence ``...104 (82\%) were randomized in January 2011. Five residents withdrew during Phase 1, and 99 continued participation in Phase 2...'' to answer SQ 3.1 but LLM produced the response option ``Yes Good'' and the expert rated it as ``No Bad''.
 It was also because our placards have a stringent rule whereby if outcome data was not available for more than 95\% of the participants, the assessor/annotator was instructed to judge the risk as high risk of bias without considering other factors like total number of participants randomized and the kind of study.
 For answering SQ 3.2 across the evaluation RCTs~\cite{myer2018integration,taylor2016novel}, the LLM was more lenient than the experts and consistently extracted information about the sensitivity analysis carried out by the study authors to account for missing outcome data, but the authors were not explicit that there was no bias due to missing outcomes data.
-LLM judged signalling question 3.3 9/10 times as No information.
+LLM judged signalling question 3.3 9/10 times as ``No information''.
 It questions whether the missingness in outcomes depended on its true value and is quite subjective because assessor need to contemplate on the reasons for missingness for a particular outcomes and if its true value could have affected the missingness.
 For example, they need to assess whether the fact that data on falls is missing can be attributed to the actual occurrence of falls in the study.
 
@@ -1180,6 +1180,7 @@ We also plan to test the visual annotation placards to guide trainee risk of bia
     \item JSON - JavaScript Object Notation
     \item ML - Machine Learning
     \item ID - Identifier
+    \item PABAK - Prevalence and Bias Adjusted Kappa
     \item CoT - Chain-of-thought
     \item ToT - Tree-of-thought
 \end{enumerate}
