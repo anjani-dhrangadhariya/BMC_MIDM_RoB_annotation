@@ -203,13 +203,13 @@ In this study, we refer to bias assessment as risk-of-bias (RoB) assessment.
 There are several tools to assess RoB, including the Cochrane Collaborations RoB Tool, Physiotherapy Evidence Database (PEDro) RoB scale, revised Cochrane RoB 2 tool (RoB 2), AMSTAR/AMSTAR 2~\footnote{A tool to assess bias risk in SRs}, EPOC RoB Tool and several other independent checklists~\cite{higgins2019,higgins2011cochrane,elkins2013growth,sterne2019rob,shea2017amstar,farrah2019risk}.
 These tools are structured as a series of questions aiming to elicit factual information from the RCTs, which could then be used for RoB assessment.
 %These tools are a series of questions aiming to elicit factual information from the RCTs, which can then be used to assess their quality.
-Manual quality assessment requires the reviewers to go through full-text RCTs and manually inspect every question from the chosen bias assessment tool.
+Manual RoB assessment requires the reviewers to go through full-text RCTs and manually inspect every question from the chosen bias assessment tool.
 Crocker \textit{et al.} reported an average of a 5 hours 58 minutes hour per RCT for bias assessment done over a set of 113 studies~\cite{crocker2023risk}. 
 Moreover, RoB assessment is a part of writing systematic reviews, which is highly resource-heavy, taking about six months to several years to complete the review~\cite{tsertsvadze2015conduct,khangura2012evidence,higgins2019cochrane}.
 The SR writing process takes about 3-10 months per person per SR and requires a high degree of methodological expertise on the reviewer's part.
 The pace at which RCTs are published makes RoB assessment a lengthy process and underscores the need for automation.
 Machine learning (ML) can help accelerate the assessment process by directly pointing the reviewers to the parts of the RCT text relevant to identifying bias, leading to quickly judging the trial quality.
-Marshall \textit{et al.}~\cite{marshall2015automating} attempted automation of RoB assessment using distant supervision approach supported by proprietary data from the Cochrane Database of Systematic Reviews (CDSR). 
+Marshall \textit{et al.}~\cite{marshall2015automating} attempted automation of RoB assessment using a distant supervision approach supported by proprietary data from the Cochrane Database of Systematic Reviews (CDSR). 
 They formulated the trial quality assessment as binary classification into \textit{low-risk} and \textit{unclear-risk/high-risk} quality attributes for each risk domain.
 The study was supported by the manually-entered data from CDSR, which is behind a paywall and automates based on Cochrane's RoB 1.0 guidelines and not the latest RoB 2~\cite{higgins2011cochrane}.
 Even though Cochrane's RoB tool (version 1) is the most frequently used to assess RCT quality, a recently revised Cochrane RoB 2 offers significant differences in comparison~\cite{ma2020methodological}.
@@ -225,7 +225,7 @@ A manually annotated corpus of RoB spans for human clinical trials is still nece
 Manual RoB assessment is a complex, expert-led task laden with subjective judgements~\cite{minozzi2022reliability,hartling2009risk}.
 Systematically translating this manual process for developing an RoB annotated corpus requires a carefully designed annotation scheme and detailed annotation guidelines.
 Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether RoB 2 guidelines could be effectively utilized as guidelines to manually annotate a corpus of RCTs with RoB using a multi-level annotation scheme adapted from the same guidelines.
-They conclude that the assesment guidelines cannot be used as text annotation guidelines, but neither provide any annotation guidelines from their end.
+They conclude that the assessment guidelines cannot be used as text annotation guidelines, but neither provide any annotation guidelines from their end.
 Additionally, the dataset they provide is comparatively small with 10 annotated RCTs~\cite{dhrangadhariya2023first}.
 Our objective is to develop clear cut annotation guidelines to annotate RCTs with RoB spans corresponding to RoB 2 tool for randomized controlled trials~\cite{sterne2019rob}.
 
@@ -236,7 +236,7 @@ However, till date, no one has evaluated their performance on the cognitively co
 Our contributions with this paper are five-fold. 
 1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
 2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We annotate a corpus of 41 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
+3) We annotate RoBuster, a corpus of 41 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions (SQs) using prompt generation.
 5) We make the visual annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
 %
@@ -313,13 +313,14 @@ Conversely, if a poorly executed method of randomization is found, the risk of b
 
 In RoB span annotation, we mimic this assessment process by considering evidence text spans in the RCT as the main units of annotation.
 Each span corresponds to answering a SQ and is annotated with the most informative label. 
-In our adopted annotation scheme, the label incorporates information about the SQ number and the domain it assesses (for the above example, ``1.1'' for the first domain and first SQ of the domain)
+In our adopted annotation scheme, the label incorporates information about the SQ number and the domain it assesses (for the above example, ``1.1'' for the first domain and first SQ of the domain).
 Additionally, the response option or risk judgement is incorporated in the label, such as ``1.1 Yes Good'' for a well-executed randomization procedure and ``1.1 No Bad'' otherwise (see Figure~\ref{fig:annotationscheme}).
 Dhrangadhariya \textit{et al.} suggests collapsing the response options ``Yes'' and ``Probably Yes'' into a single ``Yes'', and ``No'' and ``Probably No'' together into a single ``No'' to increase the inter-annotator agreement (IAA) without altering the final risk domain judgment~\cite{dhrangadhariya2023first}.
 As shown in Figure~\ref{fig:flowchart} responding to any SQ for the risk domain 2 as either ``Probably Yes'' or ``Yes'' does not alter the final risk judgment for this domain (low, high, or some concerns).
-Therefore, except for some special case SQs, we too collapse these response option as suggested.
+Therefore, except for some special case SQs, we also collapse these response option as suggested.
 %In summary, the reviewer needs to label the identified text span with the RoB entity along with one of the response options.
-In this regard, we have a hierarchical span annotation scheme comprising 22 entities corresponding to the 22 SQs, each with typically two response options (``Yes'' or ``No'') and two directions (``good'' and ``bad'').
+In this regard, we have a hierarchical span annotation scheme comprising 22 entities corresponding to the 22 SQs, each with typically two response options (``Yes'' or ``No'') and two risk judgments (``Good'' and ``Bad'').
+Any label containing ``Good'' denoted a low risk of bias and any label containing ``Bad'' denoted a high risk of bias.
 We also remove the ``No Information'' response option because this was meant for the situations where actually no text evidence is found in the RCT to answer and label for a SQ.
 However, for selected SQs (currently only SQ 2.1), ``Probably Yes'', ``Probably No'' and ``No Information'' may still be acceptable.
 For instance, consider that an RCT uses ``...random number generator and sealed envelopes for patient randomization...'', but the trial provided no information on whether the envelop was ``opaque'' or not.
@@ -481,13 +482,13 @@ We interpret both the IAA measures as shown in the Table~\ref{tab:iaa_interpret}
 %
 Our annotation guidelines and annotations were adapted for benchmarking supervised machine learning approaches and not LLMs.
 So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical ML model could not use without extensive modifications~\cite{li2019figure,li2023uttsr}.
-Recent advancements with LLMs that encode vast amounts of knowledge offers a better alternative made us rethink the evaluation.
+Recent advancements with LLMs offers a better alternative and made us rethink the evaluation.
 The bar for clinical applications is high and it is imperative to evaluate LLMs for the more challenging clinical tasks like RoB text span extraction~\cite{singhal2023large}.
 The tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allow direct interaction between LLMs and PDFs, negating the clumsy PDF to text conversion.
 Therefore, we consider it essential to evaluate LLMs instead of forcefully adapting the evaluation to a classical ML problem.
 We formulated the task as a zero-shot RoB text span extraction task.
 This was to gauge whether an LLM encodes knowledge related to assessing trial biases.
-We will use simple prompt constructs of the structure ``Answer the \{\textit{SQ}\} + Action item to extract sentence supporting the answer''.
+We used simple prompt constructs of the structure ``Answer the \{\textit{SQ}\} + Action item to extract sentence supporting the answer''.
 Consider the following example.
 
 \begin{quote}
@@ -659,11 +660,11 @@ The agreement before the placard development was none and it increased to slight
 
 
 Improvements in agreement were observed at individual SQs level too, with considerable gains exceeding 50\% points for signaling questions 1.3, 2.1, 4.1, and 4.4.
-The F1-measure between the two reference annotators for a total of 11 out of 22 questions remained zero both before and after the guideline development.
-For two SQs, 4.4 and 5.2, the guideline improvement raised it from zero to 56.25 and 49.49 respectively.
-However, for SQs 2.3 and 2.7, the agreement experienced a modest decline of 5.42 and 6.52, reaching zero after the guideline development.
-For the SQ 1.2, the agreement dropped by 6.28 IAA points making it a drop in agreement for three SQs.
-Inferring from the table~\ref{tab:iaa_interpret} and table~\ref{tab:IAA_sq}, annotators for 11 of the 22 SQs had a poor agreement, three of the 22 questions had a fair agreement, four out of the 22 questions had a good agreement and two out of the 22 questions had a substantial agreement while only two of the 22 questions had an almost perfect agreement of beyond 81 IAA points.
+The F1-measure between the two reference annotators for a total of 11 out of 22 questions remained 0 both before and after the guideline development.
+For two SQs, 4.4 and 5.2, the guideline improvement raised it from 0 to 56.25 and 49.49 respectively.
+However, for SQs 2.3 and 2.7, the agreement experienced a modest decline of 5.42 and 6.52, reaching 0 after the guideline development.
+For the SQ 1.2, the agreement dropped by 6.28 IAA points making it a drop in agreement for 3 SQs.
+Inferring from the table~\ref{tab:iaa_interpret} and table~\ref{tab:IAA_sq}, annotators for 11 of the 22 SQs had a poor agreement, 3 of the 22 questions had a fair agreement, 4 out of the 22 questions had a good agreement and 2 out of the 22 questions had a substantial agreement while only 2 of the 22 questions had an almost perfect agreement of beyond 81 IAA points.
 As expected, none of the SQ annotations had a perfect F1-measure.
 %
 %
@@ -735,8 +736,8 @@ It is, however, important to note that more than half of this agreement arises f
 For the remaining SQs, we do not find any instances of either almost perfect or strong agreement.
 Agreements for SQs 1.1, 2.1, 2.5, 3.1, and 4.3 fall within the moderate agreement category ranging from 0.60 to 0.80 IAA.
 Amongst these SQs, only for the SQ 1.1, 2.1, 3.1 and 4.3 has no substantial agreement originating from the ``No Information'' judgments.
-In contrast, two of the 22 signaling questions (4.2 and 5.1) exhibit agreement worse than what would be expected by chance.
-The bias questions 3.3 and 4.5 show zero $\kappa_{pabak}$ agreement.
+In contrast, 2 of the 22 signaling questions (4.2 and 5.1) exhibit agreement worse than what would be expected by chance.
+The bias questions 3.3 and 4.5 show 0 $\kappa_{pabak}$ agreement.
 
 
 %
@@ -897,7 +898,7 @@ For the rest of the SQs, it is the availability of detailed description on the s
 The more information a study provided, the easier it is to evaluate a bias question.
 Some studies tend to not report key details making it tougher to assess certain bias questions.
 Feedback forms received indicated that for SQs with fewer than 100 annotated tokens, annotators consistently rated the availability of information to answer those questions as either ``low'' or ``very low''.
-In contrast, for the top five signalling questions shown in Figure~\ref{fig:ann_counts}, both annotators consistently rated the availability of information as ``high'' and ``normal''.
+In contrast, for the top 5 signalling questions shown in Figure~\ref{fig:ann_counts}, both annotators consistently rated the availability of information as ``high'' and ``normal''.
 It is important to interpret this qualitative feedback with caution though, as annotator ratings are influenced by the number and types of RCTs they annotated.
 The annotator who reviewed a greater number of documents in RoBuster experienced that it was more difficult to assess certain questions and the availability of information was lower than the other annotator who annotated fewer documents (for IAA calculation).
 %
@@ -930,7 +931,7 @@ Earlier, the annotators were inconsistently annotating either the description of
 % Why do some RoB questions have more annotations compared to the other? Does it mean papers have more information on certain aspects compared to the other questions?
 %How did the annotators perceive the difficulty of each SQ? -> Make a scale
 % Why were agreements on certain questions zero?
-While the agreement drastically increased for certain SQs, for other questions it remained zero.
+While the agreement drastically increased for certain SQs, for other questions it remained 0.
 These outcomes align with the feedback forms' findings.
 Almost all the RoB questions where the IAA between the annotators was zero (2.3, 2.4, 2.5, 2.7, 3.2, 3.3, 3.4, 4.2, 4.5, 5.1, 5.3) consistently received remarks from one or both annotators regarding their higher subjectivity, difficulty in assessment, and lower availability of information for evaluation and hence annotating.
 The poor agreement hence can be well assumed to caused by the subjectivity of the SQs, lack of information to annotate in the RCT, and the overall complex process of analysing trials.
@@ -953,7 +954,7 @@ What one person considers likely to affect outcomes, another might not.
 This leaves room for variability in how different assessors may interpret and score this question.
 In addition, annotators may have limited information available annotate any text and to make a judgment.
 They may not have access to detailed data or explanations regarding the deviations, making it challenging to assess their potential impact accurately.
-Specifically, only two out of the nine RCTs had annotations for SQ 2.4 and these annotations were made only by one of the annotators and not by both annotators lading to no agreement at the text span level.
+Specifically, only 2 out of the 9 RCTs had annotations for SQ 2.4 and these annotations were made only by one of the annotators and not by both annotators lading to no agreement at the text span level.
 Similar subjectivity occurs for the SQ 3.3: Could missingness in the outcome depend on its true value?
 The SQ involves assessors making a judgment about the relationship between missing data and the true outcome, which can be challenging to determine objectively.
 Annotating text evidence is even more difficult for this question because authors need to annotate the reasons for missing outcomes data that are related to the true value of the outcome, for the physiotherapy outcomes like `fatigue'.
@@ -961,7 +962,7 @@ Annotating text evidence is even more difficult for this question because author
 If authors describe the reasons for missing outcomes data as patients not showing up at follow-up owing to fatigue, annotating this is necessary because missingness of outcomes data in this case depends on the true value of outcome (here fatigue).
 However, this information is not usually available in the RCT.
 Placards instructed annotators to mark outcome descriptions instead, aiding judgment.
-Unfortunately, one annotator did not follow this instruction, resulting in zero agreement at the text span level.
+Unfortunately, one annotator did not follow this instruction, resulting in 0 agreement at the text span level.
 Such instances suggest a longer training and several rounds of conflict resolution and correction are required for the annotators.
 %For example, it is not possible to blind the intervention administrators for certain interventions in physiotherapy and rehabilitation.
 %Therefore, wherever the reviewers found such an intervention, they had to use this information to mark the judgment.
@@ -1030,7 +1031,7 @@ Consequently, the annotators needed to mark the information in both the RCT and 
 \subsection{Feedback on Placards}
 \label{disc:improv}
 %
-We will now address the concerns raised by a stalwart in bias assessment.
+We now address the concerns raised by a stalwart in bias assessment.
 To address subjectivity arising from signaling questions 2.7 and 3.1, which inquire about the potential impact of failure to analyze participants in their randomized groups and the availability of data for all participants, respectively, we introduced the concept of a threshold.
 Specifically, SQ 2.7 ``Was there potential for a substantial impact (on the result) of the failure to analyse participants in the group to which they were randomized?''.
 To annotate for this question, the visual placard instructs the annotators to find the data about the number of participants included and excluded from the intention-to-treat (ITT) analysis.
@@ -1062,7 +1063,7 @@ Manual LLM evaluation highlighted the tricky nature of bias annotation as well a
 LLM was tasked with the same work as human expert and was supposed to answer a SQs and extract text descriptions from RCTs that supported answer.
 In some cases LLM (via ChatPDF) straightforward answered a SQ with a response option - ``Yes'' or ``No'' or ``No Information'', but in certain cases it gave an indirect answer.
 For instance, in the Gleason study~\cite{gleason2015effects}, for SQ 1.1, LLM directly and correctly answered ``\textbf{Yes}, the allocation sequence was random. Extracted sentences: A random number generator (Excel, Microsoft) was used to devise a randomization series. The order of randomization was incorporated into a KEEPS database, so that treatment allocation occurred when a study identification number was assigned.''
-In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regarding RoB 5.2, the study authors reported that to correct for multiple comparisons, they divided the p-value by the number of outcomes. For example, there were five cognitive outcomes (four domain factors and one global cognition score) and six POMS mood scores. Splitting the significance value of 0.05 equally between the five cognitive and six mood sub-domains resulted in a p-value of 0.01 for each of the two primary domains investigated (cognition and mood). However, \textbf{the study authors did not provide information} on whether the numerical result being assessed was selected on the basis of the results from multiple eligible outcome measurements within the outcome domain.'' implying it found ``No Information'' for answering the SQ 5.2.
+In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regarding RoB 5.2, the study authors reported that to correct for multiple comparisons, they divided the p-value by the number of outcomes. For example, there were five cognitive outcomes (four domain factors and one global cognition score) and six POMS mood scores. Splitting the significance value of 0.05 equally between the five cognitive and six mood sub-domains resulted in a p-value of 0.01 for each of the two primary domains investigated (cognition and mood). However, the study authors did not provide information on whether the numerical result being assessed was selected on the basis of the results from multiple eligible outcome measurements within the outcome domain.'' implying it found ``No Information'' for answering the SQ 5.2.
 
 
 % -------------- LLM Risk Domain one --------------
@@ -1177,6 +1178,8 @@ We also plan to test the visual annotation placards to guide trainee risk of bia
     \item CDSR - Cochrane Database of Systematic Reviews
     \item PDF - Portable Document Format
     \item JSON - JavaScript Object Notation
+    \item ML - Machine Learning
+    \item ID - Identifier
     \item CoT - Chain-of-thought
     \item ToT - Tree-of-thought
 \end{enumerate}
@@ -1210,7 +1213,7 @@ This research was supported by HES-SO, Valais-Wallis, Switzerland.
 %
 \subsection*{Conflict of interest}
 %
-The authors declare that they have no competing interests.
+The authors declare that they have no conflict of interest.
 %
 %
 %
@@ -1244,7 +1247,7 @@ Availability of data and materials on the journals preferred portal.
 %
 \subsection*{Code availability}
 %
-The notebooks used analyze RoBuster will be made public on GitHub.
+The notebooks used to analyze RoBuster will be made public on GitHub.
 %
 %
 %
