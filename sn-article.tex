@@ -175,7 +175,7 @@ Utilizing visual placards for bias assessment and annotation enhances IAA compar
 However, text annotation remains challenging for the subjective, low information availability questions.
 While LLMs demonstrate efficacy, their accuracy diminishes with more subjective RoB questions and instances where RCT data is unavailable.}
 
-\keywords{risk of bias, dataset, natural language processing, large language models}
+\keywords{risk of bias, corpus annotation, natural language processing, large language models, information extraction}
 
 %%\pacs[JEL Classification]{D8, H51}
 
@@ -190,10 +190,10 @@ While LLMs demonstrate efficacy, their accuracy diminishes with more subjective 
 \label{sec:background}
 %
 Systematic reviews (SRs) synthesized using randomized controlled trials (RCTs) are the highest quality of evidence in the evidence pyramid.
-SRs aid medical professionals make educated decisions about an individual's health and help governments enact informed health policies~\cite{mogo2022systematic,mctigue2006obesity}.
-An RCT is a scientific experiment aiming to evaluate the efficacy of an intervention on particular patient outcomes.
-In these trials, patients are randomly divided and allocated to different intervention groups, and the impact of intervention under investigation is compared to the rest in a controlled setting~\cite{sibbald1998understanding}.
-Theoretically, RCTs are low on biases given the randomized study design but are still prone to unavoidable biases creeping into the trial's design, execution, or reporting.
+SRs aid medical professionals to make informed decisions about an individuals' health diagnosis or treatment and help governments enact informed health policies~\cite{mogo2022systematic,mctigue2006obesity}.
+An RCT is a scientific experiment aiming to evaluate the effectiveness of an intervention on particular patient outcomes.
+In these trials, patients are randomly divided and allocated to different intervention groups, and the impact of intervention under investigation is compared to other interventions in a controlled setting~\cite{sibbald1998understanding}.
+Theoretically, RCTs are low on biases given the randomized study design but are still prone in practice to unavoidable biases creeping into the trial's design, execution, or reporting.
 Biased clinical trials make medical practitioners systematically overestimate or underestimate the intervention effect on patient outcomes, leading to harmful health practices and policies~\cite{kjaergard1999randomized,naci2019design}.
 Thus, reviewers conducting SRs must thoroughly screen RCTs for biases.
 
@@ -204,7 +204,7 @@ There are several tools to assess RoB, including the Cochrane Collaborations RoB
 These tools are structured as a series of questions aiming to elicit factual information from the RCTs, which could then be used for RoB assessment.
 %These tools are a series of questions aiming to elicit factual information from the RCTs, which can then be used to assess their quality.
 Manual RoB assessment requires the reviewers to go through full-text RCTs and manually inspect every question from the chosen bias assessment tool.
-Crocker \textit{et al.} reported an average of a 5 hours 58 minutes hour per RCT for bias assessment done over a set of 113 studies~\cite{crocker2023risk}. 
+Crocker \textit{et al.} reported an average of 5 hours 58 minutes per RCT for bias assessment done over a set of 113 studies~\cite{crocker2023risk}. 
 Moreover, RoB assessment is a part of writing systematic reviews, which is highly resource-heavy, taking about six months to several years to complete the review~\cite{tsertsvadze2015conduct,khangura2012evidence,higgins2019cochrane}.
 The SR writing process takes about 3-10 months per person per SR and requires a high degree of methodological expertise on the reviewer's part.
 The pace at which RCTs are published makes RoB assessment a lengthy process and underscores the need for automation.
@@ -218,76 +218,57 @@ A study analyzing Cochrane systematic reviews and protocols found that the use o
 This indicates the importance of using an updated and standardized tool to assess bias in RCTs.
 
 Millard \textit{et al.} attempted automating RoB assessment using supervised machine learning trained on proprietary data as well~\cite{millard2016machine}.
-In fact, the research utilizing this pay-walled data was used to develop RobotReviewer that has been evaluated by several studies for its human-competent performance~\cite{marshall2016robotreviewer,soboczenski2019machine,vinkers2021methodological,jardim2022automating,hirt2021agreement}.
-The question, however, remains of the unavailability of a publicly-available RoB annotated corpus that hinders community efforts for automation. 
+In fact, the research utilizing this pay-walled data was used to develop RobotReviewer that has been evaluated by several studies for its human-level performance~\cite{marshall2016robotreviewer,soboczenski2019machine,vinkers2021methodological,jardim2022automating,hirt2021agreement}.
+The challenge, however, remains the unavailability of a publicly-available RoB annotated corpus that hinders community efforts for automation. 
 Wang \textit{et al.} recently released three RoB annotated datasets, but for preclinical studies with RoB assessments pertaining to animals~\cite{wang2022risk}.
 A manually annotated corpus of RoB spans for human clinical trials is still necessary.
 Manual RoB assessment is a complex, expert-led task laden with subjective judgements~\cite{minozzi2022reliability,hartling2009risk}.
 Systematically translating this manual process for developing an RoB annotated corpus requires a carefully designed annotation scheme and detailed annotation guidelines.
-Recently Dhrangadhariya \textit{et al.} worked on a pilot study to test whether RoB 2 guidelines could be effectively utilized as guidelines to manually annotate a corpus of RCTs with RoB using a multi-level annotation scheme adapted from the same guidelines.
+Recently, Dhrangadhariya \textit{et al.} worked on a pilot study to test whether RoB 2 guidelines could be effectively utilized as guidelines to manually annotate a corpus of RCTs with RoB using a multi-level annotation scheme adapted from the same guidelines.
 They conclude that the assessment guidelines cannot be used as text annotation guidelines, but did not provide any annotation guidelines from their end.
 Additionally, the dataset they provide is comparatively small with 10 annotated RCTs~\cite{dhrangadhariya2023first}.
 Our objective is to develop clear cut annotation guidelines to annotate RCTs with RoB spans corresponding to RoB 2 tool for randomized controlled trials~\cite{sterne2019rob}.
 
-
-
 Recently, large language models (LLMs) have demonstrated exceptional performance on unseen tasks when only the task instructions are provided~\cite{chang2023survey}.
-However, till date, no one has evaluated their performance on the cognitively complex task of identifying RoB text descriptions from RCTs and providing their RCT quality judgments based on text.
+However, so far no one has evaluated their performance on the cognitively complex task of identifying RoB text descriptions from RCTs and providing their RCT quality judgments based on text.
 Our contributions with this paper are five-fold. 
-1) We develop comprehensive annotation guidelines for annotating RCTs with risk of bias description.
-2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards could be used as visual RoB assessment guidelines by the trainee RoB assessors.
-3) We annotate RoBuster, a corpus of 41 full-text RCTs with 22 risk of bias span types which could be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
+1) We develop comprehensive annotation guidelines for annotating RCTs with a risk of bias description.
+2) We model these annotation guidelines in form of visual placards for ease of annotation and understanding. These placards can be used as visual RoB assessment guidelines by the trainee RoB assessors.
+3) We annotate RoBuster, a corpus of 41 full-text RCTs with 22 risk of bias span types that can be used to fine-tune machine learning models or LLMs and could also be used as a validation benchmark.
 4) We evaluate the performance of LLMs to automatically identify the answers to these signalling questions (SQs) using prompt generation.
-5) We make the visual annotation guidelines, the dataset and LLM prompts openly-available for the scientific community.
-%
-%
+5) We make the visual annotation guidelines, the dataset and LLM prompts openly available for the scientific community.
 %
 \section{Methodology}
 \label{sec:methods}
 %
-This section describes the annotation scheme, annotation softwares and visual placard development.
-Since there are no text annotation guidelines available for RoB span annotation task, we take pleasure in formulating them from scratch using the revised Cochrane RoB 2 tool.
-We first developed a draft version of our visual annotation guidelines, doubly annotated a fraction of documents using it and used the conflicts identified during this exercise to refine the guidelines.
-%
-%
+This section describes the annotation scheme, annotation software and visual placard development.
+Since there are no text annotation guidelines available for the RoB span annotation task, we take pleasure in formulating them from scratch using the revised Cochrane RoB 2 tool.
+We first developed a draft version of our visual annotation guidelines, doubly annotating a fraction of documents using it and then use the conflicts identified during this exercise to refine the guidelines.
 %
 \subsection{Annotation scheme}
 \label{met:annot_scheme}
 %
-
-%
-%
-%
 \begin{figure}
     \centering
     \includegraphics[width=0.99\columnwidth]{figures/annotation_schema.pdf}
-    \caption{Our RoB annotation scheme as explained in the Section~\ref{met:annot_scheme}}
+    \caption{Our RoB annotation scheme as explained in Section~\ref{met:annot_scheme}}
     \label{fig:annotationscheme}
 \end{figure}
 %
-%
-%
-
-
-
 Creating a new annotated corpus involves defining an annotation scheme or adopting an existing one.
 To our knowledge the only available annotation scheme for RoB span annotation was presented by~\cite{dhrangadhariya2023first}.
 We adapt and enhance their approach by learning from its drawbacks rather than developing a new scheme.
-Their annotation scheme was directly adapted from the RoB 2 assessment procedure and hence it is imperative to understand the RoB 2 organization to understand the annotation scheme.
+The annotation scheme was directly adapted from the RoB 2 assessment procedure and hence it is imperative to understand the RoB 2 organization to understand the annotation scheme.
 RoB 2 divides biases into five risk domains, each loosely corresponding to different parts of the clinical trial design.
-Each risk domain decomposes into several SQs, each aiming to prompt the assessor to look for relevant RCT text evidence and elicit a relevant response for bias risk judgment for that SQ (refer to Table~\ref{tab:robdomains}).
-
-
-%
-%
+Each risk domain decomposes into several SQs, each aiming to prompt the assessor to look for relevant RCT text evidence and elicit a relevant response for bias risk judgment for that SQ (see Table~\ref{tab:robdomains}).
 %
 \begin{table*}
  \centering
  %\captionsetup{justification=justified}
-   \caption{The table lists down the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2) and the number of signalling questions (SQs) in each domain.}\label{tab:robdomains}
+   \caption{The table lists the bias domains as structured in the revised Cochrane RoB assessment tool (RoB 2) and the number of signalling questions (SQs) in each domain.}\label{tab:robdomains}
     \begin{tabular}{llr}
     \toprule[1.0pt]
-     Class & Domain & SQ\\
+     Class & Domain & \#SQ\\
     \midrule[1.0pt]
     RoB 1 & biases arising from the \textbf{randomization process} &  3\\
     RoB 2 & biases due to \textbf{deviations from intended interventions} & 7\\
@@ -298,18 +279,12 @@ Each risk domain decomposes into several SQs, each aiming to prompt the assessor
     \end{tabular}
 \end{table*}
 %
-%
-%
-
-
 The response options for bias risk (or simply risk) judgment are restricted to ``Yes'', ``Probably yes'', ``No'', ``Probably no'', or ``No information''~\cite{sterne2019rob}.
 Reviewers assess these SQs by examining the factual evidence in the RCT.
 For instance, to answer the SQ ``Was the allocation sequence random?'', the reviewer reads through the RCT to identify how participants were randomized into intervention groups.
 If a well-executed method of randomization is identified, the reviewer answers with ``yes'' (the allocation sequence is random) judging the risk of bias for this signaling question as low risk.
 Conversely, if a poorly executed method of randomization is found, the risk of bias is deemed  high risk with response option ``no''.
 %Similarly, each SQ prompts the reviewer to look for a piece(s) of factual evidence in the clinical study to respond with one of the five response options.
-
-
 
 In RoB span annotation, we mimic this assessment process by considering evidence text spans in the RCT as the main units of annotation.
 Each span corresponds to answering a SQ and is annotated with the most informative label. 
@@ -459,7 +434,7 @@ We interpret both the IAA measures as shown in the Table~\ref{tab:iaa_interpret}
 %
 \begin{center}
  \begin{table}[htb]
-   \caption{The table details interpretation of pairwise F1-measure (Left), $\kappa_{pabak}$ (Middle) and observed or raw agreement (Left)}\label{tab:iaa_interpret}
+   \caption{The table details interpretation of pairwise F1-measure (Left), $\kappa_{pabak}$ (Middle) and observed or raw agreement (Right)}\label{tab:iaa_interpret}
  \centering
     \begin{tabular}{lr|lr|lr}
     \toprule[1.0pt]
@@ -529,7 +504,7 @@ This section outlines the visual placards, annotated dataset, reports the IAA fi
 %
 \begin{figure}
     \centering
-    \includegraphics[width=0.80\columnwidth]{figures/placard_3_1.pdf}
+    \includegraphics[width=0.95\columnwidth]{figures/placard_3_1.pdf}
     \caption{Sample annotation instruction placard for the SQ 3.1 designed and adapted using RoB 2 tool.}
     \label{fig:placard}
 \end{figure}
@@ -541,7 +516,7 @@ Details of the annotation guidelines and visual placards are available in the Su
 Figure~\ref{fig:placard} presents an example placard for annotating SQ 3.1 (``Were data for this outcome available for all, or nearly all participants randomized?'') which assesses the completeness of outcome data in an RCT.
 This question assesses whether data for the specific outcome of interest were collected and available for analysis for a high proportion of initially randomized participants.
 Missing data can compromise statistical power and treatment effect estimates. 
-The first diamond on the placard instructs annotators to check the Results section (first priority) and the flowchart (second priority) to identify outcome data at the specified time point.
+The first diamond on the placard instructs annotators to check the Results section (first priority) and the flowchart and Table within the Results section (second priority) to identify outcome data at the specified time point.
 If outcomes data were available for at least 95\% of participants, annotators mark relevant text descriptions as ``3.1 Yes Good'' indicating a low bias.
 If data were available for less than 95\%, they mark it as ``3.1 No Bad'' indicating a high bias.
 Lack of information will lead to automatically assuming a ``No Information'' label.
@@ -561,7 +536,7 @@ SQ 2.4 ("Were these deviations likely to have affected the outcome?") had only 2
 
 
 Table~\ref{table:stats} lists down essential information on the absolute and average annotation lengths for each RoB SQ along with the total number of documents the annotations were identified from.
-Annotations for the ``randomization'' risk domain 1 were found in an average of 35 of the 41 documents, while annotation related to answering the other risk questions was available only in a small subset of the total annotated RCTs, as also depicted in Figure~\ref{fig:rob_information} which shows the distribution of risk judgments across RoBuster.
+Annotations for the ``randomization'' risk domain 1 were found in an average of 35 of the 41 documents, while annotations related to answering the other risk questions were available only in a small subset of the total annotated RCTs, as also depicted in Figure~\ref{fig:rob_information} which shows the distribution of risk judgments across RoBuster.
 The figure highlights that, for most SQs, no information was available (indicated by yellow bars) for answering the SQs and making the risk judgment.
 Notably, SQs 2.2, 2.6, 3.1, 4.3, and 4.4 stood out as exceptions, with information available in more than 50\% of the annotated documents.
 In cases where information was available, bias tended to be low, as indicated by the prevalence of green bars with an exception for the SQs 2.2, 3.1, 4.3, and 4.4, where bias was high, as indicated by the prevalence of red bars.
@@ -802,7 +777,7 @@ The bias questions 3.3 and 4.5 show 0 $\kappa_{pabak}$ agreement.
 In Table~\ref{table:LLM_eval}, we present the observed or raw agreement between LLM and expert assessments in extracting and responding to SQ over a subset (n=10) of RoBuster~\ref{method:llm}. 
 The evaluation was conducted on four RCTs reporting objective outcome, three RCTs evaluating subjective outcome and the rest three RCTs reporting mortality outcome.
 For the first risk domain, ChatGPT had high $P_{O} (Extraction)$ and $P_{O} (Response)$ agreements (66.6\% and 55.3\% IAA respectively) with experts and none of these agreements came from ``No Information'' responses indicating a good availability of information for bias assessment. 
-Notably, for individual SQs within domain 1, the $P_{O} (Extraction)$ was greater than $P_{O} (Response)$.
+Specifically, for individual SQs within domain 1, the $P_{O} (Extraction)$ was greater than $P_{O} (Response)$.
 The observed agreements for the the second domain are even higher 64.28\% and 60\% respectively, but 40\% of these agreements emanate from ``No Information'' responses suggesting lower availability of information. 
 Domain 3 exhibited a moderate average observed agreement of 47.5\% for both $P_{O} (Response)$ and $P_{O} (Extraction)$ , while Domain 4 demonstrated a lower observed agreement of 28\% and 26\% for response and extraction, respectively.
 \textcolor{blue}{The results for risk domain 5 remain.}
@@ -895,7 +870,7 @@ To address this subjectivity, we introduced a threshold of 95\% in the placard i
 \subsection{The Corpus}
 \label{disc:corpus}
 %
-The immediate points we noticed in the Figure~\ref{fig:ann_counts} was that SQ 1.3 had a disproportionately higher number of annotated tokens (n=16,446) while the remaining signal questions had fewer than 2600 tokens each annotated.
+The immediate points we noticed in the Figure~\ref{fig:ann_counts} were that SQ 1.3 had a disproportionately higher number of annotated tokens (n=16,446) while the remaining signal questions had fewer than 2600 tokens each annotated.
 The reason behind this is that the answer to SQ 1.3 is found in the table detailing baseline patient characteristics of the intervention groups.
 To ensure good F1 IAA, instructions on visual placards directed annotators to label the entire table, leading to a higher count of annotated tokens for this question.
 For the rest of the SQs, it is the availability of detailed description on the study design, methods and results that could have impacted the amount of tokens annotated and also the subjectivity level of bias assessment.
@@ -956,7 +931,7 @@ For example, for the SQ 2.4, it is asked whether deviations from the intended in
 Assessing whether deviations could have affected outcomes requires a subjective judgment.
 What one person considers likely to affect outcomes, another might not.
 This leaves room for variability in how different assessors may interpret and score this question.
-In addition, annotators may have limited information available annotate any text and to make a judgment.
+In addition, annotators may have limited information available to annotate any text and to make a judgment.
 They may not have access to detailed data or explanations regarding the deviations, making it challenging to assess their potential impact accurately.
 Specifically, only 2 out of the 9 RCTs had annotations for SQ 2.4 and these annotations were made only by one of the annotators and not by both annotators lading to no agreement at the text span level.
 Similar subjectivity occurs for the SQ 3.3: Could missingness in the outcome depend on its true value?
@@ -1006,7 +981,7 @@ According to~\cite{mchugh2012interrater}, a $\kappa$ value smaller than $-0.10$ 
 The SQs (1.1, 2.1, 2.5, 2.6, 3.1, 4.3) with adequate agreement ($>0.60$ kappa) had higher number of agreements (refer Figure~\ref{fig:pabakagreement}) not coming from ``No Information'' judgments.
 This aligned with the results of the feedback form where the difficulty and subjectivity of these questions was consistently rated as ``Normal'' or ``very low'', the availability of information was rated ``normal'' or ``very high''.
 For the SQs with zero and negative agreement, had a net higher number of disagreements.
-In the nutshell, a decrease in disagreements and an increase in agreements led to improved $\kappa_{pabak}$ agreement.
+In a nutshell, a decrease in disagreements and an increase in agreements led to improved $\kappa_{pabak}$ agreement.
 
 
 % Risk domain five and low IAA. Reasons?
@@ -1045,7 +1020,7 @@ What one reviewer considers ``nearly all'' might be different from another revie
 This ambiguity can lead to subjective judgments when applying the tool.
 Therefore, we introduced the 95\% threshold meaning if the data were not available for at least 95\% or more participants, we instructed the assessors/annotators to judge the bias risk as high.
 On our end, to simplify the annotation process and increase the IAA, we chose these thresholds but enforcing a threshold deviates from the recommended RoB guidance as critiqued by this stalwart.
-In practical, thresholds are not one-solution-fits-all and are difficult to apply in different trial conditions.
+In practice, thresholds are not one-solution-fits-all and are difficult to apply in different trial conditions.
 Thus, we must find an alternative approach to guide annotators in assessing risk without relying on thresholds.
 One potential solution is to provide examples illustrating instances where low numbers may still introduce bias, offering guidance on specific result figures that annotators should scrutinize.
 
@@ -1071,13 +1046,13 @@ In contrast, to answer SQ 5.2, LLM indirectly answered the following, ``Regardin
 
 
 % -------------- LLM Risk Domain one --------------
-LLM evaluation results for the first risk domain SQ 1.3, we saw a comparatively lower agreement between LLM and the experts because the answer to this SQ is typically found in the table text of RCT.
+For LLM evaluation results of the first risk domain SQ 1.3, we saw a comparatively lower agreement between LLM and the experts because the answer to this SQ is typically found in the table text of RCT.
 Text in tables is read by ChatPDF, but it might have problems correlating the correct rows and columns leading to a distorted understanding of the tables.
 This could be the reason why ChatPDF sought to answer this question typically using RCT text rather than the table text wherever available.
 To elaborate, for~\cite{stuck2015effect}, both the expert and LLM answered SQ 1.3 with ``No Good'', but expert used Table 2 as the evidence to answer the question while LLM used the text evidence not found in the table.
 
 \begin{quote}
-    LLM answer: No, there were no significant differences (p < 0.05; based on z-statistics from generalized estimating equation models) between the intervention and control groups in any of the baseline characteristics listed in Table 2~\cite{stuck2015effect}.
+    LLM answer: No, there were no significant differences (p $<$ 0.05; based on z-statistics from generalized estimating equation models) between the intervention and control groups in any of the baseline characteristics listed in Table 2~\cite{stuck2015effect}.
 \end{quote}
 
 The LLM correctly extracts information about participant randomization and allocation concealment procedures pertaining to answer SQ 1.1 and 1.2 leading to a rightly good $P_{O} (Extraction)$ agreements. 
@@ -1099,19 +1074,19 @@ A lenient assessor will judge a risk of bias as low in comparison to a stringent
 In~\cite{thorndike2014activity}, LLM and the expert used the same text evidence ``...104 (82\%) were randomized in January 2011. Five residents withdrew during Phase 1, and 99 continued participation in Phase 2...'' to answer SQ 3.1 but LLM produced the response option ``Yes Good'' and the expert rated it as ``No Bad''.
 It was also because our placards have a stringent rule whereby if outcome data was not available for more than 95\% of the participants, the assessor/annotator was instructed to judge the risk as high risk of bias without considering other factors like total number of participants randomized and the kind of study.
 For answering SQ 3.2 across the evaluation RCTs~\cite{myer2018integration,taylor2016novel}, the LLM was more lenient than the experts and consistently extracted information about the sensitivity analysis carried out by the study authors to account for missing outcome data, but the authors were not explicit that there was no bias due to missing outcomes data.
-LLM judged signalling question 3.3 9/10 times as ``No information''.
-It questions whether the missingness in outcomes depended on its true value and is quite subjective because assessor need to contemplate on the reasons for missingness for a particular outcomes and if its true value could have affected the missingness.
+LLM judged signalling question 3.3 9 out of 10 times as ``No information''.
+It questions whether the missingness in outcomes depended on its true value and is quite subjective because assessor needs to contemplate on the reasons for missingness for a particular outcome and if its true value could have affected the missingness.
 For example, they need to assess whether the fact that data on falls is missing can be attributed to the actual occurrence of falls in the study.
 
 
 
 % -------------- LLM Risk Domain four --------------
 %Limitation with not mentioning what the target outcome was which confused LLM
-LLM exhibited a lower overall agreement with the annotators for the domain 4 despite the data for outcomes measurement was available in the RCTs.
-The reason for low agreement was use of simple prompts in our work.
+The LLM exhibited a lower overall agreement with the annotators for the domain 4 despite the data for outcomes measurement was available in the RCTs.
+The reason for low agreement was the use of simple prompts in our work.
 For RoB assessment, the annotators assess bias pertaining to the pre-decided target outcome and not all the outcomes reported in the trial.
 However, the information about the target outcome being assessed was not available in the simple prompts used to test LLMs.
-Consequently, LLMs extracted information that did not necessarily pertain to the target outcome but rather to other outcomes reported in the trial.
+Consequently, the LLMs extracted information that did not necessarily pertain to the target outcome but rather to other outcomes reported in the trial.
 This situation suggests a potential avenue for improvement, involving the exploration of adapted prompting styles, such as chain-of-thought (CoT) and tree-of-thought (ToT), commonly used in language generation tasks, for the RoB text extraction task~\cite{wei2022chain}.
 
 
@@ -1128,7 +1103,7 @@ While the LLM demonstrates promise in automating RoB span extraction, additional
 \subsection{Limitations}
 \label{subsec:limits}
 %
-Our study has the following limitations.
+Our study has the following limitations:
 The first limitation arises from the relative scale of our annotations, with only 41 documents undergoing the annotation process.
 This limitation is primarily due to financial constraints, as the availability of funds limited our ability to hire a larger number of expert annotators.
 Despite the limitation, the robustness of the annotations provided by the experts remains noteworthy, as they thoroughly assessed the selected RCTs within the resources at hand.
@@ -1143,7 +1118,7 @@ Another limitation is the stochastic nature of LLMs.
 Specifically, Google Bard is freely available tool that interacts with PDFs, but we observed that the Bard results were less deterministic than ChatPDF.
 Another drawback was associated with the prompts used.
 The prompts employed were relatively simple and lacked information about the target outcome assessed for bias.
-Consequently, for SQs seeking information on outcomes reporting for the target outcome, LLM provided general information about outcomes reported in the RCT but did not specifically consider the target outcome of interest, as it was not instructed to do so.
+Consequently, for SQs seeking information on the target outcomes, LLM provided general information about outcomes reported in the RCT but did not specifically consider the target outcome of interest, as it was not instructed to do so.
 %
 %
 %
