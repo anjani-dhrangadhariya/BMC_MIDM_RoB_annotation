@@ -135,7 +135,7 @@
 
 \affil*[1]{\orgdiv{Department of Computer Science}, \orgname{University of Geneva}, \orgaddress{\city{Geneva}, \country{Switzerland}}}
 
-\affil[2]{\orgdiv{Informatics Institute}, \orgname{HES-SO Valais-Wallis}, \orgaddress{\city{Sierre}, \country{Switzerland}}}
+\affil[2]{\orgdiv{Health Institute}, \orgname{HES-SO Valais-Wallis}, \orgaddress{\city{Leukerbad}, \country{Switzerland}}}
 
 \affil[3]{\orgdiv{IUFRS}, \orgname{University of Lausanne}, \orgaddress{\city{Lausanne}, \country{Switzerland}}}
 
@@ -155,25 +155,18 @@
 %% Sample for structured abstract %%
 %%================================%%
 
-\abstract{\textbf{Purpose:} Risk of bias (RoB) assessment of randomized clinical trials (RCTs) is vital to accurately answer systematic review questions.
-Manual RoB assessment for hundreds of clinical trials is a cognitively demanding and lengthy process.
-Automation has the potential to assist reviewers in rapidly identifying text descriptions in RCTs that indicate potential bias.
-However, there is no annotated corpus for RoB to fine-tune large language models (LLMs) and no established guidelines for annotating the risk of bias in RCTs.
+\abstract{\textbf{Purpose:}
+Risk of bias (RoB) assessment of randomized clinical trials (RCTs) is vital to answer systematic review questions accurately.
+Manual RoB assessment for hundreds of RCTs is a cognitively demanding and lengthy process. Automation has the potential to assist reviewers in rapidly identifying text descriptions in RCTs that indicate potential risks of bias. However, no RoB text span annotated corpus could be used to fine-tune or evaluate large language models (LLMs), and there are no established guidelines for annotating the RoB spans in RCTs.
 % 
-\textbf{Methods:} We utilized the revised Cochrane Risk of Bias Assessment 2 guidelines for RCTs to create visual instructional placards serving as text annotation guidelines for RoB spans and risk judgments.
-Expert annotators employed these visual guidelines to  to annotate a dataset named RoBuster, consisting of 41 full-text RCTs from the field of physiotherapy and rehabilitation domain.
-We report inter-annotator agreements (IAA) at two levels: agreement on text spans and risk of bias judgments between two expert annotators when applying the guidelines to a subset (9 out of 41) of the annotated corpus.
-Additionally, a portion of the corpus (10 out of 41) was employed to evaluate an LLM using a straightforward evaluation framework.
+\textbf{Methods:} 
+The revised Cochrane RoB Assessment 2 (RoB 2) tool provides comprehensive guidelines for RoB assessment; however, due to the inherent subjectivity of this tool, it cannot be directly used as RoB annotation guidelines. To address this limitation, we leveraged RoB 2 to develop visual instructional placards that serve as text annotation guidelines for RoB spans and risk judgments. Expert annotators employed these visual placards to annotate a dataset named RoBuster, consisting of 41 full-text RCTs from the domains of physiotherapy and rehabilitation. The primary objective of these visual instructions was to address subjectivity in RoB 2 and provide precise instructions to the annotators to increase the consistency of annotations. We report inter-annotator agreement (IAA) between two expert annotators for text span annotations before and after applying visual instructions on a subset (9 out of 41) of RoBuster. We also provide IAA on bias risk judgments using Cohen's Kappa. Moreover, we utilized a portion of RoBuster (10 out of 41) to evaluate an LLM using a straightforward evaluation framework. This evaluation aimed to gauge the performance of LLM (here GPT 3.5) in the challenging task of RoB span extraction and demonstrate the utility of this corpus using a straightforward evaluation framework.
 % 
-\textbf{Results:} We present a corpus of 41 RCTs with fine-grained text span annotations comprising more than 28,427 tokens belonging to 22 RoB classes.
-The IAA at the text span level varies from $0\%$ to $90\%$, while the IAA for risk judgments ranges between $-0.235$ and $1.0$.
-LLMs show promising but variable observed agreements with the expert annotation across the different bias questions.
+\textbf{Results:} We present a corpus of 41 RCTs with fine-grained text span annotations comprising more than $28,427$ tokens belonging to $22$ RoB classes. The IAA at the text span level calculated using the F1 measure varies from $0\%$ to $90\%$, while Cohen's kappa for risk judgments ranges between $-0.235$ and $1.0$. Employing visual instructions for annotation increases the IAA by more than $17$ percent points. LLM (GPT-$3.5$) shows promising but varied observed agreements with the expert annotation across the different bias questions.
 % 
 \textbf{Conclusion:} 
-Despite having comprehensive bias assessment guidelines and visual instructional placards, RoB annotation remains a complex task.
-Utilizing visual placards for bias assessment and annotation enhances IAA compared to cases where visual placards are absent.
-However, text annotation remains challenging for the subjective, low information availability questions.
-While LLMs demonstrate efficacy, their accuracy diminishes with more subjective RoB questions and instances where RCT data is unavailable.}
+Despite having comprehensive bias assessment guidelines and visual instructional placards, RoB annotation remains a complex task. Utilizing visual placards for bias assessment and annotation enhances IAA compared to cases where visual placards are absent; however, text annotation remains challenging for the subjective questions and the questions for which annotation data is unavailable in RCTs.
+Similarly, while GPT-3.5 demonstrates effectiveness, its accuracy diminishes with more subjective RoB questions and low information availability.}
 
 \keywords{risk of bias, corpus annotation, natural language processing, large language models, information extraction}
 
@@ -293,19 +286,12 @@ Additionally, the response option or risk judgement is incorporated in the label
 Dhrangadhariya \textit{et al.} suggests collapsing the response options ``Yes'' and ``Probably Yes'' into a single ``Yes'', and ``No'' and ``Probably No'' together into a single ``No'' to increase the inter-annotator agreement (IAA) without altering the final risk domain judgment~\cite{dhrangadhariya2023first}.
 As shown in Figure~\ref{fig:flowchart} responding to any SQ for the risk domain 2 as either ``Probably Yes'' or ``Yes'' does not alter the final risk judgment for this domain (low, high, or some concerns).
 Therefore, except for some special case SQs, we also collapse these response option as suggested.
-%In summary, the reviewer needs to label the identified text span with the RoB entity along with one of the response options.
 In this regard, we have a hierarchical span annotation scheme comprising 22 entities corresponding to the 22 SQs, each with typically two response options (``Yes'' or ``No'') and two risk judgments (``Good'' and ``Bad'').
 Any label containing ``Good'' denoted a low risk of bias and any label containing ``Bad'' denoted a high risk of bias.
 We also remove the ``No Information'' response option because this was meant for the situations where actually no text evidence is found in the RCT to answer and label for a SQ.
 However, for selected SQs (currently only SQ 2.1), ``Probably Yes'', ``Probably No'' and ``No Information'' may still be acceptable.
 For instance, consider that an RCT uses ``...random number generator and sealed envelopes for patient randomization...'', but the trial provided no information on whether the envelop was ``opaque'' or not.
 In such situations, ``No Information'' judgment is acceptable.
-%Additionally, it is based on this span, the response judgment option is decided, and therefore even the response judgement information is incorporated in the label.
-%Consider the following span is found to answer the above-mentioned SQ, ``randomized participants using random number generation...'', which is a good randomization procedure and therefore the reviewer responds with ``yes''.
-%The label extends the example label to ``1.1 Yes''.
-%In addition, a direction is also added to the label, for example, whether it is ``good'' or ``bad.
-%In this example, a good randomization ensure low risk for this SQ and vice versa.
-%Adding direction extends the example label to ``1.1 Yes Good''.
 
 
 %
@@ -957,7 +943,7 @@ The disagreements at response option judgments arose because of two reasons.
 The most apparent cause of disagreement occurred when two annotators choose a text section to address a signaling question but did not reach a consensus on the response option judgement.
 The other less obvious reason was when one of the annotators annotated a part of text to answer a SQ and gives it a response option judgment, but the other one did not annotate anything for this SQ leading to an automatic assumption of ``No Information''.
 Notably, 82.85\% of these conflicts fall into the second category, with only about 17\% involving discrepancies in response judgments.
-Similarly, agreements were of two types too, the agreements when both annotators chose a text span for answering a SQ and labelled them with the same response options and the agreements when none of the annotators answered a SQ leading to both their annotations being set to ``No Information''.
+Similarly, agreements were of two types too, the agreements when both annotators chose a text span for answering a SQ and labelled it with the same response options and the agreements when none of the annotators answered a SQ leading to both their annotations being set to ``No Information''.
 The agreements were evenly distributed between these two categories.
 Therefore, a considerable of chunk of both agreements and disagreements came from ``No Information''.
 %Recall the yellow bar in the Figure~\ref{fig:rob_information} which indicated prevalence of ``No Information'' judgment.
