@@ -112,18 +112,18 @@
 %%                 \dgr{MSc, PhD}}\email{iauthor@gmail.com}
 %%=============================================================%%
 
-\author*[1,2]{\fnm{Anjani} \sur{Dhrangadhariya}}\email{anjani.dhrangadhariya@hevs.ch}
+\author*[1,2,3]{\fnm{Anjani Kirit} \sur{Dhrangadhariya}}\email{anjani.dhrangadhariya@hevs.ch}
 
-\author[3]{\fnm{Roger} \sur{Hilfiker}}\email{roger.hilfiker@proton.me}
+\author[4]{\fnm{Roger} \sur{Hilfiker}}\email{roger.hilfiker@proton.me}
 
-\author[4]{\fnm{Karl Martin} \sur{Sattelmayer}}\email{martin.sattelmayer@hevs.ch}
+\author[3]{\fnm{Karl Martin} \sur{Sattelmayer}}\email{martin.sattelmayer@hevs.ch}
 
 \author[5]{\fnm{Nona} \sur{Naderi}}\email{nona.naderi@lisn.fr}
 
-\author[4]{\fnm{Katia} \sur{Giacomino}}\email{katia.giacomino@hevs.ch}
+\author[3]{\fnm{Katia} \sur{Giacomino}}\email{katia.giacomino@hevs.ch}
 \equalcont{These authors contributed equally to this work.}
 
-\author[4]{\fnm{Rahel} \sur{Caliesch}}\email{rahel.caliesch@hevs.ch}
+\author[3]{\fnm{Rahel} \sur{Caliesch}}\email{rahel.caliesch@hevs.ch}
 \equalcont{These authors contributed equally to this work.}
 
 \author[6]{\fnm{Julian PT} \sur{Higgins}}\email{julian.higgins@bristol.ac.uk}
@@ -135,11 +135,11 @@
 
 \affil*[1]{\orgdiv{Department of Computer Science}, \orgname{University of Geneva}, \orgaddress{\city{Geneva}, \country{Switzerland}}}
 
-\affil[2]{\orgdiv{Health Institute}, \orgname{HES-SO Valais-Wallis}, \orgaddress{\city{Leukerbad}, \country{Switzerland}}}
+\affil[2]{\orgdiv{Informatics Institute}, \orgname{HES-SO Valais-Wallis}, \orgaddress{\city{Sierre}, \country{Switzerland}}}
 
-\affil[3]{\orgdiv{IUFRS}, \orgname{University of Lausanne}, \orgaddress{\city{Lausanne}, \country{Switzerland}}}
+\affil[3]{\orgdiv{School of Health Sciences}, \orgname{HES-SO Valais-Wallis}, \orgaddress{\city{Leukerbad}, \country{Switzerland}}}
 
-\affil[4]{\orgdiv{School of Health Sciences}, \orgname{HES-SO Valais-Wallis}, \orgaddress{\city{Leukerbad}, \country{Switzerland}}}
+\affil[4]{\orgdiv{IUFRS}, \orgname{University of Lausanne}, \orgaddress{\city{Lausanne}, \country{Switzerland}}}
 
 \affil[5]{\orgdiv{CNRS, Laboratoire Interdisciplinaire des Sciences du Numérique}, \orgname{Université Paris-Saclay}, \orgaddress{\city{Orsay}, \country{France}}}
 
@@ -446,7 +446,7 @@ We interpret both the IAA measures as shown in the Table~\ref{tab:iaa_interpret}
 \label{method:llm}
 %
 Our annotation guidelines and annotations were adapted for benchmarking supervised machine learning approaches and not LLMs.
-So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical ML model could not use without extensive modifications~\cite{li2019figure,li2023uttsr}.
+So even though we were annotating PDFs, we had to restrict a lot of annotations based on the assumption that PDF will be converted into text via OCR (optical character recognition) losing its structure of tables and figures, which anyway a classical ML model could not use without extensive modifications~\cite{li2019figure,li2023uttsr,datar2020review}.
 Recent advancements with LLMs offers a better alternative and made us rethink the evaluation.
 The bar for clinical applications is high and it is imperative to evaluate LLMs for the more challenging clinical tasks like RoB text span extraction~\cite{singhal2023large}.
 The tools like ChatPDF~\footnote{\url{https://www.chatpdf.com/}} allow direct interaction between LLMs and PDFs, negating the clumsy PDF to text conversion.
